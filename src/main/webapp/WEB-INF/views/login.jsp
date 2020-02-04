@@ -26,15 +26,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/style.css" type="text/css">
-    <script type="text/javascript">
-      		window.onload = function() {//이 페이지가 실행 되면, 이 함수를 실행해라
-				var chk = "${check}";
-				if(chk != ""){
-					alert(chk);
-					location.reload(true);//화면을 다시 한번 불러오면서 check를 리셋함 
-				}
-			}
-</script>
 </head>
 
 <body>
@@ -179,19 +170,19 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="login-form">
                         <h2>Login</h2>
-                        <form action="loginProc">
+                        <form action="#">
                             <div class="group-input">
                                 <label for="username">E-mail을 입력해주세요. *</label>
-                                <input type="text" id="username" name="cm_id" placeholder="Ex) example@example.com" required>
+                                <input type="text" id="username" placeholder="Ex) example@example.com" required>
                             </div>
                             <div class="group-input">
                                 <label for="pass">Password를 입력해주세요. *</label>
-                                <input type="text" id="pass" name="cm_pwd"  required>
+                                <input type="text" id="pass" required>
                             </div>
                             <div class="group-input gi-check">
                                 <div class="gi-more">
                                     <label for="save-pass">
-                                    		    비밀번호 저장.
+                                        비밀번호 저장.
                                         <input type="checkbox" id="save-pass" >
                                         <span class="checkmark"></span>
                                     </label>

@@ -1,23 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.atelier.dao.CM_Dao">
-
-
-	<select id="getMemberPwd" parameterType="String" resultType="String">
-		SELECT CM_PWD FROM CM WHERE CM_ID=#{cm_id}
+<!--  -->
+	<insert id="memberInsert" parameterType="com.atelier.dto.CM_Dto">
+		INSERT INTO COMMON_MEMBER
+		VALUES (#{cm_id},#{cm_pwd},#{cm_name},#{cm_nick},#{cm_phone},#{cm_addr},DEFAULT,'일반회원',DEFAULT)
+	</insert>
+	
+	<select id="getSecurityPwd" parameterType="String" resultType="String">
+		SELECT cm_pwd FROM COMMON_MEMBER WHERE cm_id=#{id}
 	</select>
 	
 	<select id="getMemberInfo" parameterType="String" resultType="com.atelier.dto.CM_Dto">
-		SELECT * FROM CM WHERE CM_ID=#{cm_id}
+		SELECT * FROM COMMON_MEMBER WHERE cm_id=#{id}
+	</select>
+	<!-- 
+	<select id="getMemberInfo2" parameterType="String" resultType="com.atelier.dto.CM_Dto">
+		SELECT * FROM COMMON_MEMBER WHERE cm_id=#{id}
+	</select>
+	 -->
+	<update id="memberUpdate" parameterType="com.atelier.dto.CM_Dto">
+		UPDATE M 
+		SET CM_ID=#{cm_id},CM_PWD=#{cm_pwd},CM_NAME=#{cm_name},CM_NICK=#{cm_nick},CM_PHONE=#{cm_phone},CMADDR=#{cm_addr},CMADDR2=#{cm_addr2},CM_STATE=#{cm_state},
+							CM_PFPHOTO=#{CM_PFPHOTO}
+		WHERE CM_ID=#{cm_id}
+	</update>
+	
+	<select id="checkOverId" parameterType="String" resultType="Integer">
+		select count(*) from COMMON_MEMBER WHERE CM_ID=#{CM_ID}
 	</select>
 </mapper>
-
-
-
-
-
-
-
-
-
-

@@ -6,15 +6,20 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpSession;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -32,6 +37,10 @@ import lombok.extern.slf4j.Slf4j;
 public class MainController {
 	
 	ModelAndView mav;
+	
+	@Setter(onMethod_ = @Autowired)
+	private HttpSession session;
+	
 	@Setter(onMethod_ = @Autowired)
 	CM_Service mServ;
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
@@ -56,6 +65,30 @@ public class MainController {
 	public String memJoinFrm(Locale locale, Model model) {
 		
 		return "memJoinFrm";
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 회원 가입 컨트롤러
+	 * 작성자: JSH
+	 * 작성일: 2020.02.04
+	 -----------------------------------------------------------------------------------------*/
+	@PostMapping("memberInsert")
+	public ModelAndView memberInsert(CM_Dto member, RedirectAttributes rttr) {
+		mav = mServ.memberInsert(member, rttr);
+		log.warn("memberInsert()");
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 회원 가입 / 아이디 유효성 검사 컨트롤러
+	 * 작성자: JSH
+	 * 작성일: 2020.02.04
+	 -----------------------------------------------------------------------------------------*/
+	@RequestMapping(value = "/memJoinFrm/idCheck", method = RequestMethod.GET)
+	@ResponseBody
+	public int idCheck(@RequestParam("CM_ID") String CM_ID) {
+		log.warn(CM_ID);
+		return mServ.userIdCheck(CM_ID);
 	}
 	//장바구니 출력
 	@RequestMapping(value = "/basket", method = RequestMethod.GET)
@@ -196,18 +229,5 @@ public class MainController {
   	   public String myAdminRQ() {
   		   return "myAdminRQ";
   	   }
-  	   
-  	 /* ---------------------------------------------------------------------------------
-  	  * 기능: 로그인하는 기능
-  	  * 작성자: JWJ
-  	  * 작성일 : 2019.02.01
-  	  -----------------------------------------------------------------------------------*/
-  	  @GetMapping("loginProc")
-  	  public ModelAndView memberLogin(CM_Dto mem, RedirectAttributes rttr) {
-  		  mav = mServ.loginProc(mem,rttr);
-  		  
-  		  return mav;
-  	  }
-  	   
   	   
 }

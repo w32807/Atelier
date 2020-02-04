@@ -22,9 +22,7 @@ public class MemberDaoTest {
 	
 	@Test
 	public void testGetPwd() {
-		String cm_id = "admin";
-		String pwd = dao.getMemberPwd(cm_id);
-		log.info(pwd + "비밀번호입니다.zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz");
+		
 	}
 	
 }

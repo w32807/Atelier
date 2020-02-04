@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -27,6 +26,16 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/style.css" type="text/css">
+    
+    <script type="text/javascript">
+      		window.onload = function() {//이 페이지가 실행 되면, 이 함수를 실행해라
+				var chk = "${check}";
+				if(chk == "fail"){
+					alert("회원 가입 실패");
+					location.reload(true);//화면을 다시 한번 불러오면서 check를 리셋함 
+				}
+			}
+	</script>
 </head>
 
 <body>
@@ -176,38 +185,41 @@
                             </a>
                     </div>
                         
-                        <form id="test" action="#">
+                        <form id="memberJoinFrm" action="memberInsert" method="post" onsubmit="return check()">
                             <div class="group-input">
                                 <label for="CM_ID">Email을 입력하세요. *</label> 
-                                <input type="text" id=CM_ID placeholder="Ex) example@example.com" required>
-                                <input type="button" value="중복검사" class="site-btn register-btn" >
+                                <input type="text" name="cm_id" id="CM_ID" placeholder="Ex) example@example.com" required>
+                                <!-- 
+                                <input type="button" value="중복검사" class="site-btn register-btn" id="CM_ID" >
+                                 -->
+                                 <div class="check_font" id="id_check"></div>
                             </div>
                             
                             <div class="group-input">
                                 <label for="CM_PWD">Password를 입력하세요. *</label>
-                                <input type="text" name ="a" id="CM_PWD" placeholder="영문과 숫자를 조합한 8자리이상의 비밀번호 입력" required onblur=checkvalue();>
+                                <input type="text" name ="cm_pwd" id="CM_PWD" placeholder="영문과 숫자를 조합한 8자리이상의 비밀번호 입력" required onblur=checkvalue();>
                             </div>
                             <div class="group-input">
                                 <label for="CON_CM_PWD">Password 확인 *</label>
-                                <input type="text" name ="b" id="CON_CM_PWD" required onblur=checkvalue();>
+                                <input type="text" name ="CON_CM_PWD" id="CON_CM_PWD" required onblur=checkvalue();>
                             </div>
                             <!-- 비밀번호 일치/불일치 출력 -->
-                            <input type="text" name="status" style="border:0;color:highlight;font size:12px 굴림;width:160" readonly onfocus="this.blur();" value="[ 비밀번호를 입력해 주세요 ]">  
+                            <input type="text" name="status" style="border:0;color:highlight;font size:12px 굴림;width:160" readonly onfocus="this.blur();" value=" 비밀번호를 입력해 주세요 ">  
                             <div class="group-input">
                                 <label for="CM_NAME">성함을 입력하세요. *</label>
-                                <input type="text" id="CM_NAME" required>
+                                <input type="text" name="cm_name" id="CM_NAME" required>
                             </div>
                             <div class="group-input">
                                 <label for="CM_NICK">닉네임을 입력하세요. *</label>
-                                <input type="text" id="CM_NICK" required>
+                                <input type="text" name="cm_nick" id="CM_NICK" required>
                             </div>
                             <div class="group-input">
                                 <label for="CM_PHONE">전화번호를 입력하세요. *</label>
-                                <input type="text" id="CM_PHONE" placeholder="Ex) 070-6749-5882" required>
+                                <input type="text" name="cm_phone" id="CM_PHONE" placeholder="Ex) 070-6749-5882" required>
                             </div>
                             <div class="group-input">
                                 <label for="CM_ADDR">주소를 입력하세요. *</label>
-                                <input type="text" id="CM_ADDR" required>
+                                <input type="text" name="cm_addr" id="CM_ADDR" required>
                             </div>
                             <div class="payment-check">
                                     <div class="pc-item">
@@ -346,46 +358,108 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="${pageContext.request.contextPath}/resources/main/js/jquery.slicknav.js"></script>
     <script src="${pageContext.request.contextPath}/resources/main/js/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/main/js/main.js"></script>
-	<!-- 비밀번호 확인 -->
+
+<!-- 비밀번호 확인 -->
 <script language='javascript'>
 
 // checkvalue 기능
 function checkvalue() {
 
 // a 텍스트 필드와 b 텍스트 필드 중 둘다 값이 있을 때
-if(test.a.value && test.b.value) {
+if(memberJoinFrm.cm_pwd.value && memberJoinFrm.CON_CM_PWD.value) {
 
   // 두 필드의 값이 서로 다를 때
-  if(test.a.value!=test.b.value){
+  if(memberJoinFrm.cm_pwd.value!=memberJoinFrm.CON_CM_PWD.value){
 
    // status 필드에 일치하지 않는다는 문장 출력
-   test.status.value = "[ 일치하지 않습니다 ]";
+   memberJoinFrm.status.value = "[ 일치하지 않습니다 ]";
 
    // 그에 맞게 길이 수정
-   test.status.style.width = 120;
+   memberJoinFrm.status.style.width = 120;
 
   // 두 필드의 값이 동일 할 때
   } else {
 
    // status 필드에 일치한다는 문장 출력
-   test.status.value = "[ 일치합니다 ]";
+   memberJoinFrm.status.value = "[ 일치합니다 ]";
 
    // 역시 그에 맞게 길이 수정
-   test.status.style.width = 83;
+   memberJoinFrm.status.style.width = 83;
   }
 
 // a 텍스트 필드와 b 텍스트 필드 두중하나라도 값이 없을 때
 } else {
 
   // 아무것도 입력이 안 되어 있으므로 비밀번호를 입력해 달라는 메세지를 status 필드에 출력 함
-  test.status.value = "[ 비밀번호를 입력해 주세요 ]";
+  memberJoinFrm.status.value = "[ 비밀번호를 입력해 주세요 ]";
 
   // 그에 맞게 길이 수정
-  test.status.style.width = 160;
+  memberJoinFrm.status.style.width = 160;
 }
 
 }
+
 </script>
+
+
+	<script>
+/* ---------------------------------------------------------------------------------------
+ * 기능: 회원가입 / 아이디 유효성 검사
+ * 작성자: JSH
+ * 작성일: 2020.02.04
+ -----------------------------------------------------------------------------------------*/
+	$("#CM_ID").blur(function() {
+		console.log("JSP 유효성 검사 실행")
+		// id = "id_reg" / name = "userId"
+		var CM_ID = $('#CM_ID').val();
+		$.ajax({
+			url : '${pageContext.request.contextPath}/memJoinFrm/idCheck?CM_ID='+ CM_ID,
+			type : 'get',
+			success : function(data) {
+				console.log("1 = 중복o / 0 = 중복x : "+ data);							
+				
+				if (data == 1) {
+						// 1 : 아이디가 중복되는 문구
+						$("#id_check").text("사용중인 아이디입니다!");
+						$("#id_check").css("color", "red");
+						$("#reg_submit").attr("disabled", true);
+					} else {
+						
+						//if(idJ.test(CM_ID)){
+							// 0 : 아이디 길이 / 문자열 검사
+							//$("#id_check").text("");
+							//$("#reg_submit").attr("disabled", false);
+							//}
+						 if(CM_ID == ""){
+							
+							$('#id_check').text('아이디를 입력해주세요!');
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);				
+							
+						} else {
+							
+							if (CM_ID.indexOf("@") != -1) {
+							$('#id_check').text("사용 가능한 아이디 입니다!");
+							$('#id_check').css('color', 'red');
+							$("#reg_submit").attr("disabled", true);
+							
+							} else {
+									$('#id_check').text("아이디를 E-mail 형식으로 입력해주세요!");
+									$('#id_check').css('color', 'red');
+									$("#reg_submit").attr("disabled", true);
+							}
+						}
+						 
+						
+						
+					}
+				}, error : function() {
+						console.log("실패");
+				}
+			});
+		});
+</script>
+
 </body>
 
 </html>

@@ -26,15 +26,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/style.css" type="text/css">
-    <script type="text/javascript">
-      		window.onload = function() {//이 페이지가 실행 되면, 이 함수를 실행해라
-				var chk = "${check}";
-				if(chk != ""){
-					alert(chk);
-					location.reload(true);//화면을 다시 한번 불러오면서 check를 리셋함 
-				}
-			}
-</script>
 </head>
 
 <body>
