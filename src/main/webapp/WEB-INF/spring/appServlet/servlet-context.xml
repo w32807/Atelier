@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
+	
+	<!-- Enables the Spring MVC @Controller programming model -->
+	<annotation-driven />
+
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<resources mapping="/resources/**" location="/resources/" />
+
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
+		<beans:property name="suffix" value=".jsp" />
+	</beans:bean>
+	
+		<!-- commons-io, commons-fileupload를 스프링에서 사용하기위해서 MultipartResolver 가 있는데 그 설정을 하자 -->
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<beans:property name="defaultEncoding" value="UTF-8"/>
+		<beans:property name="maxUploadSize" value="10000000"/><!-- byte 단위로 10mb -->
+		<beans:property name="maxInMemorySize" value="10000000"/><!-- 파일 당 메모리에 적재 될 상한 -->
+	</beans:bean>
+	
+	
+	<!-- 인터셉트를 하지않을 예외 uri 처리 -->
+	<!-- <interceptors>
+			<interceptor>
+				<mapping path="/**"/>
+				인터셉트를 모든 uri에 대해 적용한다
+				모든 요청이 controll로 가기전에 가로챈다
+				
+				제외 할 uri 지정하기
+				
+				
+				인터셉터가 될 때 처리할 클래스 선언
+				<beans:bean class="com.atelier.util.SessionInterceptor"/>
+				
+			
+			</interceptor>
+	</interceptors>
+	 -->
+	
+	
+	<context:component-scan base-package="com.atelier.ad.controller" />
+	<context:component-scan base-package="com.atelier.at.controller" />
+	<context:component-scan base-package="com.atelier.center.controller" />
+	<context:component-scan base-package="com.atelier.main.controller" />
+	<context:component-scan base-package="com.atelier.mypage.controller" />
+	<context:component-scan base-package="com.atelier.product.controller" />
+	
+	
+	
+</beans:beans>

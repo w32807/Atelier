@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atelier.dao.CM_Dao">
+
+
+	<select id="getMemberPwd" parameterType="String" resultType="String">
+		SELECT CM_PWD FROM CM WHERE CM_ID=#{cm_id}
+	</select>
+	
+	<select id="getMemberInfo" parameterType="String" resultType="com.atelier.dto.CM_Dto">
+		SELECT * FROM CM WHERE CM_ID=#{cm_id}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
+
+
