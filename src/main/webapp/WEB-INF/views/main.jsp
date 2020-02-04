@@ -710,17 +710,23 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 </body>
     <!-- 사진 변환 스크립트 -->
     <script type="text/javascript">
-    		$(function(){
-    			$('#first_bgi').click(function(){
-    				$("#large_banner").css('background-image', 'url(./resources/main/img/products/man-large.jpg)');
-    			});
-    			$('#second_bgi').click(function(){
-  			    	$("#large_banner").css('background-image', 'url(./resources/main/img/products/mw-large.jpg)');
-  			  	});
-    			$('#third_bgi').click(function(){
-  			    	$("#large_banner").css('background-image', 'url(./resources/main/img/products/couple-large.jpg)');
- 				});
+    /* ---------------------------------------------------------------------------------------
+	 * 기능: 메인 하단 이미지 전환
+	 * 작성자: JSH
+	 * 작성일: 2020.02.04
+	 -----------------------------------------------------------------------------------------*/
+	 
+    	$(function(){
+    		$('#first_bgi').click(function(){
+    			$("#large_banner").css('background-image', 'url(./resources/main/img/products/man-large.jpg)');
     		});
+    		$('#second_bgi').click(function(){
+  		    	$("#large_banner").css('background-image', 'url(./resources/main/img/products/mw-large.jpg)');
+  		  	});
+    		$('#third_bgi').click(function(){
+  		    	$("#large_banner").css('background-image', 'url(./resources/main/img/products/couple-large.jpg)');
+ 			});
+    	});
     </script>
 	<!-- 메뉴태그 클래스 변경	 -->
 	<script type="text/javascript">
