@@ -170,25 +170,24 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="login-form">
                         <h2>Login</h2>
-                        <form action="#">
+                        <form action="loginProc" method="post" >
                             <div class="group-input">
                                 <label for="username">E-mail을 입력해주세요. *</label>
-                                <input type="text" id="username" placeholder="Ex) example@example.com" required>
+                                <input type="text" id="username" name="cm_id" placeholder="Ex) example@example.com" required>
                             </div>
                             <div class="group-input">
                                 <label for="pass">Password를 입력해주세요. *</label>
-                                <input type="text" id="pass" required>
+                                <input type="text" id="pass" name="cm_pwd" required>
                             </div>
                             <div class="group-input gi-check">
                                 <div class="gi-more">
+                                	
                                     <label for="save-pass">
-                                        비밀번호 저장.
+                                  		     아이디 저장.
                                         <input type="checkbox" id="save-pass" >
                                         <span class="checkmark"></span>
                                     </label>
-                                    <!-- 비밀번호 찾기 
-                                    <a href="#" class="forget-pass">passward 찾기</a>
-                                    -->
+                                    
                                 </div>
                             </div>
                             <button type="submit" class="site-btn login-btn">Atelier 로그인</button>

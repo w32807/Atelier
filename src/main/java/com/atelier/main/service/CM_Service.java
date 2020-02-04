@@ -26,6 +26,55 @@ public class CM_Service {
 	@Setter(onMethod_ = {@Autowired}) 
 	private HttpSession session;
 	
+	/*----------------------------------------------------------
+	 * 기   능 : 로그인 프로세스, 입력된 아이디와 비밀번호를 DB와 대조 후 일치 시 세션에 저장
+	 * 		   로그인 예외처리 추가 필요 
+	 * 작성일 : 20.02.03
+	 * 수정일 : -
+	 * 작성자 : JSG
+	 ----------------------------------------------------------*/
+	public ModelAndView loginProc(CM_Dto customer, RedirectAttributes rttr) {
+		mav = new ModelAndView();
+		String view = null;
+		BCryptPasswordEncoder pwdEncode = new BCryptPasswordEncoder();
+		
+		//DB에서 암호화된 비번 구하기
+		String encPwd = cm_Dao.getSecurityPwd(customer.getCm_id());
+		if(encPwd != null) {
+			if(pwdEncode.matches(customer.getCm_pwd(), encPwd)) {			
+				customer = cm_Dao.getMemberInfo(customer.getCm_id());
+				// 사용자 정보를 세션에 저장
+				session.setAttribute("mb", customer);
+				rttr.addFlashAttribute("check","로그인 성공!");
+				view = "redirect:main";
+			}
+			else {
+				view = "redirect:/";
+				rttr.addFlashAttribute("check","패스워드가 틀립니다.");
+			}
+		}
+		else {
+			//아이디가 존재하지 않는다.
+			view = "redirect:/";
+			rttr.addFlashAttribute("check","해당 아이디가 없습니다.");
+		}
+		mav.setViewName(view);
+		return mav;
+	}
+
+	/*----------------------------------------------------------
+	 * 기   능 : 로그아웃 프로세스 실행, 사용자 세션 정보 초기화
+	 * 작성일 : 20.02.04
+	 * 수정일 : -
+	 * 작성자 : JSG
+	 ----------------------------------------------------------*/
+	public void logoutProc(HttpSession logout_session) {
+		// TODO Auto-generated method stub
+		logout_session.invalidate();
+		//mav.setViewName("main");
+		//return mav;
+	}
+	
 	/* ---------------------------------------------------------------------------------------
 	 * 기능: 회원가입 서비스
 	 * 작성자: JSH
