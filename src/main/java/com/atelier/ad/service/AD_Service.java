@@ -2,6 +2,8 @@ package com.atelier.ad.service;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -74,7 +76,7 @@ public class AD_Service {
 	
 	   
  	 /* ---------------------------------------------------------------------------------
- 	  * 기능: FAQ입력 및 출력
+ 	  * 기능: FAQ입력 및 출력(ajax)
  	  * 작성자: JWJ
  	  * 작성일 : 2019.02.02
  	  -----------------------------------------------------------------------------------*/
@@ -89,8 +91,18 @@ public class AD_Service {
 			pageInt.put("pageNum", pageNum);
 			pageInt.put("maxNum", maxNum);
 			List<FT_FAQDto> faqList = aDao.getFAQList(pageInt);
+				//DB에서 가져온 날짜 값을 yyyy-MM-dd 로 변환
+			Timestamp date = faqList.get(1).getFt_regdate();
+			SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd"); 
+			
+			
+			
+			
 			faqmap = new HashMap<String, List<FT_FAQDto>>();
 			faqmap.put("faqList", faqList);
+			
+			
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
