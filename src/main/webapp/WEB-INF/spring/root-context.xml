@@ -39,17 +39,18 @@
       
       
       
-      
-        <mybatis-spring:scan base-package="com.atelier.dao"/>
-        <context:component-scan base-package="com.atelier.ad.service"/>
-        <context:component-scan base-package="com.atelier.at.service"/>
-        <context:component-scan base-package="com.atelier.center.service"/>
-        <context:component-scan base-package="com.atelier.main.service"/>
-        <context:component-scan base-package="com.atelier.mypage.service"/>
-        <context:component-scan base-package="com.atelier.product.service"/>
-        
-        
    
+      <mybatis-spring:scan base-package="com.atelier.dao"/>
+         <context:component-scan base-package="com.atelier.main.service"/>
+		 <context:component-scan base-package="com.atelier.at.controller"/>
+         <context:component-scan base-package="com.atelier.at.service"/>
+         <context:component-scan base-package="com.atelier.main.controller"/>
+         <context:component-scan base-package="com.atelier.mypage.service"/>
+         <context:component-scan base-package="com.atelier.mypage.controller"/>
+         <context:component-scan base-package="com.atelier.ad.controller"/>
+         <context:component-scan base-package="com.atelier.ad.service"/>
+         <context:component-scan base-package="com.atelier.co.controller"/>
+         <context:component-scan base-package="com.atelier.co.service"/>
          
        
 </beans>
