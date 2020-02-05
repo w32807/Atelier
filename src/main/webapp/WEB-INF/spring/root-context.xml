@@ -42,16 +42,15 @@
       
       <mybatis-spring:scan base-package="com.atelier.dao"/>
          <context:component-scan base-package="com.atelier.main.service"/>
-<<<<<<< HEAD
+		 <context:component-scan base-package="com.atelier.at.controller"/>
          <context:component-scan base-package="com.atelier.at.service"/>
-=======
          <context:component-scan base-package="com.atelier.main.controller"/>
          <context:component-scan base-package="com.atelier.mypage.service"/>
          <context:component-scan base-package="com.atelier.mypage.controller"/>
          <context:component-scan base-package="com.atelier.ad.controller"/>
          <context:component-scan base-package="com.atelier.ad.service"/>
+         <context:component-scan base-package="com.atelier.co.controller"/>
+         <context:component-scan base-package="com.atelier.co.service"/>
          
-         
->>>>>>> branch 'master' of https://github.com/w32807/Atelier
-      
+       
 </beans>

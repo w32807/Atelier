@@ -390,18 +390,15 @@ if(test.a.value && test.b.value) {
     
    
     /* ---------------------------------------------------------------------------------------
-	 * 기능: 
-	 * 작성자: JSG
+	 * 기   능: 세션에 계정id가 없으면 로그인 화면으로 보냄.
 	 * 작성일: 2020.02.04
+	 * 작성자: JSG 
 	 -----------------------------------------------------------------------------------------*/
     window.onload = function(){
-    	//$('.hideandshow').hide();
     	var mid = '${mb.cm_id}';
     	console.log(mid);
     	if(mid == ''){
-    		//alert("꺼져");
     		document.location.href = "login";
-    		//window.history.back();​
     	}
     	
     }

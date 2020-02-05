@@ -34,10 +34,10 @@ public class AD_controller {
 	@Setter(onMethod_ = @Autowired)
 	AD_Service aServ;
 	
-	@GetMapping("CONotice")
-	public String goCONotice() {
-		return "CONotice";
-	}
+//	@GetMapping("CONotice")
+//	public String goCONotice() {
+//		return "CONotice";
+//	}
 	
 	@GetMapping("ADNotice")
 	public String goADNotice() {

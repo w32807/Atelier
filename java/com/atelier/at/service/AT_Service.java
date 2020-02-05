@@ -25,7 +25,12 @@ public class AT_Service {
 	@Setter(onMethod_ = {@Autowired}) 
 	private HttpSession session;
 
-	
+	/*-------------------------------------------------------------------
+	 * 기   능 : 공방 신청 요청 서비스. AtRegist.jsp 입력폼에서 받은 데이터를 DB에 저장
+	 * 작성일 : 20.02.05
+	 * 수정일 :
+	 * 작업자 : 정성규
+	 -------------------------------------------------------------------*/
 	public void ATRegistProc(AG_Dto ag_Dto, RedirectAttributes rttr) {
 		
 		//boolean b;
