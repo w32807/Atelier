@@ -5,14 +5,14 @@ import lombok.Data;
 @Data
 public class CM_Dto {
 
-	String cm_id;
-	String cm_pwd;
-	String cm_name;
-	String cm_nick;
-	String cm_phone;
-	String cm_addr;
-	String cm_addr2;
-	String cm_state;
-	String cm_pfphoto;
+	private String cm_id;
+	private String cm_pwd;
+	private String cm_name;
+	private String cm_nick;
+	private String cm_phone;
+	private String cm_addr;
+	private String cm_addr2;
+	private String cm_state;
+	private String cm_pfphoto;
 	
 }

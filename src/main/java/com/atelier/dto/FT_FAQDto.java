@@ -15,7 +15,7 @@ public class FT_FAQDto {
 	private String ft_contents;
 	private String ft_id;
 	
-	@JsonFormat(pattern="yyyy-mm-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Timestamp ft_regdate;
-	
+	private String ft_date;
 }

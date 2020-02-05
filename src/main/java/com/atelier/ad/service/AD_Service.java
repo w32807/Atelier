@@ -2,6 +2,9 @@ package com.atelier.ad.service;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,6 +51,14 @@ public class AD_Service {
 		pageInt.put("pageNum", num);
 		pageInt.put("maxNum", maxNum);
 		List<FT_FAQDto> faqList = aDao.getFAQList(pageInt);
+		
+		//날짜를 yyyy-MM-dd 형태로 변환
+		SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
+		for(int i=0;i<faqList.size();i++) {
+			String convertDate = dataFm.format(faqList.get(i).getFt_regdate());
+			faqList.get(i).setFt_date(convertDate);
+		}
+		
 		mav.addObject("faqList",faqList);
 		mav.addObject("paging",getPaging(num));
 		session.setAttribute("pageNum", num);
@@ -74,7 +85,7 @@ public class AD_Service {
 	
 	   
  	 /* ---------------------------------------------------------------------------------
- 	  * 기능: FAQ입력 및 출력
+ 	  * 기능: FAQ입력 및 출력(ajax)
  	  * 작성자: JWJ
  	  * 작성일 : 2019.02.02
  	  -----------------------------------------------------------------------------------*/
@@ -89,8 +100,19 @@ public class AD_Service {
 			pageInt.put("pageNum", pageNum);
 			pageInt.put("maxNum", maxNum);
 			List<FT_FAQDto> faqList = aDao.getFAQList(pageInt);
+			//DB에서 가져온 날짜 값을 yyyy-MM-dd 로 변환
+			SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd"); 
+			String convertDate = dataFm.format(faqList.get(1).getFt_regdate());
+			Date parsedate = dataFm.parse(convertDate); 
+			Timestamp convertedDate = new Timestamp(parsedate.getTime()); 
+			faqList.get(1).setFt_regdate(convertedDate);
+			
+			
 			faqmap = new HashMap<String, List<FT_FAQDto>>();
 			faqmap.put("faqList", faqList);
+			
+			
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
