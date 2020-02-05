@@ -24,7 +24,13 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 	
-<<<<<<< HEAD
+	<!-- commons-io, commons-fileupload를 스프링에서 사용하기위해서 MultipartResolver 가 있는데 그 설정을 하자 -->
+    <beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <beans:property name="defaultEncoding" value="UTF-8"/>
+        <beans:property name="maxUploadSize" value="10000000"/><!-- byte 단위로 10mb -->
+        <beans:property name="maxInMemorySize" value="10000000"/><!-- 파일 당 메모리에 적재 될 상한 -->
+    </beans:bean>
+	
 	<context:component-scan base-package="com.atelier.main" />
 	<context:component-scan base-package="com.atelier.at" />
 	<context:component-scan base-package="com.atelier.co" />
@@ -35,14 +41,5 @@
     <context:component-scan base-package="com.atelier.main.controller" />
     <context:component-scan base-package="com.atelier.mypage.controller" />
     <context:component-scan base-package="com.atelier.product.controller" />
-=======
-	
-	         <context:component-scan base-package="com.atelier.main.service"/>
-         <context:component-scan base-package="com.atelier.main.controller"/>
-         <context:component-scan base-package="com.atelier.mypage.service"/>
-         <context:component-scan base-package="com.atelier.mypage.controller"/>
-         <context:component-scan base-package="com.atelier.ad.controller"/>
-         <context:component-scan base-package="com.atelier.ad.service"/>
->>>>>>> branch 'master' of https://github.com/w32807/Atelier.git
 	
 </beans:beans>

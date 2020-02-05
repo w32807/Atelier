@@ -70,22 +70,10 @@
 	
 	</head>
 	<body>
-	<!-- 상단바 -->
-	<!-- 이메일 전화번호 회원가입 로그인 -->
     <header class="header-section">
         <div class="header-top">
             <div class="container">
                 <div class="ht-left">
-                <!-- 헤더 이메일
-                    <div class="mail-service">
-                        <i class=" fa fa-envelope"></i>
-                    </div>
-                     -->
-                     <!-- 헤더 전화번호 
-                    <div class="phone-service">
-                        <i class=" fa fa-phone"></i>
-                    </div>
-                     -->
                 </div>
                 <!-- 로그인, 회원가입 -->
                 <div class="ht-right">
@@ -242,7 +230,7 @@
 		</aside>
 	<!-------------------------------------------------------여기까지 좌측바 메뉴입니다.---------------------------------------------------------------------->
 	
-		<form action="ATProdManage" id="ATProdRegist" method="get">
+		
 		<div id="colorlib-main">
 			<div class="colorlib-about">
 				<div class="container-fluid" style="margin-left: 100px;">
@@ -262,34 +250,41 @@
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft" style="margin-top: 20px;">
 							<div class="about-desc">
 								<!-- 각각의 항목에 같은 class명을 부여하여, 등록 시 유효성 검사를 함  -->
+							<form action="ATProdInsert" id="ATProdRegist" method="post" enctype="multipart/form-data">
 								<table style="font-size: 15px; margin-top: 100px; margin-bottom: 140px;">
 									<tr>
 										<td class="title"><b>제 품 명</b></td>
-										<td><input type="text" name="PD_NAME" class="content" placeholder="제품명" title="제품명"></td>
+										<td><input type="text" name="pd_name" class="content" placeholder="제품명" title="제품명"></td>
 									</tr>
 									<tr>
+                                        <td class="title"><b>공 방 명</b></td>
+                                        <td><input type="text" name="pd_at_name" class="content" placeholder="공방명" title="제품명"></td>
+                                    </tr>
+									<tr>
 										<td class="title"><b>수 &nbsp;&nbsp;량</b></td>
-										<td><input name="PD_numOfprod"value="0" class="content"
+										<td><input name="pd_numofstock" value="0" class="content"
 												type="number" min="0"
 												style="border: none; width: 70px;" placeholder="수량 "title="수량"></td>
 									</tr>
 									<tr>
 										<td class="title"><b>단 가</b></td>
-										<td><input type="text" class="content" name="PD_PRICE" placeholder="단 가"title="단가"></td>
+										<td><input type="number" class="content" name="pd_price"  min="0"
+                                                style="border: none; width: 70px;" placeholder="단 가"title="단가"></td>
 									</tr>
 									<tr>
 										<td class="title"><b>이미지 첨부</b></td>
-										<td><input type="file" id="image" class="content" name="PI_DIR"title="이미지" accept=".gif, .jpg, .png"></td>
+										<td><input type="file" id="image" class="content" name="pi_oriname"title="이미지" accept=".gif, .jpg, .png" ></td>
+										    
 									</tr>
 									<tr>
 										<td class="title"><b>색 상</b></td>
-										<td><input type="text" class="content" name="PI_DIR" placeholder="색 상"title="색상"></td>
+										<td><input type="text" class="content" name="pd_option" placeholder="색 상"title="색상"></td>
 									</tr>
 									
 									<tr>
 										<td class="title"><b>타겟</b></td>
 										<td>
-										<select class="content" name="PD_SEX"  placeholder="타겟"title="타겟">
+										<select class="content" name="pd_sex" placeholder="타겟" title="타겟" >
 													<option>남성용</option>
 													<option>여성용</option>
 													<option>남녀공용</option>
@@ -297,7 +292,7 @@
 									</tr>
 									<tr>
 										<td class="title"><b>가죽 종류</b></td>
-										<td><select class="content" name="PD_TYPE" placeholder="가죽 종류" title="가죽 종류">
+										<td><select class="content" name="pd_type" placeholder="가죽 종류" title="가죽 종류">
 													<option>레자</option>
 													<option>소가죽</option>
 													<option>말가죽</option>
@@ -305,7 +300,7 @@
 									</tr>
 									<tr>
 										<td class="title"><b>카테고리</b></td>
-										<td><select class="content" name="PD_SEX "title="카테고리">
+										<td><select class="content" name="pd_cate"title="카테고리">
 												<!-- foreach문으로 카테고리를 출력해 주세요. -->
 													<option value="카테고리1">카테고리1</option>
 													<option value="카테고리2">카테고리2</option>
@@ -314,17 +309,19 @@
 									</tr>
 									
 								</table>
+								
 								<table style="margin-left: -747px; width: 1150px;">
 									<tr>
 										<td style="display: inline; font-size: 16px; margin-left: 100px;"><b>상세내역</b></td>
 									</tr>
 									<tr>
 										<td style="margin-left: 75px; margin-top: 10px; float: left; width: 1110px;">
-											<textarea class="form-control content" id="p_content" title="상세내역">
+											<textarea class="form-control content" id="p_content" name="pd_datail" title="상세내역">
 											</textarea>
 										</td>
 									</tr>
 								</table>
+								</form>
 							</div>
 							</div>
 							<div style="float: right; margin-right: 50px">
@@ -335,7 +332,7 @@
 					</div>
 				</div>
 			</div>
-			</form>
+			
 		
 		</div>
 	
@@ -448,8 +445,9 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			var inputContent = $(".content");//content클래스로, 입력할 태그들을 배열로써 가져옴
 			var inputLength = inputContent.length;//등록해야할 정보는 총 7개이다.
 			var a = false;
-			console.log(inputContent);
-			console.log(inputLength);
+			//var editor1 = CKEDITOR.replace( 'contents' );
+			 CKEDITOR.instances.p_content.updateElement(); 
+			 var data = CKEDITOR.instances.p_content.getData();
 			inputContent.each(function() {//jquery에서의 for문은 이렇게 사용!
 				a = false;//루프문 같이 돌리기 위해 지역변수로 선언
 				//each메소드안에서 return false는 for문의 break 역할을, return true는 for문의 continue역할을 한다. 
@@ -472,6 +470,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			console.log(a);
 			if(a){
 				if(confirm("정말 제품 등록 하시겠습니까?")){
+					console.log("제출합니다.");
 					$("#ATProdRegist").submit();//ATProdManage(제품관리 페이지)로 이동!
 				}
 			 }else {
@@ -496,7 +495,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	            var reader = new FileReader();
 
 	            reader.onload = function (e) {
-	            	console.log(e.target.result);
+	            	//console.log(e.target.result);
 	            	console.log( $('#preview').css("background-image"));
 	                    $('#preview').css({'background-image':'url('+e.target.result+')'});
 	                }
@@ -505,7 +504,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	            }
 	        };
 		
-	
+	  
 	</script>
 	
 	</body>
