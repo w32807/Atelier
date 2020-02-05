@@ -5,15 +5,25 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.atelier.at.service.AT_Service;
+import com.atelier.dto.AG_Dto;
+import com.atelier.main.service.CM_Service;
+
+import lombok.Setter;
 
 /**
  * Handles requests for the application home page.
@@ -21,17 +31,46 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AT_Controller {
 	
+	ModelAndView mav;
+
+	@Setter(onMethod_ = @Autowired)
+	private HttpSession session;
+
+	@Setter(onMethod_ = @Autowired)
+	AT_Service mServ;
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
 	
+	/*-------------------------------------------------------------------
+	 * 기   능 : 공방 신청 페이지로 이동
+	 * 작성일 : 
+	 * 수정일 :
+	 * 작업자 : 정성규
+	 -------------------------------------------------------------------*/
+//	@GetMapping("ATRegist")
+//	public String goATRegist() {
+//		return "ATRegist";
+//	}
+	
+	/*-------------------------------------------------------------------
+	 * 기   능 : 공방 신청 요청 처리
+	 * 작성일 : 
+	 * 수정일 :
+	 * 작업자 : 정성규
+	 -------------------------------------------------------------------*/
+	@PostMapping("ATRegistProc")
+	public String ATRegistProc(AG_Dto agDto, RedirectAttributes rttr) {
+		//String goMain;
+		mServ.ATRegistProc(agDto, rttr);
+		
+		return "main";
+	}
 	
 	//--------------------------------------------------------------------------------------------
 	// 책임자 : 김예희
 	//--------------------------------------------------------------------------------------------
-
-
 	@GetMapping("ATDetail")//공방 상세 페이지로 이동하는 메소드
 	public String goATDetail() {
 		return "ATDetail";

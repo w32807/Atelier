@@ -6,6 +6,9 @@ import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -58,10 +61,8 @@ public class MainController {
 	 * 작성자: JSG
 	 * 작성일: 2020.02.04
 	 -----------------------------------------------------------------------------------------*/
-	//로그인창 출력
 	@GetMapping("login")
 	public String login() {
-		//mav = mloginserv.loginProc(cmDto, rttr);
 		return "login";
 	}
 
@@ -70,7 +71,6 @@ public class MainController {
 	 * 작성자: JSG
 	 * 작성일: 2020.02.04
 	 -----------------------------------------------------------------------------------------*/
-	//로그인창 출력
 	@PostMapping("loginProc")
 	public ModelAndView login(CM_Dto cmDto, RedirectAttributes rttr) {
 		mav = mServ.loginProc(cmDto, rttr);
@@ -82,7 +82,6 @@ public class MainController {
 	 * 작성자: JSG
 	 * 작성일: 2020.02.04
 	-----------------------------------------------------------------------------------------*/
-	// 로그아웃
 	@GetMapping("logout")
 	public ModelAndView logout() {
 		mServ.logoutProc(session);

@@ -1,5 +1,6 @@
 package com.atelier.main.service;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class CM_Service {
 		mav = new ModelAndView();
 		String view = null;
 		BCryptPasswordEncoder pwdEncode = new BCryptPasswordEncoder();
-		
+
 		//DB에서 암호화된 비번 구하기
 		String encPwd = cm_Dao.getSecurityPwd(customer.getCm_id());
 		if(encPwd != null) {
@@ -47,6 +48,8 @@ public class CM_Service {
 				session.setAttribute("mb", customer);
 				rttr.addFlashAttribute("check","로그인 성공!");
 				view = "redirect:main";
+				
+				
 			}
 			else {
 				view = "redirect:/";

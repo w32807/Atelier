@@ -42,5 +42,6 @@
       
       <mybatis-spring:scan base-package="com.atelier.dao"/>
          <context:component-scan base-package="com.atelier.main.service"/>
+         <context:component-scan base-package="com.atelier.at.service"/>
       
 </beans>
