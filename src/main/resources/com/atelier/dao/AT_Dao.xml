@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.atelier.dao.AT_Dao">
+	
+	<insert id="setATRegistUserData" parameterType="com.atelier.dto.AG_Dto">
+		INSERT INTO AG VALUES
+		(#{ag_at_name},#{ag_phone},#{ag_id},#{ag_snsaddr},
+		#{ag_cate1},#{ag_cate2},#{ag_cate3})
+	</insert>
+
+</mapper>

@@ -206,16 +206,16 @@ nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
 						<a class="nav-item nav-link active" id="nav-home-tab"
 							data-toggle="tab" href="#nav-home" role="tab"
-							aria-controls="nav-home" aria-selected="true">약관</a> <a
-							class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+							aria-controls="nav-home" aria-selected="true">약관</a> 
+						<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
 							href="#nav-profile" role="tab" aria-controls="nav-profile"
-							aria-selected="false">개인정보 처리 방침</a> <a class="nav-item nav-link"
-							id="nav-FAQ-tab" data-toggle="tab" href="#nav-FAQ" role="tab"
-							aria-controls="nav-FAQ" aria-selected="false">FAQ</a> <a
-							class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+							aria-selected="false">공지사항</a> 
+						<a class="nav-item nav-link" id="nav-FAQ-tab" data-toggle="tab" href="#nav-FAQ" role="tab"
+							aria-controls="nav-FAQ" aria-selected="false">FAQ</a> 
+						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
 							href="#nav-contact" role="tab" aria-controls="nav-contact"
-							aria-selected="false">Contact Us</a> <a class="nav-item nav-link"
-							id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab"
+							aria-selected="false">Contact Us</a> 
+						<a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab"
 							aria-controls="nav-about" aria-selected="false">메세지 문의</a>
 					</div>
 				</nav>
@@ -321,20 +321,57 @@ Google은 서비스의 변경사항을 반영하거나 법령, 규제, 보안 �
 
 Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 바랍니다.
                </textarea>
-
-
 					</div>
-
-
+					
 					<div class="tab-pane fade" id="nav-profile" role="tabpanel"
 						aria-labelledby="nav-profile-tab">
 						<br>
-						<h4>개인정보 처리 방침</h4>
+						<h4>공지사항</h4>
 						<br>
-						<textarea class="col-md-6" style="resize: none; height: 400px;">
-						님들 개인정보 100원에 팜 개꿀 ㅎ 
-						고멘네!
-               			</textarea>
+						<div class="table-responsive">
+									<table
+										class="align-middle mb-0 table table-borderless table-striped table-hover">
+										<thead>
+											<tr>
+												<!-- <th>선택</th> -->
+												<th class="text-center" style="width: 100px;">등록번호</th>
+												<th class="text-center" style="width: 450px;">제목</th>
+												<th class="text-center">작성자</th>
+												<th class="text-center">조회수</th>
+												<th class="text-center">상세보기</th>
+											</tr>
+										</thead>
+										<tbody>
+											<c:forEach var="bnotice" items="${noticeList}">
+											<tr>
+												<!--  <td><input type="checkbox"></td> -->
+		
+												<td class="text-center text-muted">${bnotice.nt_num}</td>
+
+												<td><div class="widget-content p-0"
+														style="text-align: center;">
+														<div class="widget-content-wrapper">
+															<div class="widget-content-left flex2">
+																<div class="widget-heading">${bnotice.nt_title}</div>
+															</div>
+														</div>
+													</div></td>
+
+												<td class="text-center">${bnotice.nt_id}</td>
+
+												<td class="text-center">${bnotice.nt_count}</td>
+
+												<td class="text-center"><a href="CONoticeContents?Noticenum=${bnotice.nt_num}"
+													onclick="window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=yes');return false;">
+														<button type="button" id="PopoverCustomT-1"
+															class="btn btn-primary btn-sm">상세보기</button>
+												</a></td>
+											</tr>
+											</c:forEach>
+										</tbody>
+									</table>
+
+								</div>
 					</div>
 
 					<!-- FAQ -->
@@ -649,7 +686,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 	<script type="text/javascript" src="./resources/main/js/main.js"></script>
 
-
+	
 </body>
 
 

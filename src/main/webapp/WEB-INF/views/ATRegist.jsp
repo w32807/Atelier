@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -176,26 +175,26 @@
                             </a>
                     </div>
                         
-                        <form id="test" action="#">
+                        <form id="test" action="ATRegistProc" method="post">
                             <div class="group-input">
                                 <label for="AT_NAME "><b>공방명을 입력하세요 *</b></label> 
-                                <input type="text" id=AT_NAME  required>
+                                <input type="text" id=AT_NAME name="ag_at_name" required >
                             </div>
                             <div class="group-input">
                                 <label for="AT_PHONE "><b>공방 연락처를 입력하세요. *</b></label>
-                                <input type="text" id="AT_PHONE " placeholder="Ex) 070-6749-5882" required>
+                                <input type="text" id="AT_PHONE" name="ag_phone" placeholder="Ex) 070-6749-5882" required>
                             </div>               
                             <div class="group-input">
                                 <label for="AT_ID "> <b>Email*</b></label> 
-                                <input type="text" id=AT_ID  placeholder="Ex) EL구문위치할것 ㅇㅋ?" required>  
+                                <input type="text" id=AT_ID  name="ag_id" value="${mb.cm_id}" readonly>
                             </div>
                             <div class="group-input">
                                 <label for="AT_SNSADDR "><b>공방Site or SNS. *</b></label>
-                                <input type="text" id="AT_SNSADDR " required>
+                                <input type="url" id="AT_SNSADDR" name="ag_snsaddr" required>
                             </div>
                             <div class="group-input">
                                 <label for="AT_CATE1 "><b>카테고리1 *</b></label>
-                                <select id="AT_CATE1 " name="종류">
+                                <select id="AT_CATE1 " name="ag_cate1">
                                 	<option value="">선택</option>
                                 	<option value="의류">의류</option>
                                 	<option value="가방">가방</option>
@@ -209,7 +208,7 @@
                             </div>
                             <div class="group-input">
                                 <label for="AT_CATE2 "><b>카테고리2 *</b></label>
-                                <select id="AT_CATE2 " name="종류">
+                                <select id="AT_CATE2 " name="ag_cate2">
                                 	<option value="">선택</option>
                                 	<option value="의류">의류</option>
                                 	<option value="가방">가방</option>
@@ -223,7 +222,7 @@
                             </div>
                             <div class="group-input">
                                 <label for="AT_CATE3 "><b>카테고리3 *</b></label>
-                                <select id="AT_CATE3 " name="종류">
+                                <select id="AT_CATE3 " name="ag_cate3">
                                 	<option value="">선택</option>
                                 	<option value="의류">의류</option>
                                 	<option value="가방">가방</option>
@@ -386,6 +385,25 @@ if(test.a.value && test.b.value) {
 
 }
 </script>
+
+<script type="text/javascript">
+    
+   
+    /* ---------------------------------------------------------------------------------------
+	 * 기   능: 세션에 계정id가 없으면 로그인 화면으로 보냄.
+	 * 작성일: 2020.02.04
+	 * 작성자: JSG 
+	 -----------------------------------------------------------------------------------------*/
+    window.onload = function(){
+    	var mid = '${mb.cm_id}';
+    	console.log(mid);
+    	if(mid == ''){
+    		document.location.href = "login";
+    	}
+    	
+    }
+    </script>
+
 </body>
 
 </html>

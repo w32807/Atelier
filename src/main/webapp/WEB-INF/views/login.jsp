@@ -184,7 +184,7 @@
                                 	
                                     <label for="save-pass">
                                   		     아이디 저장.
-                                        <input type="checkbox" id="save-pass" >
+                                        <input type="checkbox" id="save-pass">
                                         <span class="checkmark"></span>
                                     </label>
                                     
@@ -319,6 +319,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="${pageContext.request.contextPath}/resources/main/js/jquery.slicknav.js"></script>
     <script src="${pageContext.request.contextPath}/resources/main/js/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/main/js/main.js"></script>
+    
 </body>
 
 </html>
