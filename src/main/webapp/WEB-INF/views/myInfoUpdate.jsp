@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -87,18 +86,37 @@
                 </div>
                 <!-- 로그인, 회원가입 -->
                 <div class="ht-right">
-                    <a href="login" class="login-panel"><i class="fa fa-user"></i>로그인</a>
-                    <a href="memJoinFrm" class="login-panel"><i class="fa fa-user"></i>회원가입</a>
+                	<!-- 
+					<a href="main" class="hideandshow login-panel" action="logout"><i class="fa fa-user"></i>로그아웃</a>
+					 -->
+					<script>
+						function goPage(){
+							var f = document.gologout;
+							f.action = "logout";
+							f.method = "post";
+							f.submit();
+						}
+					</script>
+					<form name="gologout"></form>
+					<a href="logout" class="hideandshow login-panel"><i class="fa fa-user"></i>로그아웃</a>
+					<c:if test="${msg == 'logoutSuccess' }">
+						<script type="text/javascript">
+							alert('로그아웃을 성공했습니다.');
+						</script>
+					</c:if>
+					
+                    <a href="login" class="showandhide login-panel"><i class="fa fa-user"></i>로그인</a>
+                    <a href="memJoinFrm" class="showandhide login-panel"><i class="fa fa-user"></i>회원가입</a>
                     <a href="CONotice" class="login-panel"><i class="fa fa-user"></i>고객센터</a>
-                    <!-- 히든 버튼 처리
-					<a href="#" class="login-panel"  style="visibility:hidden;"><i class="fa fa-user"></i>로그아웃</a>
-					-->
+                     
                     <!-- SNS광고란 -->
                     <div class="top-social">
+                  	    <temp class="hideandshow">${mb.cm_name}님 환영합니다.</temp>
                         <a href="https://www.facebook.com/"><i class="ti-facebook"></i></a>
                         <a href="https://twitter.com/"><i class="ti-twitter-alt"></i></a>
                         <a href="https://www.instagram.com/"><i class="ti-linkedin"></i></a>
                         <a href="https://www.pinterest.co.kr/"><i class="ti-pinterest"></i></a>
+                        
                     </div>
                 </div>
             </div>
@@ -123,8 +141,8 @@
                         </div>
                         <!-- 마이페이지 -->
                     </div>
-                    <div class="col-lg-3 text-right col-md-3">
-                        <ul class="nav-right">
+                    <div  class="col-lg-3 text-right col-md-3">
+                        <ul class="nav-right hideandshow">
 	                            <li class="heart-icon">
 	                                <a href="myPage">
 	                                    <i class="icon_heart_alt"></i>
@@ -153,7 +171,7 @@
                         <span>Home</span>
                         	<ul class="depart-hover">
                             <li class="active"><a href="main">Shop Home</a></li>
-                            <li><a href=ATMain>Atelier Home</a></li>
+                            <li><a href="ATMain">Atelier Home</a></li>
                             <li><a href="/">Experience</a></li>
                         </ul>
                     </div>
@@ -404,34 +422,35 @@ function btn(){
 }
 </script>
 <script type="text/javascript">
-	var sel_file;
-	
-	$(document).ready(function(){
-		$("#input_img").on("change", handleImgFileSelect);
-	});
-	
-	function handleImgFileSelect(e) {
-		var files = e.target.files;
-		var filesArr = Array.prototype.slice.call(files);
-		
-		filesArr.forEach(function(f) {
-			if(!f.type.match("image.*")) {
-				alert("확장자는 이미지 확장자만 가능합니다.");
-				return;
-			}
-			
-			sel_file = f;
-			
-			var reader = new FileReader();
-			reader.onload = function(e) {
-				$("#img").attr("src",e.target.result);
-				
-			}
-			reader.readAsDataURL(f);
-		});
-	}
-	
-</script>
+    /* ---------------------------------------------------------------------------------------
+	 * 기능: 로그인 여부에 따른 버튼 출력여부 결정
+	 * 작성자: JSG
+	 * 수정자: JSH
+	 * 작성일: 2020.02.04
+	 -----------------------------------------------------------------------------------------*/
+    window.onload = function(){
+    	$('.hideandshow').hide();
+    	var mid = '${mb.cm_id}';
+    	var mname = '${mb.cm_name}';
+    	console.log('세션값'+'${mb}');
+    	console.log(mid);
+    	console.log(mname);
+    	if(mid != ''){
+    		$('.hideandshow').show();
+    	}
+    	
+    	$('.showandhide').show();
+    	var mid1 = '${mb.cm_id}';
+    	var mname1 = '${mb.cm_name}';
+    	console.log('세션값'+'${mb}');
+    	console.log(mid1);
+    	console.log(mname1);
+    	if(mid1 != ''){
+    		$('.showandhide').hide();
+    	}
+    	
+    }
+    </script>
 </body>
 
 </html>
