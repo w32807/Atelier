@@ -119,84 +119,80 @@ nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
 
 	<!-- 상단바 -->
 	<!-- 이메일 전화번호 회원가입 로그인 -->
-    <header class="header-section">
-        <div class="header-top">
-            <div class="container">
-                <div class="ht-left">
-                <!-- 헤더 이메일
+	<header class="header-section">
+		<div class="header-top">
+			<div class="container">
+				<div class="ht-left">
+					<!-- 헤더 이메일
                     <div class="mail-service">
                         <i class=" fa fa-envelope"></i>
                     </div>
                      -->
-                     <!-- 헤더 전화번호 
+					<!-- 헤더 전화번호 
                     <div class="phone-service">
                         <i class=" fa fa-phone"></i>
                     </div>
                      -->
-                </div>
-                <!-- 로그인, 회원가입 -->
-                <div class="ht-right">
-                    <a href="login" class="login-panel"><i class="fa fa-user"></i>로그인</a>
-                    <a href="memJoinFrm" class="login-panel"><i class="fa fa-user"></i>회원가입</a>
-                    <a href="CONotice" class="login-panel"><i class="fa fa-user"></i>고객센터</a>
-                    <!-- 히든 버튼 처리
+				</div>
+				<!-- 로그인, 회원가입 -->
+				<div class="ht-right">
+					<a href="login" class="login-panel"><i class="fa fa-user"></i>로그인</a>
+					<a href="memJoinFrm" class="login-panel"><i class="fa fa-user"></i>회원가입</a>
+					<a href="CONotice" class="login-panel"><i class="fa fa-user"></i>고객센터</a>
+					<!-- 히든 버튼 처리
 					<a href="#" class="login-panel"  style="visibility:hidden;"><i class="fa fa-user"></i>로그아웃</a>
 					-->
-                    <!-- SNS광고란 -->
-                    <div class="top-social">
-                        <a href="https://www.facebook.com/"><i class="ti-facebook"></i></a>
-                        <a href="https://twitter.com/"><i class="ti-twitter-alt"></i></a>
-                        <a href="https://www.instagram.com/"><i class="ti-linkedin"></i></a>
-                        <a href="https://www.pinterest.co.kr/"><i class="ti-pinterest"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="inner-header">
-                <div class="row">
-                    <div class="col-lg-2 col-md-2">
-                        <div class="logo">
-                            <a href="/">
-                                <img src="./resources/main/img/logo_main.jpg" alt="">
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-lg-7 col-md-7">
-                        <div class="advanced-search">
-                            <button type="button" class="category-btn">검색창</button>
-                            <div class="input-group">
-                                <input type="text" placeholder="원하시는 공방명/상품을 입력해주세요.">
-                                <button type="button"><i class="ti-search"></i></button>
-                            </div>
-                        </div>
-                        <!-- 마이페이지 -->
-                    </div>
-                    <div class="col-lg-3 text-right col-md-3">
-                        <ul class="nav-right">
-	                            <li class="heart-icon">
-	                                <a href="myPage">
-	                                    <i class="icon_heart_alt"></i>
-	                                    <span>6</span>
-	                            </li>
-	                            <li class="cart-price">MyPage</li>
-	                            </a>
-	                            
-	                            <li class="cart-icon">
-	                                <a href="basket">
-	                                    <i class="icon_bag_alt"></i>
-	                                <span>9</span>
-	                            </li>
-                            <li class="cart-price">basket</li>
-                            </a>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
-    <!-- Header End -->
-<!-- 상단바 End -->
+					<!-- SNS광고란 -->
+					<div class="top-social">
+						<a href="https://www.facebook.com/"><i class="ti-facebook"></i></a>
+						<a href="https://twitter.com/"><i class="ti-twitter-alt"></i></a>
+						<a href="https://www.instagram.com/"><i class="ti-linkedin"></i></a>
+						<a href="https://www.pinterest.co.kr/"><i class="ti-pinterest"></i></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container">
+			<div class="inner-header">
+				<div class="row">
+					<div class="col-lg-2 col-md-2">
+						<div class="logo">
+							<a href="/"> <img src="./resources/main/img/logo_main.jpg"
+								alt="">
+							</a>
+						</div>
+					</div>
+					<div class="col-lg-7 col-md-7">
+						<div class="advanced-search">
+							<button type="button" class="category-btn">검색창</button>
+							<div class="input-group">
+								<input type="text" placeholder="원하시는 공방명/상품을 입력해주세요.">
+								<button type="button">
+									<i class="ti-search"></i>
+								</button>
+							</div>
+						</div>
+						<!-- 마이페이지 -->
+					</div>
+					<div class="col-lg-3 text-right col-md-3">
+						<ul class="nav-right">
+							<li class="heart-icon"><a href="myPage"> <i
+									class="icon_heart_alt"></i> <span>6</span></li>
+							<li class="cart-price">MyPage</li>
+							</a>
+
+							<li class="cart-icon"><a href="basket"> <i
+									class="icon_bag_alt"></i> <span>9</span></li>
+							<li class="cart-price">basket</li>
+							</a>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+	<!-- Header End -->
+	<!-- 상단바 End -->
 
 
 	<div class="container">
@@ -206,16 +202,16 @@ nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
 						<a class="nav-item nav-link active" id="nav-home-tab"
 							data-toggle="tab" href="#nav-home" role="tab"
-							aria-controls="nav-home" aria-selected="true">약관</a> 
-						<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+							aria-controls="nav-home" aria-selected="true">공지사항</a> <a
+							class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
 							href="#nav-profile" role="tab" aria-controls="nav-profile"
-							aria-selected="false">공지사항</a> 
-						<a class="nav-item nav-link" id="nav-FAQ-tab" data-toggle="tab" href="#nav-FAQ" role="tab"
-							aria-controls="nav-FAQ" aria-selected="false">FAQ</a> 
-						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+							aria-selected="false">약관</a> <a class="nav-item nav-link"
+							id="nav-FAQ-tab" data-toggle="tab" href="#nav-FAQ" role="tab"
+							aria-controls="nav-FAQ" aria-selected="false">FAQ</a> <a
+							class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
 							href="#nav-contact" role="tab" aria-controls="nav-contact"
-							aria-selected="false">Contact Us</a> 
-						<a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab"
+							aria-selected="false">Contact Us</a> <a class="nav-item nav-link"
+							id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab"
 							aria-controls="nav-about" aria-selected="false">메세지 문의</a>
 					</div>
 				</nav>
@@ -223,6 +219,57 @@ nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
 				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
 					<div class="tab-pane fade show active" id="nav-home"
 						role="tabpanel" aria-labelledby="nav-home-tab">
+						<br>
+						<h4>공지사항</h4>
+						<br>
+						<div class="table-responsive">
+							<table  class="align-middle mb-0 table table-borderless table-striped table-hover">
+								<thead>
+									<tr>
+										<!-- <th>선택</th> -->
+										<th class="text-center" style="width: 100px;">등록번호</th>
+										<th class="text-center" style="width: 450px;">제목</th>
+										<th class="text-center">작성자</th>
+										<th class="text-center">조회수</th>
+										<th class="text-center">상세보기</th>
+									</tr>
+								</thead>
+								<tbody id="nList" name="nList">
+									
+									<c:forEach var="bnotice" items="${noticeList}">
+									<tr>
+
+									<td class="text-center text-muted">${bnotice.nt_num}</td>
+
+									<td><div class="widget-content p-0"
+											style="text-align: center;">
+											<div class="widget-content-wrapper">
+												<div class="widget-content-left flex2">
+													<div class="widget-heading">${bnotice.nt_title}</div>
+												</div>
+											</div>
+										</div></td>
+
+									<td class="text-center">${bnotice.nt_id}</td>
+
+									<td class="text-center">${bnotice.nt_count}</td>
+
+									<td class="text-center"><a
+										href="CONoticeContents?Noticenum=${bnotice.nt_num}"
+										onclick="window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=yes');return false;">
+											<button type="button" id="PopoverCustomT-1"
+												class="btn btn-primary btn-sm">상세보기</button>
+									</a></td>
+									</tr>
+									</c:forEach>
+																		
+								</tbody>
+							</table>
+							<p style="text-align:center">${paging}</p>
+						</div>
+						</div>
+					<div class="tab-pane fade" id="nav-profile" role="tabpanel"
+						aria-labelledby="nav-profile-tab">
 						<br>
 						<h4>약관 안내 (필독!)</h4>
 						<br>
@@ -323,56 +370,6 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
                </textarea>
 					</div>
 					
-					<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-						aria-labelledby="nav-profile-tab">
-						<br>
-						<h4>공지사항</h4>
-						<br>
-						<div class="table-responsive">
-									<table
-										class="align-middle mb-0 table table-borderless table-striped table-hover">
-										<thead>
-											<tr>
-												<!-- <th>선택</th> -->
-												<th class="text-center" style="width: 100px;">등록번호</th>
-												<th class="text-center" style="width: 450px;">제목</th>
-												<th class="text-center">작성자</th>
-												<th class="text-center">조회수</th>
-												<th class="text-center">상세보기</th>
-											</tr>
-										</thead>
-										<tbody>
-											<c:forEach var="bnotice" items="${noticeList}">
-											<tr>
-												<!--  <td><input type="checkbox"></td> -->
-		
-												<td class="text-center text-muted">${bnotice.nt_num}</td>
-
-												<td><div class="widget-content p-0"
-														style="text-align: center;">
-														<div class="widget-content-wrapper">
-															<div class="widget-content-left flex2">
-																<div class="widget-heading">${bnotice.nt_title}</div>
-															</div>
-														</div>
-													</div></td>
-
-												<td class="text-center">${bnotice.nt_id}</td>
-
-												<td class="text-center">${bnotice.nt_count}</td>
-
-												<td class="text-center"><a href="CONoticeContents?Noticenum=${bnotice.nt_num}"
-													onclick="window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=yes');return false;">
-														<button type="button" id="PopoverCustomT-1"
-															class="btn btn-primary btn-sm">상세보기</button>
-												</a></td>
-											</tr>
-											</c:forEach>
-										</tbody>
-									</table>
-
-								</div>
-					</div>
 
 					<!-- FAQ -->
 					<div class="tab-pane fade" id="nav-FAQ" role="tabpanel"
@@ -433,11 +430,11 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 												</button>
 											</div>
 											<div data-parent="#accordion" id="collapseOne4"
-												 class="collapse">
+												class="collapse">
 												<div class="card-body">4다</div>
 											</div>
 										</div>
-											<div class="card">
+										<div class="card">
 											<div id="headingFive" class="card-header">
 												<button type="button" data-toggle="collapse"
 													data-target="#collapseOne5" aria-expanded="false"
@@ -447,7 +444,7 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 												</button>
 											</div>
 											<div data-parent="#accordion" id="collapseOne5"
-												 class="collapse">
+												class="collapse">
 												<div class="card-body">5다</div>
 											</div>
 										</div>
@@ -460,90 +457,92 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 					<!-- Contact Us -->
 					<div class="tab-pane fade" id="nav-contact" role="tabpanel"
 						aria-labelledby="nav-contact-tab">
-					
 
-    <!-- Map Section Begin -->
-    <div class="map spad">
-        <div class="container">
-            <div class="map-inner">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48158.305462977965!2d-74.13283844036356!3d41.02757295168286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2e440473470d7%3A0xcaf503ca2ee57958!2sSaddle%20River%2C%20NJ%2007458%2C%20USA!5e0!3m2!1sen!2sbd!4v1575917275626!5m2!1sen!2sbd"
-                    height="610" style="border:0" allowfullscreen="">
-                </iframe>
-                <div class="icon">
-                    <i class="fa fa-map-marker"></i>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Map Section Begin -->
 
-    <!-- Contact Section Begin -->
-    <section class="contact-section spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-5">
-                    <div class="contact-title">
-                        <h4>Contacts Us</h4>
-                        <p>Contrary to popular belief, Lorem Ipsum is simply random text. It has roots in a piece of
-                            classical Latin literature from 45 BC, maki years old.</p>
-                    </div>
-                    <div class="contact-widget">
-                        <div class="cw-item">
-                            <div class="ci-icon">
-                                <i class="ti-location-pin"></i>
-                            </div>
-                            <div class="ci-text">
-                                <span>Address:</span>
-                                <p>60-49 Road 11378 New York</p>
-                            </div>
-                        </div>
-                        <div class="cw-item">
-                            <div class="ci-icon">
-                                <i class="ti-mobile"></i>
-                            </div>
-                            <div class="ci-text">
-                                <span>Phone:</span>
-                                <p>+65 11.188.888</p>
-                            </div>
-                        </div>
-                        <div class="cw-item">
-                            <div class="ci-icon">
-                                <i class="ti-email"></i>
-                            </div>
-                            <div class="ci-text">
-                                <span>Email:</span>
-                                <p>hellocolorlib@gmail.com</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 offset-lg-1">
-                    <div class="contact-form">
-                        <div class="leave-comment">
-                            <h4>Leave A Comment</h4>
-                            <p>Our staff will call back later and answer your questions.</p>
-                            <form action="#" class="comment-form">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <input type="text" placeholder="Your name">
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <input type="text" placeholder="Your email">
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <textarea placeholder="Your message"></textarea>
-                                        <button type="submit" class="site-btn">Send message</button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-					
+						<!-- Map Section Begin -->
+						<div class="map spad">
+							<div class="container">
+								<div class="map-inner">
+									<iframe
+										src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48158.305462977965!2d-74.13283844036356!3d41.02757295168286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2e440473470d7%3A0xcaf503ca2ee57958!2sSaddle%20River%2C%20NJ%2007458%2C%20USA!5e0!3m2!1sen!2sbd!4v1575917275626!5m2!1sen!2sbd"
+										height="610" style="border: 0" allowfullscreen=""> </iframe>
+									<div class="icon">
+										<i class="fa fa-map-marker"></i>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Map Section Begin -->
+
+						<!-- Contact Section Begin -->
+						<section class="contact-section spad">
+							<div class="container">
+								<div class="row">
+									<div class="col-lg-5">
+										<div class="contact-title">
+											<h4>Contacts Us</h4>
+											<p>Contrary to popular belief, Lorem Ipsum is simply
+												random text. It has roots in a piece of classical Latin
+												literature from 45 BC, maki years old.</p>
+										</div>
+										<div class="contact-widget">
+											<div class="cw-item">
+												<div class="ci-icon">
+													<i class="ti-location-pin"></i>
+												</div>
+												<div class="ci-text">
+													<span>Address:</span>
+													<p>60-49 Road 11378 New York</p>
+												</div>
+											</div>
+											<div class="cw-item">
+												<div class="ci-icon">
+													<i class="ti-mobile"></i>
+												</div>
+												<div class="ci-text">
+													<span>Phone:</span>
+													<p>+65 11.188.888</p>
+												</div>
+											</div>
+											<div class="cw-item">
+												<div class="ci-icon">
+													<i class="ti-email"></i>
+												</div>
+												<div class="ci-text">
+													<span>Email:</span>
+													<p>hellocolorlib@gmail.com</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-lg-6 offset-lg-1">
+										<div class="contact-form">
+											<div class="leave-comment">
+												<h4>Leave A Comment</h4>
+												<p>Our staff will call back later and answer your
+													questions.</p>
+												<form action="#" class="comment-form">
+													<div class="row">
+														<div class="col-lg-6">
+															<input type="text" placeholder="Your name">
+														</div>
+														<div class="col-lg-6">
+															<input type="text" placeholder="Your email">
+														</div>
+														<div class="col-lg-12">
+															<textarea placeholder="Your message"></textarea>
+															<button type="submit" class="site-btn">Send
+																message</button>
+														</div>
+													</div>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>
+
 					</div>
 
 
@@ -599,75 +598,81 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 
 	<!-- 하단바 -->
 	<!-- Footer Section Begin -->
-    <footer class="footer-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="footer-left">
-                        <ul>
-                            <li>Address: 인천 미추홀구 학익동 663-1 태승빌딩 5층</li>
-                            <li>Phone: 032-876-3332</li>
-                            <li>Email: whdgus5841@gmail.com</li>
-                        </ul>
-                        <div class="footer-social">
-                            <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
-                            <a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a>
-                            <a href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
-                            <a href="https://www.pinterest.co.kr/"><i class="fa fa-pinterest"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-2 offset-lg-1">
-                    <div class="footer-widget">
-                        <h5>Information</h5>
-                        <ul>
-                        	<li><a href="CONotice">고객 센터</a></li>
-                            <li><a href="CONotice">약관</a></li>
-                            <li><a href="CONotice">개인 정보 처리 방침</a></li>
-                            <li><a href="CONotice">QNA</a></li>
-                            <li><a href="CONotice">Contact US</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="footer-widget">
-                        <h5>My Account</h5>
-                        <ul>
-                            <li><a href="myPage">myPage</a></li>
-                            <li><a href="basket">Basket</a></li>
-                            <li><a href="ATRegist">공방 회원 신청</a></li>
-                            <li><a href="ADNoticeList">Admin</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="newslatter-item">
-                         <a href="/">
-                                <img src="./resources/main/img/logo_bottom.png" alt="" style="margin-top: 25px;">
-                            </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="copyright-reserved">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="copyright-text">
-                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        </div>
-                        <div class="payment-pic">
-                            <img src="./resources/main/img/payment-method.png" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <!-- Footer Section End -->
-<!-- 하단바 End -->
+	<footer class="footer-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-3">
+					<div class="footer-left">
+						<ul>
+							<li>Address: 인천 미추홀구 학익동 663-1 태승빌딩 5층</li>
+							<li>Phone: 032-876-3332</li>
+							<li>Email: whdgus5841@gmail.com</li>
+						</ul>
+						<div class="footer-social">
+							<a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+							<a href="https://www.instagram.com/"><i
+								class="fa fa-instagram"></i></a> <a href="https://twitter.com/"><i
+								class="fa fa-twitter"></i></a> <a
+								href="https://www.pinterest.co.kr/"><i
+								class="fa fa-pinterest"></i></a>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-2 offset-lg-1">
+					<div class="footer-widget">
+						<h5>Information</h5>
+						<ul>
+							<li><a href="CONotice">고객 센터</a></li>
+							<li><a href="CONotice">약관</a></li>
+							<li><a href="CONotice">개인 정보 처리 방침</a></li>
+							<li><a href="CONotice">QNA</a></li>
+							<li><a href="CONotice">Contact US</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-2">
+					<div class="footer-widget">
+						<h5>My Account</h5>
+						<ul>
+							<li><a href="myPage">myPage</a></li>
+							<li><a href="basket">Basket</a></li>
+							<li><a href="ATRegist">공방 회원 신청</a></li>
+							<li><a href="ADNoticeList">Admin</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="newslatter-item">
+						<a href="/"> <img src="./resources/main/img/logo_bottom.png"
+							alt="" style="margin-top: 25px;">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="copyright-reserved">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="copyright-text">
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+							Copyright &copy;
+							<script>document.write(new Date().getFullYear());</script>
+							All rights reserved | This template is made with <i
+								class="fa fa-heart-o" aria-hidden="true"></i> by <a
+								href="https://colorlib.com" target="_blank">Colorlib</a>
+							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+						</div>
+						<div class="payment-pic">
+							<img src="./resources/main/img/payment-method.png" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer Section End -->
+	<!-- 하단바 End -->
 
 	<!-- Js Plugins -->
 	<script src="<c:url value="/resources/main/js/jquery-3.3.1.min.js"/>"></script>
@@ -686,7 +691,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 	<script type="text/javascript" src="./resources/main/js/main.js"></script>
 
-	
 </body>
 
 

@@ -27,14 +27,24 @@ public class CO_Controller {
 	
 	ModelAndView mav;//service에서 넘어오는 ModelandView를 받기 위한 변수
 	
-	@GetMapping("CONotice")//get방식으로 전송되는 method. 
-	public ModelAndView noticeList() {
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 고객센터 공지사항 리스트 처리
+	 * 작성자: JSG
+	 * 작성일: 2020.02.05
+	 -----------------------------------------------------------------------------------------*/
+	@GetMapping("CONotice")
+	public ModelAndView noticeList(Integer pageNum) {
 		//log.info("boardList()");
-		mav = mServ.getNoticeList();
+		mav = mServ.getNoticeList(pageNum);
 
 		return mav;
 	}
 	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 고객센터 공지사항 상세정보 처리
+	 * 작성자: JSG
+	 * 작성일: 2020.02.05
+	 -----------------------------------------------------------------------------------------*/
 	@GetMapping("CONoticeContents")//get방식으로 전송되는 method. 
 	public ModelAndView noticeContents(Integer Noticenum) {
 		//log.info("boardList()");
