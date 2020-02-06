@@ -24,7 +24,11 @@
 		text-align: center;
 		padding-bottom: 0px;
 	}
-
+	#CM_ID {
+		color: black;
+		font-weight: bold;
+	}
+	
 </style>
 <!-- Google Font -->
 <link
@@ -223,9 +227,23 @@
 					<div class="blog-sidebar">
 						<div class="profile_form"
 							style="border: 2px solid #00000033; text-align: center; border-radius: 30px;">
+							<!-- 
 							<img class="profile_img"
 								src="./resources/main/img/blog/profile_sample.jpg"
 								style="padding: 30px 0px;">
+							 -->
+							 <!-- spring taglib
+							 <img class="profile_img"
+								src="<spring:url value = '/profile/tester@gmail'/>"
+								style="padding: 30px 0px;">
+								 -->
+								 <!-- 
+								 <a><img class="profile_img" src="/profileIMG?name=${mb.cm_pfphoto}" style="padding: 30px 0px;"></a>
+								  -->
+								  <!-- 
+								  <img class="profile_img" src="resources\upload\profile\"a style="padding: 30px 0px;">
+								   -->
+								   <img class="profile_img" id="profile_img" src="./resources/main/img/blog/penguin.jpg" style="padding: 30px 0px;">
 							<h4>Anne Hathaway</h4>
 							<p>sample@gmail.com</p>
 						</div>
@@ -274,47 +292,45 @@
 											<h3 style="text-align:center"><b>회원정보 변경</b></h3>
 										</div>
 										<hr>
-										<!-- 이미지 업로드 -->
-										<div>
-										<label for="CM_ID"><p><b>프로필 사진</b></p></label>
-											<div class="img_wrap" style="margin: auto;">
-												<img style ="border:3px solid darkgrey; max-width: 100%;border-radius:20% ; "id="img"/ >
+										<form id="test" action="MyPageFix" method="post" enctype="multipart/form-data">
+											<!-- 이미지 업로드 -->
+											<div>
+											<label for="CM_ID"><p><b>프로필 사진</b></p></label>
+												<div class="img_wrap" style="margin: auto;">
+													<img src="./resources/main/img/blog/penguin.jpg" style ="border:3px solid darkgrey; max-width: 100%;border-radius:20% ; "id="img"/ >
+												</div>
 											</div>
-										</div>
-										<hr>
-										<div>
-											<input type="file" id= "input_img"/>
-										</div>
-										<hr>
-										<!--  이미지 업로드 끝 -->
-										<form id="test" action="#">
+											<hr>
+											<div>
+												<input type="file" id= "input_img" name=input_img onchange="fileChk(this)" />
+												<input type="hidden" 	id="filecheck" value="0" name="fileCheck">
+											</div>
+											<hr>
+											<!--  이미지 업로드 끝 -->
+										
 											<div class="group-input">
-												<label for="CM_ID"><b>회원 Email</b></label> <input type="text"
-													id=CM_ID placeholder="Ex) example@example.com" required>
+												<label for="CM_ID"><b>회원 Email</b></label> 
+												<input type="text" name="CM_ID" id=CM_ID value=${mb.cm_id} readonly/>
 											</div>
 											<div class="group-input">
 												<label for="CM_NAME"><b>이름. *</b></label> <input type="text"
-													id="CM_NAME" required>
+													name="CM_NAME" id="CM_NAME" value=${mb.cm_name} required>
 											</div>
 											<div class="group-input">
 												<label for="CM_NICK"><b>닉네임. *</b></label> <input type="text"
-													id="CM_NICK" required>
+													name="CM_NICK" id="CM_NICK" value=${mb.cm_nick} required>
 											</div>
 											<div class="group-input">
 												<label for="CM_PHONE"><b>전화번호. *</b></label> <input type="text"
-													id="CM_PHONE" placeholder="Ex) 070-6749-5882" required>
+													name="CM_PHONE" id="CM_PHONE" value=${mb.cm_phone} required>
 											</div>
 											<div class="group-input">
 												<label for="CM_ADDR"><b>배송지1. *</b></label> <input type="text"
-													id="CM_ADDR" required>
+													name="CM_ADDR" id="CM_ADDR" value=${mb.cm_addr} required>
 											</div>
 											<div class="group-input">
 												<label for="CM_ADDR"><b>배송지2. *</b></label> <input type="text"
-													id="CM_ADDR" required>
-											</div>
-											<div class="group-input">
-												<label for="CM_BIRTH"><b>생년월일 *</b></label> <input type="text"
-													id="CM_BIRTH" required>
+													name="CM_ADDR2" id="CM_ADDR" value=${mb.cm_addr2} >
 											</div>
 											<button type="submit" class="site-btn register-btn"
 												onclick="javascript:btn()">수정하기.</button>
@@ -451,6 +467,99 @@ function btn(){
     	
     }
     </script>
+    
+    <script type="text/javascript">
+    /* ---------------------------------------------------------------------------------------
+	 * 기능: 프로필 사진 출력
+	 * 작성자: JSH
+	 * 작성일: 2020.02.05
+	 -----------------------------------------------------------------------------------------*/
+	 
+   var sel_file;
+   
+   $(document).ready(function(){
+      $("#input_img").on("change", handleImgFileSelect);
+   });
+   
+   function handleImgFileSelect(e) {
+      var files = e.target.files;
+      var filesArr = Array.prototype.slice.call(files);
+      
+      filesArr.forEach(function(f) {
+         if(!f.type.match("image.*")) {
+            alert("확장자는 이미지 확장자만 가능합니다.");
+            return;
+         }
+         
+         sel_file = f;
+         
+         var reader = new FileReader();
+         reader.onload = function(e) {
+            $("#img").attr("src",e.target.result);
+            
+         }
+         reader.readAsDataURL(f);
+      });
+   }
+   
+</script>
+
+<script type="text/javascript">
+/* ---------------------------------------------------------------------------------------
+ * 기능: 프로필 이미지 업로드 체크
+ * 작성자: JSH
+ * 작성일: 2020.02.05
+ -----------------------------------------------------------------------------------------*/
+	
+	//파일 입력이 되었을 때, > <input type="hidden" id="filecheck" value="0" name="fileCheck">의 value 값을 1로 바꿔주자.
+	function fileChk(elem) {
+		console.log(elem);
+		console.dir(elem.value);
+		
+		if(elem.value == ""){
+			console.log("empty");
+			$("#filecheck").val(0); 
+		}
+		else{
+			console.log("not empty");
+			$("#filecheck").val(1);
+		}
+	}
+</script>
+
+<script type="text/javascript">
+/* ---------------------------------------------------------------------------------------
+ * 기능: 프로필 이미지 출력
+ * 작성자: JSH
+ * 작성일: 2020.02.06
+ -----------------------------------------------------------------------------------------*/
+	var imgRoot = 'resources/upload/profile/';
+	var sessionImg = '${mb.cm_pfphoto}';
+	var sessionImgRP = sessionImg.replace('com','jpg');
+	console.log(sessionImgRP);
+	
+	var sessionImgView = imgRoot+sessionImgRP;
+	console.log(sessionImgView);
+	
+	document.getElementById('profile_img').setAttribute('src',sessionImgView);
+</script>
+<script type="text/javascript">
+/* ---------------------------------------------------------------------------------------
+ * 기능: 프로필 이미지 미리보기 출력
+ * 작성자: JSH
+ * 작성일: 2020.02.06
+ -----------------------------------------------------------------------------------------*/
+	var imgRoot = 'resources/upload/profile/';
+	var sessionImg = '${mb.cm_pfphoto}';
+	var sessionImgRP = sessionImg.replace('com','jpg');
+	console.log(sessionImgRP);
+	
+	var sessionImgView = imgRoot+sessionImgRP;
+	console.log(sessionImgView);
+	
+	document.getElementById('img').setAttribute('src',sessionImgView);
+</script>
+
 </body>
 
 </html>

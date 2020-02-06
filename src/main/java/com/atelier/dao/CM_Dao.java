@@ -18,5 +18,7 @@ public interface CM_Dao {
 
 	public int checkOverId(String CM_ID);
 	
-	
+	public boolean upPass(CM_Dto udto);
+
+	public boolean pfPhoto(String profileName);
 }
