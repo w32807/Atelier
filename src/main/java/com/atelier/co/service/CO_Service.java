@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.atelier.dao.AD_dao;
+import com.atelier.dao.AD_Dao;
 import com.atelier.dao.CO_Dao;
 import com.atelier.dto.CO_NoticeDto;
 

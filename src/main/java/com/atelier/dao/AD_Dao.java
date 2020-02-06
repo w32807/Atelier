@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.atelier.dto.FT_FAQDto;
 
-public interface AD_dao {
+public interface AD_Dao {
 
 	public boolean FAQInsert(FT_FAQDto faq);
 

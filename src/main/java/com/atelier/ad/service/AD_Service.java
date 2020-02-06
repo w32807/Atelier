@@ -18,7 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.atelier.dao.AD_dao;
+import com.atelier.dao.AD_Dao;
 import com.atelier.dto.FT_FAQDto;
 import com.atelier.util.FAQPaging;
 
@@ -30,7 +30,7 @@ public class AD_Service {
 
 	ModelAndView mav;
 	@Setter(onMethod_ = @Autowired)
-	AD_dao aDao;
+	AD_Dao aDao;
 	
 	
 	@Setter(onMethod_ = @Autowired) 

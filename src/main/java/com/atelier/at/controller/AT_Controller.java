@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,9 +17,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atelier.at.service.AT_Service;
+import com.atelier.dto.AG_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
 
@@ -32,15 +35,33 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class AT_Controller {
 	
+	ModelAndView mav;
+
+	@Setter(onMethod_ = @Autowired)
+	private HttpSession session;
+
+	@Setter(onMethod_ = @Autowired)
+	AT_Service mServ;
 	
 	@Setter(onMethod_ = @Autowired)
 	AT_Service atServ;
 	
 	
+	/*-------------------------------------------------------------------
+	 * 기   능 : 공방 신청 요청 처리
+	 * 작성일 : 20.02.05
+	 * 수정일 :
+	 * 작업자 : 정성규
+	 -------------------------------------------------------------------*/
+	@PostMapping("ATRegistProc")
+	public String ATRegistProc(AG_Dto agDto, RedirectAttributes rttr) {
+		//String goMain;
+		mServ.ATRegistProc(agDto, rttr);
+		
+		return "main";
+	}
 	
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+	
 	
 	
 	//--------------------------------------------------------------------------------------------
@@ -151,8 +172,6 @@ public class AT_Controller {
 		
 		return "ATProdRegist";
 	}
-	
-	
 	
 	
 	

@@ -30,7 +30,7 @@
 		select count(*) from COMMON_MEMBER WHERE CM_ID=#{CM_ID}
 	</select>
 	
-	<!--  -->
+	<!-- 비밀번호 변경  -->
 	<update id="upPass" parameterType="com.atelier.dto.CM_Dto">
 		UPDATE CM 
 		SET CM_PWD=#{cm_pwd}

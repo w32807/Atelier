@@ -17,4 +17,6 @@ public interface CM_Dao {
 	public boolean memberUpdate(CM_Dto member);
 
 	public int checkOverId(String CM_ID);
+	
+	
 }

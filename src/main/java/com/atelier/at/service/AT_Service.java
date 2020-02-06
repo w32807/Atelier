@@ -19,7 +19,8 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.atelier.dao.AT_dao;
+import com.atelier.dao.AT_Dao;
+import com.atelier.dto.AG_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
@@ -35,13 +36,25 @@ public class AT_Service {
 	ModelAndView mav;
 	
 	@Setter(onMethod_ = @Autowired)
-	AT_dao atDao;
+	AT_Dao atDao;
 	
 
 	@Setter(onMethod_ = @Autowired) 
 	private HttpSession session;
 	
-	
+	/*-------------------------------------------------------------------
+	 * 기   능 : 공방 신청 요청 서비스. AtRegist.jsp 입력폼에서 받은 데이터를 DB에 저장
+	 * 작성일 : 20.02.05
+	 * 수정일 :
+	 * 작업자 : 정성규
+	 -------------------------------------------------------------------*/
+	public void ATRegistProc(AG_Dto ag_Dto, RedirectAttributes rttr) {
+		
+		//boolean b;
+		atDao.setATRegistUserData(ag_Dto);
+		
+		//return "main";
+	}
 	
 	 /* ---------------------------------------------------------------------------------
 	  * 기능: 제품 관리의 상품 등록하기

@@ -2,10 +2,27 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.atelier.dao.AT_Dao">
 	
+	<insert id="ATProdInsert" parameterType="com.atelier.dto.PD_productDto">
+	   INSERT INTO PD VALUES(PD_CODE_SEQ.NEXTVAL,#{pd_name},#{pd_price},#{pd_datail},#{pd_at_name},#{pd_option},
+		   DEFAULT,SYSDATE,#{pd_cate},#{pd_type},#{pd_sex},#{pd_numofstock})
+	</insert>
+	
+	<insert id="ATProdImgInsert" parameterType="com.atelier.dto.PI_productImgDto" >
+	   INSERT INTO PI VALUES(PI_NUM_SEQ.NEXTVAL,#{pi_pd_code},#{pi_sysname},#{pi_oriname})
+	</insert>
+	
+	<select id="getPd_code" resultType="Integer">
+	   SELECT PD_CODE_SEQ.CURRVAL FROM DUAL
+	</select>
+	
 	<insert id="setATRegistUserData" parameterType="com.atelier.dto.AG_Dto">
 		INSERT INTO AG VALUES
 		(#{ag_at_name},#{ag_phone},#{ag_id},#{ag_snsaddr},
 		#{ag_cate1},#{ag_cate2},#{ag_cate3})
 	</insert>
-
+    
+    
+    
+    
+    
 </mapper>
