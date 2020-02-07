@@ -187,22 +187,25 @@ public class AT_Controller {
 		return view;
 	}
 	
-	@PostMapping("prodSellRegist")//제품 목록 관리에서 판매 등록을 위한 메소드
-	public String prodSellRegist(HttpServletRequest request) {
-		//여기의 작업은 service에서  처리해도 됩니다. 일단 써놨습니다.
-		//페이징 처리도 해주세요.
-		String[] chkedBoxArr = request.getParameterValues("prod");//체크박스의 값들이 넘어옴(상품의 상품코드를 가져옴)
+	 /* ---------------------------------------------------------------------------------
+	  * 기능: 선택한 상품의 판매여부를 판매 (T)로 전환
+	  * 작성자: JWJ
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	@PostMapping("prodSellRegist")
+	public String prodSellRegist(HttpServletRequest request, RedirectAttributes rttr) {
 		
+		String[] chkedBoxArr = request.getParameterValues("prod");//체크박스의 값들이 넘어옴(상품의 상품코드를 가져옴)
+		String view = atServ.changeProdRegist(chkedBoxArr,rttr);
 		return "ATProdManage";//상품의 판매등록을 하고 난 뒤 다시 제품관리 페이지로 넘어감
 	}
 	
 	@PostMapping("prodRegistCancle")//제품 목록 관리에서 판매 등록 해제를 위한 메소드
 	public String prodRegistCancle(HttpServletRequest request) {
-		//여기의 작업은 service에서  처리해도 됩니다. 일단 써놨습니다.
-		//페이징 처리도 해주세요.
-		String[] chkedBoxArr = request.getParameterValues("prod");//체크박스의 값들이 넘어옴(상품의 상품코드를 가져옴)
+		String[] chkedBoxArr = request.getParameterValues("prod");
 		
-		return "ATProdManage";//상품의 판매등록을 하고 난 뒤 다시 제품관리 페이지로 넘어감
+		
+		return "ATProdManage";
 	}
 	
 	 /* ---------------------------------------------------------------------------------
@@ -271,5 +274,6 @@ public class AT_Controller {
 	public String ATMessageRQ() {
 		return "ATMessageRQ";
 	}
+	
 	
 }

@@ -50,4 +50,8 @@ public class MyPageController {
 			log.warn("프로필 이미지 출력 컨트롤러");
 		mpServ.profileIMG(name, req, resp);
 	}
+	
+	
+	
+	
 }

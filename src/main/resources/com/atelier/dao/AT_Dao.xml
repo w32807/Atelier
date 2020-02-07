@@ -35,4 +35,25 @@
 		WHERE PD_CODE = #{pd_code}
     </update>
     
+    <update id="changeProdRegist" parameterType="String">
+    	UPDATE PD SET PD_REGIST = 'TRUE' WHERE PD_CODE = #{pd_code}
+    </update>
+    
+   <insert id="replyInsert" parameterType="com.atelier.dto.SM_Dto" useGeneratedKeys="true" 
+      keyProperty="sm_num"> 
+         <selectKey keyProperty="sm_num" resultType="int" order="BEFORE">
+         SELECT SM_NUM_SEQ.NEXTVAL FROM DUAL
+         </selectKey>         
+         INSERT INTO SUPPORT_MG 
+         VALUES(${sm_num}, #{sm_contents},SYSDATE, #{sm_sender},#{sm_receiver})
+   </insert>
+   
+   <select id="getReplyList1" parameterType="String" resultType="com.atelier.dto.SM_Dto">
+      SELECT * FROM SUPPORT_MG WHERE MG_RECEIVER = #{sm_receiver}
+   </select>   
+      
+   <select id="getReplyList2" parameterType="com.atelier.dto.SM_Dto" resultType="com.atelier.dto.SM_Dto">
+      SELECT * FROM SUPPORT_MG ORDER BY SM_NUM DESC
+   </select>   
+    
 </mapper>
