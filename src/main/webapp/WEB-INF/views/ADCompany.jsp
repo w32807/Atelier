@@ -302,7 +302,7 @@
 
 							</ul>
 								<div>
-								<button class="btn btn-info btn-lg" style="float:right; width:80px; height:80;"><h5>Insert</h5></button>
+								<button class="btn btn-info btn-lg" onclick="location.href='ADCompanyInsert'" style="float:right; width:80px; height:80;"><h5>Insert</h5></button>
 	          					</div>
 						</div>
 						

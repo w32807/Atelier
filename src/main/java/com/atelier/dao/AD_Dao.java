@@ -3,6 +3,7 @@ package com.atelier.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.atelier.dto.AD_MaterialDto;
 import com.atelier.dto.FT_FAQDto;
 
 public interface AD_Dao {
@@ -18,6 +19,7 @@ public interface AD_Dao {
 	public int getFAQCount();
 
 	public boolean delFAQ(String ft_num);
-
+	
+	public boolean materialInsert (AD_MaterialDto material);
 
 }

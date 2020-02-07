@@ -19,6 +19,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atelier.ad.service.AD_Service;
+import com.atelier.dto.AD_MaterialDto;
+import com.atelier.dto.CM_Dto;
 import com.atelier.dto.FT_FAQDto;
 
 import lombok.Setter;
@@ -120,18 +122,31 @@ public class AD_controller {
 	@GetMapping("ADProdManage")
 	public String goADProdManage() {
 		return "ADProdManage";
-	}
-	
+	}	
 	
 	@GetMapping("ADNoticeContents")
 	public String goADNoticeContents() {
 		return "ADNoticeContents";
 	}
 	
-	
-	
 	@GetMapping("ADMessageContents")
 	public String goADMessageContents() {
 		return "ADMessageContents";
+	}
+	
+	@GetMapping("ADCompanyInsert")
+	public String goADCompanyInsert() {
+		return "ADCompanyInsert";
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 원자재 등록 컨트롤러
+	  * 작성자: JSH
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	@PostMapping("MaterialInsert")
+	public ModelAndView MaterialInsert(AD_MaterialDto material, RedirectAttributes rttr) {
+		mav = aServ.MaterialInsert(material, rttr);
+		return mav;
 	}
 }
