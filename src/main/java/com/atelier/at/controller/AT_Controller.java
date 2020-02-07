@@ -161,10 +161,45 @@ public class AT_Controller {
 	}
 	
 
-	@GetMapping("ATProdManage")//제품 목록 관리에서(ATProdManage)로 넘어가는 메소드
-	public String goATProdManage() {
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 제작한 상품 리스트 전체 출력
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.05
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ATProdManage")
+	public ModelAndView getATProdList(Integer pageNum, Integer maxNum) {
+		log.warn("제작한 상품 리스트 전체 출력 컨트롤러");
+		mav = atServ.getATProdList(pageNum, maxNum);
 		
-		return "ATProdManage";
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 판매 등록한 상품 리스트 출력
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.06
+	  -----------------------------------------------------------------------------------*/
+	@PostMapping("ATProdRegistTrueList")
+	public ModelAndView getATProdRegistTrueList(Integer pageNum, Integer maxNum) {
+		log.warn("판매 등록한 상품 리스트 출력 컨트롤러");
+		mav = atServ.getATProdRegistTrueList(pageNum, maxNum);
+		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 제품 목록 관리에서 판매 등록 해제 처리
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.06
+	  -----------------------------------------------------------------------------------*/
+	@PostMapping("prodRegistCancle")
+	public ModelAndView prodRegistCancleProc(PD_productDto pdDto, HttpServletRequest request, RedirectAttributes rttr) {
+		log.warn("판매 등록해제 컨트롤러");
+		String[] checkedBoxArr = request.getParameterValues("prodChk");
+		
+		mav = atServ.prodRegistCancleProc(pdDto, checkedBoxArr, rttr);
+		
+		return mav;
 	}
 	
 	@GetMapping("ATProdRegist")//제품 목록 관리에서(ATProdManage)에서 제품 메뉴 제작 페이지로 넘어가는 메소드
@@ -172,8 +207,6 @@ public class AT_Controller {
 		
 		return "ATProdRegist";
 	}
-	
-	
 	
 	 /* ---------------------------------------------------------------------------------
 	  * 기능: 제품 관리의 상품 등록하기
@@ -198,14 +231,6 @@ public class AT_Controller {
 		String[] chkedBoxArr = request.getParameterValues("prod");//체크박스의 값들이 넘어옴(상품의 상품코드를 가져옴)
 		String view = atServ.changeProdRegist(chkedBoxArr,rttr);
 		return "ATProdManage";//상품의 판매등록을 하고 난 뒤 다시 제품관리 페이지로 넘어감
-	}
-	
-	@PostMapping("prodRegistCancle")//제품 목록 관리에서 판매 등록 해제를 위한 메소드
-	public String prodRegistCancle(HttpServletRequest request) {
-		String[] chkedBoxArr = request.getParameterValues("prod");
-		
-		
-		return "ATProdManage";
 	}
 	
 	 /* ---------------------------------------------------------------------------------

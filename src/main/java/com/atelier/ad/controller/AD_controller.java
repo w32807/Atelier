@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.atelier.ad.service.AD_Service;
 import com.atelier.dto.AD_MaterialDto;
 import com.atelier.dto.CM_Dto;
+import com.atelier.dto.CO_NoticeDto;
 import com.atelier.dto.FT_FAQDto;
 
 import lombok.Setter;
@@ -49,13 +50,61 @@ public class AD_controller {
 	}
 	
 	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공지사항 전체 출력
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.01
+	  -----------------------------------------------------------------------------------*/
 	@GetMapping("ADNoticeList")
-	public String goADNoticeList() {
+	public ModelAndView getADNoticeList(Integer pageNum, Integer maxNum) {
+		log.warn("공지사항 컨트롤러");
+		mav = aServ.getADNoticeList(pageNum, maxNum);
 		
-		
-		return  "ADNoticeList";
+		return mav;
 	}
 	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공지사항 상세내용 보기 및 조회수 증가
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.04
+	  -----------------------------------------------------------------------------------*/
+	 @GetMapping("ADNoticeContents")
+	 public ModelAndView goADNoticeContents(Integer nt_num) {
+		 //log.warn("공지사항 상세내용 컨트롤러");
+		 mav = aServ.getADNoticeDetail(nt_num);
+		 
+		 return mav;
+	 }
+	 
+	 /* ---------------------------------------------------------------------------------
+	  * 기능: 공지사항 수정
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.05
+	  -----------------------------------------------------------------------------------*/
+	 @PostMapping("ADNoticeUpdate")
+	 public String goADNoticeUpdate(CO_NoticeDto ntdto) {
+		//log.warn("공지사항 수정 컨트롤러");
+		 String view = null;
+		 view = aServ.goADNoticeUpdate(ntdto);
+		 
+		 log.warn(ntdto.getNt_title()+ntdto.getNt_contents());
+		 
+		 return view;
+	 }
+	 
+	 /* ---------------------------------------------------------------------------------
+	  * 기능: 공지사항 삭제
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.05
+	  -----------------------------------------------------------------------------------*/
+	 @PostMapping("ADNoticeDelete")
+	 public ModelAndView ADNoticeDelete(CO_NoticeDto ntdto, HttpServletRequest request, RedirectAttributes rttr) {
+		 log.warn("공지사항 삭제 컨트롤러");
+		 String[] checkedBoxArr = request.getParameterValues("NoticeChk");
+		 mav = aServ.ADNoticeDelete(ntdto, checkedBoxArr, rttr);
+		 return mav;
+	 }
+	 
 	 /* ---------------------------------------------------------------------------------
 	  * 기능: FAQ 출력 
 	  * 작성자: JWJ
@@ -120,11 +169,6 @@ public class AD_controller {
 	public String goADProdManage() {
 		return "ADProdManage";
 	}	
-	
-	@GetMapping("ADNoticeContents")
-	public String goADNoticeContents() {
-		return "ADNoticeContents";
-	}
 	
 	@GetMapping("ADMessageContents")
 	public String goADMessageContents() {

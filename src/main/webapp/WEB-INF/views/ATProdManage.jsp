@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -86,16 +87,6 @@
 			});
 		}
 	</script>
-	<script type="text/javascript">
-            window.onload = function() {//이 페이지가 실행 되면, 이 함수를 실행해라
-                var chk = "${check}";
-                if(chk != ""){
-                    alert(chk);
-                    location.reload(true);//화면을 다시 한번 불러오면서 check를 리셋함 
-                }
-            }
-         
-</script>
 </head>
 <body>
 	<!-- 상단바 -->
@@ -217,7 +208,7 @@
 		<aside id="colorlib-aside" role="complementary" class="border js-fullheight"
 				style="overflow-y: hidden; overflow-x: hidden; position: absolute; border-bottom: white; height: auto; min-height: 1400px; z-index: 998;">
 			<h1 id="colorlib-logo" style="margin-bottom: 0; text-align: center;">
-				<a href="ATDatail" style="background-color: white; padding: 10px 0px;">
+				<a href="ATDetail" style="background-color: white; padding: 10px 0px;">
 				<img src="http://www.topstarnews.net/news/photo/201905/629556_323603_2217.jpg" width="180px" height="180px"> 
 				</a>
 				<h1 id="AT_SNS" style="text-align: center;"></h1>	
@@ -270,150 +261,74 @@
 		</aside>
 		<!-------------------------------------------------------여기까지 좌측바 메뉴입니다.---------------------------------------------------------------------->
 		
-		<form action="" method="post" name="prodManageFrm" enctype="multipart/form-data">
+		<form action="prodRegist" method="post" id="prodManageFrm" name="prodManageFrm">
 			<!--여기부터 각각 하나의 상품이 됩니다. 실제로 구현시에는 HTML에서 JSTL의 forEach구문과 자바 코딩부에서 페이징 처리를 하면 될 듯 합니다. -->
 			<div id="colorlib-main">
-				<div class="colorlib-blog" style="margin-left: 100px;">
-					<div class="container-fluid">
-						<div class="row">
-							<div class="col-md-6 col-md-offset-3 col-md-pull-3">
-								<h2 class="colorlib-heading animate-box" data-animate-effect="fadeInLeft"
-									style="font-weight: bolder; font-size: 23px; letter-spacing: 0.5px;">제품 목록 관리<hr>
-								</h2>
-							</div>
-							<select id="selectBox" style="margin-left: 1160px; border-radius: 10px; width: 100px; height: 35px;  padding-left: 8px; font-size: 14px; border: 1px solid #A09182; color: white; background-color: #A09182;">
-								<option >판매 등록</option>
-								<option >판매 미등록</option>
-							</select>
+			<div class="colorlib-blog">
+				<div class="container-fluid">
+					<div class="row" style="margin-left: 80px;">
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3">
+							<h2 class="colorlib-heading animate-box" data-animate-effect="fadeInLeft"
+								style="font-weight: bolder; font-size: 23px; letter-spacing: 0.5px;">제품 목록 관리<hr>
+							</h2>
 						</div>
-						
-						<div class="row" style="margin-top: 60px;">
-							<!--이 한 div 덩어리를 for문으로 돌리면 됩니당.-->
-							<!-- item에는 받아온 상품들의 목룍 배열을 넣어주세요. -->
-							<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-								<div class="blog-entry">
-									<label for="상품코드1">
-										<input id="상품코드1" type="checkbox" name="prod" value="68"
-												style="background-color: transparent; position: relative; top: 6px; left: 12px;">
-										<!-- value에는 해당 상품의 코드를 넣어주세요. -->
-										<img src="resources/AT_front/images/img-1.jpg" class="img-responsive"
-												style="margin-top: -26px; width: 400px;">
-										<div class="desc" style="font-size: 15px; font-weight: 500;">
-											<span style="font-size: 16px;">
-												<small>등록한 날짜</small> | 
-												<small> 카테고리 </small> |
-												<small> <i class="icon-bubble3"></i></small>
-											</span>
-											<h3 style="margin-bottom: 40px; font-size: 22px; font-weight: bolder;">
-												<a href="blog.html">상품명 1</a>
-											</h3>
-											<form >
-												&nbsp;제품명 : <input type="hidden" name="prodName"
-																	value="제품명이 들어갑니다">아빠에게 선물하면 좋은 가죽 벨트<br>
-												&nbsp;재고량 : <input type="hidden" name="stock"
-																	value="재고량이 들어갑니다">100개<br>
-												&nbsp;단가 : <input type="hidden" name="price"
-																	value="단가가 들어갑니다">100원<br>
-												<div style="text-align: right; margin-bottom: 0px;">
-													<input type="submit" value="상세보기"
-														style="border: none; color: #A09182; background-color: white; font-weight: 700; margin: 10px;">
-												</div>
-											</form>
-										</div>
-									</label>
-								</div>
-							</div>
-							<!--여기까지의 한 div 덩어리를 for문으로 돌리면 됩니당.-->
-	
-							<div class="col-md-4 col-sm-6 animate-box"
-								data-animate-effect="fadeInLeft" style="margin-left: -85px;">
-								<div class="blog-entry">
-									<label for="상품코드2">
-										<input id="상품코드2" type="checkbox" name="prod" value="상품코드2"
-												style="background-color: transparent; position: relative; top: 6px; left: 12px;">
-										<img src="resources/AT_front/images/img-1.jpg"
-												class="img-responsive" style="margin-top: -26px; width: 400px;">
-										<div class="desc" style="font-size: 15px; font-weight: 500;">
-											<span style="font-size: 16px;">
-												<small>등록한 날짜</small> | 
-												<small> 카테고리 </small> |
-												<small> <i class="icon-bubble3"></i></small>
-											</span>
-											<h3 style="margin-bottom: 15px; font-size: 22px; font-weight: bolder;">
-												<a href="blog.html">상품명 2</a>
-											</h3>
-											&nbsp;&nbsp;
-											<form>
-												&nbsp;제품명 : <input type="hidden" name="prodName"
-																	value="제품명이 들어갑니다">아빠에게 선물하면 좋은 가죽 벨트<br>
-												&nbsp;재고량 : <input type="hidden" name="stock"
-																	value="재고량이 들어갑니다">100개<br>
-												&nbsp;단가 : <input type="hidden" name="price"
-																	value="단가가 들어갑니다">100원<br>
-												<div style="text-align: right; margin-bottom: 0px;">
-													<input type="submit" value="상세보기"
-														style="border: none; color: #A09182; background-color: white; font-weight: 700; margin: 10px;">
-												</div>
-											</form>
-										</div>
-									</label>
-								</div>
-							</div>
-								
-							<div class="col-md-4 col-sm-6 animate-box"
-								data-animate-effect="fadeInLeft" style="margin-left: -85px;">
-								<div class="blog-entry">
-									<label for="상품코드3">
-										<input id="상품코드3" type="checkbox" name="prod" value="상품코드3"
+						<select id="registSelectBox" onclick="changeProdRegist();"
+							style="margin-left: 1185px; border-radius: 10px; width: 120px; height: 35px;
+							padding-left: 8px; font-size: 14px; border: 1px solid #A09182; color: white;
+							background-color: #A09182;">
+							<option value="">선택</option>
+							<option value="registTrue">판매 등록</option>
+							<option value="registFalse">판매 미등록</option>
+						</select>
+					</div>
+					
+					<div class="row" style="margin: 20px 80px;">
+						<c:forEach var="product" items="${pd}">
+						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
+							<div class="blog-entry">
+								<label for="${product.pd_code}">
+									<input type="checkbox" id="${product.pd_code}" name="prodChk" value="${product.pd_code}"
 											style="background-color: transparent; position: relative; top: 6px; left: 12px;">
-										<img src="resources/AT_front/images/img-1.jpg"
-											class="img-responsive" style="margin-top: -26px; width: 400px;">
-										<div class="desc" style="font-size: 15px; font-weight: 500;">
-											<span style="font-size: 16px;">
-												<small>등록한 날짜</small> | 
-												<small> 카테고리 </small> |
-												<small> <i class="icon-bubble3"></i></small>
-											</span>
-											<h3 style="margin-bottom: 15px; font-size: 22px; font-weight: bolder;">
-												<a href="blog.html">상품명 3</a>
-											</h3>
-											&nbsp;&nbsp;
-											<form>
-												&nbsp;제품명 : <input type="hidden" name="prodName"
-																	value="제품명이 들어갑니다">아빠에게 선물하면 좋은 가죽 벨트<br>
-												&nbsp;재고량 : <input type="hidden" name="stock"
-																	value="재고량이 들어갑니다">100개<br>
-												&nbsp;단가 : <input type="hidden" name="price"
-																	value="단가가 들어갑니다">100원<br>
-												<div style="text-align: right; margin-bottom: 0px;">
-													<input type="submit" value="상세보기"
-														style="border: none; color: #A09182; background-color: white; font-weight: 700; margin: 10px;">
-												</div>
-											</form>
+									<img src="resources/AT_front/images/img-1.jpg" class="img-responsive"
+											style="margin-top: -26px; width: 400px;">
+									<div class="desc" style="font-size: 15px; font-weight: 500;">
+										<span style="font-size: 16px;">
+											<small>${product.pd_regdate}</small> | 
+											<small> ${product.pd_cate} </small> |
+											<small> <i class="icon-bubble3"></i></small>
+										</span>
+										<h3 style="margin-bottom: 40px; font-size: 22px; font-weight: bolder;">
+											<a href="blog.html">${product.pd_name}</a>
+										</h3>			
+										&nbsp;제품명 : <input type="hidden" name="prodName"
+																value="${product.pd_name}">${product.pd_name}<br>
+										&nbsp;재고량 : <input type="hidden" name="stock"
+																value="${product.pd_numofstock}">${product.pd_numofstock}<br>
+										&nbsp;단가 : <input type="hidden" name="price"
+																value="${product.pd_price}">${product.pd_price}<br>
+										<input type="hidden" id="pd_regist" name="pd_regist" value="${product.pd_regist}">
+										<div style="text-align: right; margin-bottom: 0px;">
+											<input type="submit" value="상세보기"
+													style="border: none; color: #A09182; background-color: white; font-weight: 700; margin: 10px;">
 										</div>
-									</label>
-								</div>
+									</div>
+								</label>	
 							</div>
-	
-	
-							<div class="row">
-								<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
-									<ul class="pagination">
-										<li class="disabled"><a href="#">&laquo;</a></li>
-										<li><a href="#">1</a></li>
-										<li><a href="#">2</a></li>
-										<li><a href="#">3</a></li>
-										<li><a href="#">4</a></li>
-										<li><a href="#">&raquo;</a></li>
-									</ul>
-								</div>
-							</div>
+						</div>
+						</c:forEach>
+					</div>
+					<div class="row" style="margin-left: 80px;">
+						<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
+							<ul class="pagination" style="font-size: 1.8rem;">
+								${paging}
+							</ul>
 						</div>
 					</div>
 				</div>
 			</div>
-		</form>
-	</div>	
+			</div>
+			</form>
+		</div>
 	<!----------------------------------------------------------------------여기까지 각각의 상품입니다.-------------------------------------------------------------------->
 	
 	<!----------------------------------------------------------------------여기부터 각각의 버튼들입니다------------------------------------------------------------------->
@@ -555,14 +470,24 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			<script src="resources/AT_front/js/main.js"></script>
 
 			<script type="text/javascript">
-				//체크박스로 다중 선택을 하여 판매 등록을 누르면 해당 상품의 상품코드와 체크박스의 데이터가 넘어감
+			window.onload = function() {
+				var chk = "${check}";
+				console.log(chk);
+				if(chk != ""){
+					alert(chk);
+					location.reload(true); 
+				}
+			}
+			
+			
+			//체크박스로 다중 선택을 하여 판매 등록을 누르면 해당 상품의 상품코드와 체크박스의 데이터가 넘어감
 			$("#prodRegistBtn").click(function() {
-				var chkLength = $("input:checkbox[name=prod]:checked").length;//체크된 체크박스의 갯수를 가져옴
+				var chkLength = $("input:checkbox[name=prodChk]:checked").length;//체크된 체크박스의 갯수를 가져옴
 				console.log(chkLength);
 				if(chkLength != 0){//체크한 체크박스가 있을 경우
 					if(confirm(chkLength+"개의 상품을 판매등록 하시겠습니까?")){
-						//var $items = $("label[name=prod]").find("input:checkbox:checked");//체크된 checkbox를 가지고 있는 label를 가져옴
-							$("form[name=prodManageFrm]").attr("action","prodSellRegist");
+						//var $items = $("label[name=prodChk]").find("input:checkbox:checked");//체크된 checkbox를 가지고 있는 label를 가져옴
+							$("form[name=prodManageFrm]").attr("action","prodRegist");
 							$("form[name=prodManageFrm]").submit();
 					}
 				}else {//체크한 체크박스가 없을 경우
@@ -571,11 +496,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			});
 				
 			$("#prodRegistCancleBtn").click(function() {
-				var chkLength = $("input:checkbox[name=prod]:checked").length;//체크된 체크박스의 갯수를 가져옴
+				var chkLength = $("input:checkbox[name=prodChk]:checked").length;//체크된 체크박스의 갯수를 가져옴
 				console.log(chkLength);
 				if(chkLength != 0){//체크한 체크박스가 있을 경우
 					if(confirm(chkLength+"개의 상품을 판매등록 해제 하시겠습니까?")){
-						//var $items = $("label[name=prod]").find("input:checkbox:checked");//체크된 checkbox를 가지고 있는 label를 가져옴
+						//var $items = $("label[name=prodChk]").find("input:checkbox:checked");//체크된 checkbox를 가지고 있는 label를 가져옴
 							$("form[name=prodManageFrm]").attr("action","prodRegistCancle");
 							$("form[name=prodManageFrm]").submit();
 					}
@@ -583,9 +508,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					alert("판매등록 해제 할 상품을 선택 해 주세요.");
 				}
 			});
-			
 			$("#prodmodifyBtn").click(function() {
-				var chkLength = $("input:checkbox[name=prod]:checked").length;//체크된 체크박스의 갯수를 가져옴
+				var chkLength = $("input:checkbox[name=prodChk]:checked").length;//체크된 체크박스의 갯수를 가져옴
 				if(chkLength == 0){
 					alert("수정 할 상품을 선택 해 주세요.");
 				}else {
@@ -599,9 +523,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 				}
 			});
-			
 			$("#prodDeleteBtn").click(function() {
-				var chkLength = $("input:checkbox[name=prod]:checked").length;//체크된 체크박스의 갯수를 가져옴
+				var chkLength = $("input:checkbox[name=prodChk]:checked").length;//체크된 체크박스의 갯수를 가져옴
 				if(chkLength == 0){
 					alert("삭제 할 상품을 선택 해 주세요.");
 				}else {
@@ -610,17 +533,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 						$("form[name=prodManageFrm]").submit();
 					}				
 				  }
+				
 			});
 			
-			$("#selectBox").change(function() {//얘는 ajax로 처리하는게 속 편할 듯.
-				var value = $(this).val();
-				if (value == "판매 등록") {
-					//판매 등록을 선택하면 배송전 판매 등록된 상품만 불러옴
-				} else if(value == "판매 미등록"){
-					//판매 미등록을 선택하면 배송전 판매 등록된 상품만 불러옴
-				}
+			function changeProdRegist(){
 				
-			});		
+			}
+
 			</script>
 
 </body>

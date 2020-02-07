@@ -20,10 +20,12 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atelier.dao.AT_Dao;
+import com.atelier.dao.PD_Dao;
 import com.atelier.dto.AG_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
+import com.atelier.util.PD_Paging;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -38,9 +40,92 @@ public class AT_Service {
 	@Setter(onMethod_ = @Autowired)
 	AT_Dao atDao;
 	
-
+	@Setter(onMethod_ = @Autowired)
+	PD_Dao pdDao;
+	
 	@Setter(onMethod_ = @Autowired) 
 	private HttpSession session;
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 제작한 상품 리스트 전체 출력
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.05
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView getATProdList(Integer pageNum, Integer maxNum) {
+		mav = new ModelAndView();
+		
+		int num = (pageNum == null) ? 1: pageNum;
+		maxNum = pdDao.getATProdListCount();
+		Map<String, Integer> pageInt = new HashMap<String, Integer>();
+		pageInt.put("pageNum", num);
+		pageInt.put("maxNum", maxNum);
+		List<PD_productDto> pd = pdDao.getATProdList(pageInt);
+		
+		mav.addObject("pd", pd);
+		mav.addObject("paging", getATProdPaging(num));
+		session.setAttribute("pageNum", num);
+		
+		mav.setViewName("ATProdManage");
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 판매 등록한 상품 리스트 출력
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.06
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView getATProdRegistTrueList(Integer pageNum, Integer maxNum) {
+		mav = new ModelAndView();
+		
+		int num = (pageNum == null) ? 1: pageNum;
+		maxNum = pdDao.getATProdListCount();
+		Map<String, Integer> pageInt = new HashMap<String, Integer>();
+		pageInt.put("pageNum", num);
+		pageInt.put("maxNum", maxNum);
+		List<PD_productDto> pd = pdDao.getATProdRegistTrueList(pageInt);
+		
+		mav.addObject("pd", pd);
+		mav.addObject("paging", getATProdPaging(num));
+		session.setAttribute("pageNum", num);
+		
+		mav.setViewName("ATProdManage");
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 판매등록 Paging 처리
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.05
+	  -----------------------------------------------------------------------------------*/
+	private Object getATProdPaging(int num) {
+		//전체 글 개수 구하기(from DB)
+				int maxNum = pdDao.getATProdListCount();
+				int listCount = 9;	//페이지 당 글 개수
+				int pageCount = 5;	//그룹 당 페이지 개수
+				String listName = "ATProdManage";
+				PD_Paging paging = new PD_Paging(maxNum, num, listCount, pageCount, listName);
+				String pagingHtml = paging.makeHtmlPaging();
+
+				return pagingHtml;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 제품 목록 관리에서 판매 등록 해제 처리
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.06
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView prodRegistCancleProc(PD_productDto pdDto, String[] checkedBoxArr, RedirectAttributes rttr) {
+
+		for(String pd_code : checkedBoxArr) {
+			pdDao.prodRegistCancle(pd_code);
+		}
+		
+		mav = new ModelAndView();
+		mav.setViewName("redirect:ATProdManage");
+		rttr.addFlashAttribute("check", "판매등록 해제 완료!");
+		
+		return mav;
+	}
 	
 	/*-------------------------------------------------------------------
 	 * 기   능 : 공방 신청 요청 서비스. AtRegist.jsp 입력폼에서 받은 데이터를 DB에 저장

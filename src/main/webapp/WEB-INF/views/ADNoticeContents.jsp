@@ -19,26 +19,24 @@
 									<input type="hidden" value="조회수">
 									<input type="hidden" value="날짜">
 								</div>
-								<div class="col-sm-10" style="padding: 0;">
-									<input type="text" class="form-control" value="제목"
-										style="padding-right: 100px; width: 750px;">
-								</div>
-								<br>
-								<textarea class="form-control input-sm " type="textarea"
-									id="message" maxlength="140" rows="15"
-									style="width: 750px;"></textarea>
-
-
+								<form id="ADNoticeUpdateFrm" action="ADNoticeUpdate" method="post" value="${nt_num}">
+									<div class="col-sm-10" style="padding: 0;">
+										<input type="hidden" name="nt_num" value="${ntdto.nt_num}">
+										<input type="text" class="form-control" value="${ntdto.nt_title}"
+											readonly="readonly" id="nt_title" name="nt_title"
+											style=" padding-right: 100px; width: 750px;">
+									</div>
+									<br>
+									<textarea class="form-control input-sm " readonly="readonly" 
+										id="nt_contents" name="nt_contents" maxlength="140" rows="15"
+										style="width: 750px;">${ntdto.nt_contents}</textarea>
+								</form>	
 							</div>
 
 							<div class="d-block text-center card-footer"
 								style="margin-left: -33px; width: 750px;">
-								<button
-									class="mr-2 btn-icon btn-icon-only btn btn-outline-danger">
-									<i class="pe-7s-trash btn-icon-wrapper"> </i>
-								</button>
-								<button class="btn-wide btn btn-info">Save</button>
-								<button class="btn-wide btn btn-warning">수정</button>
+								<button class="btn-wide btn btn-info" id="saveBtn">Save</button>
+								<button class="btn-wide btn btn-warning" id="modifyBtn">수정</button>
 							</div>
 						</div>
 					</div>
@@ -48,4 +46,30 @@
 
 </body>
 <script type="text/javascript" src="resources/assets/scripts/main.js"></script>
+<script src="./resources/main/js/jquery-3.3.1.min.js" /></script>
+<script type="text/javascript">
+	$("#modifyBtn").click(function() {
+		$("#nt_title").removeAttr('readonly');	//선택한 요소의 특정 속성 제거
+		$("#nt_contents").removeAttr('readonly');	//선택한 요소의 특정 속성 제거
+	})
+	
+	$("#saveBtn").click(function() {
+		var nt_title = $("#nt_title").val();
+		var nt_contents = $("#nt_contents").val();
+		
+		if(nt_title == '' || nt_title == null) {
+			alert("제목을 입력해주세요");
+		}
+		else if(nt_contents == '' || nt_contents == null) {
+			alert("내용을 입력해주세요");
+		}
+		else {
+			$("#ADNoticeUpdateFrm").submit();
+			alert("공지사항 수정 완료!");
+			opener.parent.location.reload();
+			window.close();
+		}
+	})
+</script>
+
 </html>

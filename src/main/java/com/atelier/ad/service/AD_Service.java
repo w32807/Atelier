@@ -20,10 +20,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atelier.dao.AD_Dao;
+import com.atelier.dao.NT_Dao;
 import com.atelier.dto.AD_MaterialDto;
+import com.atelier.dto.CM_Dto;
+import com.atelier.dto.CO_NoticeDto;
 import com.atelier.dto.FT_FAQDto;
 import com.atelier.util.AD_MaterialPaging;
 import com.atelier.util.FAQPaging;
+import com.atelier.util.NT_Paging;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -35,11 +39,141 @@ public class AD_Service {
 	@Setter(onMethod_ = @Autowired)
 	AD_Dao aDao;
 	
+	@Setter(onMethod_ = @Autowired)
+	NT_Dao ntDao;
 	
 	@Setter(onMethod_ = @Autowired) 
 	private HttpSession session;
 	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공지사항 전체 출력
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.01
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView getADNoticeList(Integer pageNum, Integer maxNum) {
+		log.info("getADNoticeList() - pageNum" + pageNum);
+		mav = new ModelAndView();
+		
+		int num = (pageNum == null) ? 1: pageNum;
+		maxNum = ntDao.getADNoticeCount();
+		Map<String, Integer> pageInt = new HashMap<String, Integer>();
+		pageInt.put("pageNum", num);
+		pageInt.put("maxNum", maxNum);
+		List<CO_NoticeDto> ntlist = ntDao.getADNoticeList(pageInt);
+		
+		mav.addObject("ntlist", ntlist);
+		mav.addObject("paging", getNoticePaging(num));
+		session.setAttribute("pageNum", num);
+		
+		mav.setViewName("ADNoticeList");
+		return mav;
+	}
 	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공지사항 Paging 처리
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.03
+	  -----------------------------------------------------------------------------------*/
+	private Object getNoticePaging(int num) {
+		//전체 글 개수 구하기(from DB)
+		int maxNum = ntDao.getADNoticeCount();
+		int listCount = 10;	//페이지 당 글 개수
+		int pageCount = 5;	//그룹 당 페이지 개수
+		String listName = "ADNoticeList";
+		NT_Paging paging = new NT_Paging(maxNum, num, listCount, pageCount, listName);
+		String pagingHtml = paging.makeHtmlPaging();
+
+		return pagingHtml;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공지사항 상세내용 보기
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.04
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView getADNoticeDetail(Integer nt_num) {
+		mav = new ModelAndView();
+		
+		//ntdto = aDao.getADNoticeDetail(ntdto.getNt_num());
+		ntDao.viewCountUpdate(nt_num);
+		
+		CO_NoticeDto ntdto = ntDao.getADNoticeDetail(nt_num);
+		
+		mav.addObject("ntdto", ntdto);
+		mav.setViewName("ADNoticeContents");
+		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공지사항 입력 및 출력
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.04
+	  -----------------------------------------------------------------------------------*/
+	public Map<String, List<CO_NoticeDto>> ADNoticeInsert(CO_NoticeDto ntdto, Integer pageNum, Integer maxNum) {
+		log.warn("서비스ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
+		Map<String, List<CO_NoticeDto>> ntMap = null;
+		
+		try {
+			//로그인하면 아래 주석 해제 후 실행
+			//CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
+			//ntdto.setNt_id(cmDto.getCm_id());
+			
+			//임시 아이디로 문자열 지정
+			ntdto.setNt_id("admin");
+			ntDao.ADNoticeInsert(ntdto);
+			log.warn("서비스입력ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
+			maxNum = ntDao.getADNoticeCount();
+			Map<String, Integer> pageInt = new HashMap<String, Integer>();
+			pageInt.put("pageNum", pageNum);
+			pageInt.put("maxNum", maxNum);
+			log.warn("서비스입력ㅇㄴㅁㅁㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ");
+			List<CO_NoticeDto> ntlist = ntDao.getADNoticeList(pageInt);
+			ntMap = new HashMap<String, List<CO_NoticeDto>>();
+			ntMap.put("ntlist", ntlist);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			ntMap = null;
+		}
+		return ntMap;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공지사항 수정
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.05
+	  -----------------------------------------------------------------------------------*/
+	public String goADNoticeUpdate(CO_NoticeDto ntdto) {
+		String view = null;
+		ntdto.setNt_id("admin");
+		if(ntDao.ADNoticeUpdate(ntdto)) {
+			view = "redirect:ADNoticeList";
+		}
+		
+		return view;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공지사항 삭제
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.05
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView ADNoticeDelete(CO_NoticeDto ntdto, String[] checkedBoxArr, RedirectAttributes rttr) {
+		Integer maxNum = null;
+		Integer pageNum = null;
+		//String nt_num = String.valueOf(ntdto.getNt_num());
+		//int[] a = (int[])checkedBoxArr;
+		for(String nt_num : checkedBoxArr) {
+			ntDao.ADNoticeDelete(nt_num);
+		}
+		
+		//mav = getADNoticeList(pageNum, maxNum);
+		mav = new ModelAndView();
+		mav.setViewName("redirect:ADNoticeList");
+		rttr.addFlashAttribute("check", "공지사항 삭제 완료!");
+		return mav;
+	}
 	
 	 /* ---------------------------------------------------------------------------------
 	  * 기능: FAQ 전체 출력
