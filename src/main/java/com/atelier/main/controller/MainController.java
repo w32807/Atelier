@@ -1,14 +1,9 @@
 package com.atelier.main.controller;
 
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.log;
 
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Locale;
 
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;

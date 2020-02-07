@@ -14,7 +14,6 @@
 		<org.slf4j-version>1.7.25</org.slf4j-version><!-- 수정 -->
 	</properties>
 	
-	<!-- ojdbc6을 제공하는 사설 저장소 등록 -->
 	<repositories>
 		<repository>
 				<id>Oracle</id>
@@ -226,9 +225,8 @@
 			    <groupId>org.springframework.security</groupId>
 			    <artifactId>spring-security-core</artifactId>
 			    <version>5.2.1.RELEASE</version>
-			</dependency>
-		
-		
+			</dependency>				
+				
     </dependencies>
     <build>
         <plugins>
