@@ -222,28 +222,12 @@ public class MainController {
 		return "ATRegist";
 	}
 
-	//마이페이지의  주문내역으로 이동
-	@GetMapping("myOrder")
-	public String myOrder() {
-		return "myOrder";
-	}
-
 	//마이페이지의  주문내역에서 취소신청을 눌렀을 때.
 	@GetMapping("orderCancle")
 	public String orderCancle() {
 		return "myOrder";
 	}
-	//마이페이지의  쪽지 보기 페이지로 넘어가기
-	@GetMapping("messager")
-	public String Messager() {
-		return "messager";
-	}
 
-	//쪽지 답장 페이지로 넘어가기
-	@GetMapping("myMessageWrite")
-	public String myMessageWrite() {
-		return "myMessageWrite";
-	}
 	//구독 리스트 출력
 	@RequestMapping(value = "mySubscript", method = RequestMethod.GET)
 	public String mySubscript(Locale locale, Model model) {
