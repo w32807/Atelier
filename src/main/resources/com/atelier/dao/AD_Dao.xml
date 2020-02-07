@@ -39,6 +39,18 @@
 		INSERT INTO RAW_MATERIAL VALUES (RM_NUM_SEQ.NEXTVAL, #{RM_TYPE},#{PRM_COMPANY},#{RM_COLOR}, #{RM_PRICE})
 	</insert>
 	
+	<select id="getADCompanyList" resultType="com.atelier.dto.AD_MaterialDto">
+		<![CDATA[
+			SELECT * FROM RAW_MATERIAL
+			WHERE RM_NUM>=#{adcPageNum}*10-9
+			AND RM_NUM<=#{adcPageNum}*10
+		]]>
+	</select>
+	
+	<select id="getADCompanyCount" resultType="Integer">
+		SELECT COUNT(*) FROM RAW_MATERIAL
+	</select>
+	
 </mapper>
 
 

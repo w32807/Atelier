@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.atelier.dao.AD_Dao;
 import com.atelier.dto.AD_MaterialDto;
 import com.atelier.dto.FT_FAQDto;
+import com.atelier.util.AD_MaterialPaging;
 import com.atelier.util.FAQPaging;
 
 import lombok.Setter;
@@ -193,6 +194,45 @@ public class AD_Service {
 			}
 		mav.setViewName(view);
 		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 원자재 리스트 출력
+	  * 작성자: JSH
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView getADCompanyList(Integer adcPageNum) {
+		log.warn("원자재 리스트 서비스 시작");
+		
+		mav = new ModelAndView();
+		
+		int num = (adcPageNum == null)? 1 : adcPageNum;
+		
+		List<AD_MaterialDto> adcList = aDao.getADCompanyList(num);
+		mav.addObject("adcList", adcList);
+		mav.addObject("ADCPaging", getADCPaging(num));
+		
+		mav.setViewName("ADCompany");
+		session.setAttribute("adcPageNum", num);
+		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 원자재 리스트 출력 / 페이징 처리
+	  * 작성자: JSH
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	private Object getADCPaging(int num) {
+		int maxNum = aDao.getADCompanyCount();
+		int listCount = 10;
+		int pageCount = 2;
+		
+		String listName = "ADCompany";
+		AD_MaterialPaging AD_MaterialPaging = new AD_MaterialPaging(maxNum, num, listCount, pageCount, listName);
+		String pagingHtml = AD_MaterialPaging.makeHtmlPaging();
+		
+		return pagingHtml;
 	}
 	
 	

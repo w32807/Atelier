@@ -240,5 +240,21 @@ public class AT_Service {
 		return view;
 		
 	}
+	 /* ---------------------------------------------------------------------------------
+     * 기능: 선택한 상품의 판매여부를 판매 (T)로 전환
+     * 작성자: JWJ
+     * 작성일 : 2019.02.07
+     -----------------------------------------------------------------------------------*/
+   public String changeProdRegist(String[] chkedBoxArr, RedirectAttributes rttr) {
+      String view = null;
+      
+      for(String pd_code: chkedBoxArr) {
+         int pdCode = Integer.parseInt(pd_code);
+         atDao.changeProdRegist(pdCode);
+      }
+      view = "redirect:ATProdManage";
+      rttr.addFlashAttribute("check", "등록 완료");
+      return view;
+   }
 	
 }

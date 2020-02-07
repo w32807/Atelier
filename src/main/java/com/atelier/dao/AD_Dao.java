@@ -21,5 +21,9 @@ public interface AD_Dao {
 	public boolean delFAQ(String ft_num);
 	
 	public boolean materialInsert (AD_MaterialDto material);
+	
+	public List<AD_MaterialDto> getADCompanyList(int adcPageNum);
+
+	public int getADCompanyCount();
 
 }

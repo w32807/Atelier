@@ -191,98 +191,17 @@
                    <th>&nbsp;수정</th>
                     <th>&nbsp;삭제</th>
                   </tr>
-                  <tr style="font-size:14px">
-                    <td>001</td>
-                    <td>천연소가죽</td>
-                    <td>Daewoo</td>
-                    <td>brown</td>
-                    <td>4000원</td>
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Update</button></td> 
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Delete</button></td>                         
-                    </tr>
-                   <tr style="font-size:14px">
-                    <td>002</td>
-                    <td>악어가죽</td>
-                    <td>Amazon</td>
-                    <td>green</td>
-                    <td>12000원</td>
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Update</button></td> 
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Delete</button></td>
-                  </tr>
-                   <tr style="font-size:14px">
-                    <td>003</td>
-                    <td>레자</td>
-                    <td>rejar</td>
-                    <td>black</td>
-                    <td>1600원</td>
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Update</button></td> 
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Delete</button></td>
-                  </tr>
-                     <tr style="font-size:14px">
-                    <td>004</td>
-                    <td>합성피혁</td>
-                    <td>hap</td>
-                    <td>brown</td>
-                    <td>1800원</td>
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Update</button></td> 
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Delete</button></td>
-                  </tr>
-                     <tr style="font-size:14px">
-                    <td>005</td>
-                    <td>돼지가죽</td>
-                    <td>buta</td>
-                    <td>pink</td>
-                    <td>800원</td>
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Update</button></td> 
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Delete</button></td>
-                  </tr>
-                     <tr style="font-size:14px">
-                    <td>006</td>
-                    <td>뱀가죽</td>
-                    <td>snake</td>
-                    <td>red</td>
-                    <td>1900원</td>
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Update</button></td> 
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Delete</button></td>
-                  </tr>
-                     <tr style="font-size:14px">
-                    <td>007</td>
-                    <td>양가죽</td>
-                    <td>sheep</td>
-                    <td>white</td>
-                    <td>2600원</td>
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Update</button></td> 
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Delete</button></td>
-                  </tr>
-                     <tr style="font-size:14px">
-                    <td>008</td>
-                    <td>다람쥐가죽</td>
-                    <td>daram</td>
-                    <td>brown</td>
-                    <td>4300원</td>
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Update</button></td> 
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Delete</button></td>
-                  </tr>
-                     <tr style="font-size:14px">
-                    <td>009</td>
-                    <td>곰가죽</td>
-                    <td>darkBrown</td>
-                    <td>black brown</td>
-                    <td>5600원</td>
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Update</button></td> 
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Delete</button></td>
-                  </tr>
-                     <tr style="font-size:14px">
-                    <td>010</td>
-                    <td>동희가죽</td>
-                    <td>dong</td>
-                    <td>white</td>
-                    <td>100원</td>
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Update</button></td> 
-                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Delete</button></td>
-                  </tr>
-               
-                  
+                  <c:forEach var="adcList" items ="${adcList}">
+	                  <tr style="font-size:14px">
+		                    <td>${adcList.RM_NUM}</td>
+		                    <td>${adcList.RM_TYPE}</td>
+		                    <td>${adcList.PRM_COMPANY}</td>
+		                    <td>${adcList.RM_COLOR}</td>
+		                    <td>${adcList.RM_PRICE}</td>
+		                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Update</button></td> 
+		                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Delete</button></td>                         
+	                   </tr>
+                    </c:forEach>
                 </tbody>
               </table>
             </section>
@@ -290,8 +209,17 @@
             
             <div class="row"     style="padding-left: 650px;">
 						<div class="container">
+							<div>
+								<ul class="pagination">
+									${ADCPaging}
+								</ul>
+							</div>
+							<!-- 
 							<ul class="pagination">
-
+								<li>
+									
+								</li>
+								
 								<li class="disabled"><a href="#">«</a></li>
 								<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
 								<li><a href="#">2</a></li>
@@ -299,10 +227,11 @@
 								<li><a href="#">4</a></li>
 								<li><a href="#">5</a></li>
 								<li><a href="#">»</a></li>
-
+								 
 							</ul>
+							-->
 								<div>
-								<button class="btn btn-info btn-lg" onclick="location.href='ADCompanyInsert'" style="float:right; width:80px; height:80;"><h5>Insert</h5></button>
+								<button class="btn btn-info btn-lg" onclick="location.href='ADCompanyInsert'" style="float:right; width:100px; height:45px;"><h5>Insert</h5></button>
 	          					</div>
 						</div>
 						

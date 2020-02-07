@@ -24,10 +24,12 @@ import com.atelier.dto.CM_Dto;
 import com.atelier.dto.FT_FAQDto;
 
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Handles requests for the application home page.
  */
+@Slf4j
 @Controller
 public class AD_controller {
 	
@@ -113,11 +115,6 @@ public class AD_controller {
 	public String goADATList() {
 		return "ADATList";
 	}
-
-	@GetMapping("ADCompany")
-	public String goADCompany() {
-		return "ADCompany";
-	}
 	
 	@GetMapping("ADProdManage")
 	public String goADProdManage() {
@@ -147,6 +144,18 @@ public class AD_controller {
 	@PostMapping("MaterialInsert")
 	public ModelAndView MaterialInsert(AD_MaterialDto material, RedirectAttributes rttr) {
 		mav = aServ.MaterialInsert(material, rttr);
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 원자재 리스트 출력
+	  * 작성자: JSH
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ADCompany")
+	public ModelAndView ADCompany(Integer adcPageNum) {
+		log.warn("원자재 리스트 출력 컨트롤러 시작");
+		mav = aServ.getADCompanyList(adcPageNum);
 		return mav;
 	}
 }
