@@ -35,6 +35,10 @@
 		DELETE FROM FT WHERE FT_NUM=#{ft_num}
 	</delete>
 	
+	<insert id="materialInsert" parameterType="com.atelier.dto.AD_MaterialDto">
+		INSERT INTO RAW_MATERIAL VALUES (RM_NUM_SEQ.NEXTVAL, #{RM_TYPE},#{PRM_COMPANY},#{RM_COLOR}, #{RM_PRICE})
+	</insert>
+	
 </mapper>
 
 

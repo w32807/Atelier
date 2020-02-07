@@ -13,12 +13,14 @@ import javax.print.DocFlavor.STRING;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atelier.dao.AD_Dao;
+import com.atelier.dto.AD_MaterialDto;
 import com.atelier.dto.FT_FAQDto;
 import com.atelier.util.FAQPaging;
 
@@ -170,7 +172,28 @@ public class AD_Service {
 		return mav;
 	}
 	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 원자재 등록 서비스
+	  * 작성자: JSH
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView MaterialInsert(AD_MaterialDto material, RedirectAttributes rttr) {
+		mav = new ModelAndView();
+		String view = null;
+		
+		log.warn("원자재 등록 서비스 시작");
 
+		try {
+				aDao.materialInsert(material);
+				view= "redirect:ADCompany";
+				rttr.addFlashAttribute("check", "원자재가 등록되었습니다.");
+			} catch (Exception e) {
+				view = "redirect:ADCompanyInsert";
+				rttr.addFlashAttribute("check", "fail");
+			}
+		mav.setViewName(view);
+		return mav;
+	}
 	
 	
 }
