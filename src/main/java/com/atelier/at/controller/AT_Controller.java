@@ -187,7 +187,7 @@ public class AT_Controller {
 		return view;
 	}
 	
-	@GetMapping("prodSellRegist")//제품 목록 관리에서 판매 등록을 위한 메소드
+	@PostMapping("prodSellRegist")//제품 목록 관리에서 판매 등록을 위한 메소드
 	public String prodSellRegist(HttpServletRequest request) {
 		//여기의 작업은 service에서  처리해도 됩니다. 일단 써놨습니다.
 		//페이징 처리도 해주세요.
@@ -196,7 +196,7 @@ public class AT_Controller {
 		return "ATProdManage";//상품의 판매등록을 하고 난 뒤 다시 제품관리 페이지로 넘어감
 	}
 	
-	@GetMapping("prodRegistCancle")//제품 목록 관리에서 판매 등록 해제를 위한 메소드
+	@PostMapping("prodRegistCancle")//제품 목록 관리에서 판매 등록 해제를 위한 메소드
 	public String prodRegistCancle(HttpServletRequest request) {
 		//여기의 작업은 service에서  처리해도 됩니다. 일단 써놨습니다.
 		//페이징 처리도 해주세요.
@@ -205,14 +205,33 @@ public class AT_Controller {
 		return "ATProdManage";//상품의 판매등록을 하고 난 뒤 다시 제품관리 페이지로 넘어감
 	}
 	
-	@GetMapping("Prodmodify")//제품 목록 관리에서 1개의 상품을 선택하여 수정을 하기 위한 메소드
-	public String modifyProd(HttpServletRequest request) {
-		String modifyProd = request.getParameter("prod");//1개의 선택된 체크박스를 가져옴
+	 /* ---------------------------------------------------------------------------------
+	  * 기능: 상품 정보 수정하기 위해 선택한 상품을 불러오는 기능
+	  * 작성자: JWJ
+	  * 작성일 : 2019.02.06
+	  -----------------------------------------------------------------------------------*/
+	@PostMapping("Prodmodify")
+	public ModelAndView modifyProd(MultipartHttpServletRequest multi) {
+		mav = atServ.goModifyProd(multi);
 		
-		return "ATProdRegist";//수정할 상품의 정보를 가지고 제품관리 페이지로 넘어가 띄워줌
+		return mav;
 	}
 	
-	@GetMapping("prodDelete")//제품 목록 관리에서 여러 상품을 선택하여 삭제를 하기 위한 메소드
+	 /* ---------------------------------------------------------------------------------
+	  * 기능: 상품 정보 수정
+	  * 작성자: JWJ
+	  * 작성일 : 2019.02.06
+	  -----------------------------------------------------------------------------------*/
+	@PostMapping("ProdModifyUpdate")
+	public String prodModifyUpdate(MultipartHttpServletRequest multi,RedirectAttributes rttr) {
+		String view = null;
+		view = atServ.updateProd(multi,rttr);
+		
+		return view;
+	}
+	
+	
+	@PostMapping("prodDelete")//제품 목록 관리에서 여러 상품을 선택하여 삭제를 하기 위한 메소드
 	public String prodDelete(HttpServletRequest request) {
 		//여기의 작업은 service에서  처리해도 됩니다. 일단 써놨습니다.
 		String[] chkedBoxArr = request.getParameterValues("prod");//체크박스의 값들이 넘어옴

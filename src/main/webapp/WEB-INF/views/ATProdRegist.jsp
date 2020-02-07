@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -52,7 +53,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/style.css" type="text/css">
 	
 	<!-- Modernizr JS -->
-	<script src="resources/AT_front/js/modernizr-2.6.2.min.js"></script>
+	<!-- <script src="resources/AT_front/js/modernizr-2.6.2.min.js"></script> -->
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 		<script src="js/respond.min.js"></script>
@@ -254,45 +255,45 @@
 								<table style="font-size: 15px; margin-top: 100px; margin-bottom: 140px;">
 									<tr>
 										<td class="title"><b>제 품 명</b></td>
-										<td><input type="text" name="pd_name" class="content" placeholder="제품명" title="제품명"></td>
+										<td><input type="text" name="pd_name" class="content" placeholder="제품명" title="제품명" value="${modifyProdDto.pd_name}"></td>
 									</tr>
 									<tr>
                                         <td class="title"><b>공 방 명</b></td>
-                                        <td><input type="text" name="pd_at_name" class="content" placeholder="공방명" title="제품명"></td>
+                                        <td><input type="text" name="pd_at_name" class="content" placeholder="공방명" title="제품명" value='${modifyProdDto.pd_at_name}'></td>
                                     </tr>
 									<tr>
 										<td class="title"><b>수 &nbsp;&nbsp;량</b></td>
-										<td><input name="pd_numofstock" value="0" class="content"
+										<td><input name="pd_numofstock" class="content"
 												type="number" min="0"
-												style="border: none; width: 70px;" placeholder="수량 "title="수량"></td>
+												style="border: none; width: 70px;" placeholder="수량 "title="수량" value='${modifyProdDto.pd_numofstock}'></td>
 									</tr>
 									<tr>
 										<td class="title"><b>단 가</b></td>
 										<td><input type="number" class="content" name="pd_price"  min="0"
-                                                style="border: none; width: 70px;" placeholder="단 가"title="단가"></td>
+                                                style="border: none; width: 70px;" placeholder="단 가"title="단가" value='${modifyProdDto.pd_price}'></td>
 									</tr>
 									<tr>
 										<td class="title"><b>이미지 첨부</b></td>
-										<td><input type="file" id="image" class="content" name="pi_oriname"title="이미지" accept=".gif, .jpg, .png" ></td>
+										<td><input type="file" id="image" class="content" name="pi_oriname" title="이미지" accept=".gif, .jpg, .png" ></td>
 										    
 									</tr>
 									<tr>
 										<td class="title"><b>색 상</b></td>
-										<td><input type="text" class="content" name="pd_option" placeholder="색 상"title="색상"></td>
+										<td><input type="text" class="content" name="pd_option" placeholder="색 상"title="색상" value='${modifyProdDto.pd_option}'></td>
 									</tr>
 									
 									<tr>
 										<td class="title"><b>타겟</b></td>
 										<td>
-										<select class="content" name="pd_sex" placeholder="타겟" title="타겟" >
-													<option>남성용</option>
+										<select id="sex_select" class="content" name="pd_sex" placeholder="타겟" title="타겟" >
+													<option >남성용</option>
 													<option>여성용</option>
 													<option>남녀공용</option>
 										</select></td>
 									</tr>
 									<tr>
 										<td class="title"><b>가죽 종류</b></td>
-										<td><select class="content" name="pd_type" placeholder="가죽 종류" title="가죽 종류">
+										<td><select id="type_select" class="content" name="pd_type" placeholder="가죽 종류" title="가죽 종류" value='${modifyProdDto.pd_sex}'>
 													<option>레자</option>
 													<option>소가죽</option>
 													<option>말가죽</option>
@@ -300,7 +301,7 @@
 									</tr>
 									<tr>
 										<td class="title"><b>카테고리</b></td>
-										<td><select class="content" name="pd_cate"title="카테고리">
+										<td><select id="cate_select" class="content" name="pd_cate"title="카테고리" value='${modifyProdDto.pd_cate}'>
 												<!-- foreach문으로 카테고리를 출력해 주세요. -->
 													<option value="카테고리1">카테고리1</option>
 													<option value="카테고리2">카테고리2</option>
@@ -316,7 +317,7 @@
 									</tr>
 									<tr>
 										<td style="margin-left: 75px; margin-top: 10px; float: left; width: 1110px;">
-											<textarea class="form-control content" id="p_content" name="pd_datail" title="상세내역">
+											<textarea class="form-control content" id="p_content" name="pd_detail" title="상세내역" >
 											</textarea>
 										</td>
 									</tr>
@@ -504,8 +505,52 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	            }
 	        };
 		
-	  
+	        
+			      
+	        $(document).ready(function() { 
+		    	 var chk = "${check}";
+	                if(chk == "수정하기"){
+						$("#ATProdRegist").attr('action','prodModifyUpdate');
+	                }
+		    	 
+		        $('#sex_select option').each(function(){
+	
+		            if($(this).val()=="${modifyProdDto.pd_sex}"){
+	
+		              $(this).attr("selected","selected"); // attr적용안될경우 prop으로 
+	
+		        	}
+		        });
+		        $('#type_select option').each(function(){
+	
+			        if($(this).val()=="${modifyProdDto.pd_type}"){
+	
+			           $(this).attr("selected","selected"); // attr적용안될경우 prop으로 
+	
+			  	    }
+		        });
+			    $('#cate_select option').each(function(){
+	
+				    if($(this).val()=="${modifyProdDto.pd_cate}"){
+	
+				       $(this).attr("selected","selected"); // attr적용안될경우 prop으로 
+	
+			    	}
+			    });
+		   			  
+			    if('${oriName}'!=''){
+			    	//$('#preview').attr('background-image','url(resources/prodImg/${oriName})');
+			    	$("#preview").css({"background-image":"url(resources/prodImg/${oriName})"}); 
+			    }
+			    
+			    
+		        CKEDITOR.instances.p_content.setData('${modifyProdDto.pd_detail}');
+		    }); 
+	    
+	     
 	</script>
+	
+		
 	
 	</body>
 </html>

@@ -270,7 +270,7 @@
 		</aside>
 		<!-------------------------------------------------------여기까지 좌측바 메뉴입니다.---------------------------------------------------------------------->
 		
-		<form action="" method="get" name="prodManageFrm">
+		<form action="" method="post" name="prodManageFrm" enctype="multipart/form-data">
 			<!--여기부터 각각 하나의 상품이 됩니다. 실제로 구현시에는 HTML에서 JSTL의 forEach구문과 자바 코딩부에서 페이징 처리를 하면 될 듯 합니다. -->
 			<div id="colorlib-main">
 				<div class="colorlib-blog" style="margin-left: 100px;">
@@ -293,7 +293,7 @@
 							<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
 								<div class="blog-entry">
 									<label for="상품코드1">
-										<input id="상품코드1" type="checkbox" name="prod" value="상품코드1"
+										<input id="상품코드1" type="checkbox" name="prod" value="68"
 												style="background-color: transparent; position: relative; top: 6px; left: 12px;">
 										<!-- value에는 해당 상품의 코드를 넣어주세요. -->
 										<img src="resources/AT_front/images/img-1.jpg" class="img-responsive"
@@ -307,7 +307,7 @@
 											<h3 style="margin-bottom: 40px; font-size: 22px; font-weight: bolder;">
 												<a href="blog.html">상품명 1</a>
 											</h3>
-											<form>
+											<form >
 												&nbsp;제품명 : <input type="hidden" name="prodName"
 																	value="제품명이 들어갑니다">아빠에게 선물하면 좋은 가죽 벨트<br>
 												&nbsp;재고량 : <input type="hidden" name="stock"
@@ -583,6 +583,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 					alert("판매등록 해제 할 상품을 선택 해 주세요.");
 				}
 			});
+			
 			$("#prodmodifyBtn").click(function() {
 				var chkLength = $("input:checkbox[name=prod]:checked").length;//체크된 체크박스의 갯수를 가져옴
 				if(chkLength == 0){
@@ -598,6 +599,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 				}
 			});
+			
 			$("#prodDeleteBtn").click(function() {
 				var chkLength = $("input:checkbox[name=prod]:checked").length;//체크된 체크박스의 갯수를 가져옴
 				if(chkLength == 0){
@@ -608,7 +610,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 						$("form[name=prodManageFrm]").submit();
 					}				
 				  }
-				
 			});
 			
 			$("#selectBox").change(function() {//얘는 ajax로 처리하는게 속 편할 듯.

@@ -14,5 +14,11 @@ public interface AT_Dao {
 	
 	public boolean setATRegistUserData(AG_Dto ag_Dto);
 
+	public PD_productDto getModifyProd(int pd_code);
+
+	public PI_productImgDto getProdImg(int pd_code);
+
+	public boolean ATProdUpdate(PD_productDto prodDto);
+
 
 }
