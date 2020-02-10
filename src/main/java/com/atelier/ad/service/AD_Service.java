@@ -384,19 +384,6 @@ public class AD_Service {
 		
 		return pagingHtml;
 	}
-
-	public ModelAndView goADMessage(String mg_receiver) {
-		mav = new ModelAndView();
-
-		String view = null;
-
-		List<MG_Dto> bList = aDao.getADMessageList(mg_receiver);
-		mav.addObject("bList", bList);
-
-		mav.setViewName("ADMessage");
-		
-		return mav;
-	}
 	
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 공방 신청서의 항목을 DB에서 불러와 ADATMemeberUp.jsp에 출력
