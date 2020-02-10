@@ -663,7 +663,7 @@
                         <ul>
                             <li><a href="myPage">myPage</a></li>
                             <li><a href="basket">Basket</a></li>
-                            <li><a href="ATRegist">공방 회원 신청</a></li>
+                            <li><a href="ATRegist?id=${mb.cm_id}">공방 회원 신청</a></li>
                             <li><a href="ADNoticeList">Admin</a></li>
                         </ul>
                     </div>

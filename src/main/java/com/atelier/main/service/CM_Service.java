@@ -115,5 +115,26 @@ public class CM_Service {
 		
 		return cm_Dao.checkOverId(CM_ID);
 	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 이미 공방회원싱청을 요청한 회원인지 체크
+	 * 작성자: JSG
+	 * 작성일: 2020.02.07
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView registCheck(String id, RedirectAttributes rttr) {
+		// TODO Auto-generated method stub
+		mav = new ModelAndView();
+		
+		int check = cm_Dao.checkRegistOverllap(id);
+		if(check >= 1) {
+			rttr.addFlashAttribute("check", 1);
+		}
+		else {
+			//view = "ATRegist";
+			mav.setViewName("ATRegist");
+		}
+		
+		return mav;
+	}
 
 }

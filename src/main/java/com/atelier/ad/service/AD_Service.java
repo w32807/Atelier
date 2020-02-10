@@ -455,6 +455,7 @@ public class AD_Service {
 		DeleteATMember(id);
 		//return "ADATMemberUp";
 	}
+<<<<<<< HEAD
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 공방 신청서의 항목을 DB에서 불러와 ADATMemeberUp.jsp에 출력
 	  * 작성자: JSG
@@ -523,5 +524,17 @@ public class AD_Service {
 		atDao.deleteAGRequest(id);
 		//return "ADATMemberUp";
 	}
+=======
+>>>>>>> c9d068156d7df24d6897ba47df64590a5c11e72a
 	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방신청서(AG) DB에서 항목을 삭제
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	public void DeleteATMember(String id) {
+		//CM_Dto cmMem = cmDao.getMemberInfo(id);
+		atDao.deleteAGRequest(id);
+		//return "ADATMemberUp";
+	}
 }

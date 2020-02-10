@@ -21,4 +21,6 @@ public interface CM_Dao {
 	public boolean upPass(CM_Dto udto);
 
 	public boolean pfPhoto(String profileName);
+	
+	public int checkRegistOverllap(String id);
 }

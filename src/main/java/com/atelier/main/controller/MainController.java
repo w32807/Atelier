@@ -229,6 +229,15 @@ public class MainController {
 		mav = new ModelAndView();
 		mav = mServ.registCheck(id, rttr);
 		return mav;
+<<<<<<< HEAD
+=======
+	}
+
+	//마이페이지의  주문내역에서 취소신청을 눌렀을 때.
+	@GetMapping("orderCancle")
+	public String orderCancle() {
+		return "myOrder";
+>>>>>>> c9d068156d7df24d6897ba47df64590a5c11e72a
 	}
 
 	/*

@@ -212,11 +212,10 @@
                            <tbody>
                               <tr>
                                  <th><input type="checkbox" id="allCheck"></th>
-                                 <th><i class="icon_mail_alt"></i> 번호</th>
+                                 
                                  <th><i class="icon_mail_alt"></i> Email</th>
                                  <th><i class="icon_calendar"></i> 공방명</th>
                                  <th><i class="icon_calendar"></i> 전화번호</th>
-                                 <th><i class="icon_calendar"></i> 주소</th>
                                  <th><i class="icon_pin_alt"></i> 공방 SNS</th>
                                  <th><i class="icon_pin_alt"></i> 카테고리1</th>
                                  <th><i class="icon_pin_alt"></i> 카테고리2</th>
@@ -224,219 +223,30 @@
                                  <th><i class="icon_pin_alt"></i> 승인</th>
                                  <th><i class="icon_pin_alt"></i> 불가</th>
                               </tr>
+                              <c:forEach var="AGList" items="${AGList}">
                               <tr>
                                  <th><input type="checkbox"></th>
-                                 <td>69</td>
-                                 <td>김종현@avsee06.tv</td>
-                                 <td>종현이의 가죽채찍</td>
-                                 <td>010-6666-9999</td>
-                                 <td>인천광역시 종현이네 행복하고 해피해피한 sm 하우스</td>
-                                 <td>트윗트윗트윗@트윗</td>
-                                 <td>가죽채찍</td>
-                                 <td>가죽수갑</td>
-                                 <td>가죽 옷</td>
+                                 
+                                 <td>${AGList.ag_id}</td>
+                                 <td>${AGList.ag_at_name}</td>
+                                 <td>${AGList.ag_phone}</td>
+                                 <td>${AGList.ag_snsaddr}</td>
+                                 <td>${AGList.ag_cate1}</td>
+                                 <td>${AGList.ag_cate2}</td>
+                                 <td>${AGList.ag_cate3}</td>
                                  <div class="btn-group">
                                     <td style="text-align: center;"><a
-                                       class="btn btn-primary" href="#"><i
+                                       class="btn btn-primary" onclick="alert('등록되었습니다.!')" href="ATMemberUpCheck?check=true&&id=${AGList.ag_id}"><i
                                           class="icon_house_alt"></i></a></td>
+                                     
 
                                     <td style="text-align: center;"><a
-                                       class="btn btn-danger" href="#"><i
+                                       class="btn btn-danger" onclick="alert('취소되었습니다.!')" href="ATMemberUpCheck?check=false&&id=${AGList.ag_id}"><i
                                           class="icon_check_alt2"></i></a></td>
-
-                                    
+								
                                  </div>
                               </tr>
-                              <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>69</td>
-                                 <td>김종현@avsee06.tv</td>
-                                 <td>종현이의 가죽채찍</td>
-                                 <td>010-6666-9999</td>
-                                 <td>인천광역시 종현이네 행복하고 해피해피한 sm 하우스</td>
-                                 <td>트윗트윗트윗@트윗</td>
-                                 <td>가죽채찍</td>
-                                 <td>가죽수갑</td>
-                                 <td>가죽 옷</td>
-                                 <div class="btn-group">
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-primary" href="#"><i
-                                          class="icon_house_alt"></i></a></td>
-
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-danger" href="#"><i
-                                          class="icon_check_alt2"></i></a></td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>69</td>
-                                 <td>김종현@avsee06.tv</td>
-                                 <td>종현이의 가죽채찍</td>
-                                 <td>010-6666-9999</td>
-                                 <td>인천광역시 종현이네 행복하고 해피해피한 sm 하우스</td>
-                                 <td>트윗트윗트윗@트윗</td>
-                                 <td>가죽채찍</td>
-                                 <td>가죽수갑</td>
-                                 <td>가죽 옷</td>
-                                 <div class="btn-group">
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-primary" href="#"><i
-                                          class="icon_house_alt"></i></a></td>
-
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-danger" href="#"><i
-                                          class="icon_check_alt2"></i></a></td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>69</td>
-                                 <td>김종현@avsee06.tv</td>
-                                 <td>종현이의 가죽채찍</td>
-                                 <td>010-6666-9999</td>
-                                 <td>인천광역시 종현이네 행복하고 해피해피한 sm 하우스</td>
-                                 <td>트윗트윗트윗@트윗</td>
-                                 <td>가죽채찍</td>
-                                 <td>가죽수갑</td>
-                                 <td>가죽 옷</td>
-                                 <div class="btn-group">
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-primary" href="#"><i
-                                          class="icon_house_alt"></i></a></td>
-
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-danger" href="#"><i
-                                          class="icon_check_alt2"></i></a></td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>69</td>
-                                 <td>김종현@avsee06.tv</td>
-                                 <td>종현이의 가죽채찍</td>
-                                 <td>010-6666-9999</td>
-                                 <td>인천광역시 종현이네 행복하고 해피해피한 sm 하우스</td>
-                                 <td>트윗트윗트윗@트윗</td>
-                                 <td>가죽채찍</td>
-                                 <td>가죽수갑</td>
-                                 <td>가죽 옷</td>
-                                 <div class="btn-group">
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-primary" href="#"><i
-                                          class="icon_house_alt"></i></a></td>
-
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-danger" href="#"><i
-                                          class="icon_check_alt2"></i></a></td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>69</td>
-                                 <td>김종현@avsee06.tv</td>
-                                 <td>종현이의 가죽채찍</td>
-                                 <td>010-6666-9999</td>
-                                 <td>인천광역시 종현이네 행복하고 해피해피한 sm 하우스</td>
-                                 <td>트윗트윗트윗@트윗</td>
-                                 <td>가죽채찍</td>
-                                 <td>가죽수갑</td>
-                                 <td>가죽 옷</td>
-                                 <div class="btn-group">
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-primary" href="#"><i
-                                          class="icon_house_alt"></i></a></td>
-
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-danger" href="#"><i
-                                          class="icon_check_alt2"></i></a></td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>69</td>
-                                 <td>김종현@avsee06.tv</td>
-                                 <td>종현이의 가죽채찍</td>
-                                 <td>010-6666-9999</td>
-                                 <td>인천광역시 종현이네 행복하고 해피해피한 sm 하우스</td>
-                                 <td>트윗트윗트윗@트윗</td>
-                                 <td>가죽채찍</td>
-                                 <td>가죽수갑</td>
-                                 <td>가죽 옷</td>
-                                 <div class="btn-group">
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-primary" href="#"><i
-                                          class="icon_house_alt"></i></a></td>
-
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-danger" href="#"><i
-                                          class="icon_check_alt2"></i></a></td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>69</td>
-                                 <td>김종현@avsee06.tv</td>
-                                 <td>종현이의 가죽채찍</td>
-                                 <td>010-6666-9999</td>
-                                 <td>인천광역시 종현이네 행복하고 해피해피한 sm 하우스</td>
-                                 <td>트윗트윗트윗@트윗</td>
-                                 <td>가죽채찍</td>
-                                 <td>가죽수갑</td>
-                                 <td>가죽 옷</td>
-                                 <div class="btn-group">
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-primary" href="#"><i
-                                          class="icon_house_alt"></i></a></td>
-
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-danger" href="#"><i
-                                          class="icon_check_alt2"></i></a></td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>69</td>
-                                 <td>김종현@avsee06.tv</td>
-                                 <td>종현이의 가죽채찍</td>
-                                 <td>010-6666-9999</td>
-                                 <td>인천광역시 종현이네 행복하고 해피해피한 sm 하우스</td>
-                                 <td>트윗트윗트윗@트윗</td>
-                                 <td>가죽채찍</td>
-                                 <td>가죽수갑</td>
-                                 <td>가죽 옷</td>
-                                 <div class="btn-group">
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-primary" href="#"><i
-                                          class="icon_house_alt"></i></a></td>
-
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-danger" href="#"><i
-                                          class="icon_check_alt2"></i></a></td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>69</td>
-                                 <td>김종현@avsee06.tv</td>
-                                 <td>종현이의 가죽채찍</td>
-                                 <td>010-6666-9999</td>
-                                 <td>인천광역시 종현이네 행복하고 해피해피한 sm 하우스</td>
-                                 <td>트윗트윗트윗@트윗</td>
-                                 <td>가죽채찍</td>
-                                 <td>가죽수갑</td>
-                                 <td>가죽 옷</td>
-                                 <div class="btn-group">
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-primary" href="#"><i
-                                          class="icon_house_alt"></i></a></td>
-
-                                    <td style="text-align: center;"><a
-                                       class="btn btn-danger" href="#"><i
-                                          class="icon_check_alt2"></i></a></td>
-                                 </div>
-                              </tr>
-                             
+                              </c:forEach>
                            </tbody>
                         </table>
                      </section>

@@ -77,14 +77,14 @@ nav>div a.nav-item.nav-link, nav>div a.nav-item.nav-link.active {
 	border-radius: 0;
 }
 
-nav>div a.nav-item.nav-link.active:after {
+/* nav>div a.nav-item.nav-link.active:after {
 	content: "";
 	position: relative;
 	bottom: -60px;
 	left: -10%;
 	border: 15px solid transparent;
 	border-top-color: #e74c3c;
-}
+} */
 
 .tab-content {
 	background: #fdfdfd;
@@ -107,7 +107,6 @@ nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
 	color: red;
 }
 </style>
-
 
 
 </head>
@@ -460,18 +459,22 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 
 
 						<!-- Map Section Begin -->
-						<div class="map spad">
-							<div class="container">
-								<div class="map-inner">
-									<iframe
-										src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d48158.305462977965!2d-74.13283844036356!3d41.02757295168286!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2e440473470d7%3A0xcaf503ca2ee57958!2sSaddle%20River%2C%20NJ%2007458%2C%20USA!5e0!3m2!1sen!2sbd!4v1575917275626!5m2!1sen!2sbd"
-										height="610" style="border: 0" allowfullscreen=""> </iframe>
-									<div class="icon">
-										<i class="fa fa-map-marker"></i>
-									</div>
-								</div>
-							</div>
-						</div>
+							<!-- 지도를 표시할 div 입니다 -->
+						<div id="map" style="width:1390;height:500px; display: block; "></div>
+						
+						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ed83f9fdd2a5201a968831f586aa62e4"></script>
+						<script>
+								var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+								    mapOption = { 
+								        center: new kakao.maps.LatLng(37.439139, 126.675124), // 지도의 중심좌표
+								        level: 3 // 지도의 확대 레벨
+								    };
+								
+								var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+								
+							
+						</script>
+						
 						<!-- Map Section Begin -->
 
 						<!-- Contact Section Begin -->
