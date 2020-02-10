@@ -41,4 +41,9 @@
 	<insert id="pfPhoto" parameterType="String">
 		UPDATE COMMON_MEMBER SET CM_PFPHOTO=#{profileName} WHERE CM_ID=#{profileName}
 	</insert>
+	
+	<!-- 아이디 유효성 검사 -->
+	<select id="checkRegistOverllap" parameterType="String" resultType="Integer">
+		select count(*) from AG WHERE AG_ID = #{ID}
+	</select>
 </mapper>

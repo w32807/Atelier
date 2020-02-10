@@ -48,6 +48,19 @@
    rel="stylesheet" />
 <link href="./resources/ADATList/css/main.css" rel="stylesheet">
 
+<style type="text/css">
+	.material_input{
+		margin: 30px;
+		text-align: center;
+	}
+	
+	.material_input label {
+		font-weight: bold; 
+		color: darkslategray;
+	}
+	
+</style>
+
 </head>
 <body>
    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
@@ -91,27 +104,25 @@
                   
                   <button class="close"></button>
                </div>
-
             </div>
-
          </div>
       </div>
-
       <div class="app-main">
          <div class="app-sidebar sidebar-shadow">
             <div class="app-header__logo">
                <div class="logo-src"></div>
-               <div class="header__pane ml-auto">
-                  <div>
-                                <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
-                                    <span class="hamburger-box">
-                                        <span class="hamburger-inner"></span>
-                                    </span>
-                                </button>
-                            </div>
-               </div>
-            </div>
-            
+					<div class="header__pane ml-auto">
+						<div>
+							<button type="button"
+								class="hamburger close-sidebar-btn hamburger--elastic"
+								data-class="closed-sidebar">
+								<span class="hamburger-box"> <span
+									class="hamburger-inner"></span>
+								</span>
+							</button>
+						</div>
+					</div>
+				</div>
             <div class="app-header__menu">
                <span>
                   <button type="button"
@@ -164,14 +175,8 @@
             </div>
          </div>
          
-      
-         
-         
          <div class="app-main__outer">
             <div class="app-main__inner">
-               
-               
-         
          
          <div class="row">
           <div class="col-md-12">
@@ -179,63 +184,30 @@
               <header class="panel-heading">
                 <h2 style="text-align:center;">원자재 업체 리스트</h2>
               </header>
-
-              <table class="table table-striped table-advance table-hover" >
-                <tbody style="text-align:center;">
-                  <tr>
-                    <th style="width:110px;"><i class="icon_menu"></i>&nbsp;원재료코드</th>
-                    <th><i class="icon_cart_alt"></i>&nbsp;원재료</th>
-                    <th><i class="icon_toolbox_alt"></i>&nbsp;제조업체명</th>
-                    <th><i class="icon_cloud"></i>&nbsp;색상</th>
-                    <th><i class="icon_zoom-in"></i>&nbsp;원가</th>
-                   <th>&nbsp;수정</th>
-                    <th>&nbsp;삭제</th>
-                  </tr>
-                  <c:forEach var="adcList" items ="${adcList}">
-	                  <tr style="font-size:14px">
-		                    <td>${adcList.RM_NUM}</td>
-		                    <td>${adcList.RM_TYPE}</td>
-		                    <td>${adcList.PRM_COMPANY}</td>
-		                    <td>${adcList.RM_COLOR}</td>
-		                    <td>${adcList.RM_PRICE}</td>
-		                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm" onclick="location.href='ADCompanyFix?RM_NUM=${adcList.RM_NUM}'">Update</button></td> 
-		                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm" onclick="location.href='ADCompanyDel?RM_NUM=${adcList.RM_NUM}'">Delete</button></td>                         
-	                   </tr>
-                    </c:forEach>
-                </tbody>
-              </table>
-            </section>
-            <br>
-            
-            <div class="row"     style="padding-left: 650px;">
-						<div class="container">
-							<div>
-								<ul class="pagination">
-									${ADCPaging}
-								</ul>
-							</div>
-							<!-- 
-							<ul class="pagination">
-								<li>
-									
-								</li>
-								
-								<li class="disabled"><a href="#">«</a></li>
-								<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">»</a></li>
-								 
-							</ul>
-							-->
-								<div>
-								<button class="btn btn-info btn-lg" onclick="location.href='ADCompanyInsert'" style="float:right; width:100px; height:45px;"><h5>Insert</h5></button>
-	          					</div>
-						</div>
-						
+              <form id="Materialfix" action="MaterialFix" method="post" onsubmit="return check()">
+					<div class="material_input">
+						<input type="hidden" id="RM_NUM" name="RM_NUM" value=${admDto.RM_NUM}>
+						<label for="CM_ID" style="margin-top: 100px;">원자재 이름 *</label> 
+						<input type="text" name="RM_TYPE" id="RM_TYPE" style="margin-left: 50px;" value=${admDto.RM_TYPE} readonly/>
 					</div>
+                            
+					<div class="material_input">
+						<label for="CM_PWD">납품 업체 *</label>
+						<input type="text" name ="PRM_COMPANY" id="PRM_COMPANY" style="margin-left: 63px;" value=${admDto.PRM_COMPANY} required>
+					</div>
+					<div class="material_input">
+						<label for="CON_CM_PWD">원자재 색상 *</label>
+						<input type="text" name ="RM_COLOR" id="RM_COLOR" style="margin-left: 48px;" value=${admDto.RM_COLOR} required>
+					</div>
+					<div class="material_input">
+						<label for="CM_NICK" style="margin-bottom: 70px;">원자재 단가 *</label>
+						<input type="text" name="RM_PRICE" id="RM_PRICE" style="margin-left: 47px;" value=${admDto.RM_PRICE} required>
+					</div>
+					<div class="button" style="text-align: center;">
+						<button type="submit" class="btn btn-info btn-lg" style=" width:120px; height:60; text-align: center; font-size: 15px;">등록하기</button>
+					</div>
+				</form>
+            </section>
         </div>
    </div>
 </div>

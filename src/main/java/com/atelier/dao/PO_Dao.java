@@ -12,6 +12,5 @@ public interface PO_Dao {
 
 	public List<PO_Dto> getOrderList(PO_Dto poDto);
 
-
-
+	public boolean orderCancle(String prod);
 }

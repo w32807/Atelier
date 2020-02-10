@@ -42,7 +42,11 @@ public interface AT_Dao {
 	public String getAM_Name(String aT_id);
 
 	public List<PO_Vo> getATOrderList(PO_Vo po_Vo);
+	
+	public List<AG_Dto> getATRegistUserData();
 
+	public AG_Dto getATRegistMember(String id);
 
+	public void deleteAGRequest(String id);
 	
 }

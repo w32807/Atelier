@@ -241,13 +241,11 @@ public class AT_Service {
 		return prodImgDto;
 
 	}
-
-	/*
-	 * -----------------------------------------------------------------------------
-	 * ---- 기능: 이미지를 저장할 폴더 및 경로 생성 작성자: JWJ 작성일 : 2019.02.06
-	 * -----------------------------------------------------------------------------
-	 * ------
-	 */
+	 /* ---------------------------------------------------------------------------------
+	  * 기능: 이미지를 저장할 폴더 및 경로 생성
+	  * 작성자: JWJ
+	  * 작성일 : 2019.02.06
+	  -----------------------------------------------------------------------------------*/
 	public String getRealPath(MultipartHttpServletRequest multi) {
 		String path = multi.getSession().getServletContext().getRealPath("/");
 		path += "resources/prodImg/";
@@ -261,12 +259,12 @@ public class AT_Service {
 		return path;
 	}
 
-	/*
-	 * -----------------------------------------------------------------------------
-	 * ---- 기능: 상품 정보 수정하기위해 해당 상품의 정보를 가져옴 작성자: JWJ 작성일 : 2019.02.06
-	 * -----------------------------------------------------------------------------
-	 * ------
-	 */
+
+	 /* ---------------------------------------------------------------------------------
+	  * 기능: 상품 정보 수정하기위해 해당 상품의 정보를 가져옴
+	  * 작성자: JWJ
+	  * 작성일 : 2019.02.06
+	  -----------------------------------------------------------------------------------*/
 	public ModelAndView goModifyProd(MultipartHttpServletRequest multi) {
 		mav = new ModelAndView();
 		String modifyProd = multi.getParameter("prod");// 1개의 선택된 체크박스를 가져옴- 상품코드가 1개 넘어옴
@@ -287,31 +285,30 @@ public class AT_Service {
 
 		return mav;
 	}
-	/*
-	 * -----------------------------------------------------------------------------
-	 * ---- 기능: 상품 정보 수정 작성자: JWJ 작성일 : 2019.02.06
-	 * -----------------------------------------------------------------------------
-	 * ------
-	 */
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 상품 정보 수정
+	  * 작성자: JWJ
+	  * 작성일 : 2019.02.06
+	  -----------------------------------------------------------------------------------*/
 
 	public String updateProd(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
-		// String view = atDao.ATProdUpdate(multi,rttr);
+		//String view = atDao.ATProdUpdate(multi,rttr);
 		String view = null;
 		PD_productDto prodDto = new PD_productDto();
 		PI_productImgDto prodImgDto = new PI_productImgDto();
-
-		int pd_code = Integer.parseInt(multi.getParameter("pd_code"));
-		String pd_name = multi.getParameter("pd_name");
-		String pd_at_name = multi.getParameter("pd_at_name");
-		int pd_numofstock = Integer.parseInt(multi.getParameter("pd_numofstock"));
-		int pd_price = Integer.parseInt(multi.getParameter("pd_price"));
-		String pd_option = multi.getParameter("pd_option");
-		String pd_sex = multi.getParameter("pd_sex");
-		String pd_type = multi.getParameter("pd_type");
-		String pd_cate = multi.getParameter("pd_cate");
-		String pd_datail = multi.getParameter("pd_detail");
-		String pi_oriname = multi.getParameter("pi_oriname");
-
+		
+		int pd_code = 	Integer.parseInt(multi.getParameter("pd_code"));
+		String pd_name =  multi.getParameter("pd_name");
+		String pd_at_name =  multi.getParameter("pd_at_name");
+		int pd_numofstock =  Integer.parseInt(multi.getParameter("pd_numofstock"));
+		int pd_price =  Integer.parseInt(multi.getParameter("pd_price"));
+		String pd_option =  multi.getParameter("pd_option");
+		String pd_sex =  multi.getParameter("pd_sex");
+		String pd_type =  multi.getParameter("pd_type");
+		String pd_cate =  multi.getParameter("pd_cate");
+		String pd_datail =  multi.getParameter("pd_detail");
+		String pi_oriname =  multi.getParameter("pi_oriname");
+			
 		prodDto.setPd_code(pd_code);
 		prodDto.setPd_at_name(pd_at_name);
 		prodDto.setPd_cate(pd_cate);
@@ -323,36 +320,35 @@ public class AT_Service {
 		prodDto.setPd_sex(pd_sex);
 		prodDto.setPd_type(pd_type);
 		prodImgDto.setPi_oriname(pi_oriname);
-
+		
 		boolean b = atDao.ATProdUpdate(prodDto);
-
-		// 2. Insert한 상품의 상품코드를 가져와 이미지 업로드
+		
+		 
+		//2. Insert한 상품의 상품코드를 가져와 이미지 업로드
 		int currentPd_code = prodDto.getPd_code();
-		// 상품 이미지를 먼저 지움
-		atDao.deleteImg(currentPd_code);
-		prodImgDto = prodImgup(multi, currentPd_code);
-		if (b) {
-			// 상품 insert 성공하면 해당 상품의 image도 DB에 insert
-			atDao.ATProdImgInsert(prodImgDto);
-			view = "redirect:ATProdManage";
-			rttr.addFlashAttribute("check", "등록 완료");
-
-		} else {
-			// 상품 insert 실패
+			//상품 이미지를 먼저 지움
+			atDao.deleteImg(currentPd_code);
+		prodImgDto = prodImgup(multi,currentPd_code);
+		if(b) {
+			//상품 insert 성공하면 해당 상품의 image도 DB에 insert
+				atDao.ATProdImgInsert(prodImgDto);
+				view = "redirect:ATProdManage";
+				rttr.addFlashAttribute("check", "등록 완료");
+			
+		}else {
+			//상품 insert 실패
 			view = "redirect:ATProdRegist";
 			rttr.addFlashAttribute("check", "등록 실패");
-
+			
 		}
 		return view;
-
+		
 	}
-
-	/*
-	 * -----------------------------------------------------------------------------
-	 * ---- 기능: 선택한 상품의 판매여부를 판매 (T)로 전환 작성자: JWJ 작성일 : 2019.02.07
-	 * -----------------------------------------------------------------------------
-	 * ------
-	 */
+	 /* ---------------------------------------------------------------------------------
+     * 기능: 선택한 상품의 판매여부를 판매 (T)로 전환
+     * 작성자: JWJ
+     * 작성일 : 2019.02.07
+     -----------------------------------------------------------------------------------*/
 	public String changeProdRegist(String[] chkedBoxArr, RedirectAttributes rttr) {
 		String view = null;
 
@@ -400,6 +396,9 @@ public class AT_Service {
 
 		return mav;
 	}
+	
+
+	
 
 	
 	/* ---------------------------------------------------------------------------------------
@@ -507,4 +506,22 @@ public class AT_Service {
 	 * return poDtomap; }
 	 */
 
-}// AT_Service 클래스의 끝
+	
+
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}//AT_Service 클래스의 끝

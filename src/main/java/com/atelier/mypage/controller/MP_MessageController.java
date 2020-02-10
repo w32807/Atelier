@@ -63,5 +63,20 @@ public class MP_MessageController {
 		return mav;
 	}
 	
+	/*
+	 * @PostMapping(value = "messageSendBtn", produces =
+	 * "application/json; charset=utf-8")
+	 * 
+	 * @ResponseBody public Map<String , List<PO_Dto>> MessageSendBtn(MG_Dto mDto){
+	 * log.warn("aa"); Map <String , List<PO_Dto>> poMap = mServ.getOrder(mDto);
+	 * 
+	 * 
+	 * return poMap;
+	 * 
+	 * }
+	 */
+
+	
+	
 	
 }

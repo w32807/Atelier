@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.atelier.dto.AD_MaterialDto;
 import com.atelier.dto.FT_FAQDto;
+import com.atelier.dto.MG_Dto;
 
 public interface AD_Dao {
 
@@ -26,4 +27,11 @@ public interface AD_Dao {
 
 	public int getADCompanyCount();
 
+	public List<MG_Dto> getADMessageList(String mg_receiver);
+
+	public AD_MaterialDto getADMaterial(Integer RM_NUM);
+
+	public boolean materialFix(AD_MaterialDto material);
+
+	public void delADMaterial(Integer RM_NUM);
 }

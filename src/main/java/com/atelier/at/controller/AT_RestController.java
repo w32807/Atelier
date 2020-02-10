@@ -17,6 +17,7 @@ import com.atelier.vo.PO_Vo;
 
 import lombok.Setter;
 
+
 @RestController
 public class AT_RestController {
 
@@ -24,6 +25,8 @@ public class AT_RestController {
 	AT_Service atServ;
 
 	// 거래처 및 발주조회에서 검색을 ajax로 처리하기 위한 메소드
+	
+	//거래처 및 발주조회에서 검색을 ajax로 처리하기 위한 메소드
 	@GetMapping(value = "prodSearch", produces = "application/json; charset=utf-8")
 	public Map<String, String> prodSearch(HttpServletRequest request) {
 		String keyword = request.getParameter("keyword");// jsp에서 받아온 검색어
@@ -52,4 +55,8 @@ public class AT_RestController {
 	 * }
 	 */
 
+
+	
+	
+	
 }

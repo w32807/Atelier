@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -39,6 +38,9 @@
 <!-- Modernizr JS -->
 	<script src="resources/AT_front/js/modernizr-2.6.2.min.js"></script>
 </head>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
 
 <body>
     <!-- Page Preloder -->
@@ -223,7 +225,7 @@
    <!-- 여기부터 컨텐츠입니다. -->
    
 		<div id="colorlib-main" style="width: auto;">
-			<div class="colorlib-services" style="  ">
+			<div class="colorlib-services" >
 				<div class="container-fluid" >
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3">					
@@ -231,138 +233,53 @@
 								style="font-weight: bolder; font-size: 23px; letter-spacing: 0.5px; margin-left: 30px;">주문 상태 조회<hr>
 							</h2>							
 						</div>
-						<select id="selectBox" style="margin-left: 1100px; border-radius: 10px; width: 100px; height: 35px;  padding-left: 8px; font-size: 14px; border: 1px solid #A09182; color: white; background-color: #A09182;">
-							<option>배송전</option>
-							<option>배송중</option>
-							<option>배송 완료</option>
-						</select>
+						<form id="seletor">
+							<select id="selectBox" 
+							style="margin-left: 1100px; border-radius: 10px; width: 100px; height: 35px;  padding-left: 8px; font-size: 14px; border: 1px solid #A09182; color: white; background-color: #A09182;">
+								<option value="before">배송전</option>
+								<option value="being">배송중</option>
+								<option value="after">배송 완료</option>
+							</select>
+						</form>
 					</div>
 					
                   	<form action="orderCancle" method="get" id="cancleStateFrm">
-						<div class="row" style="margin-top: 80px;">
-							<div class="col-md-6">
+						<div class="row" style="margin-top: 60px;">
+							<div class="col-md-8">
 								<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft"
 									style="margin-bottom: 70px;">
-								<label>
-									<div class="colorlib-icon" style="width: 130px; height: 130px;">
-										<i class="icon-tag"></i>
+									<div id="orderAjax">
+									<br>
+									<c:forEach var="pl" items="${poList}">
+									
+									<div class="${pl.po_state}">
+									<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; float:left;">
+											<span><img src="./resources/image/${pl.pi_oriname}" style="width:300px; heigt:300px;" ></span>
+											<div style="float:right;">
+												<input type="hidden" value="${pl.po_num}">
+												<input type="checkbox" name="prod" value="${pl.po_num}">
+												<h3 style="display: inline-block; font-size: 18px;"><b>${pl.po_at_name}</b></h3>
+												<br><!-- 체크박스의 상품코드로 주문취소 처리 할 것임! -->
+												<b>배송상태</b><span>&nbsp;&nbsp;&nbsp;${pl.po_state}</span><br>
+												<b>가격</b><span>&nbsp;&nbsp;&nbsp;${pl.po_price}</span><br>
+												<b>수량</b><span>&nbsp;&nbsp;&nbsp;${pl.po_count}</span><br>
+												<b>배송지</b><span>&nbsp;&nbsp;&nbsp;${pl.po_addr}</span><br>
+												<br>
+											</div>
+										</div>
+										</div>
+									</c:forEach>
 									</div>
-									<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; ">
-										
-										<input type="checkbox" name="prod" value="상품코드1">
-										<h3 style="display: inline-block; font-size: 18px;"><b>상품명</b></h3>	<br><!-- 체크박스의 상품코드로 주문취소 처리 할 것임! -->
-										<b>배송상태</b><span>&nbsp;&nbsp;&nbsp;배송중</span><br>
-										<b>가격</b><span>&nbsp;&nbsp;&nbsp;2020-01-21</span><br>
-										<b>수량</b><span>&nbsp;&nbsp;&nbsp;10</span><br>
-										<b>배송지</b><span>&nbsp;&nbsp;&nbsp;2020-01-21</span><br>
 									</div>
-								
-								</label>	
+								</div>
 							</div>
 							
-							<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft"
-								style="margin-bottom: 70px;">
-								<label>
-									<div class="colorlib-icon" style="width: 130px; height: 130px;">
-										<i class="icon-tag"></i>
-									</div>	
-										<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; ">
-										
-										<input type="checkbox" name="prod" value="상품코드1">
-										<h3 style="display: inline-block; font-size: 18px;"><b>상품명</b></h3>	<br><!-- 체크박스의 상품코드로 주문취소 처리 할 것임! -->
-										<b>배송상태</b><span>&nbsp;&nbsp;&nbsp;배송중</span><br>
-										<b>가격</b><span>&nbsp;&nbsp;&nbsp;2020-01-21</span><br>
-										<b>수량</b><span>&nbsp;&nbsp;&nbsp;10</span><br>
-										<b>배송지</b><span>&nbsp;&nbsp;&nbsp;2020-01-21</span><br>
-									</div>
-								</label>	
-							</div>
-							
-							<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft"
-								style="margin-bottom: 70px;">
-								<label>
-									<div class="colorlib-icon" style="width: 130px; height: 130px;">
-										<i class="icon-tag"></i>
-									</div>
-										<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; ">
-										
-										<input type="checkbox" name="prod" value="상품코드1">
-										<h3 style="display: inline-block; font-size: 18px;"><b>상품명</b></h3>	<br><!-- 체크박스의 상품코드로 주문취소 처리 할 것임! -->
-										<b>배송상태</b><span>&nbsp;&nbsp;&nbsp;배송중</span><br>
-										<b>가격</b><span>&nbsp;&nbsp;&nbsp;2020-01-21</span><br>
-										<b>수량</b><span>&nbsp;&nbsp;&nbsp;10</span><br>
-										<b>배송지</b><span>&nbsp;&nbsp;&nbsp;2020-01-21</span><br>
-									</div>
-								</label>	
-							</div>
-						</div>
-						
-						<div class="col-md-6" style="left: -70px;"><!--여기가 주문 내역의 2열 시작-->
-							<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft"
-								style="margin-bottom: 70px;">
-								<label>
-									<div class="colorlib-icon" style="width: 130px; height: 130px;">
-										<i class="icon-tag"></i>
-									</div>
-										<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; ">
-										
-										<input type="checkbox" name="prod" value="상품코드1">
-										<h3 style="display: inline-block; font-size: 18px;"><b>상품명</b></h3>	<br><!-- 체크박스의 상품코드로 주문취소 처리 할 것임! -->
-										<b>배송상태</b><span>&nbsp;&nbsp;&nbsp;배송중</span><br>
-										<b>가격</b><span>&nbsp;&nbsp;&nbsp;2020-01-21</span><br>
-										<b>수량</b><span>&nbsp;&nbsp;&nbsp;10</span><br>
-										<b>배송지</b><span>&nbsp;&nbsp;&nbsp;2020-01-21</span><br>
-									</div>
-								</label>	
-							</div>
-							
-							<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft"
-								style="margin-bottom: 70px;">
-								<label>
-									<div class="colorlib-icon" style="width: 130px; height: 130px;">
-										<i class="icon-tag"></i>
-									</div>
-									<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; ">
-										
-										<input type="checkbox" name="prod" value="상품코드1">
-										<h3 style="display: inline-block; font-size: 18px;"><b>상품명</b></h3>	<br><!-- 체크박스의 상품코드로 주문취소 처리 할 것임! -->
-										<b>배송상태</b><span>&nbsp;&nbsp;&nbsp;배송중</span><br>
-										<b>가격</b><span>&nbsp;&nbsp;&nbsp;2020-01-21</span><br>
-										<b>수량</b><span>&nbsp;&nbsp;&nbsp;10</span><br>
-										<b>배송지</b><span>&nbsp;&nbsp;&nbsp;2020-01-21</span><br>
-									</div>
-								</label>	
-							</div>
-							
-							<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft"
-								style="margin-bottom: 70px;">
-								<label>
-									<div class="colorlib-icon" style="width: 130px; height: 130px;">
-										<i class="icon-tag"></i>
-									</div>
-								<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; ">
-										
-										<input type="checkbox" name="prod" value="상품코드1">
-										<h3 style="display: inline-block; font-size: 18px;"><b>상품명</b></h3>	<br><!-- 체크박스의 상품코드로 주문취소 처리 할 것임! -->
-										<b>배송상태</b><span>&nbsp;&nbsp;&nbsp;배송중</span><br>
-										<b>가격</b><span>&nbsp;&nbsp;&nbsp;2020-01-21</span><br>
-										<b>수량</b><span>&nbsp;&nbsp;&nbsp;10</span><br>
-										<b>배송지</b><span>&nbsp;&nbsp;&nbsp;2020-01-21</span><br>
-									</div>
-								</label>	
-							</div>
-						</div>
-					</div>
-
+					
 					<div class="colorlib-feature animate-box" style="text-align: right; width: 1100px; height: 200px;" >
-						<input id="cancleBtn" type="button" name="serch"  value="주문취소"
+						<input id="cancleBtn" type="button" name="search"  value="주문취소"
 								style="width: 100px; height: 35px; border: none; font-size: 16px; color: white; background-color: #A09182; margin: 80px -85px 0 0;">
 					</div>
-			</form>
-		</div>
-	</div>
-	</div>
-	</div>
+				</form>
    <!-- 여기까지 컨텐츠입니다. -->                        
                             </div>
                    
@@ -470,6 +387,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 	<!-- MAIN JS -->
 	<script src="resources/AT_front/js/main.js"></script>
+	<script src="/resources/js/jquery.serializeObject.js"></script>
 	<script type="text/javascript">
 	//1. 아무것도 체크하지 않고 상태변경를 눌렀을 때.
 	//2. n개의 상품을 취소하시겠습니까?
@@ -481,13 +399,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		}else {
 			if(confirm(+chkLength+"개의 상품을 취소하시겠습니까?")){
 				$("#cancleStateFrm").submit();
+				location.reload();
 			}else {
 				location.reload();
 			}
 		}
 	});
 	
-	$("#selectBox").change(function() {//얘는 ajax로 처리하는게 속 편할 듯.
+/* 	$("#selectBox").change(function() {//얘는 ajax로 처리하는게 속 편할 듯.
 		var value = $(this).val();
 		if (value == "배송전") {
 			$("#cancleBtn").show();
@@ -500,10 +419,89 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			//배송 완료를 선택하면 배송 완료 목록만 불러옴
 			}
 		
-	});
+	});  */
+	
+	
+	$("#seletor").change(function() {
+		
+		var select = $("#seletor").serializeObject();
+		
+		select.po_cm_id = "${mb.cm_id}";
+		select.po_state = $("#selectBox").val();
+		console.log(select);
+		
+			$.ajax({
+				url:"orderAjax",
+				type:"post",
+				data:select,
+				dataType:"json",
+				success: function(data){
+					console.log(data);
+					var poList = "";
+					var dlist = data.poList;
+					
+					for(var i=0; i<dlist.length; i++){
+						
+						poList +=
 
+						 '<br>'+
+						 '<div class="'+dlist[i].po_state+'">'+
+						 '<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; float:left;">'+
+						 '<span>'+
+						 '<img src="'+'./resources/image/'+dlist[i].pi_oriname+'"'+ 'style="width:300px; heigt:300px;" >'+
+						 '</span>'+
+						 '<div style="float:right;">'+
+						 '<input type="hidden" value="'+dlist[i].po_num+'">'+
+						 '<input type="checkbox" name="prod"' + 'value='+'"'+dlist[i].po_num+'">'+
+						 '<h3 style="display: inline-block; font-size: 18px;"><b>상품명</b></h3>'+
+						 '<br>'+
+						 '<b>배송상태</b><span>&nbsp;&nbsp;&nbsp;'+dlist[i].po_state+'</span><br>'+
+						 '<b>가격</b><span>&nbsp;&nbsp;&nbsp;'+dlist[i].po_price+'</span><br>'+
+						 '<b>수량</b><span>&nbsp;&nbsp;&nbsp;'+dlist[i].po_count+'</span><br>'+
+						 '<b>배송지</b><span>&nbsp;&nbsp;&nbsp;'+dlist[i].po_addr+'</span><br>'+
+						 '<br>'+
+						 '</div>'+
+						 '</div>'+
+						 '</div>'
+					}
+					$('#orderAjax').html(poList);
+				},
+				error: function(error){
+					alert("hhhhhh");
+			},
+			
+			});
+		
+	});
+		
 	</script>
+	
+
 	
 </body>
 
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

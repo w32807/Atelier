@@ -6,31 +6,30 @@
 <mapper namespace="com.atelier.dao.MG_Dao">
 
 	<select id="getList" resultType="com.atelier.dto.MG_Dto"
-		parameterType="Integer">
-		<![CDATA[
-		SELECT * FROM MESSAGE WHERE MG_NUM>=#{pageNum}*10-9 AND MG_NUM<=#{pageNum}*10
-		]]>
+		parameterType="String">
+
+		SELECT * FROM MESSAGE WHERE MG_RECEIVER = #{mg_receiver} ORDER BY
+		MG_NUM DESC
+		<!-- <![CDATA[ SELECT * FROM MESSAGE WHERE MG_NUM>=#{pageNum}*10-9 AND 
+			MG_NUM<=#{pageNum}*10 ]]> -->
 	</select>
 
-	<select id="getBoardCount" resultType="Integer">
-		SELECT COUNT(*) FROM
-		MESSAGE
-	</select>
-
-
-	<select id="getMessage" resultType="com.atelier.dto.MG_Dto">
+	<select id="getMessage" parameterType="Integer"
+		resultType="com.atelier.dto.MG_Dto">
 		SELECT * FROM MESSAGE WHERE
 		MG_NUM=#{mg_num}
 	</select>
 
-	
 
-	<insert id="SendMessage" parameterType="com.atelier.dto.MG_Dto" useGeneratedKeys="true" keyProperty="mg_num">
-		
-		<selectKey keyProperty="mg_num" resultType="int" order="BEFORE">
-			SELECT MG_NUM_SEQ.NEXTVAL FROM DUAL
-		</selectKey>
-		
-		INSERT INTO B VALUES(${mg_num},#{mg_sender},#{mg_receiver},DEFAULT,#{mg_contents},DEFAULT)
+
+	<insert id="SendMessage" parameterType="com.atelier.dto.MG_Dto">
+		INSERT INTO MESSAGE
+		VALUES(MG_NUM_SEQ.NEXTVAL,#{mg_sender},#{mg_receiver},'F',#{mg_contents},DEFAULT)
 	</insert>
+
+
+
+	<!-- <insert id="SendMessage" parameterType="com.atelier.dto.PO_Dto" resultType="com.atelier.dto.PO_Dto"> 
+		INSERT INTO MESSAGE VALUES(MG_NUM_SEQ.NEXTVAL,#{mg_sender},#{mg_receiver},'F',#{mg_contents},DEFAULT) 
+		</insert> -->
 </mapper>

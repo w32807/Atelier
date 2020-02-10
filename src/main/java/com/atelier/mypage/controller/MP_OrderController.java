@@ -44,7 +44,7 @@ public class MP_OrderController {
 		return mav;
 	}
 	
-	
+	 //기능: 주문내역 조회메소드  ajax <수정필요>
 	 @PostMapping(value = "orderAjax", produces = "application/json; charset=utf-8")
 	 @ResponseBody 
 	 public Map<String , List<PO_Dto>> orderAjax(PO_Dto poDto) {
@@ -53,6 +53,25 @@ public class MP_OrderController {
 	 
 	 return poMap; 
 	 
+	 }
+	 
+	 
+	 /* ---------------------------------------------------------------------------------------
+		 * 기능: 주문내역 취소 메소드 <수정필요>
+		 * 작성자: KBH
+		 * 작성일: 2020.02.07
+		 -----------------------------------------------------------------------------------------*/
+	 @GetMapping("orderCancle")
+	 public ModelAndView orderCancle(String[] prod) {
+		 
+		 
+		 log.warn("asd");
+		 String view = null;
+		 
+		 mpServ.orderCancle(prod);
+		 
+		 
+		 return mav;
 	 }
 	 
 }

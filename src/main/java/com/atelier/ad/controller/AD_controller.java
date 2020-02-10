@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atelier.ad.service.AD_Service;
 import com.atelier.dto.AD_MaterialDto;
+import com.atelier.dto.AG_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.CO_NoticeDto;
 import com.atelier.dto.FT_FAQDto;
@@ -149,15 +150,29 @@ public class AD_controller {
 		
 		return mav;
 	}
-	
-	@GetMapping("ADMessage")
-	public String goADMessage() {
-		return "ADMessage";
+
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방회원신청서 화면으로 이동
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ADATMemberUp")
+	public ModelAndView goADATMemberUp(AG_Dto agDto) {
+		mav = aServ.getApplicant(agDto);
+		return mav;
 	}
 	
-	@GetMapping("ADATMemberUp")
-	public String goADATMemberUp() {
-		return "ADATMemberUp";
+	 /* ---------------------------------------------------------------------------------
+	  * 기능: 공방회원신청서 결과 처리
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ATMemberUpCheck")
+	public ModelAndView ATMemberUpCheck(String check, String id) {
+
+		String ADATMemberUp = aServ.ATMemberCheckProc(check, id);
+		mav.setViewName(ADATMemberUp);
+		return mav;
 	}
 	
 	@GetMapping("ADATList")
@@ -200,6 +215,60 @@ public class AD_controller {
 	public ModelAndView ADCompany(Integer adcPageNum) {
 		log.warn("원자재 리스트 출력 컨트롤러 시작");
 		mav = aServ.getADCompanyList(adcPageNum);
+		return mav;
+	}
+	
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 메세지 리스트 출력
+	  * 작성자: KBH
+	  * 작성일 : 2010.02.10
+	  -----------------------------------------------------------------------------------*/
+	/*
+	@GetMapping("ADMessage")
+		public ModelAndView goADMessage(String mg_receiver) {
+			
+			mav = aServ.goADMessage(mg_receiver);
+			
+			return mav;
+		}
+	*/
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 원자재 수정 / 기존 데이터 입력
+	  * 작성자: JSH
+	  * 작성일 : 2019.02.10
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ADCompanyFix")
+	public ModelAndView ADCompanyFix(Integer RM_NUM) {//form에서 넘겨주는 name과 controller의 매개변수 명과 같아야 한다.
+		log.info("원자재 수정 컨트롤러 시작");
+		mav = aServ.getADCompanyFix(RM_NUM);
+		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 원자재 수정 / 업데이트
+	  * 작성자: JSH
+	  * 작성일 : 2019.02.10
+	  -----------------------------------------------------------------------------------*/
+	@PostMapping("MaterialFix")
+	public ModelAndView MaterialFix(AD_MaterialDto material, RedirectAttributes rttr) {//form에서 넘겨주는 name과 controller의 매개변수 명과 같아야 한다.
+		log.info("원자재 수정 컨트롤러 시작");
+		mav = aServ.MaterialFix(material, rttr);
+		
+		return mav;
+	}
+		
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 원자재 삭제
+	  * 작성자: JSH
+	  * 작성일 : 2019.02.10
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ADCompanyDel")
+	public ModelAndView ADCompanyDel(Integer RM_NUM) {
+		log.info("원자재 삭제 컨트롤러 시작");
+		mav = aServ.MaterialDel(RM_NUM);
+		
 		return mav;
 	}
 }

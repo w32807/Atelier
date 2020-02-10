@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -221,7 +220,9 @@
 								<li><a href="messager">메세지</a></li>
 								<li><a href="myInfoUpdate">내 정보 수정</a></li>
 								<li><a href="myChangePwd">비밀번호 변경</a></li>
-								<li><a href="myAdminRQ" onclick="window.open(this.href, '_blank', 'width=655px,height=650px,toolbars=no,scrollbars=no');return false;">관리자에게 문의하기</a>
+								<li><a href="myAdminRQ"
+									onclick="window.open(this.href, '_blank', 'width=655px,height=650px,toolbars=no,scrollbars=no');return false;">관리자에게
+										문의하기</a>
 							</ul>
 						</div>
 						<div class="atelier_go">
@@ -255,136 +256,47 @@
 
 
 
-
-						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft"
-							style="margin: 0px auto;">
+						<div id="messager" class="col-md-12 animate-box"
+							data-animate-effect="fadeInLeft" style="margin: 0px auto;">
 							<div class="about-desc"></div>
 							<div class="fancy-collapse-panel">
 								<div class="panel-group" id="accordion" role="tablist"
 									aria-multiselectable="true">
 
+
 									<!-- 각각의 heading숫자 ,  collapse숫자는 모두 for문으로 숫자들을 1개씩 증가시켜주세요. -->
-									<div class="panel panel-default">
-										<div class="panel-heading" role="tab" id="heading1">
+									<c:forEach var="bitem" items="${bList}" >
+										<div class="panel panel-default">
+											<div class="panel-heading" role="tab" id="heading${bitem.mg_num}" >
 											<h4 class="panel-title">
 												<a class="collapsed" data-toggle="collapse"
-													data-parent="#accordion" href="#collapse1"
-													aria-expanded="false" aria-controls="collapse1"
-													style="font-weight: bold;"> 보낸 사람 : 장원준 </a>
-											</h4>
-										</div>
-										<div id="collapse1" class="panel-collapse collapse"
-											role="tabpanel" aria-labelledby="heading1">
-											<div class="panel-body" style="font-size: 15px">
-												안녕하세요. 여기는 장원준씨께 온 쪽지입니다.
-												<form action="myMessageWrite" method="get">
-													<input type="hidden" name="CM_ID" value="쪽지 보낸 사람 ID">
-													<input type="submit" value="답장"
-														style="border: thick; float: right;">
-												</form>
+													data-parent="#accordion" href="#collapse${bitem.mg_num}"
+													aria-expanded="false" aria-controls="collapse${bitem.mg_num}"
+													style="font-weight: bold;">${bitem.mg_sender}</a>
+												 <input type="hidden" name="mg_num" value="${bitem.mg_num}">
+												 <input type="hidden" name="mg_num" value="${bitem.mg_num}">
+													</h4>
+												</div>
+												<div id="collapse${bitem.mg_num}" class="panel-collapse collapse"
+													role="tabpanel" aria-labelledby="heading${bitem.mg_num}">
+													<div class="panel-body" style="font-size: 15px">
+														${bitem.mg_contents}
+														<form action="myMessageWrite" method="get">
+															<%-- <input type="hidden" name="mg_sender" value="${mb.cm_id}">
+															<input type="hidden" name="mg_receiver"
+																value="${bitem.mg_sender}">  --%>
+																<input type="hidden"
+																name="mg_num" value="${bitem.mg_num}"> <input
+																type="submit" value="답장"
+																style="border: thick; float: right;">
+														</form>
+													</div>
+												</div>
 											</div>
-										</div>
-									</div>
+									</c:forEach>
+									<div>${paging}</div>
 									<!-- 여기까지 쪽지 1개 -->
 
-
-
-									<div class="panel panel-default">
-										<div class="panel-heading" role="tab" id="heading2">
-											<h4 class="panel-title">
-												<a class="collapsed" data-toggle="collapse"
-													data-parent="#accordion" href="#collapse2"
-													aria-expanded="false" aria-controls="collapse2">테스트 </a>
-											</h4>
-										</div>
-										<div id="collapse2" class="panel-collapse collapse"
-											role="tabpanel" aria-labelledby="heading2">
-											<div class="panel-body">
-												<p>
-													Far far away, behind the word <strong>mountains</strong>,
-													far from the countries Vokalia and Consonantia, there live
-													the blind texts. Separated they live in Bookmarksgrove
-													right at the coast of the Semantics, a large language
-													ocean.
-												</p>
-											</div>
-										</div>
-									</div>
-
-
-
-									<div class="panel panel-default">
-										<div class="panel-heading" role="tab" id="heading3">
-											<h4 class="panel-title">
-												<a class="collapsed" data-toggle="collapse"
-													data-parent="#accordion" href="#collapse3"
-													aria-expanded="false" aria-controls="collapse3">숫자 테스트
-												</a>
-											</h4>
-										</div>
-										<div id="collapse3" class="panel-collapse collapse"
-											role="tabpanel" aria-labelledby="heading3">
-											<div class="panel-body">
-												<p>
-													Far far away, behind the word <strong>mountains</strong>,
-													far from the countries Vokalia and Consonantia, there live
-													the blind texts. Separated they live in Bookmarksgrove
-													right at the coast of the Semantics, a large language
-													ocean.
-												</p>
-											</div>
-										</div>
-									</div>
-
-
-
-
-									<div class="panel panel-default">
-										<div class="panel-heading" role="tab" id="headingFive">
-											<h4 class="panel-title">
-												<a class="collapsed" data-toggle="collapse"
-													data-parent="#accordion" href="#collapseFive"
-													aria-expanded="false" aria-controls="collapseFive">My
-													Specialties </a>
-											</h4>
-										</div>
-										<div id="collapseFive" class="panel-collapse collapse"
-											role="tabpanel" aria-labelledby="headingFive">
-											<div class="panel-body">
-												<p>
-													Far far away, behind the word <strong>mountains</strong>,
-													far from the countries Vokalia and Consonantia, there live
-													the blind texts. Separated they live in Bookmarksgrove
-													right at the coast of the Semantics, a large language
-													ocean.
-												</p>
-											</div>
-										</div>
-									</div>
-
-
-
-									<div class="panel panel-default">
-										<div class="panel-heading" role="tab" id="heading6">
-											<h4 class="panel-title">
-												<a class="collapsed" data-toggle="collapse"
-													data-parent="#accordion" href="#collapse6"
-													aria-expanded="false" aria-controls="collapse6">zzz </a>
-											</h4>
-										</div>
-										<div id="collapse6" class="panel-collapse collapse"
-											role="tabpanel" aria-labelledby="heading6">
-											<div class="panel-body">
-												<p>
-													Far far away, behind the word <strong>mountains</strong>,
-													far from the countries Vokalia and Consonantia, there live
-													the blind texts. Separated they live in Bookmarksgrove
-													right at the coast of the Semantics, a large language
-													ocean.
-												</p>
-											</div>
-										</div>
-									</div>
 								</div>
 							</div>
 						</div>
@@ -460,7 +372,9 @@
 						<div class="copyright-text">
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
 							Copyright &copy;
-							<script>document.write(new Date().getFullYear());</script>
+							<script>
+								document.write(new Date().getFullYear());
+							</script>
 							All rights reserved | This template is made with <i
 								class="fa fa-heart-o" aria-hidden="true"></i> by <a
 								href="https://colorlib.com" target="_blank">Colorlib</a>

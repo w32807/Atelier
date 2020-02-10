@@ -17,7 +17,7 @@
 	
 	<insert id="setATRegistUserData" parameterType="com.atelier.dto.AG_Dto">
 		INSERT INTO AG VALUES
-		(#{ag_at_name},#{ag_phone},#{ag_id},#{ag_snsaddr},
+		(#{ag_id},#{ag_at_name},#{ag_phone},#{ag_snsaddr},
 		#{ag_cate1},#{ag_cate2},#{ag_cate3})
 	</insert>
     
@@ -76,6 +76,24 @@
    	  SELECT * FROM POLIST WHERE PO_STATE = #{po_state} AND PO_AT_NAME = #{po_at_name}
    </select>
    
+
+
+   <select id="getATRegistUserData" resultType="com.atelier.dto.AG_Dto">
+	   SELECT AG_ID, AG_AT_NAME, AG_PHONE, AG_SNSADDR, AG_CATE1, AG_CATE2, AG_CATE3 
+	   FROM AG
+	</select>
+	
+	<select id="getATRegistMember" resultType="com.atelier.dto.AG_Dto">
+	   SELECT *
+	   FROM AG
+	   WHERE AG_ID = #{id} 
+	</select>
+    
+    <delete id="deleteAGRequest" >
+	   DELETE FROM AG
+	   WHERE AG_ID = #{id}
+	</delete>
+
   
    
 </mapper>
