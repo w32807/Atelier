@@ -20,12 +20,12 @@
 	</select>
 	 -->
 	<update id="memberUpdate" parameterType="com.atelier.dto.CM_Dto">
-		UPDATE M 
-		SET CM_ID=#{cm_id},CM_PWD=#{cm_pwd},CM_NAME=#{cm_name},CM_NICK=#{cm_nick},CM_PHONE=#{cm_phone},CMADDR=#{cm_addr},CMADDR2=#{cm_addr2},CM_STATE=#{cm_state},
-							CM_PFPHOTO=#{CM_PFPHOTO}
+		UPDATE COMMON_MEMBER 
+		SET CM_NAME=#{cm_name},CM_NICK=#{cm_nick},CM_PHONE=#{cm_phone},CM_ADDR=#{cm_addr},CM_ADDR2=#{cm_addr2} 
 		WHERE CM_ID=#{cm_id}
 	</update>
 	
+	<!-- 아이디 유효성 검사 -->
 	<select id="checkOverId" parameterType="String" resultType="Integer">
 		select count(*) from COMMON_MEMBER WHERE CM_ID=#{CM_ID}
 	</select>
@@ -36,4 +36,29 @@
 		SET CM_PWD=#{cm_pwd}
 		WHERE CM_ID=#{cm_id}
 	</update>
+	
+	<!-- 프로필 사진 저장 -->
+	<insert id="pfPhoto" parameterType="String">
+		UPDATE COMMON_MEMBER SET CM_PFPHOTO=#{profileName} WHERE CM_ID=#{profileName}
+	</insert>
+	
+	<!-- 아이디 유효성 검사 -->
+	<select id="checkRegistOverllap" parameterType="String" resultType="Integer">
+		select count(*) from AG WHERE AG_ID = #{ID}
+	</select>
+	
+	<select id="getproduct_AllList" resultType="com.atelier.dto.PD_productDto">
+		SELECT * FROM PD WHERE PD_REGIST='T'
+	</select>
+	
+	<select id="getPi_oriName" parameterType="Integer" resultType="String">
+		SELECT PI_ORINAME FROM PI WHERE PI_PD_CODE = #{pd_code}
+	</select>
+	
+	<select id="getProdList" parameterType="String" resultType="com.atelier.dto.PD_productDto">
+		SELECT * FROM PD WHERE PD_REGIST='T' AND PD_CATE = #{pd_cate}
+	</select>
+	
+	
+	
 </mapper>

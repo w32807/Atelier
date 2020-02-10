@@ -1,6 +1,9 @@
 package com.atelier.dao;
 
+import java.util.List;
+
 import com.atelier.dto.CM_Dto;
+import com.atelier.dto.PD_productDto;
 
 
 
@@ -23,4 +26,10 @@ public interface CM_Dao {
 	public boolean pfPhoto(String profileName);
 	
 	public int checkRegistOverllap(String id);
+
+	public List<PD_productDto> getproduct_AllList();
+
+	public String getPi_oriName(int pd_code);
+
+	public List<PD_productDto> getProdList(String pd_cate);
 }

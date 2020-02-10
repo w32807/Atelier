@@ -3,8 +3,12 @@
 <mapper namespace="com.atelier.dao.CO_Dao">
 	
 <select id="getNoticeList" resultType="com.atelier.dto.CO_NoticeDto">
+<![CDATA[
 	SELECT nt_num, nt_title, nt_id, nt_count
-	FROM NT
+	FROM NTLIST
+	WHERE RONUM>=#{pageNum}*10-9
+	AND RONUM<=#{pageNum}*10
+]]>
 </select>
 
 <select id="getNoticeContents" parameterType="Integer" resultType="com.atelier.dto.CO_NoticeDto">
@@ -12,5 +16,10 @@
 	FROM NT
 	WHERE nt_num = #{nt_num}
 </select>
+
+	<select id="getBoardCount" resultType="Integer" >
+			SELECT COUNT(*) FROM NTLIST
+	</select>
+
 
 </mapper>

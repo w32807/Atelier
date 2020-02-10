@@ -267,21 +267,18 @@
 								<hr>
 							</h2>
 						</div>
-<<<<<<< HEAD
 						<form action="chgOrderList" method="get" id="orderStateFrm">
 							<select id="selectBox" name="orderState"
 								style="margin-left: 1100px; border-radius: 10px; width: 100px; height: 35px; padding-left: 8px; font-size: 14px; border: 1px solid #A09182; color: white; background-color: #A09182;">
 								<option  value="before">배송전</option>
 								<option  value="being">배송중</option>
 								<option  value="after">배송 완료</option>
-=======
 						<form id="orderStateFrm">
 							<select id="selectBox"
 								style="margin-left: 1100px; border-radius: 10px; width: 100px; height: 35px; padding-left: 8px; font-size: 14px; border: 1px solid #A09182; color: white; background-color: #A09182;">
 								<option value="before">배송전</option>
 								<option value="being">배송중</option>
 								<option value="after">배송 완료</option>
->>>>>>> branch 'master' of https://github.com/w32807/Atelier.git
 							</select>
 						</form>
 					</div>
@@ -498,7 +495,6 @@
 		}
 	});
 	
-<<<<<<< HEAD
 	 $('#selectBox').change(function() {
 		 var value = document.getElementById('selectBox').value;
 		 console.log(value);
@@ -506,182 +502,7 @@
 		 
 	 });
 	
-	/* 
- 	$(document).ready(function(){
-		  $('#selectBox').change(function() {
-			  
-			  var value = document.getElementById('selectBox').value;
-				 //this.value;
-				var orderStateFrm = $("#orderStateFrm").serializeObject();
-				orderStateFrm.orderState = value;
-				console.log(orderStateFrm);
-			
-				  $.ajax({
-		              url: "chgOrderList",
-		              type: "post",
-		              data: orderStateFrm,
-		              dataType: "json",
-		              success: function(data) {
-		            	 var leftPoDtoList ='';
-		            	 var rightPoDtoList ='';
-		            	 var dpoDtoList = data.poDtoList;
-		            	 console.log(dpoDtoList);
-		            	 
-					            	 for(var i = 0; i<1; i+=2){
-					            		 
-					            		 leftPoDtoList +=	'<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft"'
-																	+'style="margin-bottom: 70px;">'
-																+'<label>'
-																	+'<div class="colorlib-icon" style="width: 130px; height: 130px;">'
-																		+'<i class="icon-tag"></i>'
-																	+'</div>'
-																	+'<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; position: absolute;"'+'>'
-																		+'<h3 style="display: inline-block; font-size: 18px;"><b>'+dpoDtoList[i].po_state+'</b></h3>'	
-																		+'<input type="checkbox" name="po_num" value="'+dpoDtoList[i].po_num+'"><br>'
-																		+'<b>상품명</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].pd_name+'</span><br>'
-																		+'<b>주문자</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].cm_name+'</span><br>'
-																		+'<b>옵션</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].pd_option+'</span><br>'
-																		+'<b>배송지</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].po_addr+'</span><br>'
-																	+'</div>'
-																	+'<div class="colorlib-text" style="padding: 40px 0 0 350px; font-size: 15px; font-weight: 400;">'
-																		+'<b>주문 날짜</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].po_date+'</span><br>'
-																		+'<b>수량</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].po_count+'</span><br>'
-																		+'<b>총 가격</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].po_count*dpoDtoList[i].po_price+'&#8361;</span><br>'
-																	+'</div>'
-																+'</label>'	
-															+'</div>'
-															
-					            	 }
-														
-							     	 for(var i = 1; i <3; i+=2){
-		            
-							     		 
-					            		 rightPoDtoList +=	'<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft"'
-													+'style="margin-bottom: 70px;">'
-													+'<label>'
-														+'<div class="colorlib-icon" style="width: 130px; height: 130px;">'
-															+'<i class="icon-tag"></i>'
-														+'</div>'
-														+'<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; position: absolute;"'+'>'
-															+'<h3 style="display: inline-block; font-size: 18px;"><b>'+dpoDtoList[i].po_state+'</b></h3>'	
-															+'<input type="checkbox" name="po_num" value="'+dpoDtoList[i].po_num+'"><br>'
-															+'<b>상품명</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].pd_name+'</span><br>'
-															+'<b>주문자</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].cm_name+'</span><br>'
-															+'<b>옵션</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].pd_option+'</span><br>'
-															+'<b>배송지</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].po_addr+'</span><br>'
-														+'</div>'
-														+'<div class="colorlib-text" style="padding: 40px 0 0 350px; font-size: 15px; font-weight: 400;">'
-															+'<b>주문 날짜</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].po_date+'</span><br>'
-															+'<b>수량</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].po_count+'</span><br>'
-															+'<b>총 가격</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].po_count*dpoDtoList[i].po_price+'&#8361;</span><br>'
-														+'</div>'
-													+'</label>'	
-												+'</div>'
-											
-															
-															
-							     	 }
-							     	 
-							     
-=======
 	
-	
- 	$(document).ready(function(){
-		  $('#selectBox').change(function() {
-			  
-			  var value = document.getElementById('selectBox').value;
-				 //this.value;
-				var orderStateFrm = $("#orderStateFrm").serializeObject();
-				orderStateFrm.orderState = value;
-				console.log(orderStateFrm);
-			
-				  $.ajax({
-		              url: "chgOrderList",
-		              type: "post",
-		              data: orderStateFrm,
-		              dataType: "json",
-		              success: function(data) {
-		            	 var leftPoDtoList ='';
-		            	 var rightPoDtoList ='';
-		            	 var dpoDtoList = data.poDtoList;
-		            	 console.log(dpoDtoList);
-		            	 
-					            	 for(var i = 0; i<dpoDtoList.length; i+=2){
-					            		 
-					            		 leftPoDtoList +=	'<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft"'
-																	+'style="margin-bottom: 70px;">'
-																+'<label>'
-																	+'<div class="colorlib-icon" style="width: 130px; height: 130px;">'
-																		+'<i class="icon-tag"></i>'
-																	+'</div>'
-																	+'<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; position: absolute;'+'>'
-																		+'<h3 style="display: inline-block; font-size: 18px;"><b>'+dpoDtoList[i].po_state+'</b></h3>'	
-																		+'<input type="checkbox" name="po_num" value="'+dpoDtoList[i].po_num+'"><br>'
-																		+'<b>상품명</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].pd_name+'</span><br>'
-																		+'<b>주문자</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].cm_name+'</span><br>'
-																		+'<b>옵션</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].pd_option+'</span><br>'
-																		+'<b>배송지</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].po_addr+'</span><br>'
-																	+'</div>'
-																	+'<div class="colorlib-text" style="padding: 40px 0 0 350px; font-size: 15px; font-weight: 400;">'
-																		+'<b>주문 날짜</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].po_date+'</span><br>'
-																		+'<b>수량</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].po_count+'</span><br>'
-																		+'<b>총 가격</b><span>&nbsp;&nbsp;&nbsp;'+dpoDtoList[i].po_count*dpoDtoList[i].po_price+'&#8361;</span><br>'
-																	+'</div>'
-																+'</label>'	
-															+'</div>'
-															
-					            	 }
-														
-							     	 for(var i = 1; i <dpoDtoList.length; i+=2){
-		            
-							     		 
-					            		 rightPoDtoList +=	'<div class="colorlib-feature animate-box"'+'data-animate-effect="fadeInLeft"'
-																	+'style="margin-bottom: 70px;">'
-																+'<label>'
-																	+'<div class="colorlib-icon"style="width: 130px; height: 130px;">'
-																		+'<i class="icon-tag"></i>'
-																	+'</div>'
-																	+'<div class="colorlib-text" style="padding: 0 0 0 150px; +font-size: 15px; font-weight: 400; position: absolute;"'+'>'
-																		+'<h3 style="display: inline-block; font-size: 18px;"><b>'+ dpoDtoList[i].po_state+'</b></h3>'	
-																		+'<input type="checkbox" name="po_num" value="'+ dpoDtoList[i].po_num+'"><br>'
-																		+'<b>상품명</b><span>&nbsp;&nbsp;&nbsp;'+ dpoDtoList[i].pd_name+'</span><br>'
-																		+'<b>주문자</b><span>&nbsp;&nbsp;&nbsp;'+ dpoDtoList[i].cm_name+'</span><br>'
-																		+'<b>옵션</b><span>&nbsp;&nbsp;&nbsp;'+ dpoDtoList[i].pd_option+ '</span><br>'
-																		+'<b>배송지</b><span>&nbsp;&nbsp;&nbsp;'+ dpoDtoList[i].po_addr+ '</span><br>'
-																	+'</div>'
-																	+'<div class="colorlib-text" style="padding: 40px 0 0 350px; font-size: 15px; font-weight: 400;">'
-																		+'<b>주문 날짜</b><span>&nbsp;&nbsp;&nbsp;'+ dpoDtoList[i].po_date+'</span><br>'
-																		+'<b>수량</b><span>&nbsp;&nbsp;&nbsp;'+ dpoDtoList[i].po_count+ '</span><br>'
-																		+'<b>총 가격</b><span>&nbsp;&nbsp;&nbsp;'+ dpoDtoList[i].po_count*dpoDtoList[i].po_price+ '&#8361;</span><br>'
-																	+'</div>'
-																+'</label>'	
-															+'</div>'
-		            		 
-							     	 }
-							     	 
-							    
->>>>>>> branch 'master' of https://github.com/w32807/Atelier.git
-							     	console.log(leftPoDtoList);
-							     	console.log(rightPoDtoList);
-							
-							     	$('#leftrow').html(leftPoDtoList);
-							     	$('#rightrow').html(rightPoDtoList);
-		               
-		            },
-		            error: function(error) {
-		            }
-			
-				
-				});
-					
-		});
-			
-	});
-<<<<<<< HEAD
-	 */
-=======
-	
->>>>>>> branch 'master' of https://github.com/w32807/Atelier.git
 	</script>
 </body>
 </html>

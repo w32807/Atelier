@@ -135,60 +135,70 @@ public class MainController {
 	//Atelier Home
 
 
-	//제품전체보기
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 상품 목록 전체 보기
+	 * 작성자: JWJ
+	 * 작성일: 2020.02.10
+	 -----------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "prodList_All", method = RequestMethod.GET)
-	public String product_All(Locale locale, Model model) {
-
-		return "prodList_All";
+	public ModelAndView product_All(Locale locale, Model model) {
+		mav = mServ.getproduct_AllList();
+		
+		return mav;
 	}
-	//의류보기
-	@RequestMapping(value = "prodList_Clo", method = RequestMethod.GET)
-	public String product_Clo(Locale locale, Model model) {
+	
 
-		return "prodList_Clo";
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 상품별 목록 보기
+	 * 작성자: JWJ
+	 * 작성일: 2020.02.10
+	 -----------------------------------------------------------------------------------------*/
+	@RequestMapping(value = {"prodList_Clo","prodList_Bag","prodList_shoes","prodList_Wallet","prodList_Belt"
+			,"prodList_Gloves","prodList_House","prodList_Etc"}, method = RequestMethod.GET)
+	public ModelAndView product_Clo(String pd_cate) {
+		mav = mServ.getProdList(pd_cate);
+		
+		return mav;
 	}
-	//가방보기
-	@RequestMapping(value = "prodList_Bag", method = RequestMethod.GET)
-	public String prodList_Bag(Locale locale, Model model) {
 
-		return "prodList_Bag";
-	}
-	//신발보기
-	@RequestMapping(value = "prodList_shoes", method = RequestMethod.GET)
-	public String product_shoes(Locale locale, Model model) {
-
-		return "prodList_shoes";
-	}
-	//지갑보기
-	@RequestMapping(value = "prodList_Wallet", method = RequestMethod.GET)
-	public String product_Wallet(Locale locale, Model model) {
-
-		return "prodList_Wallet";
-	}
-	//벨트보기
-	@RequestMapping(value = "prodList_Belt", method = RequestMethod.GET)
-	public String product_Belt(Locale locale, Model model) {
-
-		return "prodList_Belt";
-	}
-	//장갑보기
-	@RequestMapping(value = "prodList_Gloves", method = RequestMethod.GET)
-	public String product_Gloves(Locale locale, Model model) {
-
-		return "prodList_Gloves";
-	}
-	//가구보기
-	@RequestMapping(value = "prodList_House", method = RequestMethod.GET)
-	public String product_House(Locale locale, Model model) {
-
-		return "prodList_House";
-	}
-	//기타보기
-	@RequestMapping(value = "prodList_Etc", method = RequestMethod.GET)
-	public String product_Etc(Locale locale, Model model) {
-
-		return "prodList_Etc";
-	}
+	/*
+	 * //가방보기
+	 * 
+	 * @RequestMapping(value = "prodList_Bag", method = RequestMethod.GET) public
+	 * String prodList_Bag(Locale locale, Model model) {
+	 * 
+	 * return "prodList_Bag"; } //신발보기
+	 * 
+	 * @RequestMapping(value = "prodList_shoes", method = RequestMethod.GET) public
+	 * String product_shoes(Locale locale, Model model) {
+	 * 
+	 * return "prodList_shoes"; } //지갑보기
+	 * 
+	 * @RequestMapping(value = "prodList_Wallet", method = RequestMethod.GET) public
+	 * String product_Wallet(Locale locale, Model model) {
+	 * 
+	 * return "prodList_Wallet"; } //벨트보기
+	 * 
+	 * @RequestMapping(value = "prodList_Belt", method = RequestMethod.GET) public
+	 * String product_Belt(Locale locale, Model model) {
+	 * 
+	 * return "prodList_Belt"; } //장갑보기
+	 * 
+	 * @RequestMapping(value = "prodList_Gloves", method = RequestMethod.GET) public
+	 * String product_Gloves(Locale locale, Model model) {
+	 * 
+	 * return "prodList_Gloves"; } //가구보기
+	 * 
+	 * @RequestMapping(value = "prodList_House", method = RequestMethod.GET) public
+	 * String product_House(Locale locale, Model model) {
+	 * 
+	 * return "prodList_House"; } //기타보기
+	 * 
+	 * @RequestMapping(value = "prodList_Etc", method = RequestMethod.GET) public
+	 * String product_Etc(Locale locale, Model model) {
+	 * 
+	 * return "prodList_Etc"; }
+	 */
 	//상품상세보기
 	@RequestMapping(value = "prodDetail", method = RequestMethod.GET)
 	public String prodDetail(Locale locale, Model model) {

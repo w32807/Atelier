@@ -130,14 +130,14 @@
                         <li class="active">
                          -->
                         <li><a href="prodList_All">전체 보기</a></li>
-                        <li><a href="prodList_Clo">의류</a></li>
-                        <li><a href="prodList_Bag">가방</a></li>
-                        <li><a href="prodList_shoes">신발</a></li>
-                        <li><a href="prodList_Wallet">지갑</a></li>
-                        <li><a href="prodList_Belt">벨트</a></li>
-                        <li><a href="prodList_Gloves">장갑</a></li>
-                        <li><a href="prodList_House">가구</a></li>
-                        <li><a href="prodList_Etc">기타 악세사리</a></li>
+                        <li><a href="prodList_Clo?pd_cate=의류">의류</a></li>
+                        <li><a href="prodList_Bag?pd_cate=가방">가방</a></li>
+                        <li><a href="prodList_shoes?pd_cate=신발">신발</a></li>
+                        <li><a href="prodList_Wallet?pd_cate=지갑">지갑</a></li>
+                        <li><a href="prodList_Belt?pd_cate=벨트">벨트</a></li>
+                        <li><a href="prodList_Gloves?pd_cate=장갑">장갑</a></li>
+                        <li><a href="prodList_House?pd_cate=가구">가구</a></li>
+                        <li><a href="prodList_Etc?pd_cate=기타 악세사리">기타 악세사리</a></li>
                     </ul>
                 </nav>
                 <div id="mobile-menu-wrap"></div>
@@ -173,21 +173,21 @@
                         <div class="fw_filter_prod">
                             <div class="filter_prod">
                                 <label for="filter_men">
-                                    남성용
+                            		        남성용
                                     <input type="checkbox" id="category_filter">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                             <div class="filter_prod">
                                 <label for="filter_women">
-                                    여성용
+                             		       여성용
                                     <input type="checkbox" id="category_filter">
                                     <span class="checkmark"></span>
                                 </label>
                             </div>
                             <div class="filter_prod">
                                 <label for="filter_unisex">
-                                    남녀 공용
+                        		            남녀 공용
                                     <input type="checkbox" id="category_filter">
                                     <span class="checkmark"></span>
                                 </label>
@@ -257,10 +257,19 @@
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="product-list">
                         <div class="row">
+                        
+                        
+                        <c:forEach var="pdDto" items="${pdList}" varStatus="status">
+                        	<c:set var="imgOriName" value="${pdDto.imgOriName}" />
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
                                     <div class="pi-pic">
-                                        <img src="./resources/main/img/products/product-1.jpg" alt="">
+                                    		<c:if test='${imgOriName eq null}'>
+                                        		<img src="./resources/main/img/products/null.jpg" alt="">
+                                            </c:if>
+                                            <c:if test='${imgOriName ne null}'>
+                                            	<img src="./resources/main/img/products/${pdDto.imgOriName}" alt="">
+                                            </c:if>
                                         <div class="sale pp-sale">Sale</div>
                                         <div class="icon">
                                             <i class="icon_heart_alt"></i>
@@ -273,218 +282,18 @@
                                         <!--  상품리스트 -->
                                     </div>
                                     <div class="pi-text">
-                                        <div class="catagory-name">Towel</div>
+                                        <div class="catagory-name">${pdDto.pd_cate}</div>
                                         <a href="prodDetail">
-                                            <h5>Pure Pineapple</h5>
+                                            <h5>${pdDto.pd_name}</h5>
                                         </a>
                                         <div class="product-price">
-                                            &#8361;14000
-                                            <span>&#8361;35000</span>
+                                           &#8361;${pdDto.pd_price}
+                                            <span>&#8361;${pdDto.pd_price* 1.5}</span>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="./resources/main/img/products/product-2.jpg" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Coat</div>
-                                        <a href="prodDetail">
-                                            <h5>Guangzhou sweater</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            &#8361;13000
-                                            <span>&#8361;35000</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="./resources/main/img/products/product-3.jpg" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Shoes</div>
-                                        <a href="prodDetail">
-                                            <h5>Guangzhou sweater</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            &#8361;30000
-                                            <span>&#8361;35000</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="./resources/main/img/products/product-4.jpg" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Coat</div>
-                                        <a href="prodDetail">
-                                            <h5>Microfiber Wool Scarf</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            &#8361;35000
-                                            <span>&#8361;64000</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="./resources/main/img/products/product-5.jpg" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Shoes</div>
-                                        <a href="prodDetail">
-                                            <h5>Men's Painted Hat</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            &#8361;44000
-                                            <span>&#8361;35000</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="./resources/main/img/products/product-6.jpg" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Shoes</div>
-                                        <a href="prodDetail">
-                                            <h5>Converse Shoes</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $34.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="./resources/main/img/products/product-7.jpg" alt="">
-                                        <div class="sale pp-sale">Sale</div>
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Towel</div>
-                                        <a href="prodDetail">
-                                            <h5>Pure Pineapple</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $64.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="./resources/main/img/products/product-8.jpg" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Coat</div>
-                                        <a href="prodDetail">
-                                            <h5>2 Layer Windbreaker</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $44.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <div class="product-item">
-                                    <div class="pi-pic">
-                                        <img src="./resources/main/img/products/product-9.jpg" alt="">
-                                        <div class="icon">
-                                            <i class="icon_heart_alt"></i>
-                                        </div>
-                                        <ul>
-                                            <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                            <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="pi-text">
-                                        <div class="catagory-name">Shoes</div>
-                                        <a href="prodDetail">
-                                            <h5>Converse Shoes</h5>
-                                        </a>
-                                        <div class="product-price">
-                                            $34.00
-                                            <span>$35.00</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </c:forEach>
 
                         </div>
                     </div>

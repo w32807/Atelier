@@ -1,5 +1,8 @@
 package com.atelier.main.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -11,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atelier.dao.CM_Dao;
 import com.atelier.dto.CM_Dto;
+import com.atelier.dto.PD_productDto;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -137,4 +141,98 @@ public class CM_Service {
 		return mav;
 	}
 
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 상품 목록 전체 보기
+	 * 작성자: JWJ
+	 * 작성일: 2020.02.10
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView getproduct_AllList() {
+		mav = new ModelAndView();
+		List<PD_productDto> pdList = cm_Dao.getproduct_AllList();
+		//List<String> imgName = new ArrayList<String>();
+		for(int i = 0; i < pdList.size(); i++) {
+			int pd_code = pdList.get(i).getPd_code();
+			String pi_oriName = cm_Dao.getPi_oriName(pd_code);
+			pdList.get(i).setImgOriName(pi_oriName+".jpg");
+		}
+		mav.addObject("pdList",pdList);
+		mav.setViewName("prodList_All");
+		
+		
+		return mav;
+	}
+
+
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 상품별 목록 보기
+	 * 작성자: JWJ
+	 * 작성일: 2020.02.10
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView getProdList(String pd_cate) {
+		mav = new ModelAndView();
+		String view = null;
+		List<PD_productDto> pdList = cm_Dao.getProdList(pd_cate);
+		
+		switch (pd_cate) {
+		case "의류":
+			view = "prodList_Clo";
+			break;
+		case "가방":
+			view = "prodList_Bag";	
+				break;
+		case "신발":
+			view = "prodList_shoes";
+			break;
+		case "지갑":
+			view = "prodList_Wallet";
+			break;
+		case "벨트":
+			view = "prodList_Belt";
+			break;
+		case "장갑":
+			view = "prodList_Gloves";
+			break;
+		case "가구":
+			view = "prodList_House";
+			break;
+		case "기타 악세사리":
+			view = "prodList_Etc";
+			break;
+		}
+		
+		mav.addObject("pdList",pdList);
+		mav.setViewName(view);
+		return mav;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
