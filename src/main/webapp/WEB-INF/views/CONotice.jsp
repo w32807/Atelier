@@ -77,14 +77,14 @@ nav>div a.nav-item.nav-link, nav>div a.nav-item.nav-link.active {
 	border-radius: 0;
 }
 
-nav>div a.nav-item.nav-link.active:after {
+/* nav>div a.nav-item.nav-link.active:after {
 	content: "";
 	position: relative;
 	bottom: -60px;
 	left: -10%;
 	border: 15px solid transparent;
 	border-top-color: #e74c3c;
-}
+} */
 
 .tab-content {
 	background: #fdfdfd;
@@ -106,8 +106,9 @@ nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
 .red {
 	color: red;
 }
-</style>
 
+
+</style>
 
 
 </head>
@@ -455,9 +456,8 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 					</div>
 
 					<!-- Contact Us -->
-					<div class="tab-pane fade" id="nav-contact" role="tabpanel"
+					<div  class="tab-pane fade" id="nav-contact" role="tabpanel"
 						aria-labelledby="nav-contact-tab">
-
 
 						<!-- Map Section Begin -->
 						<div class="map spad">

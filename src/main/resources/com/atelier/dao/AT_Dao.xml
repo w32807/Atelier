@@ -56,4 +56,26 @@
       SELECT * FROM SUPPORT_MG ORDER BY SM_NUM DESC
    </select>   
     
+     <delete id="deleteImg" parameterType="Integer">
+   	  DELETE FROM PI WHERE PI_PD_CODE = #{currentPd_code}
+   </delete>
+    
+   <delete id="deleteProd" parameterType="Integer">
+      DELETE FROM PD WHERE PD_CODE = #{pd_code}
+   </delete>
+   
+   <delete id="chgDeliveryState" parameterType="Integer">
+   	  UPDATE PO SET PO_STATE = 'being' WHERE PO_NUM = #{PO_NUM}
+   </delete>
+   
+   <select id="getAM_Name" parameterType="String" resultType="String">
+   	  SELECT AM_NAME FROM AM WHERE AM_ID = #{aT_id}	
+   </select>
+   
+   <select id="getATOrderList" parameterType="com.atelier.vo.PO_Vo" resultType="com.atelier.vo.PO_Vo">
+   	  SELECT * FROM POLIST WHERE PO_STATE = #{po_state} AND PO_AT_NAME = #{po_at_name}
+   </select>
+   
+  
+   
 </mapper>
