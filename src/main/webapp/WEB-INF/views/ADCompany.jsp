@@ -199,7 +199,7 @@
 		                    <td>${adcList.RM_COLOR}</td>
 		                    <td>${adcList.RM_PRICE}</td>
 		                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm" onclick="location.href='ADCompanyFix?RM_NUM=${adcList.RM_NUM}'">Update</button></td> 
-		                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm">Delete</button></td>                         
+		                    <td class="text-center"><button type="button" id="PopoverCustomT-1" class="btn btn-info btn-sm" onclick="location.href='ADCompanyDel?RM_NUM=${adcList.RM_NUM}'">Delete</button></td>                         
 	                   </tr>
                     </c:forEach>
                 </tbody>

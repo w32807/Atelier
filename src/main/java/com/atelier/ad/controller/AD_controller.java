@@ -251,11 +251,24 @@ public class AD_controller {
 	  * 작성자: JSH
 	  * 작성일 : 2019.02.10
 	  -----------------------------------------------------------------------------------*/
-		@PostMapping("MaterialFix")
-		public ModelAndView MaterialFix(AD_MaterialDto material, RedirectAttributes rttr) {//form에서 넘겨주는 name과 controller의 매개변수 명과 같아야 한다.
-			log.info("원자재 수정 컨트롤러 시작");
-			mav = aServ.MaterialFix(material, rttr);
-			
-			return mav;
-		}
+	@PostMapping("MaterialFix")
+	public ModelAndView MaterialFix(AD_MaterialDto material, RedirectAttributes rttr) {//form에서 넘겨주는 name과 controller의 매개변수 명과 같아야 한다.
+		log.info("원자재 수정 컨트롤러 시작");
+		mav = aServ.MaterialFix(material, rttr);
+		
+		return mav;
+	}
+		
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 원자재 삭제
+	  * 작성자: JSH
+	  * 작성일 : 2019.02.10
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ADCompanyDel")
+	public ModelAndView ADCompanyDel(Integer RM_NUM) {
+		log.info("원자재 삭제 컨트롤러 시작");
+		mav = aServ.MaterialDel(RM_NUM);
+		
+		return mav;
+	}
 }

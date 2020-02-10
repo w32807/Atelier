@@ -32,4 +32,6 @@ public interface AD_Dao {
 	public AD_MaterialDto getADMaterial(Integer RM_NUM);
 
 	public boolean materialFix(AD_MaterialDto material);
+
+	public void delADMaterial(Integer RM_NUM);
 }

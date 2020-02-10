@@ -63,6 +63,10 @@
 		UPDATE RAW_MATERIAL SET RM_TYPE = #{RM_TYPE}, PRM_COMPANY = #{PRM_COMPANY}, RM_COLOR = #{RM_COLOR}, RM_PRICE = #{RM_PRICE}
 		WHERE RM_NUM = #{RM_NUM}
 	</insert>
+	
+	<delete id="delADMaterial" parameterType="com.atelier.dto.AD_MaterialDto">
+		DELETE FROM RAW_MATERIAL WHERE RM_NUM=#{RM_NUM}
+	</delete>
 </mapper>
 
 

@@ -491,4 +491,20 @@ public class AD_Service {
 		mav.setViewName(view);
 		return mav;
 	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 원자재 삭제
+	  * 작성자: JSH
+	  * 작성일 : 2019.02.10
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView MaterialDel(Integer RM_NUM) {
+		mav = new ModelAndView();
+		
+		log.warn("원자재 삭제 서비스 시작");
+
+		aDao.delADMaterial(RM_NUM);
+		mav.setViewName("redirect:ADCompany");
+
+		return mav;
+	}
 }
