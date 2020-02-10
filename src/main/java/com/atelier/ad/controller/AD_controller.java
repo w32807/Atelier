@@ -150,12 +150,7 @@ public class AD_controller {
 		
 		return mav;
 	}
-	
-	@GetMapping("ADMessage")
-	public String goADMessage() {
-		return "ADMessage";
-	}
-	
+
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 공방회원신청서 화면으로 이동
 	  * 작성자: JSG
@@ -233,6 +228,32 @@ public class AD_controller {
 		public ModelAndView goADMessage(String mg_receiver) {
 			
 			mav = aServ.goADMessage(mg_receiver);
+			
+			return mav;
+		}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 원자재 수정 / 기존 데이터 입력
+	  * 작성자: JSH
+	  * 작성일 : 2019.02.10
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ADCompanyFix")
+	public ModelAndView ADCompanyFix(Integer RM_NUM) {//form에서 넘겨주는 name과 controller의 매개변수 명과 같아야 한다.
+		log.info("원자재 수정 컨트롤러 시작");
+		mav = aServ.getADCompanyFix(RM_NUM);
+		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 원자재 수정 / 업데이트
+	  * 작성자: JSH
+	  * 작성일 : 2019.02.10
+	  -----------------------------------------------------------------------------------*/
+		@PostMapping("MaterialFix")
+		public ModelAndView MaterialFix(AD_MaterialDto material, RedirectAttributes rttr) {//form에서 넘겨주는 name과 controller의 매개변수 명과 같아야 한다.
+			log.info("원자재 수정 컨트롤러 시작");
+			mav = aServ.MaterialFix(material, rttr);
 			
 			return mav;
 		}

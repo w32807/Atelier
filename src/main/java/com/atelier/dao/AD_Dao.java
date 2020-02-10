@@ -29,4 +29,7 @@ public interface AD_Dao {
 
 	public List<MG_Dto> getADMessageList(String mg_receiver);
 
+	public AD_MaterialDto getADMaterial(Integer RM_NUM);
+
+	public boolean materialFix(AD_MaterialDto material);
 }

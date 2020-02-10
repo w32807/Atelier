@@ -455,86 +455,53 @@ public class AD_Service {
 		DeleteATMember(id);
 		//return "ADATMemberUp";
 	}
-<<<<<<< HEAD
+	
 	/* ---------------------------------------------------------------------------------
-	  * 기능: 공방 신청서의 항목을 DB에서 불러와 ADATMemeberUp.jsp에 출력
+	  * 기능: 공방신청서(AG) DB에서 항목을 삭제
 	  * 작성자: JSG
 	  * 작성일 : 2019.02.07
 	  -----------------------------------------------------------------------------------*/
-	public ModelAndView getApplicant(AG_Dto agDto) {
+	public void DeleteATMember(String id) {
+		//CM_Dto cmMem = cmDao.getMemberInfo(id);
+		atDao.deleteAGRequest(id);
+		//return "ADATMemberUp";
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 원자재 수정 / 기존 데이터 출력
+	  * 작성자: JSH
+	  * 작성일 : 2019.02.10
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView getADCompanyFix(Integer RM_NUM) {
 		mav = new ModelAndView();
-		List<AG_Dto> AGList = atDao.getATRegistUserData();
+		AD_MaterialDto admDto = aDao.getADMaterial(RM_NUM);
 		
-		mav.addObject("AGList", AGList);
-		mav.setViewName("ADATMemberUp");
+		mav.addObject("admDto", admDto);
+		mav.setViewName("ADCompanyFix");
+		
 		return mav;
 	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 원자재 수정 / 업데이트
+	  * 작성자: JSH
+	  * 작성일 : 2019.02.10
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView MaterialFix(AD_MaterialDto material, RedirectAttributes rttr) {
+		mav = new ModelAndView();
+		String view = null;
+		
+		log.warn("원자재 등록 서비스 시작");
 
-	/* ---------------------------------------------------------------------------------
-	  * 기능: 신청서 항목에서 수락, 거절 버튼 클릭에 따른 분기 처리 
-	  * 작성자: JSG
-	  * 작성일 : 2019.02.07
-	  -----------------------------------------------------------------------------------*/
-	public String ATMemberCheckProc(String check, String id) {
-		// TODO Auto-generated method stub
-		//String s = null;
-		// 수락 버튼을 누르면
-		if(check.equals("true")) {
-			assentATMember(id);
-		}
-		// 거절 버튼을 누르면
-		else {
-			DeleteATMember(id);
-		}
-		
-		return "ADATMemberUp";
-	}
-	
-	/* ---------------------------------------------------------------------------------
-	  * 기능: 공방 수락하여 신청자의 정보를 공방회원 테이블(AM)에 저장 후 신청서 테이블(AG)에서 항목 삭제
-	  * 작성자: JSG
-	  * 작성일 : 2019.02.07
-	  -----------------------------------------------------------------------------------*/
-	public void assentATMember(String id) {
-		CM_Dto cm_Member = cmDao.getMemberInfo(id);
-		AG_Dto ag_Member = atDao.getATRegistMember(id);
-		AM_Dto am_Member = new AM_Dto();
-		
-		am_Member.setAm_id(ag_Member.getAg_id());
-		am_Member.setAm_name(ag_Member.getAg_at_name());
-		am_Member.setAm_phone(ag_Member.getAg_phone());
-		am_Member.setAm_addr(cm_Member.getCm_addr());
-		am_Member.setAm_sns(ag_Member.getAg_snsaddr());
-		am_Member.setAm_cate1(ag_Member.getAg_cate1());
-		am_Member.setAm_cate2(ag_Member.getAg_cate2());
-		am_Member.setAm_cate3(ag_Member.getAg_cate3());
-		
-		amDao.insertNewATMember(am_Member);
-		DeleteATMember(id);
-		//return "ADATMemberUp";
-	}
-	
-	/* ---------------------------------------------------------------------------------
-	  * 기능: 공방신청서(AG) DB에서 항목을 삭제
-	  * 작성자: JSG
-	  * 작성일 : 2019.02.07
-	  -----------------------------------------------------------------------------------*/
-	public void DeleteATMember(String id) {
-		//CM_Dto cmMem = cmDao.getMemberInfo(id);
-		atDao.deleteAGRequest(id);
-		//return "ADATMemberUp";
-	}
-=======
->>>>>>> c9d068156d7df24d6897ba47df64590a5c11e72a
-	
-	/* ---------------------------------------------------------------------------------
-	  * 기능: 공방신청서(AG) DB에서 항목을 삭제
-	  * 작성자: JSG
-	  * 작성일 : 2019.02.07
-	  -----------------------------------------------------------------------------------*/
-	public void DeleteATMember(String id) {
-		//CM_Dto cmMem = cmDao.getMemberInfo(id);
-		atDao.deleteAGRequest(id);
-		//return "ADATMemberUp";
+		try {
+				aDao.materialFix(material);
+				view= "redirect:ADCompany";
+				rttr.addFlashAttribute("check", "원자재가 등록되었습니다.");
+			} catch (Exception e) {
+				view = "redirect:ADCompanyInsert";
+				rttr.addFlashAttribute("check", "fail");
+			}
+		mav.setViewName(view);
+		return mav;
 	}
 }
