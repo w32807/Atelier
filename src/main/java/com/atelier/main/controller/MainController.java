@@ -116,12 +116,15 @@ public class MainController {
 		log.warn(CM_ID);
 		return mServ.userIdCheck(CM_ID);
 	}
-	//장바구니 출력
-	@RequestMapping(value = "/basket", method = RequestMethod.GET)
-	public String basket(Locale locale, Model model) {
 
-		return "basket";
-	}
+	/*
+	 * //장바구니 출력
+	 * 
+	 * @RequestMapping(value = "/basket", method = RequestMethod.GET) public String
+	 * basket(Locale locale, Model model) {
+	 * 
+	 * return "basket"; }
+	 */
 	//HOME
 	//Shop Home
 	@RequestMapping(value = "main", method = RequestMethod.GET)
@@ -216,18 +219,23 @@ public class MainController {
 		return "myInfoUpdate";
 	}
 
-	//공방회원신청
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 공방회원 신청 페이지로 이동
+	 * 작성자: JSG
+	 * 작성일: 2020.02.07
+	 -----------------------------------------------------------------------------------------*/
 	@GetMapping("ATRegist")
-	public String ATRegist() {
-		return "ATRegist";
+	public ModelAndView ATRegist(String id, RedirectAttributes rttr) {
+		mav = new ModelAndView();
+		mav = mServ.registCheck(id, rttr);
+		return mav;
 	}
 
-	//마이페이지의  주문내역에서 취소신청을 눌렀을 때.
-	@GetMapping("orderCancle")
-	public String orderCancle() {
-		return "myOrder";
-	}
-
+	/*
+	 * //마이페이지의 주문내역에서 취소신청을 눌렀을 때.
+	 * 
+	 * @GetMapping("orderCancle") public String orderCancle() { return "myOrder"; }
+	 */
 	//구독 리스트 출력
 	@RequestMapping(value = "mySubscript", method = RequestMethod.GET)
 	public String mySubscript(Locale locale, Model model) {

@@ -67,7 +67,7 @@ public class MP_OrderService {
 		return pagingHtml;
 	}
 
-
+	// 주문내역 조회메소드 기능 ajax
 	public Map<String, List<PO_Dto>> getOrder(PO_Dto poDto) {
 		 log.warn("bb");
 		Map<String, List<PO_Dto>> poMap = null;
@@ -90,7 +90,31 @@ public class MP_OrderService {
 
 	
 
-
+	 /* ---------------------------------------------------------------------------------------
+		 * 기능: 주문내역 취소 메소드 <수정필요>
+		 * 작성자: KBH
+		 * 작성일: 2020.02.07
+		 -----------------------------------------------------------------------------------------*/
+		public ModelAndView orderCancle(String[] prod) {
+			log.warn("st");
+			
+			mav = new ModelAndView();
+			
+			
+			try {
+				for(int i=0; i<prod.length; i++ ) {
+					poDao.orderCancle(prod[i]);
+				}
+				
+				mav.setViewName("myOrder");
+			}catch(Exception e) {
+				e.printStackTrace();
+				log.warn("error");
+			}
+		
+			
+			return mav;
+		}
 	
 }
 

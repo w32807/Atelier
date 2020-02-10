@@ -195,10 +195,10 @@
                         <div class="blog-catagory">
 							<h4>My Menu</h4>
 							<ul>
-								<li><a href="myOrder">주문 내역</a></li>
-								<li><a href="basket">장바구니</a></li>
+								<li><a href="myOrder?po_cm_id=${mb.cm_id}">주문 내역</a></li>
+								<li><a href="basket?bt_cm_id=${mb.cm_id}">장바구니</a></li>
 								<li><a href="mySubscript">구독 리스트</a></li>
-								<li><a href="messager">메세지</a></li>
+								<li><a href="messager?mg_receiver=${mb.cm_id}">메세지</a></li>
 								<li><a href="myInfoUpdate">내 정보 수정</a></li>
 								<li><a href="myChangePwd">비밀번호 변경</a></li>
 								<li><a href="myAdminRQ" onclick="window.open(this.href, '_blank', 'width=655px,height=650px,toolbars=no,scrollbars=no');return false;">관리자에게 문의하기</a>

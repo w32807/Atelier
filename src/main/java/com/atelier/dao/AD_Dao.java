@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.atelier.dto.AD_MaterialDto;
 import com.atelier.dto.FT_FAQDto;
+import com.atelier.dto.MG_Dto;
 
 public interface AD_Dao {
 
@@ -25,5 +26,7 @@ public interface AD_Dao {
 	public List<AD_MaterialDto> getADCompanyList(int adcPageNum);
 
 	public int getADCompanyCount();
+
+	public List<MG_Dto> getADMessageList(String mg_receiver);
 
 }

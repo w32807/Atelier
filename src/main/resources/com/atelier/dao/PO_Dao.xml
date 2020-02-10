@@ -16,4 +16,8 @@
       WHERE PROD_ORDER.PO_CM_ID = #{po_cm_id} AND PROD_ORDER.PO_STATE = #{po_state}
 </select>
 
+<delete id="orderCancle" parameterType="String" >
+	DELETE FROM PROD_ORDER WHERE PO_NUM = #{prod}
+</delete>
+
 </mapper>

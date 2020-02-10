@@ -20,11 +20,17 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atelier.dao.AD_Dao;
+import com.atelier.dao.AM_Dao;
+import com.atelier.dao.AT_Dao;
+import com.atelier.dao.CM_Dao;
 import com.atelier.dao.NT_Dao;
 import com.atelier.dto.AD_MaterialDto;
+import com.atelier.dto.AG_Dto;
+import com.atelier.dto.AM_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.CO_NoticeDto;
 import com.atelier.dto.FT_FAQDto;
+import com.atelier.dto.MG_Dto;
 import com.atelier.util.AD_MaterialPaging;
 import com.atelier.util.FAQPaging;
 import com.atelier.util.NT_Paging;
@@ -44,6 +50,16 @@ public class AD_Service {
 	
 	@Setter(onMethod_ = @Autowired) 
 	private HttpSession session;
+	
+	@Setter(onMethod_ = @Autowired)
+	AT_Dao atDao;
+	
+	@Setter(onMethod_ = @Autowired)
+	CM_Dao cmDao;
+	
+	@Setter(onMethod_ = @Autowired)
+	AM_Dao amDao;
+	
 	
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 공지사항 전체 출력
@@ -368,6 +384,144 @@ public class AD_Service {
 		
 		return pagingHtml;
 	}
+
+	public ModelAndView goADMessage(String mg_receiver) {
+		mav = new ModelAndView();
+
+		String view = null;
+
+		List<MG_Dto> bList = aDao.getADMessageList(mg_receiver);
+		mav.addObject("bList", bList);
+
+		mav.setViewName("ADMessage");
+		
+		return mav;
+	}
 	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방 신청서의 항목을 DB에서 불러와 ADATMemeberUp.jsp에 출력
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView getApplicant(AG_Dto agDto) {
+		mav = new ModelAndView();
+		List<AG_Dto> AGList = atDao.getATRegistUserData();
+		
+		mav.addObject("AGList", AGList);
+		mav.setViewName("ADATMemberUp");
+		return mav;
+	}
+
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 신청서 항목에서 수락, 거절 버튼 클릭에 따른 분기 처리 
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	public String ATMemberCheckProc(String check, String id) {
+		// TODO Auto-generated method stub
+		//String s = null;
+		// 수락 버튼을 누르면
+		if(check.equals("true")) {
+			assentATMember(id);
+		}
+		// 거절 버튼을 누르면
+		else {
+			DeleteATMember(id);
+		}
+		
+		return "ADATMemberUp";
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방 수락하여 신청자의 정보를 공방회원 테이블(AM)에 저장 후 신청서 테이블(AG)에서 항목 삭제
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	public void assentATMember(String id) {
+		CM_Dto cm_Member = cmDao.getMemberInfo(id);
+		AG_Dto ag_Member = atDao.getATRegistMember(id);
+		AM_Dto am_Member = new AM_Dto();
+		
+		am_Member.setAm_id(ag_Member.getAg_id());
+		am_Member.setAm_name(ag_Member.getAg_at_name());
+		am_Member.setAm_phone(ag_Member.getAg_phone());
+		am_Member.setAm_addr(cm_Member.getCm_addr());
+		am_Member.setAm_sns(ag_Member.getAg_snsaddr());
+		am_Member.setAm_cate1(ag_Member.getAg_cate1());
+		am_Member.setAm_cate2(ag_Member.getAg_cate2());
+		am_Member.setAm_cate3(ag_Member.getAg_cate3());
+		
+		amDao.insertNewATMember(am_Member);
+		DeleteATMember(id);
+		//return "ADATMemberUp";
+	}
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방 신청서의 항목을 DB에서 불러와 ADATMemeberUp.jsp에 출력
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView getApplicant(AG_Dto agDto) {
+		mav = new ModelAndView();
+		List<AG_Dto> AGList = atDao.getATRegistUserData();
+		
+		mav.addObject("AGList", AGList);
+		mav.setViewName("ADATMemberUp");
+		return mav;
+	}
+
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 신청서 항목에서 수락, 거절 버튼 클릭에 따른 분기 처리 
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	public String ATMemberCheckProc(String check, String id) {
+		// TODO Auto-generated method stub
+		//String s = null;
+		// 수락 버튼을 누르면
+		if(check.equals("true")) {
+			assentATMember(id);
+		}
+		// 거절 버튼을 누르면
+		else {
+			DeleteATMember(id);
+		}
+		
+		return "ADATMemberUp";
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방 수락하여 신청자의 정보를 공방회원 테이블(AM)에 저장 후 신청서 테이블(AG)에서 항목 삭제
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	public void assentATMember(String id) {
+		CM_Dto cm_Member = cmDao.getMemberInfo(id);
+		AG_Dto ag_Member = atDao.getATRegistMember(id);
+		AM_Dto am_Member = new AM_Dto();
+		
+		am_Member.setAm_id(ag_Member.getAg_id());
+		am_Member.setAm_name(ag_Member.getAg_at_name());
+		am_Member.setAm_phone(ag_Member.getAg_phone());
+		am_Member.setAm_addr(cm_Member.getCm_addr());
+		am_Member.setAm_sns(ag_Member.getAg_snsaddr());
+		am_Member.setAm_cate1(ag_Member.getAg_cate1());
+		am_Member.setAm_cate2(ag_Member.getAg_cate2());
+		am_Member.setAm_cate3(ag_Member.getAg_cate3());
+		
+		amDao.insertNewATMember(am_Member);
+		DeleteATMember(id);
+		//return "ADATMemberUp";
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방신청서(AG) DB에서 항목을 삭제
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	public void DeleteATMember(String id) {
+		//CM_Dto cmMem = cmDao.getMemberInfo(id);
+		atDao.deleteAGRequest(id);
+		//return "ADATMemberUp";
+	}
 	
 }

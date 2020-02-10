@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -247,48 +246,47 @@
 									    <div class="panel-heading" role="tab" id="heading1">
 									        <h4 class="panel-title">
 									            <a class="collapsed"  href="#collapse1" aria-expanded="false" aria-controls="collapse1" style="font-weight: bold;">
-									           <i class="icon_mail_alt"></i> 보낸 사람 : 장원준
-									            </a>
+									           <i class="icon_mail_alt"></i>${mDto.mg_sender}</a>
 									        </h4>
 									    </div>
-									         	<textarea rows="10" cols="45" style="margin-top: 5px; font-size: 15px;resize: none;">안녕하세요. 여기는 장원준씨께 온 쪽지입니다.dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd</textarea>
+									         	<textarea rows="10" cols="45" style="margin-top: 5px; font-size: 15px;resize: none;">${mDto.mg_contents}</textarea>
 									</div>
 											<!-- 여기까지 쪽지 1개 -->
 						
 								
+										<form id="messageFrm" action="messageSendBtn" method="get">
+													
 										<div class="panel panel-default" style="margin-top: 100px;">
 									    <div class="panel-heading" role="tab" id="heading1">
 									        <h4 class="panel-title">
 									            <a class="collapsed"  href="#collapse1" aria-expanded="false" aria-controls="collapse1" style="font-weight: bold;">
-									            보내는 사람 : 김종현
+									            ${mb.cm_id}
 									            </a>
+									           	<input type="hidden" name="mg_sender" value="${mb.cm_id}">
+									           	<input type="hidden" name="mg_num" value="${mDto.mg_num}">
 									        </h4>
 									    </div>
-									    	<form id="messageFrm" action="쪽지를 저장할 컨트롤러 메소드" method="get">
-									     	<textarea id="messageContents" rows="10" cols="45" name="MG_CONTENTS" style="margin-top: 5px; font-size: 15px;resize: none;" placeholder="여기에 내용을 작성 해주세요." ></textarea>
-											<input type="hidden" name="MG_RECEIVER" value="받는 사람 ID"><!-- 송신자의 아이디는 session에 담겨있을테니 여기서 안 보내도 됨. -->
-											</form>								
+									    	
+									     	<textarea id="messageContents" rows="10" cols="45" name="mg_contents" style="margin-top: 5px; font-size: 15px;resize: none;" placeholder="여기에 내용을 작성 해주세요." ></textarea>
+											<input type="hidden" name="mg_receiver" value="${mDto.mg_sender}"><!-- 송신자의 아이디는 session에 담겨있을테니 여기서 안 보내도 됨. -->
+																	
 									</div>
 									
-										<div style="margin-top: 10px;">
+										<div style="margin-top: 10px;"></div>
 										
-										<input id="messageSendBtn" type="button" value="전송" style="float: right; font-size: 15px;">
+										<button><input id="messageSendBtn" type="submit" value="전송" style="float: right; font-size: 15px;"></button>
+										</form>	
 										</div>
 										</div>
-										
-										
+										 </div>	
 								</div>
 							</div>
-						</div>
-						
 	
    <!-- 여기까지 쪽지입니다. -->                        
                             </div>
                    
                     </div>
                 </div>
-            </div>
-        </div>
     </section>
     <!-- Blog Section End -->
 
@@ -405,8 +403,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 								
 				});
 						
+			/* 			
+				
+				$("#messageSendBtn").click(function(){
+					
+					var click = $("#messageSendBtn").serializeObject();
+					
+					console.log(click);
+					
+					$.ajax({
 						
+						url:"messageSendBtn",
+						type:"post",
+						data:click,
+						dataType:"json",
+						success: function(data){
+							console.log(data);
+							var mList = "";
+						}
+					});
+					
+				}); */
+				
 	</script>
+				
 </body>
 
 </html>

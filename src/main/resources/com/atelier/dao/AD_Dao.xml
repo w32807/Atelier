@@ -51,6 +51,10 @@
 		SELECT COUNT(*) FROM RAW_MATERIAL
 	</select>
 	
+	<select id="getADMessageList" parameterType="String" resultType="com.atelier.dto.MG_Dto">
+	SELECT * FROM MESSAGE WHERE MG_RECEIVER=#{mg_receiver} ORDER BY MG_NUM DESC
+	</select>
+	
 </mapper>
 
 
