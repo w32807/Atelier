@@ -216,10 +216,16 @@ public class MainController {
 		return "myInfoUpdate";
 	}
 
-	//공방회원신청
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 공방회원 신청 페이지로 이동
+	 * 작성자: JSG
+	 * 작성일: 2020.02.07
+	 -----------------------------------------------------------------------------------------*/
 	@GetMapping("ATRegist")
-	public String ATRegist() {
-		return "ATRegist";
+	public ModelAndView ATRegist(String id, RedirectAttributes rttr) {
+		mav = new ModelAndView();
+		mav = mServ.registCheck(id, rttr);
+		return mav;
 	}
 
 	//마이페이지의  주문내역에서 취소신청을 눌렀을 때.

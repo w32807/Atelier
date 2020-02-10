@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atelier.ad.service.AD_Service;
 import com.atelier.dto.AD_MaterialDto;
+import com.atelier.dto.AG_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.CO_NoticeDto;
 import com.atelier.dto.FT_FAQDto;
@@ -155,9 +156,28 @@ public class AD_controller {
 		return "ADMessage";
 	}
 	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방회원신청서 화면으로 이동
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
 	@GetMapping("ADATMemberUp")
-	public String goADATMemberUp() {
-		return "ADATMemberUp";
+	public ModelAndView goADATMemberUp(AG_Dto agDto) {
+		mav = aServ.getApplicant(agDto);
+		return mav;
+	}
+	
+	 /* ---------------------------------------------------------------------------------
+	  * 기능: 공방회원신청서 결과 처리
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ATMemberUpCheck")
+	public ModelAndView ATMemberUpCheck(String check, String id) {
+
+		String ADATMemberUp = aServ.ATMemberCheckProc(check, id);
+		mav.setViewName(ADATMemberUp);
+		return mav;
 	}
 	
 	@GetMapping("ADATList")

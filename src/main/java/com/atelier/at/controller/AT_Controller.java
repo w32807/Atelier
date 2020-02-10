@@ -2,7 +2,9 @@ package com.atelier.at.controller;
 
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -24,6 +27,7 @@ import com.atelier.at.service.AT_Service;
 import com.atelier.dto.AG_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
+import com.atelier.dto.SM_Dto;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -89,10 +93,10 @@ public class AT_Controller {
 		return "ATNoticeDetail";
 	}
 	
-	@GetMapping("ATSupportMg")//응원의 메세지로 이동하는 메소드
-	public String goATSupportMg() {
-		return "ATSupportMg";
-	}
+	/*
+	 * @GetMapping("ATSupportMg")//응원의 메세지로 이동하는 메소드 public String goATSupportMg() {
+	 * return "ATSupportMg"; }
+	 */
 	
 	@GetMapping("ATProduct")//판매물품으로 이동하는 메소드
 	public String goATProduct() {
@@ -258,14 +262,17 @@ public class AT_Controller {
 		return view;
 	}
 	
-	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 선택한 상품을 삭제
+	  * 작성자: JWJ
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
 	@PostMapping("prodDelete")//제품 목록 관리에서 여러 상품을 선택하여 삭제를 하기 위한 메소드
-	public String prodDelete(HttpServletRequest request) {
-		//여기의 작업은 service에서  처리해도 됩니다. 일단 써놨습니다.
+	public String prodDelete(HttpServletRequest request,RedirectAttributes rttr) {
 		String[] chkedBoxArr = request.getParameterValues("prod");//체크박스의 값들이 넘어옴
+		String view = atServ.deleteProd(chkedBoxArr,rttr);
 		
-		
-		return "ATProdManage";
+		return view;
 	}
 //	@GetMapping("prodDetail")//제품 목록 관리에서 1개의 상품 상세보기를 위한 메소드
 //	public String goprodDetail(HttpServletRequest request) {
@@ -273,23 +280,31 @@ public class AT_Controller {
 //		//제품관리 페이지에서 하나의 상품의 상세보기를 선택하면, 상품 세부정보 페이지로 이동
 //		return "prodDetail";
 //	}
-	
-	@GetMapping("ATOrderState")//주문 상태 조회 페이지로 넘어가는 메소드
-	public String goATOrderState() {
-		//주문 테이블의 컬럼들을 가져와 ATOrderState.jsp로 가져가서 출력합니다.
+	 /* ---------------------------------------------------------------------------------
+	  * 기능: 주문 상태 조회 페이지로 이동
+	  * 작성자: JWJ
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ATOrderState")
+	public ModelAndView goATOrderState(HttpServletRequest request) {
+		String orderState = request.getParameter("orderState");
+		mav = atServ.getATOrdetList(orderState);
 		
-		
-		
-		return "ATOrderState";
+		return mav;
 	}
 	
-	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 선택한 주문 내역의 배송상태를 변경
+	  * 작성자: JWJ
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
 	@GetMapping("chgDeliveryState")
-	public String chgDeliveryState(HttpServletRequest request) {
-		String[] chkedBoxArr = request.getParameterValues("prod");//체크박스의 값들이 넘어옴(상품의 상품코드를 가져옴)
-		//체크박스에 담겨있는 value 들을 가지고 DB의 주문테이블에서 해당 주문에 대한 배송상태를 변경한다.
-		return "chgDeliveryState";
+	public String chgDeliveryState(HttpServletRequest request,RedirectAttributes rttr) {
+		String[] chkedBoxArr = request.getParameterValues("po_num");//체크박스의 값들이 넘어옴(상품의 상품코드를 가져옴)
+		String view = atServ.chgDeliveryState(chkedBoxArr,rttr);
+		return view;
 	}
+	
 	@GetMapping("ATMessageWrite")
 	public String ATMessageWrite() {
 		return "ATMessageWrite";
@@ -300,5 +315,30 @@ public class AT_Controller {
 		return "ATMessageRQ";
 	}
 	
+	/*-------------------------------------------------------------------
+	 * 기능 : 응원의 한마디
+	 * 책임자 : 김병현, 김종현
+	 * 작성일 : 2020.02.06		최종수정일 : 2020.02.06
+	 ------------------------------------------------------------------- */
+
+	   @GetMapping("ATSupportMg")//응원의 메세지로 이동하는 메소드 public String goATSupportMg() {
+	   public ModelAndView getSupportMg(SM_Dto reply) {
+		   log.warn("ATSupportMg()");
+		   mav = mServ.getSupportMg(reply);
+		   
+		   return mav;
+	   }
 	
+	   //응원의 한마디 ajax
+		@PostMapping(value = "/supportMGInsert", produces = "application/json; charset=utf-8")
+		//	//text/html은 텍스트이고 html이다.
+		//	//시스템에서 만든 것이고 json이다 라는 뜻.
+		//	//dispather를 안 거치고 바로 html로 보냄
+		//	//model을 써야만 디스패처서블릿을 간다.
+		@ResponseBody
+		public Map<String, List<SM_Dto>> supportMGInsert(SM_Dto reply){
+		Map<String, List<SM_Dto>> rmap = mServ.replyInsert(reply);
+	
+			return rmap;
+		}
 }

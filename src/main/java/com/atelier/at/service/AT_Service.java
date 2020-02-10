@@ -4,6 +4,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -25,7 +26,10 @@ import com.atelier.dto.AG_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
+import com.atelier.dto.PO_Dto;
+import com.atelier.dto.SM_Dto;
 import com.atelier.util.PD_Paging;
+import com.atelier.vo.PO_Vo;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -270,7 +274,6 @@ public class AT_Service {
 
 		return mav;
 	}
-
 	 /* ---------------------------------------------------------------------------------
 	  * 기능: 상품 정보 수정
 	  * 작성자: JWJ
@@ -283,6 +286,7 @@ public class AT_Service {
 		PD_productDto prodDto = new PD_productDto();
 		PI_productImgDto prodImgDto = new PI_productImgDto();
 		
+		int pd_code = 	Integer.parseInt(multi.getParameter("pd_code"));
 		String pd_name =  multi.getParameter("pd_name");
 		String pd_at_name =  multi.getParameter("pd_at_name");
 		int pd_numofstock =  Integer.parseInt(multi.getParameter("pd_numofstock"));
@@ -294,6 +298,7 @@ public class AT_Service {
 		String pd_datail =  multi.getParameter("pd_detail");
 		String pi_oriname =  multi.getParameter("pi_oriname");
 			
+		prodDto.setPd_code(pd_code);
 		prodDto.setPd_at_name(pd_at_name);
 		prodDto.setPd_cate(pd_cate);
 		prodDto.setPd_detail(pd_datail);
@@ -307,8 +312,11 @@ public class AT_Service {
 		
 		boolean b = atDao.ATProdUpdate(prodDto);
 		
+		 
 		//2. Insert한 상품의 상품코드를 가져와 이미지 업로드
 		int currentPd_code = prodDto.getPd_code();
+			//상품 이미지를 먼저 지움
+			atDao.deleteImg(currentPd_code);
 		prodImgDto = prodImgup(multi,currentPd_code);
 		if(b) {
 			//상품 insert 성공하면 해당 상품의 image도 DB에 insert
@@ -325,6 +333,7 @@ public class AT_Service {
 		return view;
 		
 	}
+
 	 /* ---------------------------------------------------------------------------------
      * 기능: 선택한 상품의 판매여부를 판매 (T)로 전환
      * 작성자: JWJ
@@ -341,5 +350,153 @@ public class AT_Service {
       rttr.addFlashAttribute("check", "등록 완료");
       return view;
    }
+
+	/*-------------------------------------------------------------------
+	 * 기능 : 응원의 한마디
+	 * 책임자 : 김병현, 김종현
+	 * 작성일 : 2020.02.06		최종수정일 : 2020.02.06
+	 ------------------------------------------------------------------- */
+
+	public Map<String, List<SM_Dto>> replyInsert(SM_Dto reply) {
+		
+		Map<String,List<SM_Dto>> rmap= null;
+		
+		try {
+			atDao.replyInsert(reply);
+			//댓글 하나를 DB에 넣으면 댓글리스트를 다시 불러오자
+			List<SM_Dto> rList = atDao.getReplyList1(reply.getSm_receiver());
+			rmap = new HashMap<String, List<SM_Dto>>();
+			rmap.put("rList", rList);
+		} catch (Exception e) {
+			rmap = null; 
+		//먼저 try문이 실행 되므로 map은 생성 되어있고 에러를 발생시켜 
+			//ajax의 error 부의 함수를 실행시키기 위함
+	}
+		return rmap;
+	}
+
+
+	public ModelAndView getSupportMg(SM_Dto reply) {
+		
+		mav = new ModelAndView();
+		
+		List<SM_Dto> rList = atDao.getReplyList2(reply);
+		
+		mav.addObject("rList", rList);
+		mav.setViewName("ATSupportMg");
+		
+		return mav;
+	}
+
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 선택한 상품을 삭제
+	  * 작성자: JWJ
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	public String deleteProd(String[] chkedBoxArr, RedirectAttributes rttr) {
+		String view = null;
+		
+		for(String pd_code: chkedBoxArr) {
+			int pdCode = Integer.parseInt(pd_code);
+			atDao.deleteProd(pdCode);
+		}
+		view = "redirect:ATProdManage";
+		rttr.addFlashAttribute("check","삭제 완료");
+		return view;
+	}
+
 	
-}
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 선택한 주문 내역의 배송상태를 변경
+	  * 작성자: JWJ
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	public String chgDeliveryState(String[] chkedBoxArr,RedirectAttributes rttr) {
+		String view = null;
+		
+		for(String po_num: chkedBoxArr) {
+			int poNum = Integer.parseInt(po_num);
+			atDao.chgDeliveryState(poNum);
+		}
+		view = "redirect:ATOrderState";
+		rttr.addFlashAttribute("check","상태변경 완료!");
+		return view;
+	}
+
+	 /* ---------------------------------------------------------------------------------
+	  * 기능: 주문 상태 조회 페이지로 이동
+	  * 작성자: JWJ
+	  * 작성일 : 2019.02.07
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView getATOrdetList(String orderState) {
+		//1. 세션에서 id를 가져와 주문테이블에서 그 아이디에 해당하는 주문을 모두 가져옴.
+		mav = new ModelAndView();
+		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
+		String AT_id = cmDto.getCm_id();
+		//로그인 한 공방 회원의 id를 가지고 그 회원의 공방이름을 가져옴
+		String AM_Name = atDao.getAM_Name(AT_id);
+		//2. JSP에서 처음에는 before를 넘기고, select박스의 내용에 따라 being을 넘기거나 after를 넘긴다
+		if(orderState == null) {
+			//before만 출력 해옴
+			PO_Vo po_Vo = new PO_Vo();
+			po_Vo.setPo_state("before");
+			po_Vo.setPo_at_name(AM_Name);
+			List<PO_Vo> poDtoList = atDao.getATOrderList(po_Vo);
+		
+			//날짜를 yyyy-MM-dd 형태로 변환
+			SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
+			for(int i=0;i<poDtoList.size();i++) {
+				String convertDate = dataFm.format(poDtoList.get(i).getPo_date());
+				poDtoList.get(i).setConveredPo_date(convertDate);
+			}
+			//원하는건 PO_VOList
+			
+			mav.addObject("poDtoList",poDtoList);
+			mav.setViewName("ATOrderState");
+			
+		
+		}
+		
+	
+		return mav;
+	}
+
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 주문 조회 페이지에서 주문 상태별로 출력하기 위한 기능
+	 * 작성자: JWJ
+	 * 작성일: 2020.02.09
+	 -----------------------------------------------------------------------------------------*/
+	public Map<String, List<PO_Vo>> chgOrderList(String orderState) {
+		
+		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
+		String AT_id = cmDto.getCm_id();
+		String AM_Name = atDao.getAM_Name(AT_id);
+		
+		PO_Vo po_Vo = new PO_Vo();
+		po_Vo.setPo_state(orderState);
+		po_Vo.setPo_at_name(AM_Name);
+		
+		Map<String, List<PO_Vo>> poDtomap = new HashMap<String, List<PO_Vo>>();
+		List<PO_Vo> poDtoList = atDao.getATOrderList(po_Vo);
+		poDtomap.put("poDtoList", poDtoList);
+	
+		return poDtomap;
+	}
+	
+	
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}//AT_Service 클래스의 끝

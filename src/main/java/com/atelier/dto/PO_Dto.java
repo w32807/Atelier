@@ -1,6 +1,7 @@
 package com.atelier.dto;
 
-import java.security.Timestamp;
+
+import java.sql.Timestamp;
 
 import lombok.Data;
 
