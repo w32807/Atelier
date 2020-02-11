@@ -67,6 +67,19 @@
 	<delete id="delADMaterial" parameterType="com.atelier.dto.AD_MaterialDto">
 		DELETE FROM RAW_MATERIAL WHERE RM_NUM=#{RM_NUM}
 	</delete>
+	
+	<select id="getADMessageContents" parameterType="Integer" resultType="com.atelier.dto.MG_Dto">
+		SELECT * FROM MESSAGE WHERE MG_NUM = #{MG_NUM}
+	</select>
+
+	<insert id="ADSendMessage" parameterType="com.atelier.dto.MG_Dto">
+		INSERT INTO MESSAGE
+		VALUES(MG_NUM_SEQ.NEXTVAL,#{mg_sender},#{mg_receiver},'F',#{mg_contents},DEFAULT)
+	</insert>
+	
+	<delete id="delMessage" parameterType="String">
+		DELETE FROM MESSAGE WHERE MG_NUM=#{hs}
+	</delete>
 </mapper>
 
 

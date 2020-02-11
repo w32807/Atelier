@@ -286,8 +286,8 @@
 															<input type="hidden" name="mg_receiver"
 																value="${bitem.mg_sender}">  --%>
 																<input type="hidden"
-																name="mg_num" value="${bitem.mg_num}"> <input
-																type="submit" value="답장"
+																name="mg_num" value="${bitem.mg_num}"> 
+																<input type="submit" value="답장"
 																style="border: thick; float: right;">
 														</form>
 													</div>

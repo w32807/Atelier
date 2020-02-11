@@ -4,7 +4,7 @@
 	
 	<insert id="ATProdInsert" parameterType="com.atelier.dto.PD_productDto">
 	   INSERT INTO PD VALUES(PD_CODE_SEQ.NEXTVAL,#{pd_name},#{pd_price},#{pd_detail},#{pd_at_name},#{pd_option},
-		   DEFAULT,SYSDATE,#{pd_cate},#{pd_type},#{pd_sex},#{pd_numofstock})
+		   DEFAULT,DEFAULT,#{pd_cate},#{pd_type},#{pd_sex},#{pd_numofstock})
 	</insert>
 	
 	<insert id="ATProdImgInsert" parameterType="com.atelier.dto.PI_productImgDto" >
@@ -36,7 +36,7 @@
     </update>
     
     <update id="changeProdRegist" parameterType="String">
-    	UPDATE PD SET PD_REGIST = 'TRUE' WHERE PD_CODE = #{pd_code}
+    	UPDATE PD SET PD_REGIST = 'T' WHERE PD_CODE = #{pd_code}
     </update>
     
    <insert id="replyInsert" parameterType="com.atelier.dto.SM_Dto" useGeneratedKeys="true" 
@@ -93,7 +93,7 @@
 	   DELETE FROM AG
 	   WHERE AG_ID = #{id}
 	</delete>
-
-  
-   
+	
+	
+   	
 </mapper>

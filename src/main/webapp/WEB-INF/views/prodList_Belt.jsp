@@ -397,7 +397,7 @@
             </div>
         </div>
         <div class="copyright-reserved">
-            <div class="container">
+            <div class="container">0
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="copyright-text">

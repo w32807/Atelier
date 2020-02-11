@@ -526,4 +526,79 @@ public class AD_Service {
 		return mav;
 	}
 	
+
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 메세지 상세보기 출력
+	  * 작성자: KBH
+	  * 작성일 : 2010.02.11
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView ADMessagecon(Integer mg_num) {
+		
+		mav = new ModelAndView();
+
+		String view = null;
+
+		MG_Dto mgDto = aDao.getADMessageContents(mg_num);
+		
+		mav.addObject("mgDto", mgDto);
+		
+		mav.setViewName("ADMessageContents");
+		return mav;
+	}
+
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 메세지 상세보기에서 답장 
+	  * 작성자: KBH
+	  * 작성일 : 2010.02.11
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView MessageSendBtn(MG_Dto mDto) {
+		 
+		  mav = new ModelAndView();
+			 
+		  String view = null;
+				  
+		  String mg_receiver = mDto.getMg_sender();
+		  
+		  log.warn(mDto.getMg_receiver()+","+mDto.getMg_sender());
+		  
+		  try {
+			  
+			  aDao.ADSendMessage(mDto);
+			  view =  "forward:ADMessage";
+			  
+		  }catch(Exception e) {
+			  
+			  e.printStackTrace();
+		  
+		  }
+		  
+		  
+		  mav.setViewName(view);
+		  
+		  return mav; 
+	}
+
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 메세지 삭제 메소드
+	  * 작성자: KBH
+	  * 작성일 : 2010.02.11
+	  -----------------------------------------------------------------------------------*/
+	@Transactional
+	public ModelAndView delMessage(String[] check, RedirectAttributes rttr) {
+		
+		mav = new ModelAndView();
+		
+		for(String hs : check) {
+			aDao.delMessage(hs);
+			
+		}
+		rttr.addFlashAttribute("check","삭제 완료!");
+		
+		
+		mav.setViewName("redirect:ADMessage");
+		
+		return mav;
+	}
+	
+
 }

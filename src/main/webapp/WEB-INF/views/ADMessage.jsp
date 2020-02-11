@@ -205,10 +205,10 @@
                         </header>
                         <!-- ----- -->
                         <div style="text-align: right; margin: 2.5% 0px;">
-                                  <i class="icon_mail_alt"></i> 모두 삭제
+                                  <i class="icon_mail_alt"></i>삭제
                            <div class="btn-group">
                                        <td style="text-align: center;"><a
-                                          class="btn btn-danger" href="#"><i
+                                          class="btn btn-danger" href="#" id="delete"><i
                                              class="icon_check_alt2"></i></a>
                                     </div>
                         </div>
@@ -221,22 +221,25 @@
                                  <th><i class="icon_mail_alt"></i> 수신자</th>
                                  <th><i class="icon_pin_alt"></i> 받은 시간</th>
                                  <th><i class="icon_pin_alt"></i>내용보기</th>
-                               
                               </tr>
+                              
+                              <form action="delMessage" method="get" name="cancleFrm">
                      <c:forEach var="m" items="${bList}" >
+                    	<input type="hidden" name="mg_sender" value="${mb.cm_id}">
+                    	<input type="hidden" name="mg_receiver" value="${m.mg_sender}">
                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>${m.mg_sender}"</td>
-                                 <td>"${m.mg_receiver}"</td>
+                                 <th><input type="checkbox" name="prod" value="${m.mg_num}"></th>
+                                 <td>${m.mg_sender}</td>
+                                 <td>${m.mg_receiver}</td>
                                  <td>${m.mg_date}</td>
                                      <td style="text-align: center;">
-                                    <a class="btn btn-success" href="ADMessageContents" onclick="window.open(this.href, '_blank', 'width=1000px,height=600px,toolbars=no,scrollbars=no');return false;">
+                                    <a class="btn btn-success" href="ADMessageContents?mg_num=${m.mg_num}" onclick="window.open(this.href, '_blank', 'width=1000px,height=600px,toolbars=no,scrollbars=no');return false;">
                            <i class="icon_close_alt2"></i>
                            </a>
                            </td>
                               </tr>
-                             </c:forEach>
-                           </tbody>
+                          </c:forEach>
+                          </form>
                         </table>
                      </section>
                   </div>
@@ -307,7 +310,19 @@
                $("input[type=checkbox]").prop("checked", false);
             }
          })
-      })
+      });
+      
+      	$("#delete").click(function() {
+		var chkLength = $("input:checkbox[name=prod]:checked").length;//체크박스에 체크가 되어있는 갯수를 구함
+		if(chkLength != 0){
+			if(confirm(chkLength+"개의 목록을 삭제 하시겠습니까?")){
+				 $("form[name=cancleFrm]").submit();
+			}
+			
+		}else{
+			  alert("삭제할 목록을 선택 해 주세요.");
+		}
+	});
    </script>
 
 </body>

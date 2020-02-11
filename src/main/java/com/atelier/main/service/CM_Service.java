@@ -153,7 +153,7 @@ public class CM_Service {
 		for(int i = 0; i < pdList.size(); i++) {
 			int pd_code = pdList.get(i).getPd_code();
 			String pi_oriName = cm_Dao.getPi_oriName(pd_code);
-			pdList.get(i).setImgOriName(pi_oriName+".jpg");
+			pdList.get(i).setImgOriName(pi_oriName);
 		}
 		mav.addObject("pdList",pdList);
 		mav.setViewName("prodList_All");
@@ -172,7 +172,11 @@ public class CM_Service {
 		mav = new ModelAndView();
 		String view = null;
 		List<PD_productDto> pdList = cm_Dao.getProdList(pd_cate);
-		
+		for(int i = 0; i < pdList.size(); i++) {
+			int pd_code = pdList.get(i).getPd_code();
+			String pi_oriName = cm_Dao.getPi_oriName(pd_code);
+			pdList.get(i).setImgOriName(pi_oriName);
+		}
 		switch (pd_cate) {
 		case "의류":
 			view = "prodList_Clo";
@@ -202,6 +206,28 @@ public class CM_Service {
 		
 		mav.addObject("pdList",pdList);
 		mav.setViewName(view);
+		return mav;
+	}
+
+	
+
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 상품 상세정보 보기
+	 * 작성자: JWJ
+	 * 작성일: 2020.02.11
+	 -----------------------------------------------------------------------------------------*/
+
+	public ModelAndView getprodDetail(int pd_code) {
+		mav = new ModelAndView();
+		PD_productDto prodDto = cm_Dao.getprodDetail(pd_code);
+			String pi_oriName = cm_Dao.getPi_oriName(pd_code);
+			int at_num = cm_Dao.getAt_num(prodDto.getPd_at_name());
+			prodDto.setImgOriName(pi_oriName);
+			
+			mav.addObject("at_num",at_num);
+			mav.addObject("prodDto",prodDto);
+			mav.setViewName("prodDetail");
+		
 		return mav;
 	}
 

@@ -94,7 +94,7 @@
 							<li>
 							<li class="app-sidebar__heading">회원관리</li>
 							<ul>
-								<li><a href="ADMessage?mg_receiver='${mb.cm_id}'"> <!--여기에 메--> 메세지답변
+								<li><a href="ADMessage"> <!--여기에 메--> 메세지답변
 								</a></li>
 							</ul>
 							</li>

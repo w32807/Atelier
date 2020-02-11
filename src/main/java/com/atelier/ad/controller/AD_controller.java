@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -24,6 +25,7 @@ import com.atelier.dto.AG_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.CO_NoticeDto;
 import com.atelier.dto.FT_FAQDto;
+import com.atelier.dto.MG_Dto;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +52,8 @@ public class AD_controller {
 		return "ADNotice";
 	}
 	
+	@Setter(onMethod_ = @Autowired) 
+	private HttpSession session;
 	
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 공지사항 전체 출력
@@ -185,10 +189,10 @@ public class AD_controller {
 		return "ADProdManage";
 	}	
 	
-	@GetMapping("ADMessageContents")
-	public String goADMessageContents() {
-		return "ADMessageContents";
-	}
+	/*
+	 * @GetMapping("ADMessageContents") public String goADMessageContents() { return
+	 * "ADMessageContents"; }
+	 */
 	
 	@GetMapping("ADCompanyInsert")
 	public String goADCompanyInsert() {
@@ -224,13 +228,14 @@ public class AD_controller {
 	  * 작성자: KBH
 	  * 작성일 : 2010.02.10
 	  -----------------------------------------------------------------------------------*/
-	@GetMapping("ADMessage")
+	/*@GetMapping("ADMessage")
 		public ModelAndView goADMessage(String mg_receiver) {
 			
 			mav = aServ.goADMessage(mg_receiver);
 			
 			return mav;
-		}
+		}*/
+	
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 원자재 수정 / 기존 데이터 입력
 	  * 작성자: JSH
@@ -266,6 +271,73 @@ public class AD_controller {
 	public ModelAndView ADCompanyDel(Integer RM_NUM) {
 		log.info("원자재 삭제 컨트롤러 시작");
 		mav = aServ.MaterialDel(RM_NUM);
+		
+		return mav;
+	}
+	
+
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 메세지 리스트 출력
+	  * 작성자: KBH
+	  * 작성일 : 2010.02.10
+	  -----------------------------------------------------------------------------------*/
+	
+	@GetMapping("ADMessage")
+		public ModelAndView goADMessage() {
+		
+			CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
+			
+			String mg_receiver = cmDto.getCm_id();
+			
+			mav = aServ.goADMessage(mg_receiver);
+			
+			return mav;
+		}
+	
+
+
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 메세지 상세보기 출력
+	  * 작성자: KBH
+	  * 작성일 : 2010.02.11
+	-----------------------------------------------------------------------------------*/
+	@GetMapping("ADMessageContents")
+	public ModelAndView ADMessagecon(Integer mg_num) {
+		log.info("메세지 상세보기 컨트롤러 시작");
+		mav = aServ.ADMessagecon(mg_num);
+		
+		return mav;
+	}
+	
+	
+
+
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 메세지 상세보기에서 답장 
+	  * 작성자: KBH
+	  * 작성일 : 2010.02.11
+	-----------------------------------------------------------------------------------*/
+	@GetMapping("ADmessageSendBtn")
+	public ModelAndView ADmessageSendBtn(MG_Dto mDto) {
+		
+		mav = aServ.MessageSendBtn(mDto);
+		
+		return mav;
+	}
+
+
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 메세지 삭제
+	  * 작성자: KBH
+	  * 작성일 : 2010.02.11
+	-----------------------------------------------------------------------------------*/
+	@GetMapping("delMessage")
+	public ModelAndView delMessage(HttpServletRequest hs, RedirectAttributes rttr) {
+		
+		String[] check = hs.getParameterValues("prod");
+		
+		mav = aServ.delMessage(check,rttr);
 		
 		return mav;
 	}

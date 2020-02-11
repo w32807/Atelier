@@ -199,11 +199,17 @@ public class MainController {
 	 * 
 	 * return "prodList_Etc"; }
 	 */
-	//상품상세보기
-	@RequestMapping(value = "prodDetail", method = RequestMethod.GET)
-	public String prodDetail(Locale locale, Model model) {
-
-		return "prodDetail";
+	
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 상품 상세정보 보기
+	 * 작성자: JWJ
+	 * 작성일: 2020.02.11
+	 -----------------------------------------------------------------------------------------*/
+	@GetMapping("prodDetail")
+	public ModelAndView prodDetail(int pd_code) {
+		mav = mServ.getprodDetail(pd_code);
+		return mav;
 	}
 	//상품구매
 	@RequestMapping(value = "prodBuy", method = RequestMethod.GET)

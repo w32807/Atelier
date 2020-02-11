@@ -34,4 +34,10 @@ public interface AD_Dao {
 	public boolean materialFix(AD_MaterialDto material);
 
 	public void delADMaterial(Integer RM_NUM);
+	
+	public MG_Dto getADMessageContents(Integer mg_num);
+
+	public void ADSendMessage(MG_Dto mDto);
+
+	public boolean delMessage(String hs);
 }

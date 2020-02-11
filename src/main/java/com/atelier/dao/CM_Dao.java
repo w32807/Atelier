@@ -32,4 +32,8 @@ public interface CM_Dao {
 	public String getPi_oriName(int pd_code);
 
 	public List<PD_productDto> getProdList(String pd_cate);
+
+	public PD_productDto getprodDetail(int pd_code);
+
+	public int getAt_num(String pd_at_name);
 }

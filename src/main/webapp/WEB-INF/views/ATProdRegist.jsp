@@ -303,9 +303,14 @@
 										<td class="title"><b>카테고리</b></td>
 										<td><select id="cate_select" class="content" name="pd_cate"title="카테고리" value='${modifyProdDto.pd_cate}'>
 												<!-- foreach문으로 카테고리를 출력해 주세요. -->
-													<option value="카테고리1">카테고리1</option>
-													<option value="카테고리2">카테고리2</option>
-													<option value="카테고리3">카테고리3</option>
+												<option>의류</option>
+												<option>가방</option>
+												<option>신발</option>
+												<option>지갑</option>
+												<option>벨트</option>
+												<option>장갑</option>
+												<option>가구</option>
+												<option>기타 악세사리</option>
 											</select></td>
 									</tr>
 									

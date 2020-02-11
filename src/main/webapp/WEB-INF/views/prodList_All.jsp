@@ -276,14 +276,14 @@
                                         </div>
                                         <ul>
                                             <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                            <li class="quick-view"> <a href="prodDetail?pd_code=${pdDto.pd_code}">+ Quick View</a></li>
                                             <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
                                         </ul>
                                         <!--  상품리스트 -->
                                     </div>
                                     <div class="pi-text">
                                         <div class="catagory-name">${pdDto.pd_cate}</div>
-                                        <a href="prodDetail">
+                                        <a href="prodDetail?pd_code=${pdDto.pd_code}">
                                             <h5>${pdDto.pd_name}</h5>
                                         </a>
                                         <div class="product-price">

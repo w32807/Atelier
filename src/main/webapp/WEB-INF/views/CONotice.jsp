@@ -560,23 +560,26 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 							<div class="row">
 								<div class="col-md-12 col-md-offset-3">
 									<div class="well well-sm">
-										<form class="form-horizontal" action="#" method="post">
+										
 											<fieldset>
 
 												<!-- Name input-->
-												<div class="form-group">
+											<!-- 	<div class="form-group">
 													<label class="col-md-6 control-label" for="name">Name</label>
 													<div class="col-md-6">
 														<input id="name" name="name" type="text"
 															placeholder="Your name" class="form-control">
 													</div>
 												</div>
-
+ -->
 												<!-- Message body -->
+										<form class="form-horizontal" action="ADsendMessage" method="post">
 												<div class="form-group">
 													<label class="col-md-6 control-label" for="message"
 														align="left">Your message</label>
-													<div class="col-md-6">
+													
+													<input type="hidden" value="관리자">
+													<input type="hidden" value="${mb.cm_id}">													<div class="col-md-6">
 														<textarea class="form-control" id="message" name="message"
 															placeholder="Please enter your message here..." rows="7"></textarea>
 													</div>
@@ -588,8 +591,8 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 														<button type="submit" class="btn btn-primary btn-lg">Submit</button>
 													</div>
 												</div>
-											</fieldset>
 										</form>
+											</fieldset>
 									</div>
 								</div>
 							</div>

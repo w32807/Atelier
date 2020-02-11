@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.atelier.dto.MG_Dto;
+import com.atelier.mypage.service.MP_MessageService;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +18,7 @@ public class MP_MessageController {
 	ModelAndView mav;
 	
 	@Setter(onMethod_=@Autowired)
-	MP_MessageController mServ;
+	MP_MessageService mServ;
 	
 	
 	/* ---------------------------------------------------------------------------------------
@@ -26,7 +27,7 @@ public class MP_MessageController {
 	 * 작성일: 2020.02.04
 	 -----------------------------------------------------------------------------------------*/
 	@GetMapping("messager")
-	public ModelAndView Messager(Integer pageNum) {
+	public ModelAndView Messager(String pageNum) {
 		log.warn("와옹아ㅏ앙");
 		mav = mServ.Messager(pageNum);
 		

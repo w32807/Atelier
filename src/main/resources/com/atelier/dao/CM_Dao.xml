@@ -59,6 +59,13 @@
 		SELECT * FROM PD WHERE PD_REGIST='T' AND PD_CATE = #{pd_cate}
 	</select>
 	
+	<select id="getprodDetail" resultType="com.atelier.dto.PD_productDto">
+		SELECT * FROM PD WHERE PD_CODE = #{pd_code}
 	
+	</select>
 	
+	<select id="getAt_num" parameterType="String" resultType="Integer">
+		SELECT AT_SEQ FROM AT WHERE AT_NAME = #{pd_at_name}	
+	</select>
+  
 </mapper>
