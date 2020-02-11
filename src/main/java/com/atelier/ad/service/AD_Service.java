@@ -507,4 +507,23 @@ public class AD_Service {
 
 		return mav;
 	}
+
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 메세지 리스트 출력
+	  * 작성자: KBH
+	  * 작성일 : 2010.02.10
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView goADMessage(String mg_receiver) {
+		mav = new ModelAndView();
+
+		String view = null;
+
+		List<MG_Dto> bList = aDao.getADMessageList(mg_receiver);
+		mav.addObject("bList", bList);
+
+		mav.setViewName("ADMessage");
+		
+		return mav;
+	}
+	
 }

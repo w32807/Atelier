@@ -99,98 +99,98 @@
 </head>
 <body>
  <div
-		class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
-		<div class="app-header header-shadow">
-			
-				
-				<!--로고 이름바꾸기. -->
-				<div class="header__pane ml-auto">
-					
-				</div>
-		
-			<div class="app-header__mobile-menu">
-				<div>
-					
-				</div>
-			</div>
-			<div class="app-header__menu">
-				<span>
-					
-				</span>
-			</div>
-			<div class="app-header__content">
-				<div class="app-header-left">
+      class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
+      <div class="app-header header-shadow">
+         
+            
+            <!--로고 이름바꾸기. -->
+            <div class="header__pane ml-auto">
+               
+            </div>
+      
+         <div class="app-header__mobile-menu">
+            <div>
+               
+            </div>
+         </div>
+         <div class="app-header__menu">
+            <span>
+               
+            </span>
+         </div>
+         <div class="app-header__content">
+            <div class="app-header-left">
 
-					<div class="container">
-						<div class="row"></div>
+               <div class="container">
+                  <div class="row"></div>
 
-						<button class="close"></button>
-					</div>
+                  <button class="close"></button>
+               </div>
 
-				</div>
+            </div>
 
-			</div>
-		</div>
+         </div>
+      </div>
 
-		<div class="app-main">
-			<div class="app-sidebar sidebar-shadow">
-				<div class="app-header__logo">
-					<div class="logo-src"></div>
-					<div class="header__pane ml-auto">
-						
-					</div>
-				</div>
-				<div class="app-header__mobile-menu">
-					<div>
-					
-					</div>
-				</div>
-				<div class="app-header__menu">
-					<span>
-						
-					</span>
-				</div>
-				<div class="scrollbar-sidebar">
-					<div class="app-sidebar__inner">
-					  <section style="border: shadow">
-							<div><a href="main"><button class="btn btn-info btn-lg" style="width:290px; margin-left:-20px; text-align:center;"><h4 style="margin-right:10px;"><i class="fa fa-home"></i> Atelier</h4></button></a></div>
-						</section>
-						<ul class="vertical-nav-menu">
-							<li class="app-sidebar__heading">고객관리</li>
-							<ul>
-								<li><a href="ADNoticeList"> 공지사항 </a> <a href="ADFAQ">
-										FAQ </a></li>
-							</ul>
-							<li>
-							<li class="app-sidebar__heading">회원관리</li>
-							<ul>
-								<li><a href="ADMessage"> <!--여기에 메--> 메세지답변
-								</a></li>
-							</ul>
-							</li>
-							<li>
-							<li class="app-sidebar__heading">공방관리</li>
-							<ul>
-								<li><a href="ADATMemberUp"> 공방회원 승인 / 거부 </a></li>
-								<li><a href="ADATList"> <i class="metismenu-icon">
-									</i>공방리스트
-								</a></li>
-							</ul>
-							</li>
+      <div class="app-main">
+         <div class="app-sidebar sidebar-shadow">
+            <div class="app-header__logo">
+               <!-- <div class="logo-src"></div> -->
+               <div class="header__pane ml-auto">
+                  
+               </div>
+            </div>
+            <div class="app-header__mobile-menu">
+               <div>
+               
+               </div>
+            </div>
+            <div class="app-header__menu">
+               <span>
+                  
+               </span>
+            </div>
+            <div class="scrollbar-sidebar">
+               <div class="app-sidebar__inner">
+                 <section style="border: shadow">
+                     <div><a href="main"><button class="btn btn-info btn-lg" style="width:290px; margin-left:-20px; text-align:center;"><h4 style="margin-right:10px;"><i class="fa fa-home"></i> Atelier</h4></button></a></div>
+                  </section>
+                  <ul class="vertical-nav-menu">
+                     <li class="app-sidebar__heading">고객관리</li>
+                     <ul>
+                        <li><a href="ADNoticeList"> 공지사항 </a> <a href="ADFAQ">
+                              FAQ </a></li>
+                     </ul>
+                     <li>
+                     <li class="app-sidebar__heading">회원관리</li>
+                     <ul>
+                        <li><a href="ADMessage"> <!--여기에 메--> 메세지답변
+                        </a></li>
+                     </ul>
+                     </li>
+                     <li>
+                     <li class="app-sidebar__heading">공방관리</li>
+                     <ul>
+                        <li><a href="ADATMemberUp"> 공방회원 승인 / 거부 </a></li>
+                        <li><a href="ADATList"> <i class="metismenu-icon">
+                           </i>공방리스트
+                        </a></li>
+                     </ul>
+                     </li>
 
-							<li class="app-sidebar__heading">업체관리</li>
-							<ul>
-								<li><a href="ADCompany"> 원자재 업체 리스트 </a></li>
-							</ul>
-							<li class="app-sidebar__heading">상품관리</li>
-							<ul>
+                     <li class="app-sidebar__heading">업체관리</li>
+                     <ul>
+                        <li><a href="ADCompany"> 원자재 업체 리스트 </a></li>
+                     </ul>
+                     <li class="app-sidebar__heading">상품관리</li>
+                     <ul>
 
-								<li><a href="ADProdManage"> 상품삭제 </a></li>
-							</ul>
-						</ul>
-					</div>
-				</div>
-			</div>
+                        <li><a href="ADProdManage"> 상품삭제 </a></li>
+                     </ul>
+                  </ul>
+               </div>
+            </div>
+         </div>
 
 
 
@@ -206,7 +206,7 @@
                         <!-- ----- -->
                         <div style="text-align: right; margin: 2.5% 0px;">
                                   <i class="icon_mail_alt"></i> 모두 삭제
-									<div class="btn-group">
+                           <div class="btn-group">
                                        <td style="text-align: center;"><a
                                           class="btn btn-danger" href="#"><i
                                              class="icon_check_alt2"></i></a>
@@ -214,152 +214,28 @@
                         </div>
                          <!-- ----- -->
                        <table class="table table-striped table-advance table-hover" style="text-align:center;" >
-                           		
-                           	
-                           
-                           
+                                 
                               <tr>
                                  <th><input type="checkbox" id="allCheck"></th>
                                  <th><i class="icon_mail_alt"></i> 송신자</th>
                                  <th><i class="icon_mail_alt"></i> 수신자</th>
                                  <th><i class="icon_pin_alt"></i> 받은 시간</th>
-                                 <th><i class="icon_pin_alt"></i> 읽음 여부</th>
                                  <th><i class="icon_pin_alt"></i>내용보기</th>
                                
                               </tr>
-
+                     <c:forEach var="m" items="${bList}" >
                               <tr>
                                  <th><input type="checkbox"></th>
-                                 <td>아이유@avsee06.tv</td>
-                                 <td>김종현</td>
-                                 <td>20-20-20, 20:20:20</td>
-                                 <td>씹음</td>
+                                 <td>${m.mg_sender}"</td>
+                                 <td>"${m.mg_receiver}"</td>
+                                 <td>${m.mg_date}</td>
                                      <td style="text-align: center;">
                                     <a class="btn btn-success" href="ADMessageContents" onclick="window.open(this.href, '_blank', 'width=1000px,height=600px,toolbars=no,scrollbars=no');return false;">
-									<i class="icon_close_alt2"></i>
-									</a>
-									</td>
-                                 </div>
+                           <i class="icon_close_alt2"></i>
+                           </a>
+                           </td>
                               </tr>
-								
-								 <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>아이유@avsee06.tv</td>
-                                 <td>김종현</td>
-                                 <td>20-20-20, 20:20:20</td>
-                                 <td>씹음</td>
-                                    <td style="text-align: center;">
-                                    <a class="btn btn-success" href="ADMessageContents" onclick="window.open(this.href, '_blank', 'width=1000px,height=600px,toolbars=no,scrollbars=no');return false;">
-									<i class="icon_close_alt2"></i>
-									</a>
-									</td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>아이유@avsee06.tv</td>
-                                 <td>김종현</td>
-                                 <td>20-20-20, 20:20:20</td>
-                                 <td>씹음</td>
-                                     <td style="text-align: center;">
-                                    <a class="btn btn-success" href="ADMessageContents" onclick="window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=no');return false;">
-									<i class="icon_close_alt2"></i>
-									</a>
-									</td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>아이유@avsee06.tv</td>
-                                 <td>김종현</td>
-                                 <td>20-20-20, 20:20:20</td>
-                                 <td>씹음</td>
-                                     <td style="text-align: center;">
-                                    <a class="btn btn-success" href="ADMessageContents" onclick="window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=no');return false;">
-									<i class="icon_close_alt2"></i>
-									</a>
-									</td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>아이유@avsee06.tv</td>
-                                 <td>김종현</td>
-                                 <td>20-20-20, 20:20:20</td>
-                                 <td>씹음</td>
-                                     <td style="text-align: center;">
-                                    <a class="btn btn-success" href="ADMessageContents" onclick="window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=no');return false;">
-									<i class="icon_close_alt2"></i>
-									</a>
-									</td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>아이유@avsee06.tv</td>
-                                 <td>김종현</td>
-                                 <td>20-20-20, 20:20:20</td>
-                                 <td>씹음</td>
-                                     <td style="text-align: center;">
-                                    <a class="btn btn-success" href="ADMessageContents" onclick="window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=no');return false;">
-									<i class="icon_close_alt2"></i>
-									</a>
-									</td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>아이유@avsee06.tv</td>
-                                 <td>김종현</td>
-                                 <td>20-20-20, 20:20:20</td>
-                                 <td>씹음</td>
-                                     <td style="text-align: center;">
-                                    <a class="btn btn-success" href="ADMessageContents" onclick="window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=no');return false;">
-									<i class="icon_close_alt2"></i>
-									</a>
-									</td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>아이유@avsee06.tv</td>
-                                 <td>김종현</td>
-                                 <td>20-20-20, 20:20:20</td>
-                                 <td>씹음</td>
-                                     <td style="text-align: center;">
-                                    <a class="btn btn-success" href="ADMessageContents" onclick="window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=no');return false;">
-									<i class="icon_close_alt2"></i>
-									</a>
-									</td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>아이유@avsee06.tv</td>
-                                 <td>김종현</td>
-                                 <td>20-20-20, 20:20:20</td>
-                                 <td>씹음</td>
-                                     <td style="text-align: center;">
-                                    <a class="btn btn-success" href="ADMessageContents" onclick="window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=no');return false;">
-									<i class="icon_close_alt2"></i>
-									</a>
-									</td>
-                                 </div>
-                              </tr>
-                               <tr>
-                                 <th><input type="checkbox"></th>
-                                 <td>아이유@avsee06.tv</td>
-                                 <td>김종현</td>
-                                 <td>20-20-20, 20:20:20</td>
-                                 <td>씹음</td>
-                                     <td style="text-align: center;">
-                                    <a class="btn btn-success" href="ADMessageContents" onclick="window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=no');return false;">
-									<i class="icon_close_alt2"></i>
-									</a>
-									</td>
-                                 </div>
-                              </tr>
-                              
+                             </c:forEach>
                            </tbody>
                         </table>
                      </section>
@@ -375,7 +251,7 @@
                               <tbody>
                                  <tr>
                                     <th><i class="icon_mail_alt"></i> 모두 삭제</th>
-									<div class="btn-group">
+                           <div class="btn-group">
                                        <td style="text-align: center;"><a
                                           class="btn btn-danger" href="#"><i
                                              class="icon_check_alt2"></i></a></td>
@@ -416,8 +292,8 @@
       type="text/javascript"></script>
    <!--custome script for all page-->
    <script src="./resources/ADATList/js/scripts.js"></script>
-   	<script type="text/javascript"
-					src="resources/assets/scripts/main.js"></script>
+      <script type="text/javascript"
+               src="resources/assets/scripts/main.js"></script>
  
 
    <script type="text/javascript">

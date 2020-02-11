@@ -224,7 +224,6 @@ public class AD_controller {
 	  * 작성자: KBH
 	  * 작성일 : 2010.02.10
 	  -----------------------------------------------------------------------------------*/
-	/*
 	@GetMapping("ADMessage")
 		public ModelAndView goADMessage(String mg_receiver) {
 			
@@ -232,7 +231,6 @@ public class AD_controller {
 			
 			return mav;
 		}
-	*/
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 원자재 수정 / 기존 데이터 입력
 	  * 작성자: JSH
