@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.atelier.dto.CM_Dto;
 import com.atelier.dto.PO_Dto;
 import com.atelier.mypage.service.MP_OrderService;
 
@@ -27,6 +30,8 @@ public class MP_OrderController {
 	@Setter(onMethod_=@Autowired)
 	MP_OrderService mpServ;
 	
+	@Setter(onMethod_=@Autowired)
+	HttpSession session;
 	
 	
 	/* ---------------------------------------------------------------------------------------
@@ -35,8 +40,11 @@ public class MP_OrderController {
 	 * 작성일: 2020.02.04
 	 -----------------------------------------------------------------------------------------*/
 	@GetMapping("myOrder")
-	public ModelAndView MyOrder(String po_cm_id) {
-		log.warn(po_cm_id);
+	public ModelAndView MyOrder() {
+		
+		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
+		
+		String po_cm_id = cmDto.getCm_id();
 		
 		mav = mpServ.getMyOrder(po_cm_id);
 		

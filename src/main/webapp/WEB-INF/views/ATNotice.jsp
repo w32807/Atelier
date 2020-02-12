@@ -89,12 +89,32 @@
 		}
 		
 	</style>
+	<script type="text/javascript">
+      		window.onload = function() {//이 페이지가 실행 되면, 이 함수를 실행해라
+				var chk = "${check}";
+				if(chk != ""){
+					alert(chk);
+					location.reload(true);//화면을 다시 한번 불러오면서 check를 리셋함 
+				}
+			}
+</script>
+<script type="text/javascript">
+         window.onload = function(){
+            var chk = ${check};
+            
+            if(chk == 2){
+               alert("글 등록 성공!");
+               location.reload(true);
+            }
+         }
+</script>
 	</head>
 	
 	<body>
 	<!----------------------------------------------------------여기부터 상단바입니다.-------------------------------------------------------------------------->
 	<!-- 상단바 -->
 	<!-- 이메일 전화번호 회원가입 로그인 -->
+    <!-- 이메일 전화번호 회원가입 로그인 -->
     <header class="header-section">
         <div class="header-top">
             <div class="container">
@@ -112,18 +132,37 @@
                 </div>
                 <!-- 로그인, 회원가입 -->
                 <div class="ht-right">
-                    <a href="login" class="login-panel"><i class="fa fa-user"></i>로그인</a>
-                    <a href="memJoinFrm" class="login-panel"><i class="fa fa-user"></i>회원가입</a>
+                	<!-- 
+					<a href="main" class="hideandshow login-panel" action="logout"><i class="fa fa-user"></i>로그아웃</a>
+					 -->
+					<script>
+						function goPage(){
+							var f = document.gologout;
+							f.action = "logout";
+							f.method = "post";
+							f.submit();
+						}
+					</script>
+					<form name="gologout"></form>
+					<a href="logout" class="hideandshow login-panel"><i class="fa fa-user"></i>로그아웃</a>
+					<c:if test="${msg == 'logoutSuccess' }">
+						<script type="text/javascript">
+							alert('로그아웃을 성공했습니다.');
+						</script>
+					</c:if>
+					
+                    <a href="login" class="showandhide login-panel"><i class="fa fa-user"></i>로그인</a>
+                    <a href="memJoinFrm" class="showandhide login-panel"><i class="fa fa-user"></i>회원가입</a>
                     <a href="CONotice" class="login-panel"><i class="fa fa-user"></i>고객센터</a>
-                    <!-- 히든 버튼 처리
-					<a href="#" class="login-panel"  style="visibility:hidden;"><i class="fa fa-user"></i>로그아웃</a>
-					-->
+                     
                     <!-- SNS광고란 -->
                     <div class="top-social">
+                  	    <temp class="hideandshow">${mb.cm_name}님 환영합니다.</temp>
                         <a href="https://www.facebook.com/"><i class="ti-facebook"></i></a>
                         <a href="https://twitter.com/"><i class="ti-twitter-alt"></i></a>
                         <a href="https://www.instagram.com/"><i class="ti-linkedin"></i></a>
                         <a href="https://www.pinterest.co.kr/"><i class="ti-pinterest"></i></a>
+                        
                     </div>
                 </div>
             </div>
@@ -148,8 +187,8 @@
                         </div>
                         <!-- 마이페이지 -->
                     </div>
-                    <div class="col-lg-3 text-right col-md-3">
-                        <ul class="nav-right">
+                    <div  class="col-lg-3 text-right col-md-3">
+                        <ul class="nav-right hideandshow">
 	                            <li class="heart-icon">
 	                                <a href="myPage">
 	                                    <i class="icon_heart_alt"></i>
@@ -176,9 +215,9 @@
                     <div class="depart-btn">
                         <i class="ti-menu"></i>
                         <span>Home</span>
-                        	<ul class="depart-hover" style="z-index: 999;">
+                        	<ul class="depart-hover">
                             <li class="active"><a href="main">Shop Home</a></li>
-                            <li><a href=ATMain>Atelier Home</a></li>
+                            <li><a href="ATMain">Atelier Home</a></li>
                             <li><a href="/">Experience</a></li>
                         </ul>
                     </div>
@@ -281,35 +320,43 @@
 					<table>
 						<tr style="background-color: #A09182;">
 							<th style="width: 60px; text-align: center; color: white;">No</th>
-							<th style="width: 550px; text-align: left; padding-left: 15px; color: white;">Title</th>
-							<th style="width: 250px; text-align: center; color: white;">Date</th>
+							<th style="width: 550px; text-align: center; padding-left: 15px; color: white;">Title</th>
+							
 							<th style="width: 130px; text-align: center; color: white;">Writer</th>
 							<th style="width: 120px; text-align: center; padding-right: 15px; color: white;">View</th>
 						</tr>
 					</table>
 			
-					<form id="deleteMessage" name="deleteMessage">
+					
 						<table>
-							<input type="hidden" name="smnum" value="댓글번호">
+						<c:forEach var="nitem" items ="${bList}">
 								<tr style="background-color: white; border-bottom: 2px solid #A09182; height:40px;">
 									<td style="width: 60px; text-align: center;">
-										넘버EL
+										${nitem.nt_num}
 									</td>
-									<td style="width: 550px; text-align: left; padding-left: 15px;">
-										<a href="ATNoticeDetail" style="color: #353535;">제목EL</a>
+									<td style="width: 550px; text-align: center; padding-left: 15px;">
+										<a href="ATNoticeDetail?nt_num=${nitem.nt_num}" style="color: #353535;">${nitem.nt_title}</a>
 									</td>
-									<td style="width: 300px;">
-										작성날짜EL
-									</td>
+									
 									<td style="width: 100px;">
-										작성자EL
+										${nitem.nt_id}
 									</td>
 									<td style="width: 140px;">
-										조회수EL
+										${nitem.nt_count}
 									</td>
 								</tr>
+								</c:forEach>
 						</table>
-					</form>
+						
+						<div>
+						<center>
+						${paging}
+						</center>
+						</div>
+						<hr>
+					<center>
+					<button onclick="location.href='./ATNoticeWrite'">글쓰기</button>
+					</center>
 				</div>
 			</div>
 		</div>
@@ -411,6 +458,37 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="resources/AT_front/js/jquery.flexslider-min.js"></script>
 	<!-- Sticky Kit -->
 	<script src="resources/AT_front/js/sticky-kit.min.js"></script>
+	<script type="text/javascript">
+    
+   
+    /* ---------------------------------------------------------------------------------------
+	 * 기능: 로그인 여부에 따른 버튼 출력여부 결정
+	 * 작성자: JSG
+	 * 작성일: 2020.02.04
+	 -----------------------------------------------------------------------------------------*/
+    window.onload = function(){
+    	$('.hideandshow').hide();
+    	var mid = '${mb.cm_id}';
+    	var mname = '${mb.cm_name}';
+    	console.log('세션값'+'${mb}');
+    	console.log(mid);
+    	console.log(mname);
+    	if(mid != ''){
+    		$('.hideandshow').show();
+    	}
+    	
+    	$('.showandhide').show();
+    	var mid1 = '${mb.cm_id}';
+    	var mname1 = '${mb.cm_name}';
+    	console.log('세션값'+'${mb}');
+    	console.log(mid1);
+    	console.log(mname1);
+    	if(mid1 != ''){
+    		$('.showandhide').hide();
+    	}
+    	
+    }
+    </script>
 	
 	
 	<!-- MAIN JS -->

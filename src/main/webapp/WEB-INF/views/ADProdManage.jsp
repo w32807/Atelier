@@ -217,271 +217,36 @@ Theme style
 							data-page-type="gallery">
 							<div class="tm-img-gallery-container">
 								<div class="tm-img-gallery gallery-one">
-
+								<form id="cancleStateFrm" action="productDelete" method="get">
+									<!-- <input type="hidden"  id="index" name="index"> -->
+								<c:forEach var="pdDto" items="${pd}" varStatus="status">
 									<div class="grid-item" style="float: left; padding: 20px;">
 										<figure class="effect-bubba">
-											<img src="./resources/admin/img/tm-img-01-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
+											<c:if test='${imgOriName eq null}'>
+                                        		<img src="./resources/main/img/products/null.jpg" alt="" style="width: 200px; height: 200px;">
+                                            </c:if>
+                                            <c:if test='${imgOriName ne null}'>
+                                            	<img src="./resources/main/img/products/${pdDto.imgOriName}" alt="" style="width: 200px; height: 200px;">
+                                            </c:if>
 											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>One</span>
-												</h4>
-												<p class="tm-figure-description">adipiscing elit.</p>
-												<a href="./resources/admin/img/tm-img-01.jpg">View more</a>
+												<input type="checkbox" name="prod" value="${pdDto.pd_code}">
+												
+												<div class="pi-text">
+			                                        <div class="catagory-name">${pdDto.pd_cate}</div>
+			                                        <a href="ADProdDetail?pd_code=${pdDto.pd_code}">
+			                                            <h5>${pdDto.pd_name}</h5>
+			                                        </a>
+		                                        </div>
 											</figcaption>
 										</figure>
 									</div>
-									<div class="grid-item" style="float: left; padding: 20px;">
-										<figure class="effect-bubba">
-											<img src="./resources/admin/img/tm-img-02-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
-											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>Two</span>
-												</h4>
-												<p class="tm-figure-description">id odio in sapien.</p>
-												<a href="./resources/admin/img/tm-img-02.jpg">View more</a>
-											</figcaption>
-										</figure>
-									</div>
-									<div class="grid-item">
-										<figure class="effect-bubba"
-											style="float: left; padding: 20px;">
-											<img src="./resources/admin/img/tm-img-03-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
-											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>Three</span>
-												</h4>
-												<p class="tm-figure-description">consectetur adipiscing
-													elit.</p>
-												<a href="./resources/admin/img/tm-img-03.jpg">View more</a>
-											</figcaption>
-										</figure>
-									</div>
-									<div class="grid-item">
-										<figure class="effect-bubba"
-											style="float: left; padding: 20px;">
-											<img src="./resources/admin/img/tm-img-04-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
-											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>Four</span>
-												</h4>
-												<p class="tm-figure-description">id odio in sapien.</p>
-												<a href="./resources/admin/img/tm-img-04.jpg">View more</a>
-											</figcaption>
-										</figure>
-									</div>
-									<div class="grid-item">
-										<figure class="effect-bubba"
-											style="float: left; padding: 20px;">
-											<img src="./resources/admin/img/tm-img-05-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
-											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>Five</span>
-												</h4>
-												<p class="tm-figure-description">ng elit.</p>
-												<a href="./resources/admin/img/tm-img-05.jpg">View more</a>
-											</figcaption>
-										</figure>
-									</div>
-									<div class="grid-item">
-										<figure class="effect-bubba"
-											style="float: left; padding: 20px;">
-											<img src="./resources/admin/img/tm-img-06-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
-											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>Six</span>
-												</h4>
-												<p class="tm-figure-description">s id odio in sapien.</p>
-												<a href="./resources/admin/img/tm-img-06.jpg">View more</a>
-											</figcaption>
-										</figure>
-									</div>
-									<div class="grid-item">
-										<figure class="effect-bubba"
-											style="float: left; padding: 20px;">
-											<img src="./resources/admin/img/tm-img-07-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
-											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>Seven</span>
-												</h4>
-												<p class="tm-figure-description">ur adipiscing elit.</p>
-												<a href="./resources/admin/img/tm-img-07.jpg">View more</a>
-											</figcaption>
-										</figure>
-									</div>
-									<div class="grid-item">
-										<figure class="effect-bubba"
-											style="float: left; padding: 20px;">
-											<img src="./resources/admin/img/tm-img-08-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
-											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>Eight</span>
-												</h4>
-												<p class="tm-figure-description">dio in sapien.</p>
-												<a href="./resources/admin/img/tm-img-08.jpg">View more</a>
-											</figcaption>
-										</figure>
-									</div>
-									<div class="grid-item">
-										<figure class="effect-bubba"
-											style="float: left; padding: 20px;">
-											<img src="./resources/admin/img/tm-img-09-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
-											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>Nine</span>
-												</h4>
-												<p class="tm-figure-description">ur adipiscing elit.</p>
-												<a href="./resources/admin/img/tm-img-09.jpg">View more</a>
-											</figcaption>
-										</figure>
-									</div>
-									<div class="grid-item">
-										<figure class="effect-bubba"
-											style="float: left; padding: 20px;">
-											<img src="./resources/admin/img/tm-img-10-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
-											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>Ten</span>
-												</h4>
-												<p class="tm-figure-description">s id odio in sapien.</p>
-												<a href="./resources/admin/img/tm-img-10.jpg">View more</a>
-											</figcaption>
-										</figure>
-									</div>
-									<div class="grid-item">
-										<figure class="effect-bubba"
-											style="float: left; padding: 20px;">
-											<img src="./resources/admin/img/tm-img-11-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
-											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>Eleven</span>
-												</h4>
-												<p class="tm-figure-description">adipiscing elit.</p>
-												<a href="./resources/admin/img/tm-img-11.jpg">View more</a>
-											</figcaption>
-										</figure>
-									</div>
-									<div class="grid-item">
-										<figure class="effect-bubba"
-											style="float: left; padding: 20px;">
-											<img src="./resources/admin/img/tm-img-12-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
-											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>Twelve</span>
-												</h4>
-												<p class="tm-figure-description">id odio in sapien.</p>
-												<a href="./resources/admin/img/tm-img-12.jpg">View more</a>
-											</figcaption>
-										</figure>
-									</div>
-									<div class="grid-item">
-										<figure class="effect-bubba"
-											style="float: left; padding: 20px;">
-											<img src="./resources/admin/img/tm-img-13-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
-											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>Thirteen</span>
-												</h4>
-												<p class="tm-figure-description">tetur adipiscing elit.</p>
-												<a href="./resources/admin/img/tm-img-13.jpg">View more</a>
-											</figcaption>
-										</figure>
-									</div>
-									<div class="grid-item">
-										<figure class="effect-bubba"
-											style="float: left; padding: 20px;">
-											<img src="./resources/admin/img/tm-img-14-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
-											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>Fourteen</span>
-												</h4>
-												<p class="tm-figure-description">ortis id odio in
-													sapien.</p>
-												<a href="./resources/admin/img/tm-img-14.jpg">View more</a>
-											</figcaption>
-										</figure>
-									</div>
-									<div class="grid-item">
-										<figure class="effect-bubba"
-											style="float: left; padding: 20px;">
-											<img src="./resources/admin/img/tm-img-15-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
-											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>Fifteen</span>
-												</h4>
-												<p class="tm-figure-description">ctetur adipiscing elit.</p>
-												<a href="./resources/admin/img/tm-img-15.jpg">View more</a>
-											</figcaption>
-										</figure>
-									</div>
-									<div class="grid-item">
-										<figure class="effect-bubba"
-											style="float: left; padding: 20px;">
-											<img src="./resources/admin/img/tm-img-16-tn.jpg" alt="Image"
-												class="img-fluid tm-img"
-												style="width: 200px; height: 200px;">
-											<figcaption>
-												<input type="checkbox">
-												<h4 class="tm-figure-title">
-													Image <span>Sixteen</span>
-												</h4>
-												<p class="tm-figure-description">Maecenas purus sem,
-													lobortis id odio in sapien.</p>
-												<a href="./resources/admin/img/tm-img-16.jpg">View more</a>
-											</figcaption>
-										</figure>
-									</div>
+								</c:forEach>
+								</form>
+								</div>
 								</div>
 							</div>
 						</div>
 					</div>
-
-
-				</div>
 
 				<div>
 					<div class="row"     style="padding-left: 430px;">
@@ -500,10 +265,7 @@ Theme style
 						</div>
 					</div>
 					<div style="position: fixed; right: 60px; bottom: 10px">
-						<a href=""><button class="btn btn-info btn-sm">삭제</button></a>
-					</div>
-					<div style="position: fixed; right: 120px; bottom: 10px">
-						<a href=""><button class="btn btn-info btn-sm">수정</button></a>
+						<button id="delete" class="btn btn-info btn-sm">삭제</button>
 					</div>
 				</div>
 			</div>
@@ -534,4 +296,72 @@ Theme style
 	<script type="text/javascript" src="resources/AT_front/js/main.js"></script>
 	<script type="text/javascript" src="resources/assets/scripts/main.js"></script>
 </body>
+<script type="text/javascript">
+
+$("#delete").click(function(){
+	
+	var chkLength = $("input:checkbox[name=prod]:checked").length;
+
+	if(chkLength == 0){
+		alert("취소 할 상품을 선택 해주세요.");
+	}else {
+		
+		if(confirm(+chkLength+"개의 상품을 취소하시겠습니까?")){
+			$("#cancleStateFrm").submit();
+			//location.reload(true);
+		}else {
+			//location.reload(true);
+		}
+	}
+});
+
+
+
+
+/* 	
+function pick(index){
+	
+	var chkLength = $("input:checkbox[name=prod]:checked").length;//체크박스에 체크가 되어있는 갯수를 구함
+		$("#index").val(index);
+		if(index == 0){
+			if(chkLength == 0){
+				alert("취소 할 상품을 선택 해주세요.");
+			}else {
+				
+				if(confirm(+chkLength+"개의 상품을 취소하시겠습니까?")){
+					$("#cancleStateFrm").submit();
+					//location.reload(true);
+				}else {
+					//location.reload(true);
+				}
+			}
+		}
+	
+		if(index == 1){
+			if(chkLength == 0){
+				alert("수정 할 상품을 선택 해주세요.");
+			}else if(chkLength != 1){
+				
+			}else{
+				
+				if(confirm(+chkLength+"개의 상품을 수정하시겠습니까?")){
+					$("#cancleStateFrm").submit();
+					//location.reload(true);
+				}else {
+					//location.reload(true);
+				}
+			}
+		}
+	 */
+
+
+/* 
+
+//상품 삭제
+$("#delete").click(pick(0));
+//수정
+$("#update").click(pick(1));
+ */
+
+</script>
 </html>

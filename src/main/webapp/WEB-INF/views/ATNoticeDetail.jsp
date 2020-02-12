@@ -291,16 +291,17 @@
 					<table>
 						<tr>
 							<th style="width: 50px; text-align: center; color: #353535;">제목</th>
-							<th style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">제목EL</th>
+							<th style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">${board.nt_title}</th>
 						</tr>
 						<tr style="border-bottom: 1px solid #A09182;">
 							<th style="width: 50px; text-align: center; color: #353535;">작성자</th>
-							<th style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">작성자EL</th>
-							<th style="width: 235px; text-align: right; color: #353535;">date</th>
-							<th style="text-align: right; color: grey; padding-right: 30px;">작성날짜EL</th>
+							<th style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">${board.nt_id}</th>
+							<th style="width: 235px; text-align: right; color: #353535;">조회수</th>
+							<th style="text-align: right; color: grey; padding-right: 30px;">${board.nt_count}</th>
 						</tr>
 						<tr colspan="4">
-							<th style="height: 350px; display: block;">내용EL</th>
+							<th style="height: 350px; display: block;">${board.nt_contents}</th>
+							
 						</tr>
 					</table>
 					<a href="ATNotice" class="btn info_btn btn-send-message" style="margin-left: 700px; margin-bottom: 100px;">목록</a>

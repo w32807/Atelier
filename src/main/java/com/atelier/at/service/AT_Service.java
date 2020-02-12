@@ -21,11 +21,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atelier.dao.AT_Dao;
+import com.atelier.dao.NT_Dao;
 import com.atelier.dao.PD_Dao;
 import com.atelier.dao.RM_Dao;
 import com.atelier.dao.RO_Dao;
 import com.atelier.dto.AG_Dto;
 import com.atelier.dto.CM_Dto;
+import com.atelier.dto.NT_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
 import com.atelier.dto.PO_Dto;
@@ -33,6 +35,7 @@ import com.atelier.dto.RM_Dto;
 import com.atelier.dto.RO_Dto;
 import com.atelier.dto.SM_Dto;
 import com.atelier.util.PD_Paging;
+import com.atelier.util.Paging;
 import com.atelier.vo.PO_Vo;
 
 import lombok.Setter;
@@ -58,6 +61,9 @@ public class AT_Service {
 	
 	@Setter(onMethod_ = @Autowired)
 	private HttpSession session;
+	
+	@Setter(onMethod_ = @Autowired)
+	NT_Dao ntDao;
 
 	/*
 	 * -----------------------------------------------------------------------------
@@ -190,7 +196,8 @@ public class AT_Service {
 		mav = new ModelAndView();
 		
 		List<RM_Dto> rmList = rmDao.getRMList();
-
+	
+	
 		mav.addObject("rmList",rmList);
 		mav.setViewName("ATOrderRequest");
 		   
@@ -261,7 +268,9 @@ public class AT_Service {
 		String view = null;
 		PD_productDto prodDto = new PD_productDto();
 		PI_productImgDto prodImgDto = new PI_productImgDto();
-
+		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
+		
+		String pd_at_id = cmDto.getCm_id();
 		String pd_name = multi.getParameter("pd_name");
 		String pd_at_name = multi.getParameter("pd_at_name");
 		int pd_numofstock = Integer.parseInt(multi.getParameter("pd_numofstock"));
@@ -273,6 +282,7 @@ public class AT_Service {
 		String pd_datail = multi.getParameter("pd_detail");
 		String pi_oriname = multi.getParameter("pi_oriname");
 
+		prodDto.setPd_at_id(pd_at_id);
 		prodDto.setPd_at_name(pd_at_name);
 		prodDto.setPd_cate(pd_cate);
 		prodDto.setPd_detail(pd_datail);
@@ -538,8 +548,9 @@ public class AT_Service {
 	 * 기능: 주문 조회 페이지에서 주문 상태별로 출력하기 위한 기능
 	 * 작성자: JWJ
 	 * 작성일: 2020.02.09
+	 * 수정일: 2020.02.11
 	 -----------------------------------------------------------------------------------------*/
-	public ModelAndView getATOrdetList(String orderState) {
+	public ModelAndView getATOrderList(String orderState) {
 		// 1. 세션에서 id를 가져와 주문테이블에서 그 아이디에 해당하는 주문을 모두 가져옴.
 		mav = new ModelAndView();
 		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
@@ -548,14 +559,14 @@ public class AT_Service {
 		String AM_Name = atDao.getAM_Name(AT_id);
 		// 2. JSP에서 처음에는 before를 넘기고, select박스의 내용에 따라 being을 넘기거나 after를 넘긴다
 		PO_Vo po_Vo = new PO_Vo();
-		po_Vo.setPo_at_name(AM_Name);
+		po_Vo.setPo_cm_id(AT_id);
 
 		if (orderState == null) {
 			po_Vo.setPo_state("before");
 		}else {
 			switch (orderState) {
 			case "before":
-				po_Vo.setPo_state("being");
+				po_Vo.setPo_state("before");
 				break;
 			case "being":
 				po_Vo.setPo_state("being");
@@ -565,6 +576,8 @@ public class AT_Service {
 				break;
 			}
 		}
+		
+		
 		
 
 		List<PO_Vo> poDtoList = atDao.getATOrderList(po_Vo);
@@ -578,7 +591,9 @@ public class AT_Service {
 		// 원하는건 PO_VOList
 
 		mav.addObject("poDtoList", poDtoList);
+		mav.addObject("check",po_Vo.getPo_state());
 		mav.setViewName("ATOrderState");
+		
 
 		return mav;
 	}
@@ -603,6 +618,96 @@ public class AT_Service {
 	 * 
 	 * return poDtomap; }
 	 */
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공지사항 작성
+	  * 작성자: KJH
+	  * 작성일 : 2020.02.10		최종수정일 : 2020.02.11
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView noticeWrite(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
+		log.warn("noticeserv");
+		
+		mav = new ModelAndView();
+		
+		String title = multi.getParameter("nt_title");
+		String contents = multi.getParameter("nt_contents");
+		String id = multi.getParameter("nt_id");
+		log.info(title+","+contents+","+id);
+		
+		NT_Dto notice = new NT_Dto();
+		notice.setNt_title(title);
+		notice.setNt_contents(contents);
+		notice.setNt_id(id);
+		
+		String view = null;
+		
+		try {
+			ntDao.noticeWrite(notice);
+			view = "redirect:ATNotice";
+			rttr.addFlashAttribute("check",2);
+		} catch (Exception e) {
+			view = "redirect:ATNoticeWrite";//redirect로, writeFrm에 가라
+			rttr.addFlashAttribute("check",1);
+		}
+		mav.setViewName(view);
+		//mav에 데이터를 담지 않아도 되나..?? - Insert를 하니까 상관 없음
+		return mav;
+	}
+
+	public ModelAndView getATNoticeList(Integer pageNum) {
+		log.info("getATNoticeList() - pageNum : " + pageNum);
+		mav = new ModelAndView();
+		
+		int num = (pageNum == null)? 1 : pageNum;//맨 처음에는 넘어오는 페이지 넘버가 없기 때문에 1페이지부터 시작함
+
+		List<NT_Dto> nList = ntDao.getList(num);//페이지 번호를 가져오고, 그 번호에 해당하는 List를 가져온다.
+		mav.addObject("bList", nList);//bList라는 이름으로 bList 데이터를 넣겠다.
+		//------추가분-----------------------------------------------------------------------------------------
+		mav.addObject("paging",getPaging(num));//여기서 num은 페이지 번호
+		//-----------------------------------------------------------------------------------------------------
+		mav.setViewName("ATNotice");//mav를 보낼 jsp파일의 이름
+		session.setAttribute("pageNum", num);
+		return mav;//
+		
+	}
+	
+	private Object getPaging(int num) {
+		//전체 글 개수 구하기(from DB)
+		int maxNum = ntDao.getBoardCount();
+		int listCount = 10;//페이지 당 글 갯수
+		int pageCount = 2; //한 그룹당 페이지 갯수
+		String listName = "ATNotice";//BoardController의 RequestMapping 과 똑같아야 함.
+		Paging paging = new Paging(maxNum, num, listCount, pageCount, listName);
+		String pagingHtml = paging.makeHtmlPaging();		
+
+		return pagingHtml;
+	}
+
+	public ModelAndView getNoticeContents(Integer nt_num) {
+		mav = new ModelAndView();
+		ntDao.upView(nt_num);
+		NT_Dto nDto = ntDao.getContents(nt_num);
+		
+		NT_Dto getNoticeContents = ntDao.getContents(nt_num);
+		CM_Dto sessionMember = (CM_Dto)session.getAttribute("mb");
+		String getSessionId = sessionMember.getCm_id();
+		String getId = getNoticeContents.getNt_id();
+		
+		if(getId.equals(getSessionId)) {
+			
+			mav.addObject("deleteCheck",1);
+		}
+		else {
+			mav.addObject("deleteCheck",0);
+		}
+		mav.addObject("board", nDto);//board는 공지사항 내용출력 ${board.nt_contents}
+		
+		mav.setViewName("ATNoticeDetail");
+	
+		
+		return mav;
+	}
+
+	
 
 	
 

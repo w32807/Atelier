@@ -26,6 +26,18 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/style.css" type="text/css">
+    
+    <script type="text/javascript">
+	    window.onload = function() {
+	        var chk = "${insertMessage}";
+	        if(chk != ""){
+	            alert("장바구니에 담겼습니다!");
+	            location.reload(true); 
+	        }
+	    }
+	    
+    
+    </script>
 </head>
 
 <body>
@@ -345,14 +357,14 @@
                                 </div>
                                 크기 -->
                                 <div class="quantity">
-	                                <form id="basketFrm" action="basket" method="get">
+	                                <form id="basketFrm" method="get">
 	                                    <div id="bt_countDiv" class="pro-qty">
 	                                        <input id="bt_count" type="text" name="bt_count" value="1">
 	                                    </div>
 	                                   <input type="hidden" name="bt_pd_code" value="${prodDto.pd_code}">  
 	                                </form>
                                     <!-- <a href="basket" class="primary-btn pd-cart">장바구니에 담기</a> -->
-                                    <input id="basketBtn" type="button"class="primary-btn pd-cart" value="장바구니에 담기" >
+                                    <input id="basketBtn" type="button"class="primary-btn pd-cart" value="장바구니에 담기">
                                 </div>
                                 
                                 <ul class="pd-tags">
@@ -737,17 +749,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="${pageContext.request.contextPath}/resources/main/js/jquery.slicknav.js"></script>
     <script src="${pageContext.request.contextPath}/resources/main/js/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/main/js/main.js"></script>
-    <script src="resources/AT_front/js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="resources/AT_front/js/jquery.easing.1.3.js"></script>
+    
+	<script src="resources/js/jquery.serializeObject.js"></script>
 </body>
 <script type="text/javascript">
    	$('#basketBtn').click(function(){
         if(confirm("이 상품을 장바구니에 담으시겠습니까?")){
-        	$('#basketFrm').submit();
+        	insertbasket();
         } 		
-                                		
-                                		
    	});
 
 	$("#bt_countDiv").on("click", function() {
@@ -756,6 +765,30 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
    		$("#totalPrice").html(totalPrice);
 	});
 
-                                
+	
+	  
+	function insertbasket() {
+		var basketFrm = $("#basketFrm").serializeObject();
+		console.log(basketFrm);
+
+		$.ajax({
+			url : "insertbasket",
+			type : "get",
+			data : basketFrm,
+			dataType : "json",
+			success : function(data) {
+				console.log(data);
+				if (data != '') {
+					alert("장바구니에 담겼습니다!");
+				}
+			},
+			error : function(error, status) {
+				console.log(error);
+				console.log(status);
+				alert("장바구니에 담기지 않았습니다.");
+			}
+
+		});
+	}
 </script>
 </html>

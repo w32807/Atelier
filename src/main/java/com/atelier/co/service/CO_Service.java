@@ -1,4 +1,3 @@
-
 package com.atelier.co.service;
 
 import java.text.SimpleDateFormat;
@@ -14,6 +13,7 @@ import com.atelier.dao.AD_Dao;
 import com.atelier.dao.CO_Dao;
 import com.atelier.dto.CO_NoticeDto;
 import com.atelier.dto.FT_FAQDto;
+import com.atelier.dto.MG_Dto;
 import com.atelier.util.CO_FAQPaging;
 import com.atelier.util.CO_NoticePaging;
 
@@ -133,6 +133,28 @@ public class CO_Service {
 		faq = coDao.viewFAQContents(faq.getFt_num());
 		mav.addObject("faq",faq);
 		mav.setViewName("COFAQContents");
+		
+		return mav;
+	}
+
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 메세지 문의
+	 * 작성자: KBH
+	 * 작성일: 2020.02.11
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView ADSendMessage(MG_Dto mgDto) {
+		mav = new ModelAndView();
+		
+		try {
+			
+			coDao.ADSendMessage(mgDto);
+		
+			mav.setViewName("CONotice");
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
 		
 		return mav;
 	}

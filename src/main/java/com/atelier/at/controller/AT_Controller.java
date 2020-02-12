@@ -139,7 +139,6 @@ public class AT_Controller {
 		return null;
 	}
 
-
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 제작한 상품 리스트 전체 출력
 	  * 작성자: KYH
@@ -318,7 +317,7 @@ public class AT_Controller {
 	@GetMapping("ATOrderState")
 	public ModelAndView goATOrderState(HttpServletRequest request) {
 		String orderState = request.getParameter("orderState");
-		mav = atServ.getATOrdetList(orderState);
+		mav = atServ.getATOrderList(orderState);
 		
 		return mav;
 	}
@@ -376,8 +375,60 @@ public class AT_Controller {
 		public ModelAndView chgOrderList(HttpServletRequest request) {
 			String orderState = request.getParameter("orderState");
 		    log.warn(orderState);
-		    mav = atServ.getATOrdetList(orderState);
+		    mav = atServ.getATOrderList(orderState);
 			return mav;
+		}
+		
+		/*-------------------------------------------------------------------
+		 * 기   능 : 공지사항 리스트 출력
+		 * 작업자 : KJH
+		 * 작성일 : 2020.02.11		최종수정일 : 2020.02.11
+		-------------------------------------------------------------------*/
+		@GetMapping("ATNotice")
+		public ModelAndView ATNoticeList(Integer pageNum) {
+			log.info("ATNoticeList()");
+			mav = atServ.getATNoticeList(pageNum);
+
+			return mav;
+		}
+		/*-------------------------------------------------------------------
+		 * 기   능 : 공지사항 내용 출력
+		 * 작업자 : KJH
+		 * 작성일 : 2020.02.11		최종수정일 : 2020.02.11
+		-------------------------------------------------------------------*/
+		@GetMapping("ATNoticeDetail")
+		public ModelAndView getNoticeContents(Integer nt_num) {//form에서 넘겨주는 name과 controller의 매개변수 명과 같아야 한다.
+			log.info("getNoticeContents - nt_num = " + nt_num);
+			mav = atServ.getNoticeContents(nt_num);
+			
+			return mav;
+		}
+		
+		
+		/*-------------------------------------------------------------------
+		 * 기   능 : 공지사항 작성
+		 * 작업자 : KJH
+		 * 작성일 : 2020.02.11		최종수정일 : 2020.02.11
+		-------------------------------------------------------------------*/
+		
+		//글 쓰기 관련 작업 2가지.
+		//1. 리스트 화면에서 글쓰기 화면으로 전환하기
+		//DB안가고 화면전환만 하는 방법
+
+		//공지사항 작성폼으로 이동
+		@GetMapping("ATNoticeWrite")
+		public String ATNoticeWrite() {
+			return "ATNoticeWrite";
+		}
+
+		//2. 글쓰기 화면에서 들어 온 데이터를 처리
+		//공지사항 작성
+		@PostMapping("noticeWrite")
+		public ModelAndView noticeWrite(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
+			log.warn("notice");
+			mav = atServ.noticeWrite(multi, rttr);
+			return mav;
+
 		}
 		
 }

@@ -68,4 +68,14 @@
 		SELECT AT_SEQ FROM AT WHERE AT_NAME = #{pd_at_name}	
 	</select>
   
+  	<insert id="insertbasket" parameterType="com.atelier.dto.BT_Dto">
+  		INSERT INTO BT VALUES(BT_NUM_SEQ.NEXTVAL,#{bt_cm_id},#{bt_at_name},#{bt_price},#{bt_count},#{bt_pd_code})
+  	</insert>
+  	
+  	
+  	
+  	
+  	
+  	
+  	
 </mapper>

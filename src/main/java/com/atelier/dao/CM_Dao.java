@@ -2,6 +2,7 @@ package com.atelier.dao;
 
 import java.util.List;
 
+import com.atelier.dto.BT_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.PD_productDto;
 
@@ -36,4 +37,6 @@ public interface CM_Dao {
 	public PD_productDto getprodDetail(int pd_code);
 
 	public int getAt_num(String pd_at_name);
+
+	public void insertbasket(BT_Dto btDto);
 }

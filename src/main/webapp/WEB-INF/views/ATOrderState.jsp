@@ -76,6 +76,7 @@
 
 <!-- Modernizr JS -->
 <script src="resources/AT_front/js/modernizr-2.6.2.min.js"></script>
+
 <!-- FOR IE9 below -->
 <!--[if lt IE 9]>
 		<script src="js/respond.min.js"></script>
@@ -267,14 +268,14 @@
 								<hr>
 							</h2>
 						</div>
-						<form action="chgOrderList" method="get" id="orderStateFrm">
+					 	<!-- <form action="chgOrderList" method="get" id="orderStateFrm">
 							<select id="selectBox" name="orderState"
 								style="margin-left: 1100px; border-radius: 10px; width: 100px; height: 35px; padding-left: 8px; font-size: 14px; border: 1px solid #A09182; color: white; background-color: #A09182;">
 								<option  value="before">배송전</option>
 								<option  value="being">배송중</option>
-								<option  value="after">배송 완료</option>
-						<form id="orderStateFrm">
-							<select id="selectBox"
+								<option  value="after">배송 완료</option> -->
+						<form action="ATOrderState" id="orderStateFrm">
+							<select id="selectBox" name="orderState"
 								style="margin-left: 1100px; border-radius: 10px; width: 100px; height: 35px; padding-left: 8px; font-size: 14px; border: 1px solid #A09182; color: white; background-color: #A09182;">
 								<option value="before">배송전</option>
 								<option value="being">배송중</option>
@@ -502,6 +503,38 @@
 		 
 	 });
 	
+	 window.onload = function(){
+	     var chk = "${check}";
+	     if(chk!=''){
+	     removeSelected();
+	     switch (chk) {
+		 	case "before":
+		 		$('select[name="orderState"]').find('option[value="before"]').attr("selected",true);
+		 	break;
+		 	case "being":
+		 		$('select[name="orderState"]').find('option[value="being"]').attr("selected",true);
+		 	break;
+		 	case "after":
+		 		$('select[name="orderState"]').find('option[value="after"]').attr("selected",true);
+		 	break;
+
+	 		}
+	     
+	    }
+	 };
+	 
+	 function removeSelected(){
+		$('select[name="orderState"]').find('option[value="before"]').attr("selected",false);
+		$('select[name="orderState"]').find('option[value="being"]').attr("selected",false);
+		$('select[name="orderState"]').find('option[value="after"]').attr("selected",false);
+	 }
+	 
+	 
+	 
+	 
+	
+
+
 	
 	</script>
 </body>

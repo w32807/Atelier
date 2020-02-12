@@ -24,6 +24,7 @@ import com.atelier.dao.AM_Dao;
 import com.atelier.dao.AT_Dao;
 import com.atelier.dao.CM_Dao;
 import com.atelier.dao.NT_Dao;
+import com.atelier.dao.PD_Dao;
 import com.atelier.dto.AD_MaterialDto;
 import com.atelier.dto.AG_Dto;
 import com.atelier.dto.AM_Dto;
@@ -31,9 +32,11 @@ import com.atelier.dto.CM_Dto;
 import com.atelier.dto.CO_NoticeDto;
 import com.atelier.dto.FT_FAQDto;
 import com.atelier.dto.MG_Dto;
+import com.atelier.dto.PD_productDto;
 import com.atelier.util.AD_MaterialPaging;
 import com.atelier.util.FAQPaging;
 import com.atelier.util.NT_Paging;
+import com.atelier.util.PD_Paging;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -59,6 +62,10 @@ public class AD_Service {
 	
 	@Setter(onMethod_ = @Autowired)
 	AM_Dao amDao;
+	
+	@Setter(onMethod_ = @Autowired)
+	PD_Dao pdDao;
+	
 	
 	
 	/* ---------------------------------------------------------------------------------
@@ -600,5 +607,86 @@ public class AD_Service {
 		return mav;
 	}
 	
+
+	/*
+	 * -----------------------------------------------------------------------------
+	 *        기능: 제작한 상품 리스트 전체 출력 
+	 *       작성자: KYH 
+	 *       작성일 : 2019.02.05
+	 * ----------------------------------------------------------------------------- */
+
+	public ModelAndView getADProdList(Integer pageNum, Integer maxNum) {
+		mav = new ModelAndView();
+
+		int num = (pageNum == null) ? 1 : pageNum;
+		maxNum = aDao.getADProdListCount();
+		Map<String, Integer> pageInt = new HashMap<String, Integer>();
+		pageInt.put("pageNum", num);
+		pageInt.put("maxNum", maxNum);
+		List<PD_productDto> pd = aDao.getADProdList(pageInt);
+
+		mav.addObject("pd", pd);
+		mav.addObject("paging", getADProdPaging(num));
+		session.setAttribute("pageNum", num);
+
+		mav.setViewName("ADProdManage");
+		return mav;
+	}
+	
+	/*
+	 * -----------------------------------------------------------------------------
+	 *  	기능: 상품삭제 Paging 처리 
+	 *  	작성자: KBH 
+	 *  	작성일 : 2019.02.05
+	 * ----------------------------------------------------------------------------- */
+	
+	private Object getADProdPaging(int num) {
+		// 전체 글 개수 구하기(from DB)
+		int maxNum = pdDao.getATProdListCount();
+		int listCount = 10; // 페이지 당 글 개수
+		int pageCount = 5; // 그룹 당 페이지 개수
+		String listName = "ATProdManage";
+		PD_Paging paging = new PD_Paging(maxNum, num, listCount, pageCount, listName);
+		String pagingHtml = paging.makeHtmlPaging();
+
+		return pagingHtml;
+	}
+
+	 /* ---------------------------------------------------------------------------------------
+	 * 기능: 주문내역 취소 메소드 <수정필요>
+	 * 작성자: KBH
+	 * 작성일: 2020.02.07
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView productDelete(String[] check, RedirectAttributes rttr) {
+		log.warn("st");
+		
+		mav = new ModelAndView();
+		
+		
+		try {
+			for(int i=0; i<check.length; i++ ) {
+				aDao.productDelete(check[i]);
+			mav.setViewName("redirect:ADProdManage");	
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+			log.warn("error");
+		}
+	
+		
+		return mav;
+	}
+
+	public ModelAndView productUpdate1(Integer pd_code) {
+		log.warn("st");
+		
+		mav = new ModelAndView();
+		
+		mav = aDao.ProductUpdate1(pd_code);
+		
+		return mav;
+	}
+
 
 }

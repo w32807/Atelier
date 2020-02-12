@@ -82,21 +82,28 @@ public class MP_MessageService {
 		  
 		  mav = new ModelAndView();
 		 
+		  String view = null;
+				  
 		  String mg_receiver = mDto.getMg_sender();
 		  
 		  log.warn(mDto.getMg_receiver()+","+mDto.getMg_sender());
 		  
-		  try { mDao.SendMessage(mDto);
-		  
+		  try {
+			  
+			  mDao.SendMessage(mDto);
+			  view =  "forward:messager";
+			  
 		  }catch(Exception e) {
 			  
 			  e.printStackTrace();
 		  
 		  }
 		  
-		  mav.setViewName("messager");
 		  
-		  return mav; }
+		  mav.setViewName(view);
+		  
+		  return mav; 
+		  }
 		 
 
 

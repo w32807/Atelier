@@ -35,4 +35,8 @@
 	<select id="viewFAQContents" parameterType="Integer" resultType="com.atelier.dto.FT_FAQDto">
 		SELECT * FROM FT WHERE FT_NUM=#{ft_num}
 	</select>
+	<insert id="ADSendMessage" parameterType="com.atelier.dto.MG_Dto">
+		INSERT INTO MESSAGE VALUES(MG_NUM_SEQ.NEXTVAL,#{mg_sender},#{mg_receiver},'F',#{mg_contents},DEFAULT)
+	</insert>
+
 </mapper>

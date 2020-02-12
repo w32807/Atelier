@@ -80,6 +80,28 @@
 	<delete id="delMessage" parameterType="String">
 		DELETE FROM MESSAGE WHERE MG_NUM=#{hs}
 	</delete>
+	
+	
+	<select id="getADProdList" parameterType="map" resultType="com.atelier.dto.PD_productDto">
+		<![CDATA[
+		SELECT * FROM (SELECT ROWNUM RONUM, PD.* FROM (SELECT * FROM PD ORDER BY PD_CODE)PD)
+        WHERE RONUM <=#{maxNum}-(#{pageNum}-1)*9 AND RONUM>=#{maxNum}-(#{pageNum}-1)*9-8
+		ORDER BY PD_CODE DESC
+		]]>
+	</select>
+	
+	<select id="getADProdListCount" resultType="Integer">
+		SELECT COUNT(*) FROM PD
+	</select>
+	
+	<delete id="productDelete" parameterType="String" >
+	DELETE FROM PRODUCT WHERE PD_CODE = #{check}
+	</delete>
+	
+	
+	<!-- <Select id="ProductUpdate1" parameterType="Integer" returnType="com.atelier.dto.PD_productDto"> 
+		UPDATE PD SET PD_REGIST='F' WHERE PD_CODE=#{pd_code}
+	</Select> -->
 </mapper>
 
 

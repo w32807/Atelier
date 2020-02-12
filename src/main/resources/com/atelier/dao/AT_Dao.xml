@@ -3,7 +3,7 @@
 <mapper namespace="com.atelier.dao.AT_Dao">
 	
 	<insert id="ATProdInsert" parameterType="com.atelier.dto.PD_productDto">
-	   INSERT INTO PD VALUES(PD_CODE_SEQ.NEXTVAL,#{pd_name},#{pd_price},#{pd_detail},#{pd_at_name},#{pd_option},
+	   INSERT INTO PD VALUES(PD_CODE_SEQ.NEXTVAL,#{pd_at_id},#{pd_name},#{pd_price},#{pd_detail},#{pd_at_name},#{pd_option},
 		   DEFAULT,DEFAULT,#{pd_cate},#{pd_type},#{pd_sex},#{pd_numofstock})
 	</insert>
 	
@@ -73,10 +73,8 @@
    </select>
    
    <select id="getATOrderList" parameterType="com.atelier.vo.PO_Vo" resultType="com.atelier.vo.PO_Vo">
-   	  SELECT * FROM POLIST WHERE PO_STATE = #{po_state} AND PO_AT_NAME = #{po_at_name}
+   	  SELECT * FROM POLIST WHERE PO_STATE = #{po_state} AND PO_CM_ID = #{po_cm_id}
    </select>
-   
-
 
    <select id="getATRegistUserData" resultType="com.atelier.dto.AG_Dto">
 	   SELECT AG_ID, AG_AT_NAME, AG_PHONE, AG_SNSADDR, AG_CATE1, AG_CATE2, AG_CATE3 

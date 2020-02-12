@@ -12,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.atelier.dao.AT_Dao;
 import com.atelier.dao.CM_Dao;
+import com.atelier.dto.BT_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.PD_productDto;
 
@@ -24,6 +26,10 @@ import lombok.extern.slf4j.Slf4j;
 public class CM_Service {
 
 	ModelAndView mav;
+	
+
+	@Setter(onMethod_ = @Autowired)
+	AT_Dao atDao;
 	
 	@Setter(onMethod_ = @Autowired)
 	CM_Dao cm_Dao;
@@ -229,6 +235,35 @@ public class CM_Service {
 			mav.setViewName("prodDetail");
 		
 		return mav;
+	}
+	
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 장바구니 담기
+	 * 작성자: JWJ
+	 * 작성일: 2020.02.12
+	 -----------------------------------------------------------------------------------------*/
+	public String insertbasket(String bt_count, String bt_pd_code) {
+		String insertChk = null;
+		BT_Dto btDto = new BT_Dto();
+		int btCount = Integer.parseInt(bt_count);
+		int btPdCode = Integer.parseInt(bt_pd_code);
+		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
+		String AT_id = cmDto.getCm_id();
+		PD_productDto prodDto = atDao.getModifyProd(btPdCode);
+		String bt_at_name = prodDto.getPd_at_name();
+		int bt_price = prodDto.getPd_price();
+		
+		btDto.setBt_cm_id(AT_id);
+		btDto.setBt_at_name(bt_at_name);
+		btDto.setBt_price(bt_price);
+		btDto.setBt_count(btCount);
+		btDto.setBt_pd_code(btPdCode);
+		
+		cm_Dao.insertbasket(btDto);
+		
+		insertChk = "insertChkSuccess";
+		return insertChk;
 	}
 
 	

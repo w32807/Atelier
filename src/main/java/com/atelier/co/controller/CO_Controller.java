@@ -11,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.atelier.co.service.CO_Service;
 import com.atelier.dto.FT_FAQDto;
+import com.atelier.dto.MG_Dto;
 import com.atelier.main.controller.MainController;
 import com.atelier.main.service.CM_Service;
 
@@ -34,6 +35,7 @@ public class CO_Controller {
 	 * 작성자: JSG, KYH
 	 * 작성일: 2020.02.05
 	 -----------------------------------------------------------------------------------------*/
+
 	@GetMapping(value = "CONotice", produces="application/json; charset=utf-8")
 	@ResponseBody
 	public ModelAndView noticeList(Integer noticePageNum, Integer FAQPageNum) {
@@ -65,6 +67,18 @@ public class CO_Controller {
 	public ModelAndView viewFAQContents(FT_FAQDto faq) {
 		mav = mServ.viewFAQContents(faq);
 
+		return mav;
+	}
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 메세지 문의
+	 * 작성자: KBH
+	 * 작성일: 2020.02.11
+	 -----------------------------------------------------------------------------------------*/
+	@GetMapping("ADsendMessage")
+	public ModelAndView ADsendMessage(MG_Dto mgDto){
+		
+		mav = mServ.ADSendMessage(mgDto);
+		
 		return mav;
 	}
 }//class end

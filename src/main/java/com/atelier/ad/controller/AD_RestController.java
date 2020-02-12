@@ -30,7 +30,7 @@ public class AD_RestController {
 	  * 작성자: KYH
 	  * 작성일 : 2019.02.04
 	  -----------------------------------------------------------------------------------*/
-	@PostMapping(value = "ADNoticeInsert", produces="application/json; charset=utf-8")
+	 @PostMapping(value = "ADNoticeInsert", produces="application/json; charset=utf-8")
 	 @ResponseBody
 	 public Map<String, List<CO_NoticeDto>> ADNoticeInsert(CO_NoticeDto ntdto, Integer pageNum, Integer maxNum) {
 		 

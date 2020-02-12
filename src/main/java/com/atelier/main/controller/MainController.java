@@ -116,15 +116,20 @@ public class MainController {
 		log.warn(CM_ID);
 		return mServ.userIdCheck(CM_ID);
 	}
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 장바구니 담기
+	 * 작성자: JWJ
+	 * 작성일: 2020.02.12
+	 -----------------------------------------------------------------------------------------*/
+	 @GetMapping(value = "insertbasket", produces="application/text; charset=utf-8")
+	 @ResponseBody
+	  public String basket(String bt_count, String bt_pd_code){
 
-	/*
-	 * //장바구니 출력
-	 * 
-	 * @RequestMapping(value = "/basket", method = RequestMethod.GET) public String
-	 * basket(Locale locale, Model model) {
-	 * 
-	 * return "basket"; }
-	 */
+		 String insertChk = mServ.insertbasket(bt_count,bt_pd_code);
+		 String jsonInsert = "{\"result\":\"" + insertChk + "\"}";
+		 return jsonInsert;
+	  }
+	 
 	//HOME
 	//Shop Home
 	@RequestMapping(value = "main", method = RequestMethod.GET)

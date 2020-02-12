@@ -184,10 +184,10 @@ public class AD_controller {
 		return "ADATList";
 	}
 	
-	@GetMapping("ADProdManage")
-	public String goADProdManage() {
-		return "ADProdManage";
-	}	
+	/*
+	 * @GetMapping("ADProdManage") public String goADProdManage() { return
+	 * "ADProdManage"; }
+	 */
 	
 	/*
 	 * @GetMapping("ADMessageContents") public String goADMessageContents() { return
@@ -276,24 +276,25 @@ public class AD_controller {
 	}
 	
 
+
 	/* ---------------------------------------------------------------------------------
-	  * 기능: 메세지 리스트 출력
-	  * 작성자: KBH
-	  * 작성일 : 2010.02.10
-	  -----------------------------------------------------------------------------------*/
-	
-	@GetMapping("ADMessage")
-		public ModelAndView goADMessage() {
+		  * 기능: 메세지 리스트 출력
+		  * 작성자: KBH
+		  * 작성일 : 2010.02.10
+		  -----------------------------------------------------------------------------------*/
 		
-			CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
+		@GetMapping("ADMessage")
+			public ModelAndView goADMessage() {
 			
-			String mg_receiver = cmDto.getCm_id();
-			
-			mav = aServ.goADMessage(mg_receiver);
-			
-			return mav;
-		}
-	
+				CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
+				
+				String mg_receiver = cmDto.getCm_id();
+				
+				mav = aServ.goADMessage(mg_receiver);
+				
+				return mav;
+			}
+		
 
 
 	/* ---------------------------------------------------------------------------------
@@ -301,30 +302,30 @@ public class AD_controller {
 	  * 작성자: KBH
 	  * 작성일 : 2010.02.11
 	-----------------------------------------------------------------------------------*/
-	@GetMapping("ADMessageContents")
-	public ModelAndView ADMessagecon(Integer mg_num) {
-		log.info("메세지 상세보기 컨트롤러 시작");
-		mav = aServ.ADMessagecon(mg_num);
+		@GetMapping("ADMessageContents")
+		public ModelAndView ADMessagecon(Integer mg_num) {
+			log.info("메세지 상세보기 컨트롤러 시작");
+			mav = aServ.ADMessagecon(mg_num);
+			
+			return mav;
+		}
 		
-		return mav;
-	}
-	
-	
+		
 
 
-	
+
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 메세지 상세보기에서 답장 
 	  * 작성자: KBH
 	  * 작성일 : 2010.02.11
 	-----------------------------------------------------------------------------------*/
-	@GetMapping("ADmessageSendBtn")
-	public ModelAndView ADmessageSendBtn(MG_Dto mDto) {
-		
-		mav = aServ.MessageSendBtn(mDto);
-		
-		return mav;
-	}
+		@GetMapping("ADmessageSendBtn")
+		public ModelAndView ADmessageSendBtn(MG_Dto mDto) {
+			
+			mav = aServ.MessageSendBtn(mDto);
+			
+			return mav;
+		}
 
 
 	/* ---------------------------------------------------------------------------------
@@ -333,12 +334,58 @@ public class AD_controller {
 	  * 작성일 : 2010.02.11
 	-----------------------------------------------------------------------------------*/
 	@GetMapping("delMessage")
-	public ModelAndView delMessage(HttpServletRequest hs, RedirectAttributes rttr) {
-		
-		String[] check = hs.getParameterValues("prod");
-		
-		mav = aServ.delMessage(check,rttr);
+		public ModelAndView delMessage(HttpServletRequest hs, RedirectAttributes rttr) {
+			
+			String[] check = hs.getParameterValues("prod");
+			
+			mav = aServ.delMessage(check,rttr);
+			
+			return mav;
+		}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 상품 리스트 전체 출력
+	  * 작성자: KBH
+	  * 작성일 : 2019.02.12
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ADProdManage")
+	public ModelAndView getATProdList(Integer pageNum, Integer maxNum) {
+		log.warn("제작한 상품 리스트 전체 출력 컨트롤러");
+		mav = aServ.getADProdList(pageNum, maxNum);
 		
 		return mav;
 	}
+	
+	 /* ---------------------------------------------------------------------------------------
+	 * 기능: 상품내역 삭제 메소드 
+	 * 작성자: KBH
+	 * 작성일: 2020.02.12
+	 -----------------------------------------------------------------------------------------*/
+	 @GetMapping("productDelete")
+	 public ModelAndView ProdManager(HttpServletRequest hs, RedirectAttributes rttr) {
+		 
+		 
+		 
+		 String[] check = hs.getParameterValues("prod");
+		 log.warn(check[0]);
+		 
+		 mav = aServ.productDelete(check,rttr);
+		 
+		 
+		 return mav;
+	 }
+	 
+	 /* ---------------------------------------------------------------------------------------
+		 * 기능:  상품내역 수정 메소드 중 상품상세정보 출력메소드
+		 * 작성자: KBH
+		 * 작성일: 2020.02.12
+		 -----------------------------------------------------------------------------------------*/
+	 @GetMapping("ADProdDetail")
+	 public ModelAndView ADupdateManager1(Integer pd_code) {
+		 
+		 mav = aServ.productUpdate1(pd_code);
+		 
+		 
+		 return mav;
+	 }
 }

@@ -184,18 +184,18 @@
                             <tbody>
                             	<c:forEach var="b" items="${bList}">
                                 <tr>
-                                    <td class="cart-pic first-row"><img src="./resources/image/${b.pi_oriname}" alt=""></td>                                    <td class="cart-title first-row">
+                                    <td class="cart-pic first-row"><img src="./resources/main/img/products/${b.pi_oriname}" alt=""></td>                                    <td class="cart-title first-row">
                                         <h5>${b.bt_at_name}</h5>
                                     </td>
                                     <td class="p-price first-row">${b.bt_price}</td>
                                     <td class="qua-col first-row">
-                                        <div class="quantity">
+                                        <div id="상품코드" class="quantity">
                                             <div class="pro-qty">
-                                                <input type="text" value="${b.bt_count}"> <!-- 수량조정 -->
+                                                <input name="상품코드" type="text" value="${b.bt_count}"> <!-- 수량조정 -->
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="total-price first-row">$60.00</td> <!-- 총가격 -->
+                                    <td name="상품코드" class="total-price first-row">$60.00</td> <!-- 총가격 -->
                                     <td class="close-td first-row"><i class="ti-close"></i></td> <!-- 취소버튼 -->
                                 </tr>
                                 </c:forEach>
