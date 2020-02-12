@@ -250,13 +250,13 @@
 						<div class="col-md-5 col-md-push-6" style="left: 50px;">
 							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
 								<div class="colorlib-icon" style="background-color: white;">
-									<img src="resources/AT_front/images/subscribe.png" style="width: 100px;">
+									<img src="resources/AT_front/images/subscribe.png" style="width: 100px; padding-bottom: 0px;">
 								</div>
 								<div class="colorlib-icon" style="margin: 0 230px; background-color: white;">
-									<img src="resources/AT_front/images/product.png" style="width: 100px;">
+									<img src="resources/AT_front/images/product.png" style="width: 100px; padding-bottom: 0px;">
 								</div>
 								<div class="colorlib-icon" style="margin: 0 460px; background-color: white;">
-									<img src="resources/AT_front/images/machine.png" style="width: 100px;">
+									<img src="resources/AT_front/images/machine.png" style="width: 100px; padding-bottom: 0px;">
 								</div>
 							</div>
 							<div class="colorlib-text" style="margin-top: 120px; width: 900px; font-size: 18px;">

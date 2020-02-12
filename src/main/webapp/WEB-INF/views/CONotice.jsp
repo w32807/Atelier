@@ -107,13 +107,7 @@ nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
 	color: red;
 }
 
-
-<<<<<<< HEAD
 </style>
-
-
-=======
->>>>>>> branch 'master' of https://github.com/w32807/Atelier.git
 </head>
 <body>
 	<!-- Page Preloder -->
@@ -198,7 +192,6 @@ nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
 	<!-- Header End -->
 	<!-- 상단바 End -->
 
-
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 ">
@@ -206,32 +199,38 @@ nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
 						<a class="nav-item nav-link active" id="nav-home-tab"
 							data-toggle="tab" href="#nav-home" role="tab"
-							aria-controls="nav-home" aria-selected="true">공지사항</a> <a
-							class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
+							aria-controls="nav-home" aria-selected="true">공지사항
+						</a>					
+						<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab"
 							href="#nav-profile" role="tab" aria-controls="nav-profile"
-							aria-selected="false">약관</a> <a class="nav-item nav-link"
-							id="nav-FAQ-tab" data-toggle="tab" href="#nav-FAQ" role="tab"
-							aria-controls="nav-FAQ" aria-selected="false">FAQ</a> <a
-							class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
+							aria-selected="false">약관
+						</a>							
+						<a class="nav-item nav-link" id="nav-FAQ-tab" data-toggle="tab"
+							href="#nav-FAQ" role="tab" aria-controls="nav-FAQ"
+							aria-selected="false">FAQ
+						</a>
+						<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab"
 							href="#nav-contact" role="tab" aria-controls="nav-contact"
-							aria-selected="false">Contact Us</a> <a class="nav-item nav-link"
-							id="nav-about-tab" data-toggle="tab" href="#nav-about" role="tab"
-							aria-controls="nav-about" aria-selected="false">메세지 문의</a>
+							aria-selected="false">Contact Us
+						</a>
+						<a class="nav-item nav-link" id="nav-about-tab" data-toggle="tab"
+							href="#nav-about" role="tab" aria-controls="nav-about"
+							aria-selected="false">메세지 문의
+						</a>
 					</div>
 				</nav>
 
 				<div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+					<!-- 공지사항 -->
 					<div class="tab-pane fade show active" id="nav-home"
 						role="tabpanel" aria-labelledby="nav-home-tab">
 						<br>
-						<h4>공지사항</h4>
-						<br>
 						<div class="table-responsive">
-							<table  class="align-middle mb-0 table table-borderless table-striped table-hover">
+							<table class="align-middle table table-borderless table-striped table-hover">
 								<thead>
 									<tr>
 										<!-- <th>선택</th> -->
-										<th class="text-center" style="width: 100px;">등록번호</th>
+										<th class="text-center" style="width: 160px;">등록번호</th>
 										<th class="text-center" style="width: 450px;">제목</th>
 										<th class="text-center">작성자</th>
 										<th class="text-center">조회수</th>
@@ -239,45 +238,42 @@ nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
 									</tr>
 								</thead>
 								<tbody id="nList" name="nList">
-									
 									<c:forEach var="bnotice" items="${noticeList}">
-									<tr>
-
-									<td class="text-center text-muted">${bnotice.nt_num}</td>
-
-									<td><div class="widget-content p-0"
-											style="text-align: center;">
-											<div class="widget-content-wrapper">
-												<div class="widget-content-left flex2">
-													<div class="widget-heading">${bnotice.nt_title}</div>
+										<tr>
+											<td class="text-center text-muted">${bnotice.nt_num}</td>
+												<td>
+												<div class="widget-content p-0" style="text-align: center;">
+													<div class="widget-content-wrapper">
+														<div class="widget-content-left flex2">
+															<div class="widget-heading">${bnotice.nt_title}</div>
+														</div>
+													</div>
 												</div>
-											</div>
-										</div></td>
-
-									<td class="text-center">${bnotice.nt_id}</td>
-
-									<td class="text-center">${bnotice.nt_count}</td>
-
-									<td class="text-center"><a
-										href="CONoticeContents?Noticenum=${bnotice.nt_num}"
-										onclick="window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=yes');return false;">
-											<button type="button" id="PopoverCustomT-1"
-												class="btn btn-primary btn-sm">상세보기</button>
-									</a></td>
-									</tr>
-									</c:forEach>
-																		
+											</td>
+											<td class="text-center">${bnotice.nt_id}</td>
+											<td class="text-center">${bnotice.nt_count}</td>
+											<td class="text-center">
+												<a href="CONoticeContents?Noticenum=${bnotice.nt_num}"
+													onclick="window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=yes');return false;">
+													<button type="button" id="PopoverCustomT-1"
+														class="btn btn-primary btn-sm"
+														style="background-color:#e74c3c; border-color:#e74c3c;">
+														상세보기
+													</button>
+												</a>
+											</td>
+										</tr>
+									</c:forEach>								
 								</tbody>
 							</table>
 							<p style="text-align:center">${paging}</p>
 						</div>
-						</div>
+					</div>
+
+					<!-- 약관 -->
 					<div class="tab-pane fade" id="nav-profile" role="tabpanel"
-						aria-labelledby="nav-profile-tab">
-						<br>
-						<h4>약관 안내 (필독!)</h4>
-						<br>
-						<textarea class="col-md-12" style="resize: none; height: 400px;">
+						aria-labelledby="nav-profile-tab"><br>
+						<textarea class="col-md-12" style="resize: none; height: 650px;">
 Google에 오신 것을 환영합니다.
 
 Google 제품 및 서비스(‘서비스’)를 이용해 주셔서 감사합니다. 서비스는 1600 Amphitheatre Parkway, Mountain View, CA 94043, United States에 소재한 Google LLC(‘Google’)에서 제공합니다.
@@ -371,92 +367,63 @@ Google은 서비스의 변경사항을 반영하거나 법령, 규제, 보안 �
 일부 국가의 법원에서는 일부 분쟁 유형에 캘리포니아 법률을 적용하지 않습니다. 캘리포니아 법률의 적용이 배제된 국가에 거주하고 있는 경우, 거주 국가의 법률이 본 약관과 관련된 분쟁에 적용될 수 있습니다. 그렇지 않은 경우, 귀하는 본 약관 또는 서비스와 관련하여 발생되는 분쟁에 대해 미국 캘리포니아주 법률이 적용되며, 캘리포니아주 국제사법의 적용은 배제된다는 것에 동의합니다. 마찬가지로, 거주 국가의 법원에서 미국 캘리포니아주 산타클라라 카운티 법원의 관할 지역이나 재판지의 적용을 동의하지 않는 경우에도 본 약관과 관련된 분쟁에 현지 관할 지역이나 재판지가 적용될 수 있습니다. 그렇지 않은 경우, 본 약관 또는 서비스와 관련하여 발생되는 모든 소송은 독점적으로 미국 캘리포니아주 산타클라라 카운티의 연방 또는 주 법원에서 다루어지며 귀하와 Google은 이러한 법원이 인적 관할을 갖는 것에 동의합니다.
 
 Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 바랍니다.
-               </textarea>
-					</div>
-					
+               			</textarea>
+					</div>					
 
-					<!-- FAQ -->
-					<div class="tab-pane fade" id="nav-FAQ" role="tabpanel"
-						aria-labelledby="nav-FAQ-tab" align="center">
-						<div class="">
-							<div class="row">
-								<div class="col-md-12">
-									<div id="accordion" class="accordion-wrapper mb-12">
-										<div class="card">
-											<div id="headingOne" class="card-header">
-												<button type="button" data-toggle="collapse"
-													data-target="#collapseOne1" aria-expanded="true"
-													aria-controls="collapseOne"
-													class="text-left m-0 p-0 btn btn-link btn-block">
-													<h5 class="m-0 p-0">공지 1</h5>
-												</button>
-											</div>
-											<div data-parent="#accordion" id="collapseOne1"
-												aria-labelledby="headingOne" class="collapse show">
-												<div class="card-body">1이다</div>
-											</div>
-										</div>
-										<div class="card">
-											<div id="headingTwo" class="b-radius-0 card-header">
-												<button type="button" data-toggle="collapse"
-													data-target="#collapseOne2" aria-expanded="false"
-													aria-controls="collapseTwo"
-													class="text-left m-0 p-0 btn btn-link btn-block">
-													<h5 class="m-0 p-0">공지 2</h5>
-												</button>
-											</div>
-											<div data-parent="#accordion" id="collapseOne2"
-												class="collapse">
-												<div class="card-body">2다</div>
-											</div>
-										</div>
-										<div class="card">
-											<div id="headingThree" class="card-header">
-												<button type="button" data-toggle="collapse"
-													data-target="#collapseOne3" aria-expanded="false"
-													aria-controls="collapseThree"
-													class="text-left m-0 p-0 btn btn-link btn-block">
-													<h5 class="m-0 p-0">공지3</h5>
-												</button>
-											</div>
-											<div data-parent="#accordion" id="collapseOne3"
-												class="collapse">
-												<div class="card-body">3이다</div>
-											</div>
-										</div>
-										<div class="card">
-											<div id="headingFour" class="card-header">
-												<button type="button" data-toggle="collapse"
-													data-target="#collapseOne4" aria-expanded="false"
-													aria-controls="collapseFour"
-													class="text-left m-0 p-0 btn btn-link btn-block">
-													<h5 class="m-0 p-0">공지 4</h5>
-												</button>
-											</div>
-											<div data-parent="#accordion" id="collapseOne4"
-												class="collapse">
-												<div class="card-body">4다</div>
-											</div>
-										</div>
-										<div class="card">
-											<div id="headingFive" class="card-header">
-												<button type="button" data-toggle="collapse"
-													data-target="#collapseOne5" aria-expanded="false"
-													aria-controls="collapseFive"
-													class="text-left m-0 p-0 btn btn-link btn-block">
-													<h5 class="m-0 p-0">공지 5</h5>
-												</button>
-											</div>
-											<div data-parent="#accordion" id="collapseOne5"
-												class="collapse">
-												<div class="card-body">5다</div>
-											</div>
+					<!-- FAQ -->	
+						<div class="tab-pane fade" id="nav-FAQ" role="tabpanel"
+							aria-labelledby="nav-FAQ-tab" align="center">
+							<form id="CONoticeFAQFrm" name="CONoticeFAQFrm">
+								<div class="row">
+									<div class="col-md-12" style="padding-top: 1.5rem;">
+										<div id="accordion" class="accordion-wrapper mb-12">
+											<div class="table-responsive">
+												<table class="align-middle table table-borderless table-striped table-hover">
+													<thead>
+														<tr>
+															<th class="text-center" style="width: 160px;">등록번호</th>
+															<th class="text-center" style="width: 450px;">제목</th>
+															<th class="text-center">작성자</th>
+															<th class="text-center">작성일</th>
+															<th class="text-center">상세보기</th>
+														</tr>
+													</thead>
+													<tbody id="faqList" name="faqList">
+														<c:forEach var="FAQ" items="${faqListBoard}">
+															<tr>
+																<td class="text-center text-muted">${FAQ.ft_num}</td>
+																	<td>
+																	<div class="widget-content p-0" style="text-align: center;">
+																		<div class="widget-content-wrapper">
+																			<div class="widget-content-left flex2">
+																				<div class="widget-heading">${FAQ.ft_title}</div>
+																			</div>
+																		</div>
+																	</div>
+																</td>
+																<td class="text-center">${FAQ.ft_id}</td>
+																<td class="text-center">${FAQ.ft_date}</td>
+																<td class="text-center">
+																	<a href="COFAQContents?ft_num=${FAQ.ft_num}"
+																		onclick="window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=yes');return false;">
+																		<button type="button" id="PopoverCustomT-1"
+																			class="btn btn-primary btn-sm"
+																			style="background-color:#e74c3c; border-color:#e74c3c;">
+																			상세보기
+																		</button>
+																	</a>
+																</td>
+															</tr>
+														</c:forEach>								
+													</tbody>
+												</table>
+												<p style="text-align:center">${FAQpaging}</p>
+											</div>	
 										</div>
 									</div>
 								</div>
-							</div>
+							</form>
 						</div>
-					</div>
 
 					<!-- Contact Us -->
 					<div  class="tab-pane fade" id="nav-contact" role="tabpanel"
@@ -698,9 +665,85 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 	<script src="<c:url value="/resources/main/js/owl.carousel.min.js"/>"></script>
 	<script src="<c:url value="/resources/main/js/main.js"/>"></script>
 
-
 	<script type="text/javascript" src="./resources/main/js/main.js"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   	<script src="../resources/js/jquery.serializeObject.js"></script>
+	<script type="text/javascript">
 
+		$(".nav-item").click(function() {
+			var activeTab = $(this).attr('href');
+			console.log(activeTab);
+			//var CONoticeFAQFrm = $("#CONoticeFAQFrm").serializeObject();
+			//console.log(CONoticeFAQFrm);
+			
+			$.ajax({
+				url: "CONotice",
+				type: "get",
+				data: CONoticeFAQFrm,
+				dataType: "json",
+				success: function(data) {				
+					var faqListBoard = '';
+					for(var i = 0; i < data.faqListBoard.length; i++) {
+						console.log(data.faqListBoard[i].FAQpaging);
+						console.log(data.faqListBoard);
+						faqListBoard += '<div class="table-responsive">'
+						+ '<table class="align-middle table table-borderless table-striped table-hover">'
+						+ '<thead>'
+						+ '<tr>'
+						+ '<th class="text-center" style="width: 160px;">' + '등록번호' + '</th>'
+						+ '<th class="text-center" style="width: 450px;">' + '제목' + '</th>'
+						+ '<th class="text-center">작성자</th>'
+						+ '<th class="text-center">작성일</th>'
+						+ '<th class="text-center">상세보기</th>'
+						+ '</tr>'
+						+ '</thead>'
+						+ '<tbody id="faqList" name="faqList">'
+						+ '<c:forEach var="FAQ" items="${faqListBoard}">'
+						+ '<tr>'
+						+'<td class="text-center text-muted">'
+						+ data.faqListBoard[i].ft_num
+						+'</td>'
+						+'<td>'
+						+'<div class="widget-content p-0" style="text-align: center;">'
+						+'<div class="widget-content-wrapper">'
+						+'<div class="widget-content-left flex2">'
+						+'<div class="widget-heading">'
+						+ data.faqListBoard[i].ft_title
+						+'</div>'
+						+'</div>'
+						+'</div>'
+						+'</div>'
+						+'</td>'
+						+'<td class="text-center">'
+						+ data.faqListBoard[i].ft_id
+						+'</td>'
+						+'<td class="text-center">'
+						+ data.faqListBoard[i].ft_date
+						+'</td>'
+						+'<td class="text-center">'
+						+'<a href="CONoticeContents?Noticenum=${FAQ.ft_num}" onclick="window.open(this.href, "_blank", "width=800px,height=600px,toolbars=no,scrollbars=yes");return false;">'
+						+'<button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm" style="background-color:#e74c3c; border-color:#e74c3c;">'
+						+'상세보기'+'</button>'
+						+'</a>'
+						+'</td>'
+						+'</tr>'
+						+ '</tr>'
+						+ '</c:forEach>'								
+						+ '</tbody>'
+						+ '</table>'
+						+ '<p style="text-align:center">' + data.faqListBoard[i].FAQpaging + '</p>'
+						+ '</div>'
+					}
+					$('#faqList').html(faqListBoard);
+				},
+				error: function(error) {
+					alert("로드 실패");
+				}
+			});
+		}) 
+
+	</script>
 </body>
 
 

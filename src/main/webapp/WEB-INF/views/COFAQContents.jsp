@@ -15,21 +15,20 @@
 							<br style="clear: both">
 							<div class="form-group col-md-13 " style="margin-top: 10px; margin-left: -30px;">
 								<div>
-									<input type="hidden" value="${noticeContents.nt_num}" readonly>
-									<input type="hidden" value="${noticeContents.nt_count}" readonly>
+									<input type="hidden" name="ft_num" value="${faq.ft_num}" readonly>
 									<input type="hidden" value="날짜">
 								</div>
-								<h5 style="font-size: 15px; margin: 0 -10px 20px 25px;font-weight: 700; color: #e74c3c; float: right;">WRITER : ${noticeContents.nt_id}</h5>
-								<h5 style="font-size: 15px; margin: 0 -10px 20px 25px;font-weight: 700; color: #e74c3c; float: right;">VIEW : ${noticeContents.nt_count}</h5>
+								<h5 style="font-size: 15px; margin: 0 -10px 20px 25px;font-weight: 700; color: #e74c3c; float: right;">WRITER : ${faq.ft_id}</h5>
+								<h5 style="font-size: 15px; margin: 0 -10px 20px 25px;font-weight: 700; color: #e74c3c; float: right;">DATE : ${faq.ft_regdate}</h5>
 								
 								<div class="col-sm-10" style="padding: 0;">
-									<input type="text" class="form-control" value="${noticeContents.nt_title}" readonly
+									<input type="text" class="form-control" value="${faq.ft_title}" readonly
 										style="padding-right: 100px; width: 750px; border: none;">
 								</div>
 								<br>
 								<textarea class="form-control input-sm " type="textarea"
 									id="message" maxlength="140" rows="15" readonly
-									style="width: 750px;">${noticeContents.nt_contents}</textarea>
+									style="width: 750px;">${faq.ft_contents}</textarea>
 
 
 							</div>

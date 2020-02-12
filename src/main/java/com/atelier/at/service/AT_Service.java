@@ -22,11 +22,15 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atelier.dao.AT_Dao;
 import com.atelier.dao.PD_Dao;
+import com.atelier.dao.RM_Dao;
+import com.atelier.dao.RO_Dao;
 import com.atelier.dto.AG_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
 import com.atelier.dto.PO_Dto;
+import com.atelier.dto.RM_Dto;
+import com.atelier.dto.RO_Dto;
 import com.atelier.dto.SM_Dto;
 import com.atelier.util.PD_Paging;
 import com.atelier.vo.PO_Vo;
@@ -45,7 +49,13 @@ public class AT_Service {
 
 	@Setter(onMethod_ = @Autowired)
 	PD_Dao pdDao;
-
+	
+	@Setter(onMethod_ = @Autowired)
+	RO_Dao roDao;
+	
+	@Setter(onMethod_ = @Autowired)
+	RM_Dao rmDao;
+	
 	@Setter(onMethod_ = @Autowired)
 	private HttpSession session;
 
@@ -137,7 +147,94 @@ public class AT_Service {
 
 		return mav;
 	}
+	
+	/* ---------------------------------------------------------------------------------
+	 * 기능: 발주 조회 리스트 출력 메소드(발주조회 페이지 만드시는 분 수정하세욤!!!)
+	 * 작성자: KYH
+	 * 작성일 : 2019.02.08
+	 * -----------------------------------------------------------------------------------*/
+	public ModelAndView getATOrderInfoList() {
+		mav = new ModelAndView();
+		   
+		List<RO_Dto> orderInfoList = roDao.getATOrderInfoList();
+		   
+		mav.addObject("orderInfoList",orderInfoList);
+		mav.setViewName("ATOrderSearch");
+		   
+		return mav;
+	}
+	  
+	/* ---------------------------------------------------------------------------------
+	 * 기능: 발주 조회에서 넘어오는 목록을 취소하는 메소드
+	 * 작성자: KYH
+	 * 작성일 : 2019.02.08
+	 * -----------------------------------------------------------------------------------*/
+	public ModelAndView rmOrderListCancleProc(RO_Dto roDto, String[] roCheckedBoxArr, RedirectAttributes rttr) {
+		for(String roCheckedBoxValue : roCheckedBoxArr) {
+			roDao.rmOrderListCancle(roCheckedBoxValue);
+		}
+			
+		mav = new ModelAndView();
+		mav.setViewName("redirect:ATOrderSearch");
+		
+		rttr.addFlashAttribute("check", "발주 목록 삭제 완료!");
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	 * 기능: 거래처 조회 리스트 출력 메소드
+	 * 작성자: KYH
+	 * 작성일 : 2019.02.09
+	 * -----------------------------------------------------------------------------------*/
+	public ModelAndView getATrmList() {
+		mav = new ModelAndView();
+		
+		List<RM_Dto> rmList = rmDao.getRMList();
 
+		mav.addObject("rmList",rmList);
+		mav.setViewName("ATOrderRequest");
+		   
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	 * 기능: 거래처 조회에서 원재료 주문 기능
+	 * 작성자: KYH
+	 * 작성일 : 2019.02.10
+	 * -----------------------------------------------------------------------------------*/
+	public String rmOrderProc(RedirectAttributes rttr, MultipartHttpServletRequest multi) {
+		String view = null;
+		
+		RM_Dto rmDto = new RM_Dto();
+		RO_Dto roDto = new RO_Dto();
+		String[] rmCheckedBoxArr = multi.getParameterValues("rmProdOrderChk");
+		for(String rm_num : rmCheckedBoxArr) {
+			int numOfProd = Integer.parseInt(multi.getParameter(rm_num));//넘어온 수량은 String이지만 계산을 위해 int로 변환
+
+			log.warn("수량 : " + numOfProd);
+		
+			rmDto = rmDao.getRMPaymentList(rm_num);	//원재료 코드(rm_num), 원재료명(rm_type), 단가(rm_price)
+			roDto.setRo_type(rmDto.getRm_type());
+			roDto.setRo_rm_price(rmDto.getRm_price());
+			roDto.setRo_rm_num(rmDto.getRm_num());
+			roDto.setRo_count(numOfProd);
+			
+			//임시 아이디 지정
+			roDto.setRo_buyer("atelier");
+			//로그인하면 아래 주석 해제 후 실행
+			//CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");		
+			//roDto.setRo_buyer(cmDto.getCm_id());
+			
+			//dao 에서 roDto를 넣는 메소드 작성
+			roDao.rmPaymentProd(roDto);	
+		}				
+		
+		view = "redirect:ATOrderRequest";
+		rttr.addFlashAttribute("check","결제가 완료되었습니다.");
+		
+		return view;
+	}
+	
 	/*-------------------------------------------------------------------
 	 * 기   능 : 공방 신청 요청 서비스. AtRegist.jsp 입력폼에서 받은 데이터를 DB에 저장
 	 * 작성일 : 20.02.05

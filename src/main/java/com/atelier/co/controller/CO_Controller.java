@@ -6,9 +6,11 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.atelier.co.service.CO_Service;
+import com.atelier.dto.FT_FAQDto;
 import com.atelier.main.controller.MainController;
 import com.atelier.main.service.CM_Service;
 
@@ -28,15 +30,16 @@ public class CO_Controller {
 	ModelAndView mav;//service에서 넘어오는 ModelandView를 받기 위한 변수
 	
 	/* ---------------------------------------------------------------------------------------
-	 * 기능: 고객센터 공지사항 리스트 처리
-	 * 작성자: JSG
+	 * 기능: 고객센터의 공지사항, FAQ리스트 처리
+	 * 작성자: JSG, KYH
 	 * 작성일: 2020.02.05
 	 -----------------------------------------------------------------------------------------*/
-	@GetMapping("CONotice")
-	public ModelAndView noticeList(Integer pageNum) {
+	@GetMapping(value = "CONotice", produces="application/json; charset=utf-8")
+	@ResponseBody
+	public ModelAndView noticeList(Integer noticePageNum, Integer FAQPageNum) {
 		//log.info("boardList()");
-		mav = mServ.getNoticeList(pageNum);
-
+		mav = mServ.getNoticeList(noticePageNum, FAQPageNum);
+		
 		return mav;
 	}
 	
@@ -53,5 +56,15 @@ public class CO_Controller {
 		return mav;
 	}
 	
-	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 고객센터 FAQ 상세정보 처리
+	 * 작성자: KYH
+	 * 작성일: 2020.02.09
+	 -----------------------------------------------------------------------------------------*/
+	@GetMapping("COFAQContents")
+	public ModelAndView viewFAQContents(FT_FAQDto faq) {
+		mav = mServ.viewFAQContents(faq);
+
+		return mav;
+	}
 }//class end

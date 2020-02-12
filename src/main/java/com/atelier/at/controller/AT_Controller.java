@@ -27,6 +27,7 @@ import com.atelier.at.service.AT_Service;
 import com.atelier.dto.AG_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
+import com.atelier.dto.RO_Dto;
 import com.atelier.dto.SM_Dto;
 
 import lombok.Setter;
@@ -119,10 +120,6 @@ public class AT_Controller {
 	// 책임자 : 장원준
 	//--------------------------------------------------------------------------------------------
 	
-	@GetMapping("ATOrderRequest")//공방 거래처 조회 및 발주 페이지로 이동
-	public String goATCheckOrder(){
-		return "ATOrderRequest";
-	}
 	@GetMapping("ATOrder")//거래처 조회 및 발주신청 페이지에서 발주(주문)를 하기 위한 메소드
 	public String gorawOrder(HttpServletRequest request) {
 		//여기의 작업은 service에서  처리해도 됩니다. 일단 써놨습니다.
@@ -141,29 +138,7 @@ public class AT_Controller {
 		}
 		return null;
 	}
-	
-	
-	@GetMapping("ATOrderSearch")//발주 조회에서 넘어오는 취소목록을 취소하는 메소드
-	public String rawCancleList(HttpServletRequest request) {
-		//여기의 작업은 service에서  처리해도 됩니다. 일단 써놨습니다.
-		
-		
-		//취소를 위한 데이터들이 넘어옴
-		String[] chkedBoxArr = request.getParameterValues("prod");//체크박스의 값들이 넘어옴
-		if (chkedBoxArr == null) {
-			//취소신청한 품목이 없음..
-			//사실 jsp의 자바스크립트에서 체크를 안 했을시의 처리를 했음.
-		} else {
-			//취소를 신청한 품목이 있다면
-			for(String chkedBoxValue : chkedBoxArr) {
-				String numOfOrder = request.getParameter("chkedBoxValue");//해당 상품의 주문번호를 가져옴
-				//주문번호를 이용한 취소처리...
-				//취소를 하고 다시 ATCheckOrder로 가면 될 것 같습니다.
-			}
-		}
-		return "ATOrderSearch";
-	}
-	
+
 
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 제작한 상품 리스트 전체 출력
@@ -205,6 +180,61 @@ public class AT_Controller {
 		
 		return mav;
 	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 발주 조회 리스트 출력 메소드(발주조회 페이지 만드시는 분 수정하세욤!!!)
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.08
+	  -----------------------------------------------------------------------------------*/	
+	@GetMapping("ATOrderSearch")
+	public ModelAndView getATOrderInfoList() {
+		//log.warn("발주 조회 리스트 출력 컨트롤러");
+		mav = atServ.getATOrderInfoList();
+		//log.warn("데이터가 들어왔을까" + mav);
+		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 발주 조회에서 넘어오는 목록을 취소하는 메소드
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.08
+	  -----------------------------------------------------------------------------------*/	
+	@GetMapping("rmOrderListCancle")
+	public ModelAndView rmOrderListCancleProc(RO_Dto roDto, HttpServletRequest request, RedirectAttributes rttr) {
+		//log.warn("발주 조회 취소 컨트롤러");
+
+		String[] roCheckedBoxArr = request.getParameterValues("rmProdCancleChk");
+		mav = atServ.rmOrderListCancleProc(roDto, roCheckedBoxArr, rttr);
+		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 거래처 조회 리스트 출력 메소드
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.09
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ATOrderRequest")
+	public ModelAndView getATrmList() {
+		mav = atServ.getATrmList();
+		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 거래처 조회에서 원재료 주문 기능
+	  * 작성자: KYH
+	  * 작성일 : 2019.02.10
+	  -----------------------------------------------------------------------------------*/	
+	@PostMapping("ATrmOrder")
+	public String rmOrderProc(RedirectAttributes rttr, MultipartHttpServletRequest multi) {
+		String view = null;
+		view = atServ.rmOrderProc(rttr, multi);
+		
+		return view;
+	}
+	
 	
 	@GetMapping("ATProdRegist")//제품 목록 관리에서(ATProdManage)에서 제품 메뉴 제작 페이지로 넘어가는 메소드
 	public String prodMake() {
