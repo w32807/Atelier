@@ -3,9 +3,12 @@ package com.atelier.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.web.servlet.ModelAndView;
+
 import com.atelier.dto.AD_MaterialDto;
 import com.atelier.dto.FT_FAQDto;
 import com.atelier.dto.MG_Dto;
+import com.atelier.dto.PD_productDto;
 
 public interface AD_Dao {
 
@@ -40,4 +43,15 @@ public interface AD_Dao {
 	public void ADSendMessage(MG_Dto mDto);
 
 	public boolean delMessage(String hs);
+	
+	public Integer getADProdListCount();
+
+	List<PD_productDto> getADProdList(Map<String, Integer> pageInt);
+
+	public boolean productDelete(String check);
+
+	public ModelAndView ProductUpdate1(Integer pd_code);
+	
+	
+	
 }
