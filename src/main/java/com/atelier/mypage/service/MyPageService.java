@@ -5,6 +5,8 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +20,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.atelier.at.service.AT_Service;
 import com.atelier.dao.CM_Dao;
+import com.atelier.dao.MP_Dao;
 import com.atelier.dto.CM_Dto;
+import com.atelier.dto.MG_Dto;
+import com.atelier.dto.MP_SubscribeDto;
+import com.atelier.dto.PO_Dto;
+import com.atelier.main.service.CM_Service;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -37,6 +45,15 @@ public class MyPageService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private CM_Dao cm_Dao;
+	
+	@Setter(onMethod_ = @Autowired)
+	private MP_Dao mpDao;
+	
+	@Setter(onMethod_ = @Autowired)
+	private CM_Service cmServ;
+	
+	@Setter(onMethod_ = @Autowired)
+	private AT_Service atServ;
 	
 	/* ---------------------------------------------------------------------------------------
 	 * 기능: 마이페이지 수정 서비스
@@ -175,6 +192,199 @@ public class MyPageService {
 			}
 		}
 		
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 서비스 / 정보 개요 출력
+	 * 작성자: JSH
+	 * 작성일: 2020.02.12
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView getmyPage() {
+		mav = new ModelAndView();
+		
+		log.warn("마이페이지 서비스 시작");
+		
+		CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
+		String id = cmDto.getCm_id();
+		log.warn(id);
+		
+		//	MY INFORMATIONS 데이터 출력을 위한 처리
+		int sendingProd = sendingProd(id);
+		int subscribedNum = subscribedNum(id);
+		int uncheckedMessageNum = uncheckedMessageNum(id);
+		
+		List<PO_Dto> poList = mpDao.getProdOrderList(id);
+		
+		//	날짜를 yyyy-MM-dd 형태로 변환
+		SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
+		for(int i=0;i<poList.size();i++) {
+			String convertDate = dataFm.format(poList.get(i).getPo_date());
+			poList.get(i).setPo_date_simple(convertDate);
+		}
+		
+		//	제품코드로 제품명 치환
+		for(int i=0;i<poList.size();i++) {
+			int pdCode = poList.get(i).getPo_pd_code();
+			String prodName = mpDao.getProdName(pdCode);
+			poList.get(i).setPo_pd_name(prodName);
+		}
+		
+		//	배송상태 한글로 치환
+		for(int i=0;i<poList.size();i++) {
+			String carryingState = poList.get(i).getPo_state();
+			if(carryingState.equals("before")) {
+				poList.get(i).setPo_state("배송전");
+			} else if (carryingState.equals("being")) {
+				poList.get(i).setPo_state("배송중");
+			} else if (carryingState.equals("after")) {
+				poList.get(i).setPo_state("배송완료");
+			}
+		}
+		
+		//	구독 정보 출력
+		List<MP_SubscribeDto> mpsList = mpDao.getSubscribeList(id);
+		
+		//	공방 id를 공방명으로 치환
+		for(int i=0;i<mpsList.size();i++) {
+			String atId = mpsList.get(i).getSc_at_id();
+			String atName = mpDao.getAtName(atId);
+			mpsList.get(i).setSc_at_name(atName);
+		}
+		
+		mav.addObject("mpsList", mpsList);
+		mav.addObject("sendingProd", sendingProd);
+		mav.addObject("subscribedNum", subscribedNum);
+		mav.addObject("uncheckedMessageNum", uncheckedMessageNum);
+		mav.addObject("poList", poList);
+		mav.setViewName("myPage");
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 서비스 / 정보 개요 출력 / 주문 내역
+	 * 작성자: JSH
+	 * 작성일: 2020.02.12
+	 -----------------------------------------------------------------------------------------*/
+	public int sendingProd(String id) {
+		int sendingProd = mpDao.getSendingProd(id);
+		
+		return sendingProd;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 서비스 / 정보 개요 출력 / 구독중인 공방 수
+	 * 작성자: JSH
+	 * 작성일: 2020.02.12
+	 -----------------------------------------------------------------------------------------*/
+	public int subscribedNum(String id) {
+		int subscribedNum = mpDao.getSubscribedNum(id);
+		
+		return subscribedNum;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 서비스 / 정보 개요 출력 / 읽지 않은 쪽지 수
+	 * 작성자: JSH
+	 * 작성일: 2020.02.12
+	 -----------------------------------------------------------------------------------------*/
+	public int uncheckedMessageNum(String id) {
+		int ucmNum = mpDao.getUncheckedMessageNum(id);
+		
+		return ucmNum;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 서비스 / 판매자에게 문의 / 정보 출력
+	 * 작성자: JSH
+	 * 작성일: 2020.02.12
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView getMyPageMessageSend(String po_at_id) {
+		log.warn("판매자에게 문의 서비스 실행");
+		
+		CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
+		String sender = cmDto.getCm_id();
+		String reciever = po_at_id;
+		
+		mav.addObject("sender", sender);
+		mav.addObject("reciever", reciever);
+		mav.setViewName("myPageHomeSendM");
+		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 서비스 / 판매자에게 문의 / 메세지 전송
+	 * 작성자: JSH
+	 * 작성일: 2020.02.12
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView getMyPageMSendAction(MG_Dto mgDto) {
+		log.warn("판매자에게 메세지 전송 서비스 실행");
+		CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
+		String mg_sender = cmDto.getCm_id();
+		
+		mgDto.setMg_sender(mg_sender);
+		log.warn("받는사람: "+ mgDto.getMg_receiver());
+		
+		mpDao.sendMtoSeller(mgDto);
+		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 서비스 / 제품 바로가기
+	 * 작성자: JSH
+	 * 작성일: 2020.02.13
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView getMyPageGoProd(int po_pd_code) {
+		
+		mav = cmServ.getprodDetail(po_pd_code);
+		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 서비스 / 주문 취소
+	 * 작성자: JSH
+	 * 작성일: 2020.02.13
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView actMyPageOrderCancle(int po_num) {
+		mpDao.actMyPageOrderCancle(po_num);
+		mav = getmyPage();
+
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 서비스 / 구독중인 공방 바로가기
+	 * 작성자: JSH
+	 * 작성일: 2020.02.13
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView actMyPageGoAtelier(String sc_at_id) {
+		int at_seq = mpDao.getAtSeq(sc_at_id);
+		//mav = atServ.getATDetail(at_seq);
+		
+		return mav;
+	}
+
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 서비스 / 구독 해제
+	 * 작성자: JSH
+	 * 작성일: 2020.02.13
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView actMyPageDelSubs(String sc_at_id) {
+		CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
+		String id = cmDto.getCm_id();
+		log.warn(id);
+		
+		MP_SubscribeDto mpSubDto = new MP_SubscribeDto();
+		
+		mpSubDto.setSc_at_id(sc_at_id);
+		mpSubDto.setSc_cm_id(id);
+		
+		mpDao.actMyPageDelSubs(mpSubDto);
+		mav = getmyPage();
+		
+		return mav;
 	}
 	
 }

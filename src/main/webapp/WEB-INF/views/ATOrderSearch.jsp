@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -231,79 +232,84 @@
 			</nav>
 		</aside>
 	<!-------------------------------------------------------여기까지 좌측바 메뉴입니다.---------------------------------------------------------------------->
-		<form action="rmOrderListCancle" method="get" id="rmCancleFrm">
-			<div id="colorlib-main">
-				<div class="colorlib-services" style="margin-left: 100px;">
-					<div class="container-fluid" style="min-height: 500px;">
-						<div class="row">
-							<div class="col-md-6 col-md-offset-3 col-md-pull-3">
-								<h2 class="colorlib-heading animate-box" data-animate-effect="fadeInLeft"
-									style="font-weight: bolder; font-size: 23px; letter-spacing: 0.5px;">발주 조회<hr>
-								</h2>
-							</div>
-						</div>
-						<!-- 밑에서부터 발주조회 바꾸시면 됩니다! var랑 items랑 checkbox의 속성들은 바꾸지 말아주세요! -->
-						<!-- 1열에서는 넘어온 물품 리스트 배열의 홀수 번째 상품만 forEach 문으로 출력합니다. -->
-						<div class="row">
-							<!-- 여기서부터 1열 시작 -->	
-							<div class="col-md-6" style="left: 100px; display: grid">
-								<c:forEach begin="0" step="2" var="rmProd" items="${orderInfoList}">
-									<label for="${rmProd.ro_num}">
-										<div class="colorlib-feature animate-box"
-											data-animate-effect="fadeInLeft" style="margin-bottom: 30px;">
-											<div class="colorlib-icon" style="width: 130px; height: 130px;">
-												<i class="icon-tag"></i>
-											</div>								
-											<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">
-												<h3 style="display: inline-block; font-size: 18px;">
-												<b>원재료명EL</b>
-												</h3>	
-												<input type="checkbox" id="${rmProd.ro_num}" name="rmProdCancleChk" value="${rmProd.ro_num}"><br>
-												<b>단가</b><span>&nbsp;&nbsp;&nbsp;단가EL&#8361;</span><br>
-												<b>수량</b><span>&nbsp;&nbsp;&nbsp;수량EL</span><br>
-												<b>색상</b><span>&nbsp;&nbsp;&nbsp;색상EL</span><br>
-											</div>
-										</div>
-									</label>
-								</c:forEach>
-							</div>
-							
-							<!-- 2열에서는 넘어온 물품 리스트 배열의 짝수 번째 상품만 forEach 문으로 출력합니다. -->
-							<!-- 여기서부터 2열 시작 -->	
-							<div class="col-md-6" style="left: -70px; display: grid">
-								<c:forEach begin="1" step="2" var="rmProd" items="${orderInfoList}">
-									<label for="${rmProd.ro_num}">
-										<div class="colorlib-feature animate-box"
-											data-animate-effect="fadeInLeft" style="margin-bottom: 30px;">
-											<div class="colorlib-icon" style="width: 130px; height: 130px;">
-												<i class="icon-tag"></i>
-											</div>								
-											<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">
-												<h3 style="display: inline-block; font-size: 18px;">
-													<b>원재료명EL</b>
-												</h3>	
-												<input type="checkbox" id="${rmProd.ro_num}" name="rmProdCancleChk" value="${rmProd.ro_num}"><br>
-												<b>단가</b><span>&nbsp;&nbsp;&nbsp;단가EL&#8361;</span><br>
-												<b>수량</b><span>&nbsp;&nbsp;&nbsp;수량EL</span><br>
-												<b>색상</b><span>&nbsp;&nbsp;&nbsp;색상EL</span><br>
-											</div>
-										</div>
-									</label>
-								</c:forEach>						
-							</div>
+
+		<div id="colorlib-main">
+			<div class="colorlib-services" style="margin-left: 100px;">
+				<div class="container-fluid" >
+					<div class="row">
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3">
+							<h2 class="colorlib-heading animate-box" data-animate-effect="fadeInLeft"
+								style="font-weight: bolder; font-size: 23px; letter-spacing: 0.5px;">발주 조회<hr>
+							</h2>
 						</div>
 					</div>
+                  	<form action="ATOrderSearch" method="get" id="rawCancleFrm">
+						<div class="row">
+							<div class="col-md-6" style="left: 100px; display: grid">
+								<c:forEach begin="0" step="2" var="atoList" items ="${atoList}">
+								<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft"
+									style="margin-bottom: 30px;">
+										<label>
+											<div class="colorlib-icon" style="width: 130px; height: 130px;">
+												<i class="icon-tag"></i>
+											</div>
+											<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">
+												<h3 style="display: inline-block; font-size: 18px;"><b>${atoList.ro_type}</b></h3>	
+												<input type="checkbox" name="prod" value=${atoList.ro_num}><br>
+												<b>날짜</b><span>&nbsp;&nbsp;&nbsp;${atoList.ro_dateSimple}</span><br>
+												<b>수량</b><span>&nbsp;&nbsp;&nbsp;${atoList.ro_count}</span><br>
+												<b>단가</b><span>&nbsp;&nbsp;&nbsp;${atoList.ro_rm_price}원</span><br>											
+											</div>
+										</label>
+									</div>
+								</c:forEach>
+							</div>
+						
+						
+						
+						<div class="col-md-6" style="left: -70px; display: grid"><!--여기가 물건의 2열 시작-->
+							<c:forEach begin="1" step="2" var="atoList" items ="${atoList}">
+								<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft" style="margin-bottom: 30px;">
+								<label>
+								<div class="colorlib-icon" style="width: 130px; height: 130px;">
+
+									<i class="icon-tag"></i>
+								</div>
+								
+								<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">
+
+									<h3 style="display: inline-block; font-size: 18px;"><b>${atoList.ro_type}</b></h3>	
+									<input type="checkbox" name="prod" value=${atoList.ro_num}><br>
+										<b>날짜</b><span>&nbsp;&nbsp;&nbsp;${atoList.ro_dateSimple}</span><br>
+										<b>수량</b><span>&nbsp;&nbsp;&nbsp;${atoList.ro_count}</span><br>
+										<b>단가</b><span>&nbsp;&nbsp;&nbsp;${atoList.ro_rm_price}원</span><br>
+								</div>
+								</label>	
+							</div>
+							</c:forEach>
+								
+							
+						</div>
+						</div>
+						</form>
+					</div>
 				</div>
-				<div class="colorlib-feature animate-box" style="text-align: right; width: 1100px; height: 200px;" >
-					<input id="cancleBtn" type="button" name="rmCancle"  value="취소하기"
-						style="width: 100px; height: 35px; border: none; font-size: 16px;
-						color: white; background-color: #A09182; margin-right: -50px;">
-				</div>
-			</div>	
-		</form>
+
+			
+			
+			</div>
+
+				  <div class="colorlib-feature animate-box" style="text-align: right; width: 1100px; height: 200px;" >
+					
+					 <input id="cancleBtn" type="button" name="serch" value="취소하기"
+					 	style="width: 100px; height: 35px; border: none; font-size: 16px; color: white; background-color: #A09182; margin-right: -50px;">
+					</div>
+				  </div>
+				  </form>
+		</div>
 	</div>
 
-	<!-- 하단바 -->
+<!-- 하단바 -->
 	<!-- Footer Section Begin -->
     <footer class="footer-section">
         <div class="container">
@@ -404,30 +410,22 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="resources/AT_front/js/main.js"></script>
 	
 	<script type="text/javascript">
-		window.onload = function() {
-			var chk = "${check}";
-			console.log(chk);
-			if(chk != ""){
-				alert(chk);
-				location.reload(true); 
+	//1. 아무것도 체크하지 않고 취소를 눌렀을 때.
+	//2. n개의 상품을 취소하시겠습니까?
+	//3. 체크박스에 해당 상품의 상품코드를 value로 넘김		
+	$("#cancleBtn").click(function() {
+		var chkLength = $("input:checkbox[name=prod]:checked").length;//체크박스에 체크가 되어있는 갯수를 구함
+		if(chkLength == 0){
+			alert("취소할 상품을 선택 해주세요.");
+		}else {
+			if(confirm("정말 "+chkLength+"개의 발주를 취소하시겠습니까?")){
+				$("#rawCancleFrm").submit();
+			}else {
+				location.reload();
 			}
 		}
-		//1. 아무것도 체크하지 않고 취소를 눌렀을 때.
-		//2. n개의 상품을 취소하시겠습니까?
-		//3. 체크박스에 해당 상품의 상품코드를 value로 넘김		
-		$("#cancleBtn").click(function() {
-			var chkLength = $("input[name=rmProdCancleChk]:checked").length;//체크박스에 체크가 되어있는 갯수를 구함
-			if(chkLength == 0){
-				alert("취소할 상품을 선택 해주세요.");
-			}else {
-				if(confirm("정말 "+chkLength+"개의 발주를 취소하시겠습니까?")){
-					$("#rmCancleFrm").submit();
-				}else {
-					location.reload();
-				}
-			}
-			
-		});
+		
+	});
 	</script>
 </body>
 </html>

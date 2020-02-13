@@ -20,6 +20,7 @@ public class PD_productDto {
 	private String pd_type;
 	private String pd_sex;
 	private int pd_numofstock;
+	private String pd_at_id;
 	
 	private String imgOriName;
 }

@@ -246,7 +246,7 @@
 							</h2>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row" style="padding-left: 200px;">
 						<div class="col-md-5 col-md-push-6" style="left: 50px;">
 							<div class="colorlib-feature colorlib-feature-sm animate-box" data-animate-effect="fadeInLeft">
 								<div class="colorlib-icon" style="background-color: white;">
@@ -261,11 +261,11 @@
 							</div>
 							<div class="colorlib-text" style="margin-top: 120px; width: 900px; font-size: 18px;">
 								<span><a href="#" style="margin-left: 2px; color: #A09182; font-weight: bolder;">구독자 수</a></span>
-								<span style="font-weight: bolder;">10K</span>
-								<span><a href="#" style="margin-left: 107px; color: #A09182; font-weight: bolder;">상품 정보</a></span>
-								<span style="font-weight: bolder;">800</span>
-								<span><a href="#" style="margin-left: 115px; color: #A09182; font-weight: bolder;">체험 정보</a></span>
-								<span style="font-weight: bolder;">20</span>
+								<span style="font-weight: bolder;">${subNum}</span>
+								<span><a href="#" style="margin-left: 125px; color: #A09182; font-weight: bolder;">등록된 상품</a></span>
+								<span style="font-weight: bolder;">${prodNum}</span>
+								<span><a href="#" style="margin-left: 130px; color: #A09182; font-weight: bolder;">제품 오더</a></span>
+								<span style="font-weight: bolder;">${orderNum}</span>
 							</div>
 						</div>
 						<div class="col-md-7 col-md-pull-5">
@@ -291,6 +291,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-6"   style="left: 50px">
+							<c:forEach begin="0" step="2" var="atmList" items ="${atmList}">
 							<div class="colorlib-feature animate-box"
 								data-animate-effect="fadeInLeft" style="margin-bottom: 30px;">
 								<div class="colorlib-icon" style="width: 130px; height: 130px;">
@@ -298,45 +299,17 @@
 								</div>
 								<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">
 									<h3 style="display: inline-block; font-size: 18px; margin-bottom: 16px;">
-										<b>소가죽</b>
+										<b>${atmList.ro_type}</b>
 									</h3><br>
-										<b>단가</b><span>&nbsp;&nbsp;&nbsp;1000&#8361;</span><br>
-										<b>수량</b><span>&nbsp;&nbsp;&nbsp;10</span><br>
-										<b>색상</b><span>&nbsp;&nbsp;&nbsp;보라</span><br>
+										<b>날짜</b><span>&nbsp;&nbsp;&nbsp;${atmList.ro_dateSimple}</span><br>
+										<b>수량</b><span>&nbsp;&nbsp;&nbsp;${atmList.ro_count}</span><br>
+										<b>단가</b><span>&nbsp;&nbsp;&nbsp;${atmList.ro_rm_price}원</span><br>
 								</div>
 							</div>
-
-							<div class="colorlib-feature animate-box"
-								data-animate-effect="fadeInLeft" style="margin-bottom: 30px;">
-								<div class="colorlib-icon" style="width: 130px; height: 130px;">
-									<i class="icon-pen2"></i>
-								</div>
-								<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">
-									<h3 style="display: inline-block; font-size: 18px; margin-bottom: 16px;">
-										<b>악어가죽</b>
-									</h3><br>
-									<b>단가</b><span>&nbsp;&nbsp;&nbsp;1000&#8361;</span><br>
-										<b>수량</b><span>&nbsp;&nbsp;&nbsp;10</span><br>
-										<b>색상</b><span>&nbsp;&nbsp;&nbsp;보라</span><br>
-								</div>
-							</div>
-
-							<div class="colorlib-feature animate-box"
-								data-animate-effect="fadeInLeft" style="margin-bottom: 30px;">
-								<div class="colorlib-icon" style="width: 130px; height: 130px;">
-									<i class="icon-search3"></i>
-								</div>
-								<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">
-									<h3 style="display: inline-block; font-size: 18px; margin-bottom: 16px;">
-										<b>말가죽</b>
-									</h3><br>
-										<b>단가</b><span>&nbsp;&nbsp;&nbsp;1000&#8361;</span><br>
-										<b>수량</b><span>&nbsp;&nbsp;&nbsp;10</span><br>
-										<b>색상</b><span>&nbsp;&nbsp;&nbsp;보라</span><br>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 						<div class="col-md-6" style="left: -70px;">
+						<c:forEach begin="1" step="2" var="atmList" items ="${atmList}">
 							<div class="colorlib-feature animate-box"
 								data-animate-effect="fadeInLeft" style="margin-bottom: 30px;">
 								<div class="colorlib-icon" style="width: 130px; height: 130px;">
@@ -344,43 +317,14 @@
 								</div>
 								<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">
 									<h3 style="display: inline-block; font-size: 18px; margin-bottom: 16px;">
-										<b>양가죽</b>
+										<b>${atmList.ro_type}</b>
 									</h3><br>
-										<b>단가</b><span>&nbsp;&nbsp;&nbsp;1000&#8361;</span><br>
-										<b>수량</b><span>&nbsp;&nbsp;&nbsp;10</span><br>
-										<b>색상</b><span>&nbsp;&nbsp;&nbsp;보라</span><br>
+										<b>날짜</b><span>&nbsp;&nbsp;&nbsp;${atmList.ro_dateSimple}</span><br>
+										<b>수량</b><span>&nbsp;&nbsp;&nbsp;${atmList.ro_count}</span><br>
+										<b>단가</b><span>&nbsp;&nbsp;&nbsp;${atmList.ro_rm_price}원</span><br>
 								</div>
 							</div>
-
-							<div class="colorlib-feature animate-box"
-								data-animate-effect="fadeInLeft" style="margin-bottom: 30px;">
-								<div class="colorlib-icon" style="width: 130px; height: 130px;">
-									<i class="icon-device-desktop"></i>
-								</div>
-								<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">
-									<h3 style="display: inline-block; font-size: 18px; margin-bottom: 16px;">
-										<b>송아지가죽</b>
-									</h3><br>
-										<b>단가</b><span>&nbsp;&nbsp;&nbsp;1000&#8361;</span><br>
-										<b>수량</b><span>&nbsp;&nbsp;&nbsp;10</span><br>
-										<b>색상</b><span>&nbsp;&nbsp;&nbsp;보라</span><br>
-								</div>
-							</div>
-
-							<div class="colorlib-feature animate-box"
-								data-animate-effect="fadeInLeft" style="margin-bottom: 30px;">
-								<div class="colorlib-icon" style="width: 130px; height: 130px;">
-									<i class="icon-help"></i>
-								</div>
-								<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">
-									<h3 style="display: inline-block; font-size: 18px; margin-bottom: 16px;">
-										<b>뱀가죽</b>
-									</h3><br>
-										<b>단가</b><span>&nbsp;&nbsp;&nbsp;1000&#8361;</span><br>
-										<b>수량</b><span>&nbsp;&nbsp;&nbsp;10</span><br>
-										<b>색상</b><span>&nbsp;&nbsp;&nbsp;보라</span><br>
-								</div>
-							</div>
+							</c:forEach>
 						</div>
 					</div>
 				</div>

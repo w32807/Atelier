@@ -25,6 +25,13 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/style.css" type="text/css">
+    
+    <style type="text/css">
+    	.btn-warning {
+    		color: #fff;
+    		font-size: .945rem;
+    	}
+    </style>
 </head>
 
 <body>
@@ -195,15 +202,14 @@
                         <div class="blog-catagory">
 							<h4>My Menu</h4>
 							<ul>
-								<li><a href="myOrder">주문 내역</a></li>
-								<li><a href="basket">장바구니</a></li>
+								<li><a href="myOrder?po_cm_id=${mb.cm_id}">주문 내역</a></li>
+								<li><a href="basket?bt_cm_id=${mb.cm_id}">장바구니</a></li>
 								<li><a href="mySubscript">구독 리스트</a></li>
-								<li><a href="messager">메세지</a></li>
+								<li><a href="messager?mg_receiver=${mb.cm_id}">메세지</a></li>
 								<li><a href="myInfoUpdate">내 정보 수정</a></li>
 								<li><a href="myChangePwd">비밀번호 변경</a></li>
 								<li><a href="myAdminRQ" onclick="window.open(this.href, '_blank', 'width=655px,height=650px,toolbars=no,scrollbars=no');return false;">관리자에게 문의하기</a>
 							</ul>
-
 						</div>
 						<div class="atelier_go">
 							<h4>Atelier Menu</h4>
@@ -234,9 +240,9 @@
                              <div class="myInfo_upper">
                              <h4>My Informations</h4>
 	                             <ul>
-	                             	<li style="background-color: lightcoral">배송중인 상품 <a href="#">n</a>개</li>
-	                             	<li style="background-color: powderblue">구독 중인 공방 <a href="#">n</a>개</li>
-	                             	<li style="background-color: palegreen">읽지 않은 쪽지 <a href="#">n</a>개</li>                             		
+	                             	<li style="background-color: lightcoral">배송중인 상품 <a href="#">${sendingProd}</a>개</li>
+	                             	<li style="background-color: powderblue">구독 중인 공방 <a href="#">${subscribedNum}</a>개</li>
+	                             	<li style="background-color: palegreen">읽지 않은 쪽지 <a href="#">${uncheckedMessageNum}</a>개</li>                             		
 	                             </ul>
                              </div>
                              
@@ -258,86 +264,29 @@
 						                    <th><i class="icon_cogs"></i> 제품 바로가기</th>
 						                    <th><i class="icon_cogs"></i> 주문 취소</th>
 						                  </tr>
-						                  <tr>
-						                    <td>Angeline Mcclain</td>
-						                    <td>2004-07-06</td>
-						                    <td>Rosser</td>
-						                    <td style="text-align: center;">
-						                      <div class="btn-group">
-						                      	<a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-						                      </div>
-						                    </td>
-						                    <td style="text-align: center;">
-						                      <div class="btn-group">
-						                        <a class="btn btn-success" href="#" ><i class="icon_check_alt2"></i></a>
-						                      </div>
-						                    </td>
-						                    <td style="text-align: center;">
-						                      <div class="btn-group">
-						                        <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-						                      </div>
-						                    </td>
-						                  </tr>
-						                  <tr>
-						                    <td>Sung Carlson</td>
-						                    <td>2011-01-10</td>
-						                    <td>Robert Lee</td>
-						                    <td style="text-align: center;">
-						                      <div class="btn-group">
-						                      	<a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-						                      </div>
-						                    </td>
-						                    <td style="text-align: center;">
-						                      <div class="btn-group">
-						                        <a class="btn btn-success" href="#" ><i class="icon_check_alt2"></i></a>
-						                      </div>
-						                    </td>
-						                    <td style="text-align: center;">
-						                      <div class="btn-group">
-						                        <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-						                      </div>
-						                    </td>
-						                  </tr>
-						                  <tr>
-						                    <td>Bryon Osborne</td>
-						                    <td>2006-10-29</td>
-						                    <td>York</td>
-						                    <td style="text-align: center;">
-						                      <div class="btn-group">
-						                      	<a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-						                      </div>
-						                    </td>
-						                    <td style="text-align: center;">
-						                      <div class="btn-group">
-						                        <a class="btn btn-success" href="#" ><i class="icon_check_alt2"></i></a>
-						                      </div>
-						                    </td>
-						                    <td style="text-align: center;">
-						                      <div class="btn-group">
-						                        <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-						                      </div>
-						                    </td>
-						                  </tr>
-						                  <tr>
-						                    <td>Dalia Marquez</td>
-						                    <td>2011-12-15</td>
-						                    <td>Alton</td>
-						                    <td style="text-align: center;">
-						                      <div class="btn-group">
-						                      	<a class="btn btn-primary" href="#"><i class="icon_plus_alt2"></i></a>
-						                      </div>
-						                    </td>
-						                    <td style="text-align: center;">
-						                      <div class="btn-group">
-						                        <a class="btn btn-success" href="#" ><i class="icon_check_alt2"></i></a>
-						                      </div>
-						                    </td>
-						                    <td style="text-align: center;">
-						                      <div class="btn-group">
-						                        <a class="btn btn-danger" href="#"><i class="icon_close_alt2"></i></a>
-						                      </div>
-						                    </td>
-						                  </tr>
+						                  <!-- 주문/배송중인 상품 -->
+						                  <c:forEach var="poList" items ="${poList}">
+							                  <tr>
+							                    <td>${poList.po_pd_name}</td>
+							                    <td>${poList.po_date_simple}</td>
+							                    <td>${poList.po_state}</td>
+							                    <td style="text-align: center;">
+							                      <div class="btn-group">
+							                      	<a class="btn btn-primary" href="myPageMessageSend?po_at_id=${poList.po_at_id}" onclick="window.open(this.href, '_blank', 'width=655px,height=650px,toolbars=no,scrollbars=no');return false;"><i class="icon_plus_alt2"></i></a>
+							                      </div>
+							                    </td>
+							                    <td style="text-align: center;">
+							                      <div class="btn-group">
+							                        <a class="btn btn-success" href="myPageGoProd?po_pd_code=${poList.po_pd_code}"><i class="icon_check_alt2"></i></a>
+							                      </div>
+							                    </td>
+							                    <td style="text-align: center;">
+							                      <div class="btn-group">
+							                        <a class="btn btn-danger" href="myPageOrderCancle?po_num=${poList.po_num}"><i class="icon_close_alt2"></i></a>
+							                      </div>
+							                    </td>
+							                  </tr>
+						                  </c:forEach>
 						                </tbody>
 						              </table>
 						            </section>
@@ -354,30 +303,21 @@
 						                <thead>
 						                  <tr>
 						                    <th>#</th>
-						                    <th>공방 로고</th>
 						                    <th>공방명</th>
+						                    <th>공방 바로가기</th>
 						                    <th>구독 해제</th>
 						                  </tr>
 						                </thead>
 						                <tbody>
+						                <!-- 구독 정보 출력 -->
+						                <c:forEach var="mpsList" items ="${mpsList}" varStatus="status">
 						                  <tr class="active">
-						                    <td>1</td>
-						                    <td>Image 1</td>
-						                    <td>Atelier 1</td>
-						                    <td><a class="btn btn-danger btn-sm" href="" title="Bootstrap 3 themes generator"><span class="icon_target"></span> 구독 해제</a></td>
+						                    <td>${status.count}</td>
+						                    <td>${mpsList.sc_at_name}</td>
+						                    <td><a class="btn btn-warning btn-sm" href="myPageGoAtelier?sc_at_id=${mpsList.sc_at_id}" title="Bootstrap 3 themes generator"><span class="icon_house_alt"></span> 바로가기</a></td>
+						                    <td><a class="btn btn-danger btn-sm" href="myPageDelSubs?sc_at_id=${mpsList.sc_at_id}" title="Bootstrap 3 themes generator"><span class="icon_target"></span> 구독 해제</a></td>
 						                  </tr>
-						                  <tr class="success">
-						                    <td>2</td>
-						                    <td>Image 2</td>
-						                    <td>Atelier 2</td>
-						                    <td><a class="btn btn-danger btn-sm" href="" title="Bootstrap 3 themes generator"><span class="icon_target"></span> 구독 해제</a></td>
-						                  </tr>
-						                  <tr class="warning">
-						                    <td>3</td>
-						                    <td>Image 3</td>
-						                    <td>Atelier 3</td>
-						                    <td><a class="btn btn-danger btn-sm" href="" title="Bootstrap 3 themes generator"><span class="icon_target"></span> 구독 해제</a></td>
-						                  </tr>
+						                </c:forEach>
 						                </tbody>
 						              </table>
 						            </section>

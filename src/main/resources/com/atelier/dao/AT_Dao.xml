@@ -92,6 +92,25 @@
 	   WHERE AG_ID = #{id}
 	</delete>
 	
+	<select id="getATOrderSearchList" parameterType="String" resultType="com.atelier.dto.RO_Dto">
+   		SELECT ro_num, ro_type, ro_date, ro_count, ro_rm_price FROM RM_ORDER WHERE RO_BUYER=#{id}
+    </select>
+   
+   <delete id="delATOrder" parameterType="Integer">
+   		DELETE FROM RM_ORDER WHERE ro_num=#{chkedBoxValue}
+   </delete>
+   
+   <select id="getSubscribeNum" parameterType="String" resultType="Integer">
+   		SELECT COUNT(*) FROM SUBSCRIBE WHERE SC_AT_ID=#{id}
+   </select>
+   
+   <select id="getProdOrderNum" parameterType="String" resultType="Integer">
+   		SELECT COUNT(*) FROM PROD_ORDER WHERE PO_AT_ID=#{id}
+   </select>
+   
+   <select id="getprodNum" parameterType="String" resultType="Integer">
+   		SELECT COUNT(*) FROM PRODUCT WHERE PD_AT_ID=#{id}
+   </select>
 	
    	
 </mapper>

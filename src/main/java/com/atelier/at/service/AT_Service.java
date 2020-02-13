@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -707,24 +708,138 @@ public class AT_Service {
 		return mav;
 	}
 
+	/*-------------------------------------------------------------------
+	 * 기능 : 발주 리스트 조회 서비스
+	 * 작성자: JSH
+	 * 작성일 : 2020.02.11
+	 ------------------------------------------------------------------- */
+	public ModelAndView getATOrderSearchList(HttpServletRequest request) {
+		mav = new ModelAndView();
+		
+		log.warn("발주 리스트 조회 서비스 시작");
+		
+		CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
+		String id = cmDto.getCm_id();
+		log.warn(id);
+		
+		
+		
+		
+		
+		//취소를 위한 처리
+		String[] chkedBoxArr = request.getParameterValues("prod");//체크박스의 값들이 넘어옴
+		if (chkedBoxArr == null) {
+			//취소신청한 품목이 없음..
+			//사실 jsp의 자바스크립트에서 체크를 안 했을시의 처리를 했음.
+		} else {
+			//취소를 신청한 품목이 있다면
+			for(String chkedBoxValue : chkedBoxArr) {
+				log.warn(chkedBoxValue + "발주 삭제");
+				orderCancel(chkedBoxValue);
+				//주문번호를 이용한 취소처리...
+				//취소를 하고 다시 ATCheckOrder로 가면 될 것 같습니다.
+			}
+		}
+		
+		List<RO_Dto> atoList = atDao.getATOrderSearchList(id);;
+		
+		//날짜를 yyyy-MM-dd 형태로 변환
+		SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
+		for(int i=0;i<atoList.size();i++) {
+			String convertDate = dataFm.format(atoList.get(i).getRo_date());
+			atoList.get(i).setRo_dateSimple(convertDate);
+		}
+		
+		mav.addObject("atoList", atoList);
+		mav.setViewName("ATOrderSearch");
+		
+		return mav;
+	}
 	
+	/*-------------------------------------------------------------------
+	 * 기능 : 공방 관리 홈 리스트 출력 서비스
+	 * 작성자: JSH
+	 * 작성일 : 2020.02.11
+	 ------------------------------------------------------------------- */
+	public ModelAndView getATManagerList() {
+		
+		mav = new ModelAndView();
+		
+		log.warn("발주 리스트 조회 서비스 시작");
+		
+		CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
+		String id = cmDto.getCm_id();
+		log.warn(id);
+		
+		List<RO_Dto> atmList = atDao.getATOrderSearchList(id);
+		
+		//날짜를 yyyy-MM-dd 형태로 변환
+		SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
+		for(int i=0;i<atmList.size();i++) {
+			String convertDate = dataFm.format(atmList.get(i).getRo_date());
+			atmList.get(i).setRo_dateSimple(convertDate);
+		}
+		
+		//	구독자 수 출력
+		int subNum = SubscribeNum(id);
+		
+		//	제품 오더 수 출력
+		int orderNum = prodOrderNum(id);
+		
+		//	등록된 상품 수 출력
+		int prodNum = prodNum(id);
+		
+		mav.addObject("prodNum", prodNum);
+		mav.addObject("orderNum", orderNum);
+		mav.addObject("subNum", subNum);
+		mav.addObject("atmList", atmList);
+		mav.setViewName("ATManager");
+		
+		return mav;
+	}
 
+	/*-------------------------------------------------------------------
+	 * 기능 : 발주 조회 / 다중 삭제 서비스
+	 * 작성자: JSH
+	 * 작성일 : 2020.02.11
+	 ------------------------------------------------------------------- */
+	public void orderCancel(String chkedBoxValue) {
+		int parCancel = Integer.parseInt(chkedBoxValue);
+		atDao.delATOrder(parCancel);
+	}
 	
+	/*-------------------------------------------------------------------
+	 * 기능 : 공방 관리 홈 리스트 출력 서비스 / 구독자 수 출력
+	 * 작성자: JSH
+	 * 작성일 : 2020.02.12
+	 ------------------------------------------------------------------- */
+	
+	public int SubscribeNum(String id) {
+		int Subscribe = atDao.getSubscribeNum(id);
+		
+		return Subscribe;
+	}
+	
+	/*-------------------------------------------------------------------
+	 * 기능 : 공방 관리 홈 리스트 출력 서비스 / 제품 오더 수
+	 * 작성자: JSH
+	 * 작성일 : 2020.02.12
+	 ------------------------------------------------------------------- */
+	public int prodOrderNum(String id) {
+		int prodOrder = atDao.getProdOrderNum(id);
+		
+		return prodOrder;
+	}
 
-	
-	
-	
-	
+	/*-------------------------------------------------------------------
+	 * 기능 : 공방 관리 홈 리스트 출력 서비스 / 등록된 제품 수
+	 * 작성자: JSH
+	 * 작성일 : 2020.02.12
+	 ------------------------------------------------------------------- */
+	public int prodNum(String id) {
+		int prodNum = atDao.getprodNum(id);
+		
+		return prodNum;
+	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }//AT_Service 클래스의 끝

@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.atelier.dto.MG_Dto;
 import com.atelier.mypage.service.MyPageService;
 
 import lombok.Setter;
@@ -47,11 +48,97 @@ public class MyPageController {
 	 -----------------------------------------------------------------------------------------*/
 	@GetMapping("profileIMG")
 	public void fileDownload(String name, HttpServletRequest req ,HttpServletResponse resp) {
-			log.warn("프로필 이미지 출력 컨트롤러");
+		log.warn("프로필 이미지 출력 컨트롤러");
 		mpServ.profileIMG(name, req, resp);
 	}
 	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 컨트롤러 / 정보 개요 출력
+	 * 작성자: JSH
+	 * 작성일: 2020.02.12
+	 -----------------------------------------------------------------------------------------*/
+	@GetMapping("myPage")
+	public ModelAndView myPage() {
+		log.warn("마이페이지 홈 출력 컨트롤러 시작");
+		mav = mpServ.getmyPage();
+		
+		return mav;
+	}
 	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 컨트롤러 / 판매자에게 문의 / 정보 출력
+	 * 작성자: JSH
+	 * 작성일: 2020.02.12
+	 -----------------------------------------------------------------------------------------*/
+	@GetMapping("myPageMessageSend")
+	public ModelAndView myPageMessageSend(String po_at_id) {//form에서 넘겨주는 name과 controller의 매개변수 명과 같아야 한다.
+		log.info("판매자에게 문의 컨트롤러");
+		mav = mpServ.getMyPageMessageSend(po_at_id);
+		
+		return mav;
+	}
 	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 컨트롤러 / 판매자에게 문의 / 메세지 전송
+	 * 작성자: JSH
+	 * 작성일: 2020.02.12
+	 -----------------------------------------------------------------------------------------*/
+	@PostMapping("myPageMSendAction")
+	public ModelAndView myPageMSendAction(MG_Dto mgDto) {
+		log.info("판매자에게 메세지 전송 컨트롤러");
+		mav = mpServ.getMyPageMSendAction(mgDto);
+		
+		return mav;
+	}
 	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 컨트롤러 / 제품 바로가기
+	 * 작성자: JSH
+	 * 작성일: 2020.02.13
+	 -----------------------------------------------------------------------------------------*/
+	@GetMapping("myPageGoProd")
+	public ModelAndView myPageGoProd(int po_pd_code) {
+		log.info("주문 신청한 제품으로 바로가기 컨트롤러");
+		mav = mpServ.getMyPageGoProd(po_pd_code);
+		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 컨트롤러 / 주문 취소
+	 * 작성자: JSH
+	 * 작성일: 2020.02.13
+	 -----------------------------------------------------------------------------------------*/
+	@GetMapping("myPageOrderCancle")
+	public ModelAndView myPageOrderCancle(int po_num) {
+		log.warn("주문 취소 컨트롤러 실행");
+		mav = mpServ.actMyPageOrderCancle(po_num);
+		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 컨트롤러 / 구독중인 공방 바로가기
+	 * 작성자: JSH
+	 * 작성일: 2020.02.13
+	 -----------------------------------------------------------------------------------------*/
+	@GetMapping("myPageGoAtelier")
+	public ModelAndView myPageGoAtelier(String sc_at_id) {
+		log.warn("공방 바로가기 컨트롤러 실행");
+		mav = mpServ.actMyPageGoAtelier(sc_at_id);
+		
+		return mav;
+	}
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 홈 컨트롤러 / 구독 해제
+	 * 작성자: JSH
+	 * 작성일: 2020.02.13
+	 -----------------------------------------------------------------------------------------*/
+	@GetMapping("myPageDelSubs")
+	public ModelAndView myPageDelSubs(String sc_at_id) {
+		log.warn("구독 해제 컨트롤러 실행");
+		mav = mpServ.actMyPageDelSubs(sc_at_id);
+		
+		return mav;
+	}
 }

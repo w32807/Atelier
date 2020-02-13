@@ -223,12 +223,6 @@ public class MainController {
 		return "prodBuy";
 	}
 
-	//myPage
-	@GetMapping("myPage")
-	public String myPage() {
-		return "myPage";
-	}
-
 	//비밀번호변경
 	@GetMapping("myChangePwd")
 	public String myChangePwd() {

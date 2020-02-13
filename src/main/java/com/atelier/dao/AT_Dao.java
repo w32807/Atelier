@@ -6,6 +6,7 @@ import com.atelier.dto.AG_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
 import com.atelier.dto.PO_Dto;
+import com.atelier.dto.RO_Dto;
 import com.atelier.dto.SM_Dto;
 import com.atelier.vo.PO_Vo;
 
@@ -48,5 +49,15 @@ public interface AT_Dao {
 	public AG_Dto getATRegistMember(String id);
 
 	public void deleteAGRequest(String id);
+	
+	public List<RO_Dto> getATOrderSearchList(String id);
+
+	public void delATOrder(int chkedBoxValue);
+
+	public int getSubscribeNum(String id);
+
+	public int getProdOrderNum(String id);
+
+	public int getprodNum(String id);
 	
 }
