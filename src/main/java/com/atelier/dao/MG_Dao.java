@@ -18,5 +18,8 @@ public interface MG_Dao {
 	public boolean SendMessage(MG_Dto mDto);
 
 	public List<PO_Dto> getOrderList(MG_Dto mDto);
+	
+	public boolean ChangeCheck(int mg_num);
+
 
 }

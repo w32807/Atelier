@@ -265,7 +265,9 @@
 
 
 									<!-- 각각의 heading숫자 ,  collapse숫자는 모두 for문으로 숫자들을 1개씩 증가시켜주세요. -->
+									
 									<c:forEach var="bitem" items="${bList}" >
+									<c:if test="${bitem.mg_check eq 'F'}">
 										<div class="panel panel-default">
 											<div class="panel-heading" role="tab" id="heading${bitem.mg_num}" >
 											<h4 class="panel-title">
@@ -293,6 +295,7 @@
 													</div>
 												</div>
 											</div>
+										</c:if>
 									</c:forEach>
 									<div>${paging}</div>
 									<!-- 여기까지 쪽지 1개 -->

@@ -12,4 +12,6 @@ public interface BT_Dao {
 
 	public boolean goBasket(BT_Dto btDto);
 
+	public boolean deleteBasket(int btNum);
+
 }

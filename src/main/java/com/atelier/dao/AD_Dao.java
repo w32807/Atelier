@@ -50,8 +50,11 @@ public interface AD_Dao {
 
 	public boolean productDelete(String check);
 
-	public ModelAndView ProductUpdate1(Integer pd_code);
-	
+	public PD_productDto ProductUpdate1(Integer pd_code);
+
+	public boolean ProductUpdate2(PD_productDto pdDto);
+
+
 	
 	
 }

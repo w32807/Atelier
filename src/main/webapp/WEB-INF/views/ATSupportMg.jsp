@@ -285,13 +285,14 @@
 						<table>
 							<tr>
 								<td>
-									<textarea rows="2" cols="100" id="contents" name="contents"
+									<textarea rows="2" cols="100" id="sm_contents" name="sm_contents"
 											style="margin-left: -100px; width: 700px;">
 									</textarea>
 								</td>
 								<td>
-									<input type="button" value="메세지전송" onclick="vaildChk();"
-											style="width: 100px; height: 50px; padding: 0; margin: -5px 0 0 -215px;">
+									<input type="hidden" name="sm_sender" value="${mb.cm_id}">
+									<input type="hidden" name="sm_receiver" value="${gb.at_id}">
+									<input type="button" id ="supportProc" value="메세지전송" style="width: 100px; height: 50px; padding: 0; margin: -5px 0 0 -215px;">
 								</td>
 							</tr>
 						</table>
@@ -304,34 +305,37 @@
 							<th style="width: 150px; text-align: center; color: white;">Writer</th>
 							<th style="width: 80px; text-align: center; padding-right: 15px; color: white;">Delete</th>
 						</tr>
+					
 					</table>
 					
 					<!-- SUPPORT_MG에 메세지 리스트 Ajax로 처리 -->
 					<form id="deleteMessage" name="deleteMessage">
-						<table>
-							<input type="hidden" name="smnum" value="댓글번호">
+						<table id ="rTable">
+							<c:forEach var="r" items="${rList}">
+							<input type="hidden" name="sm_receiver" value="수신자">
 								<tr style="background-color: white; border: 2px solid #A09182; height:40px;">
 									<td style="width: 50px; text-align: center;">
-										넘버
+										${r.sm_num}
 									</td>
 									<td style="width: 550px; text-align: left; padding-left: 15px;">
-										내용
+										${r.sm_contents}
 									</td>
 									<td style="width: 200px;">
-										작성날짜
+										${r.sm_date}
 									</td>
 									<td style="width: 150px;">
-										작성자
+										${r.sm_sender}
 									</td>
 									<td style="padding-right: 15px; width: 80px;">
 										<button type="button" id="btnDelete" 
-											style="border: 0; background-color: white;" onclick="deleteBtn();">
-											<img src="resources/AT_front/images/x.png" style="width: 15px;">
+											style="border: 0; background-color: white;">
+											삭제<!-- <img src="resources/AT_front/images/x.png" style="width: 15px;"> -->
 										</button>
 									</td>
 								</tr>
+								</c:forEach>
 						</table>
-					</form>
+						</form>
 				</div>
 			</div>
 		</div>
@@ -433,41 +437,83 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	<script src="resources/AT_front/js/jquery.flexslider-min.js"></script>
 	<!-- Sticky Kit -->
 	<script src="resources/AT_front/js/sticky-kit.min.js"></script>
+	<!-- serializeObject -->
+	<script src="../resources/js/jquery.serializeObject.js"></script>
 	
+	${AT_Dto.at_id}
+<script type="text/javascript">
 	
-	<!-- MAIN JS -->
-	<script src="resources/AT_front/js/main.js"></script>
-	
-	<script type="text/javascript">
-	function isNull(elem) {
-		if(elem == null || elem == "") {
-			return true;
-		}
-		return false;
-	}
-
-	function vaildChk() {
-		var messageFrm = document.supportFrm;
-		console.log(messageFrm.contents.value);
-		if(isNull(messageFrm.contents.value)){
-			alert("메세지를 입력해주세요.");
-			messageFrm.contents.value ="";
-			messageFrm.contents.focus();
+	$("#supportProc").click(function(){
+		var support = $("#supportFrm").serializeObject();
+		console.log(support);
+		
+		$.ajax({
+			url: "supportMGInsert",
+			type: "post",
+			data: support,
+			dataType: "json",
+			success : function(data){
+				var rlist = '';
+				var dlist = data.rList;
+				
+				for(var i=0; i<dlist.length; i++){
+					rlist +=
+						'<input type="hidden" name="sm_receiver" value="수신자">'+
+						+'<tr style='+'"background-color: white; border: 2px solid #A09182; height:40px;">'+
+						+'<td style="width: 50px; text-align: center;">'+dlist[i].sm_num+'</td>'
+						+'<td style="width: 550px; text-align: left; padding-left: 15px;">'+dlist[i].sm_contents+'</td>'
+						+'<td style="width: 200px;">'+dlist[i].sm_date+"</td>"
+						+'<td style="width: 150px;">'+dlist[i].sm_sender+"</td>"
+						+'<td style="padding-right: 15px; width: 80px;">'+
+						+'<button type="button" id="btnDelete" style="border: 0; background-color: white;">'
+						+'삭제'+
+						'</button>'+
+						'</td>'+
+						"</tr>"
+						
+				}
+				$('#rTable').html(rlist);
 			
-            return false;
-		} else {
-			alert("메세지 등록 완료!");
-			return true;
-		}
-	}
-	
-	function deleteBtn() {
-		if (confirm("정말 삭제하시겠습니까?")) {
-			document.deleteMessage.submit();
-		} else {
-			return false;
-		}
-	}
-	</script>
+			},
+			error: function(error){
+				alert("댓글 입력 실패");
+			}
+		});
+	});
+		/* 
+			
+			//객체에 데이터 추가! r_bnum은 무엇?
+			console.log(replyFrm);
+			$.ajax({
+				url: "supportMGInsert",
+				type: "post",
+				data: replyFrm,
+				dataType: "json",
+				success: function(data) {
+					console.log(data.rList);//map에 들어있는 key값으로 받아온 value값 확인!
+					var rList = "";
+					for(var i =0; i <data.rList.length;i++){
+						rList += 
+									//form의 댓글에서 for문의 내용을 다 지우고 가져온 rList의 데이터를 사용해서 새로 작성!
+						}
+					$('#rTable').html(rList);//얘의 역할은...?//
+				},
+			error: function (error) {
+				alert(error);
+				}
+			})
+			
+			
+		} */
+
+		function confirmDelete(bnum) {
+				theForm=document.delBoard;
+				//document.객체의 이름으로 저장 하나의 태그를 변수로 저장
+				var chk = confirm("정말 삭제하시겠습니까?");
+				if (chk) {
+					return theForm.submit();
+				}
+			}	
+		</script>
 	</body>
 </html>

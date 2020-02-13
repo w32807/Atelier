@@ -28,6 +28,10 @@
 	</insert>
 
 
+	<update id="ChangeCheck" parameterType="Integer">
+		UPDATE MESSAGE SET MG_CHECK='T' WHERE MG_NUM = #{mg_num}
+	</update>
+
 
 	<!-- <insert id="SendMessage" parameterType="com.atelier.dto.PO_Dto" resultType="com.atelier.dto.PO_Dto"> 
 		INSERT INTO MESSAGE VALUES(MG_NUM_SEQ.NEXTVAL,#{mg_sender},#{mg_receiver},'F',#{mg_contents},DEFAULT) 

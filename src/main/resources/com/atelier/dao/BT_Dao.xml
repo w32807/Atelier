@@ -13,4 +13,7 @@
 		INSERT INTO BASKET VALUES(BT_NUM_SEQ.NEXTVAL,#{bt_cm_id},#{bt_at_name},#{bt_price},#{bt_count},#{bt_pd_code})
 	</insert>
 
+	<delete id="deleteBasket">
+		DELETE FROM BT WHERE BT_NUM = #{btNum}
+	</delete>
 </mapper>

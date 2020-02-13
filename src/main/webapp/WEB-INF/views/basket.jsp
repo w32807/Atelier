@@ -169,7 +169,7 @@
     <section class="shopping-cart spad">
         <div class="container">
                     <div class="cart-table">
-                    <form action="basketList" method="get">
+                    <form id="prodBuy" action="prodBuy" method="post">
                         <table>
                             <thead>
                                 <tr>
@@ -181,26 +181,31 @@
                                     <th><i class="ti-close"></i></th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody id="listBody">
                             	<c:forEach var="b" items="${bList}">
                                 <tr>
                                     <td class="cart-pic first-row"><img src="./resources/main/img/products/${b.pi_oriname}" alt=""></td>                                    <td class="cart-title first-row">
                                         <h5>${b.bt_at_name}</h5>
                                     </td>
-                                    <td class="p-price first-row">${b.bt_price}</td>
+                                    <td class="p-price first-row" title="${b.bt_num}">${b.bt_price}</td>
                                     <td class="qua-col first-row">
-                                        <div id="상품코드" class="quantity">
-                                            <div class="pro-qty">
-                                                <input name="상품코드" type="text" value="${b.bt_count}"> <!-- 수량조정 -->
+                                        <div  class="quantity">
+                                            <div id="${b.bt_num}" class="pro-qty">
+                                                <input name="${b.bt_num}" type="text" value="${b.bt_count}"> <!-- 수량조정 -->
                                             </div>
                                         </div>
                                     </td>
-                                    <td name="상품코드" class="total-price first-row">$60.00</td> <!-- 총가격 -->
-                                    <td class="close-td first-row"><i class="ti-close"></i></td> <!-- 취소버튼 -->
+                                    <td name="${b.bt_num}" class="total-price first-row">${b.bt_price*b.bt_count}</td> <!-- 총가격 -->
+                                    <td class="close-td first-row"><i class="ti-close" onclick="deleteBasket(${b.bt_num})"></i></td> <!-- 취소버튼 -->
+                                	<input type="hidden" name="orderBtNum" value="${b.bt_num}">
                                 </tr>
                                 </c:forEach>
+                                
                             </tbody>
                         </table>
+                       </form>
+                       <form id="deleteFrm">
+                            <input id="deleteInput" type="hidden" name="bt_num" value="">
                        </form>
                     </div>
                     <div class="row">
@@ -225,9 +230,9 @@
                                 <ul>
                                 <!-- 서브토탈 -->
                                     <!--  <li class="subtotal">Subtotal <span>$240.00</span></li>-->
-                                    <li class="cart-total">총가격 <span>$240.00</span></li>
+                                    <li class="cart-total">총가격 <span id="orderTotalPrice"></span></li>
                                 </ul>
-                                <a href="prodBuy" class="proceed-btn">구매하기</a>
+                                <a id="order" class="proceed-btn">구매하기</a>
                             </div>
                         </div>
                     </div>
@@ -321,7 +326,103 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="${pageContext.request.contextPath}/resources/main/js/jquery.slicknav.js"></script>
     <script src="${pageContext.request.contextPath}/resources/main/js/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/main/js/main.js"></script>
+    <script src="resources/js/jquery.serializeObject.js"></script>
 </body>
 <script type="text/javascript">
+
+		$(document).ready(function() {
+			totalPriceCal();
+		});
+	
+		$(".pro-qty").on("click", function() {
+			var bt_num = $(this).attr('id');//상품 코드 가져옴
+			console.log("주문번호 : "+bt_num);
+			var totalPrice = 0;
+		
+			var price = $("td[title="+bt_num+"]").html();//가격
+			var count = $("input[name="+bt_num +"]").val();//수량
+			totalPrice = price * count;
+			console.log("가격 : " +price);
+			console.log("수량 : " +count);
+			console.log("해당 상품 총 가격 : " +totalPrice);
+			$("td[name="+bt_num+"]").html(totalPrice);//총가격
+			totalPriceCal();
+			
+		});
+		
+		function totalPriceCal(){	
+	        var i = 0;
+	        var total = 0;
+	        $('.total-price').each( function() {
+	          priceStr = $( this ).html();
+	          var priceInt = parseInt(priceStr);
+			  total += priceInt;	       	
+	        });
+	        console.log( typeof(total));
+	       
+	        console.log("전체 총 합계 : " + total);
+	    	$("#orderTotalPrice").html(total);
+		}
+		
+		function deleteBasket(bt_num){
+			console.log(bt_num);
+			$('#deleteInput').val(bt_num);
+			//ajax로 처리
+			if(confirm("정말 장바구니에서 삭제하시겠습니까?")){
+			
+					var bt_numObj = $("#deleteFrm").serializeObject();
+					console.log(bt_numObj);
+					$.ajax({
+						url: "deleteBasket",
+						type: "get",
+						data: bt_numObj,
+						dataType: "json",
+						success: function(data){
+							alert("장바구니에서 삭제 되었습니다.");
+							console.log(data); 
+							var basketList = '';	
+							var dbList = data.bList;
+							  for(var i = 0; i < dbList.length; i++){
+								  basketList += '<tr>'
+						                            +'<td class="cart-pic first-row"><img src="./resources/main/img/products/'+ dbList[i].pi_oriname +'" alt=""></td>'
+						                            +'<td class="cart-title first-row">'
+					                                	+'<h5>'+ dbList[i].bt_at_name +'</h5>'
+					                            	+'</td>'
+					                           	    +'<td class="p-price first-row" title="' + dbList[i].bt_num +'">b.bt_price</td>'
+					                                +'<td class="qua-col first-row">'
+						                                +'<div  class="quantity">'
+						                                    +'<div id="' + dbList[i].bt_num+'" class="pro-qty">'
+						                                        +'<input name="' + dbList[i].bt_num +'" type="text" value="' + dbList[i].bt_count +'"> <!-- 수량조정 -->'
+						                                    +'</div>'
+						                                +'</div>'
+						                            +'</td>'
+						                            +'<td name="' + dbList[i].bt_num +'" class="total-price first-row">'+ dbList[i].bt_price * dbList[i].bt_count +'</td> <!-- 총가격 -->'
+						                            +'<td class="close-td first-row"><i class="ti-close" onclick="deleteBasket('+ dbList[i].bt_num +')"></i></td> <!-- 취소버튼 -->'
+					                    	    +'</tr>'
+							
+							  }
+							$("#listBody").html(basketList);
+							
+						},
+						error: function(error){
+							alert("장바구니에서 삭제 되지 않았습니다.");
+						}
+					});
+			}
+		
+		}
+		
+		
+		
+		$("#order").click(function(){
+			if(confirm("장바구니의 상품을 구매 하시겠습니까?")){
+				$("#prodBuy").submit();
+				
+			}
+		})
+		
+		
+		
+		
 </script>
 </html>

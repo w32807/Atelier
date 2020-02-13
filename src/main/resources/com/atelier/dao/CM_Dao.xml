@@ -72,6 +72,9 @@
   		INSERT INTO BT VALUES(BT_NUM_SEQ.NEXTVAL,#{bt_cm_id},#{bt_at_name},#{bt_price},#{bt_count},#{bt_pd_code})
   	</insert>
   	
+  	<select id="getPd_code" parameterType="Integer" resultType="Integer">
+  		SELECT BT_PD_CODE FROM BT WHERE BT_NUM = #{getorderVtNum}
+  	</select>
   	
   	
   	

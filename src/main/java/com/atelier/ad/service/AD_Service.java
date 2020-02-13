@@ -23,6 +23,7 @@ import com.atelier.dao.AD_Dao;
 import com.atelier.dao.AM_Dao;
 import com.atelier.dao.AT_Dao;
 import com.atelier.dao.CM_Dao;
+import com.atelier.dao.MG_Dao;
 import com.atelier.dao.NT_Dao;
 import com.atelier.dao.PD_Dao;
 import com.atelier.dto.AD_MaterialDto;
@@ -66,7 +67,8 @@ public class AD_Service {
 	@Setter(onMethod_ = @Autowired)
 	PD_Dao pdDao;
 	
-	
+	@Setter(onMethod_ = @Autowired)
+	MG_Dao mDao;
 	
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 공지사항 전체 출력
@@ -516,10 +518,10 @@ public class AD_Service {
 	}
 
 	/* ---------------------------------------------------------------------------------
-	  * 기능: 메세지 리스트 출력
-	  * 작성자: KBH
-	  * 작성일 : 2010.02.10
-	  -----------------------------------------------------------------------------------*/
+	 * 기능: 메세지 리스트 출력
+	 * 작성자: KBH
+	 * 작성일 : 2020.02.11 / 수정(KBH) 2020.02.13
+		  -----------------------------------------------------------------------------------*/
 	public ModelAndView goADMessage(String mg_receiver) {
 		mav = new ModelAndView();
 
@@ -535,30 +537,39 @@ public class AD_Service {
 	
 
 	/* ---------------------------------------------------------------------------------
-	  * 기능: 메세지 상세보기 출력
-	  * 작성자: KBH
-	  * 작성일 : 2010.02.11
-	  -----------------------------------------------------------------------------------*/
-	public ModelAndView ADMessagecon(Integer mg_num) {
+	 * 기능: 메세지 상세보기 출력
+	 * 작성자: KBH
+	 * 작성일 : 2020.02.11 / 수정(KBH) 2020.02.13
+	-----------------------------------------------------------------------------------*/
+		public ModelAndView ADMessagecon(Integer mg_num) {
 		
 		mav = new ModelAndView();
 
 		String view = null;
-
-		MG_Dto mgDto = aDao.getADMessageContents(mg_num);
 		
-		mav.addObject("mgDto", mgDto);
+		try {
+			MG_Dto mgDto = aDao.getADMessageContents(mg_num);
+			mav.addObject("mgDto", mgDto);
+			
+			mDao.ChangeCheck(mgDto.getMg_num());
+			
+			mav.setViewName("ADMessageContents");
+			
+		}catch(Exception e) {
+			
+			e.printStackTrace();
+			
+		}
 		
-		mav.setViewName("ADMessageContents");
 		return mav;
 	}
 
-	/* ---------------------------------------------------------------------------------
-	  * 기능: 메세지 상세보기에서 답장 
-	  * 작성자: KBH
-	  * 작성일 : 2010.02.11
-	  -----------------------------------------------------------------------------------*/
-	public ModelAndView MessageSendBtn(MG_Dto mDto) {
+		/* ---------------------------------------------------------------------------------
+		 * 기능: 메세지 상세보기에서 답장 
+		 * 작성자: KBH
+		 * 작성일 : 2020.02.11 / 수정(KBH) 2020.02.13
+		-----------------------------------------------------------------------------------*/
+		public ModelAndView MessageSendBtn(MG_Dto mDto) {
 		 
 		  mav = new ModelAndView();
 			 
@@ -573,6 +584,7 @@ public class AD_Service {
 			  aDao.ADSendMessage(mDto);
 			  view =  "forward:ADMessage";
 			  
+			  
 		  }catch(Exception e) {
 			  
 			  e.printStackTrace();
@@ -586,10 +598,10 @@ public class AD_Service {
 	}
 
 	/* ---------------------------------------------------------------------------------
-	  * 기능: 메세지 삭제 메소드
-	  * 작성자: KBH
-	  * 작성일 : 2010.02.11
-	  -----------------------------------------------------------------------------------*/
+	 * 기능: 메세지 삭제
+	 * 작성자: KBH
+	 * 작성일 : 2020.02.11 / 수정(KBH) 2020.02.13
+	-----------------------------------------------------------------------------------*/
 	@Transactional
 	public ModelAndView delMessage(String[] check, RedirectAttributes rttr) {
 		
@@ -608,13 +620,11 @@ public class AD_Service {
 	}
 	
 
-	/*
-	 * -----------------------------------------------------------------------------
-	 *        기능: 제작한 상품 리스트 전체 출력 
-	 *       작성자: KYH 
-	 *       작성일 : 2019.02.05
-	 * ----------------------------------------------------------------------------- */
-
+	/* ---------------------------------------------------------------------------------
+	 * 기능: 상품 리스트 전체 출력
+	 * 작성자: KBH
+	 * 작성일 : 2020.02.12 / 수정(KBH) 2020.02.13
+	  -----------------------------------------------------------------------------------*/
 	public ModelAndView getADProdList(Integer pageNum, Integer maxNum) {
 		mav = new ModelAndView();
 
@@ -637,7 +647,7 @@ public class AD_Service {
 	 * -----------------------------------------------------------------------------
 	 *  	기능: 상품삭제 Paging 처리 
 	 *  	작성자: KBH 
-	 *  	작성일 : 2019.02.05
+	 *  	작성일 : 2020.02.12
 	 * ----------------------------------------------------------------------------- */
 	
 	private Object getADProdPaging(int num) {
@@ -652,10 +662,10 @@ public class AD_Service {
 		return pagingHtml;
 	}
 
-	 /* ---------------------------------------------------------------------------------------
-	 * 기능: 주문내역 취소 메소드 <수정필요>
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 상품내역 삭제 메소드 
 	 * 작성자: KBH
-	 * 작성일: 2020.02.07
+	 * 작성일: 2020.02.12 / 수정(KBH) 2020.02.13
 	 -----------------------------------------------------------------------------------------*/
 	public ModelAndView productDelete(String[] check, RedirectAttributes rttr) {
 		log.warn("st");
@@ -678,15 +688,47 @@ public class AD_Service {
 		return mav;
 	}
 
+	/* ---------------------------------------------------------------------------------------
+	 * 기능:  상품내역 수정 메소드 중 상품상세정보 출력메소드
+	 * 작성자: KBH
+	 * 작성일: 2020.02.13
+		 -----------------------------------------------------------------------------------------*/
 	public ModelAndView productUpdate1(Integer pd_code) {
 		log.warn("st");
 		
 		mav = new ModelAndView();
 		
-		mav = aDao.ProductUpdate1(pd_code);
+		PD_productDto pdDto = aDao.ProductUpdate1(pd_code);
+		
+		mav.addObject("pd",pdDto);
+		
+		mav.setViewName("ADProdDetail");
 		
 		return mav;
 	}
+
+	/* ---------------------------------------------------------------------------------------
+	 * 기능:  상품내역 수정 메소드 중 상품상세정보 수정메소드
+	 * 작성자: KBH
+	 * 작성일: 2020.02.13
+		 -----------------------------------------------------------------------------------------*/
+	public ModelAndView productUpdate2(PD_productDto pdDto) {
+		log.warn("stst");
+		
+		mav = new ModelAndView();
+		
+		try {
+			aDao.ProductUpdate2(pdDto);
+				mav.setViewName("redirect:ADProdManage");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return mav;
+	}
+
 
 
 }

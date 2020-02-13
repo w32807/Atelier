@@ -227,7 +227,12 @@
                      <c:forEach var="m" items="${bList}" >
                     	<input type="hidden" name="mg_sender" value="${mb.cm_id}">
                     	<input type="hidden" name="mg_receiver" value="${m.mg_sender}">
-                              <tr>
+                              <c:if test="${m.mg_check eq 'F'}">
+                              <tr style="background-color:red;">
+                              </c:if>
+                              <c:if test="${m.mg_check eq 'T'}">
+                              <tr style="background-color:blue;">
+                              </c:if>
                                  <th><input type="checkbox" name="prod" value="${m.mg_num}"></th>
                                  <td>${m.mg_sender}</td>
                                  <td>${m.mg_receiver}</td>
@@ -238,7 +243,7 @@
                            </a>
                            </td>
                               </tr>
-                          </c:forEach>
+                      </c:forEach>
                           </form>
                         </table>
                      </section>

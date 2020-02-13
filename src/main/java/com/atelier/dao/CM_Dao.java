@@ -39,4 +39,6 @@ public interface CM_Dao {
 	public int getAt_num(String pd_at_name);
 
 	public void insertbasket(BT_Dto btDto);
+
+	public int getPd_code(int getorderVtNum);
 }

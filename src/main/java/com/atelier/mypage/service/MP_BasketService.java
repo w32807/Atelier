@@ -1,6 +1,8 @@
 package com.atelier.mypage.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,6 +55,25 @@ public class MP_BasketService {
 		return mav;
 	}
 
+	/* ---------------------------------------------------------------------------------
+	 * 기능: 장바구니에서 내역 삭제
+	 * 작성자: JWJ
+	 * 작성일 : 2019.02.13
+	  -----------------------------------------------------------------------------------*/
+	public Map<String, List<PO_Dto>> deleteBasket(String bt_num, String bt_cm_id) {
+		
+		Map<String, List<PO_Dto>> basketMap = new HashMap<String, List<PO_Dto>>();
+		int btNum = Integer.parseInt(bt_num);
+		boolean a = btDao.deleteBasket(btNum);
+		
+		if(a){
+			List<PO_Dto> bList = btDao.getBasketList(bt_cm_id);
+			basketMap.put("bList", bList);
+		}
+		
+		return basketMap;
+	}
+
 	
 	
-}
+}//class end

@@ -266,7 +266,39 @@ public class CM_Service {
 		return insertChk;
 	}
 
-	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 장바구니에서 주문 페이지로 이동
+	 * 작성자: JWJ
+	 * 작성일: 2020.02.13
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView prodBuy(HttpServletRequest request) {
+		mav = new ModelAndView();
+		String[] orderBtNum = request.getParameterValues("orderBtNum");//주문 번호
+		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
+		List<PD_productDto> orderedProdList = new ArrayList<PD_productDto>();
+		int totalPrice = 0;
+		
+		for(int i = 0; i < orderBtNum.length; i++) {
+			 PD_productDto pdDto = new PD_productDto();
+			 int orderCount = Integer.parseInt(request.getParameter(orderBtNum[i]));
+			 int getorderVtNum = Integer.parseInt(orderBtNum[i]);
+			 int pd_code = cm_Dao.getPd_code(getorderVtNum);
+			 pdDto = cm_Dao.getprodDetail(pd_code);
+			 pdDto.setPd_numofstock(orderCount);
+			 orderedProdList.add(pdDto);
+			 totalPrice += orderCount * pdDto.getPd_price();
+		}
+		
+		//모든 가격의 총 합 구하기
+		
+		
+		mav.addObject("totalPrice",totalPrice);
+		mav.addObject("orderedProdList",orderedProdList);
+		mav.setViewName("prodBuy");
+		
+		return mav;
+	}
+
 	
 	
 	

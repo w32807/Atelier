@@ -98,6 +98,16 @@
 	DELETE FROM PRODUCT WHERE PD_CODE = #{check}
 	</delete>
 	
+	<select id="ProductUpdate1" parameterType="Integer" resultType="com.atelier.dto.PD_productDto"> 
+		SELECT * FROM PRODUCT WHERE PD_CODE=#{pd_code}
+	</select> 
+	
+	
+	
+	<update id="ProductUpdate2" parameterType="com.atelier.dto.PD_productDto">
+		UPDATE PRODUCT SET PD_PRICE=#{pd_price},PD_NUMOFSTOCK=#{pd_numofstock},PD_OPTION=#{pd_option},
+		PD_CATE=#{pd_cate},PD_NAME=#{pd_name},PD_DETAIL=#{pd_detail} WHERE PD_CODE=#{pd_code}
+	</update>
 	
 	<!-- <Select id="ProductUpdate1" parameterType="Integer" returnType="com.atelier.dto.PD_productDto"> 
 		UPDATE PD SET PD_REGIST='F' WHERE PD_CODE=#{pd_code}

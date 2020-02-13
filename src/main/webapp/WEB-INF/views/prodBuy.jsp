@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -46,6 +45,14 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/main/css/style.css"
 	type="text/css">
+<style type="text/css">
+	.count {
+		margin-right: 30px;
+	}
+	.prodInfo{
+		width: 30px;
+	}
+</style>
 </head>
 
 <body>
@@ -186,7 +193,7 @@
 	<!-- Shopping Cart Section Begin -->
 	<section class="checkout-section spad">
 		<div class="container">
-			<form action="#" class="checkout-form">
+			<form action="orderInsert" class="checkout-form" method="post">
 				<div class="row">
 					<div class="col-lg-6">
 						<!-- 로그인 화면으로 가기 -->
@@ -210,31 +217,36 @@
                             </div>
                             -->
 							<div class="col-lg-12">
-								<label for="zip">주문자 성명</label> <input type="text" id="zip" required>
+								<label for="zip"></label>주문자 성명 <input  type="text" id="senderName" required value="${mb.cm_name}" readonly="readonly">
 							</div>
 							<div class="col-lg-12">
-								<label for="zip">주문자 전화번호</label> <input type="text" id="zip" required>
+								<label for="zip"></label>주문자 전화번호 <input type="text" id="senderPhone" required value="${mb.cm_phone}">
 							</div>
 
-							<h4>받는 사람</h4>
+							<h4>받는 사람</h4> 
+							
 							<div class="col-lg-12">
-								<label for="zip">받는사람 성명</label> <input type="text" id="zip" required>
+								<label for="zip">받는사람 성명<span style="margin-left: 8px; font-size: 13px;">주문자와 동일
+								<input id="receiver" type="checkbox" style="width: 13px; margin-left: 5px; margin-top: -8px; position: absolute;"></span></label> 
+								<input type="text" id="receiverName" name="receiverName" required value="">
 							</div>
+							
 							<div class="col-lg-12">
-								<label for="zip">받는사람 전화번호</label> <input type="text" id="zip" required>
+								<label for="zip">받는사람 전화번호</label> <input type="text" id="receiverPhone" name="receiverPhone" required value="">
 							</div>
 							<!--  탭시작 -->
 							<div class="product-tab">
 								<div class="tab-item">
 									<ul class="nav" role="tablist">
-										<li><a class="active" data-toggle="tab" href="#tab-1"
+										<li><a id="tab1" class="active" data-toggle="tab" href="#tab-1"
 											role="tab">배송지1</a></li>
-										<li><a data-toggle="tab" href="#tab-2" role="tab">배송지2</a>
+										<li><a id="tab2" data-toggle="tab" href="#tab-2" role="tab">배송지2</a>
 										</li>
-										<li><a data-toggle="tab" href="#tab-3" role="tab">배송지3</a>
+										<li><a id="tab3" data-toggle="tab" href="#tab-3" role="tab">배송지3</a>
 										</li>
 									</ul>
 								</div>
+								
 								<!-- 탭시작 -->
 								<div class="tab-item-content">
 									<div class="tab-content">
@@ -248,8 +260,7 @@
 														</h5>
 														<hr>
 														<label for="street"></label> <input type="text"
-															id="street" class="street-first"> <input
-															type="text">
+															id="addr1" class="street-first" value="${mb.cm_addr}"> 
 													</div>
 												</div>
 											</div>
@@ -263,8 +274,7 @@
 														</h5>
 														<hr>
 														<label for="street"></label> <input type="text"
-															id="street" class="street-first"> <input
-															type="text">
+															id="addr2" class="street-first" value="${mb.cm_addr2}"> 
 													</div>
 												</div>
 											</div>
@@ -274,12 +284,11 @@
 												<div class="row">
 													<div class="col-lg-12">
 														<h5>
-															주소<span>*</span>
+															주소<span>*(직접입력)</span>
 														</h5>
 														<hr>
 														<label for="street"></label> <input type="text"
-															id="street" class="street-first"> <input
-															type="text">
+															id="addr3" class="street-first">
 													</div>
 												</div>
 											</div>
@@ -310,12 +319,19 @@
 							<!-- Breadcrumb Section Begin -->
 							<div class="order-total">
 								<ul class="order-table">
-									<li>Product <span>Total</span></li>
-									<li class="fw-normal">배송비 무료 <span>Free</span></li>
-									<li class="fw-normal">작품1 <span>60,000</span></li>
-									<li class="fw-normal">작품2 <span>70,000</span></li>
-									<li class="fw-normal">작품3 <span>10,000</span></li>
-									<li class="total-price">Total <span>140,000</span></li>
+									<li>Product <span style="margin-right: -5px;">Total</span><span class="count prodInfo">수량</span>
+																							<span class="count prodInfo" style="margin-right: 22px;">단가</span></li>
+									<li class="fw-normal">배송비 무료 <span class="prodInfo">Free</span></li>
+									 <c:forEach var="pdDto" items="${orderedProdList}">
+									<li class="fw-normal">${pdDto.pd_name} <span class="prodInfo">${pdDto.pd_price*pdDto.pd_numofstock}
+										</span><span class="count prodInfo">${pdDto.pd_numofstock}</span><span class="count prodInfo">${pdDto.pd_price}</span></li>
+										<input type="hidden" name="orderProdList" value="${pdDto.pd_code}"/>
+										<input type="hidden" name="orderProdCount" value="${pdDto.pd_numofstock}"/>
+										<input type="hidden" name="orderProdPrice" value="${pdDto.pd_price}"/>
+									</c:forEach>
+										<input type="hidden" id="orderAddr" name="orderAddr" value="${mb.cm_addr}"/>			
+									
+									<li class="total-price">Total<span class="prodInfo">${totalPrice}</span></li>
 								</ul>
 								<div class="payment-check">
 									<div class="pc-item">
@@ -330,7 +346,7 @@
 									</div>
 								</div>
 								<div class="order-btn">
-									<button type="submit" class="site-btn place-btn" onclick="javascript:btn()">주문하기</button>
+									<button id="orderInsertBtn" type="submit" class="site-btn place-btn">주문하기</button>
 								</div>
 							</div>
 						</div>
@@ -468,11 +484,53 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		src="${pageContext.request.contextPath}/resources/main/js/owl.carousel.min.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/main/js/main.js"></script>
-		<script>
+	<script>
 function btn(){
     alert('주문이 완료되었습니다!');
 }
-</script>
+
+    
+		$("#receiver").change(function() {
+
+			var receiverName = $("#senderName").val();
+			var receiverPhone = $("#senderPhone").val();
+			if ($("#receiver").is(":checked")) {
+				$("#receiverName").val(receiverName);
+				$("#receiverPhone").val(receiverPhone);
+
+			} else {
+				$("#receiverName").val('');
+				$("#receiverPhone").val('');
+
+			}
+		});
+
+		$("#orderInsertBtn").click(function() {
+
+			if (confirm("결제를 진행하시겠습니까?")) {
+				$("#orderInsert").submit();
+			}
+		})
+
+		
+		$("#tab1").click(function() {
+			var addr1 = $("#addr1").val();
+			console.log("배송지 1 : "+addr1);
+			$("#orderAddr").val(addr1);
+		})
+		
+		$("#tab2").click(function() {
+			var addr2 = $("#addr2").val();
+			console.log("배송지 2 : "+addr2);
+			$("#orderAddr").val(addr2);
+		})
+		
+		$("#tab3").click(function() {
+			var addr3 = $("#addr3").val();
+			console.log("배송지 3 : "+addr3);
+			$("#orderAddr").val(addr3);
+		})
+	</script>
 </body>
 <!-- 
 <div class="tab-pane fade-in active" id="tab-1"
