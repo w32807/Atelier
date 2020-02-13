@@ -84,16 +84,6 @@ public class AT_Controller {
 		return "ATMain";
 	}
 	
-	@GetMapping("ATNotice")//공방 공지사항으로 이동하는 메소드
-	public String goATNotice() {
-		return "ATNotice";
-	}
-	
-	@GetMapping("ATNoticeDetail")//공방 공지사항 상세페이지로 이동하는 메소드
-	public String goATNoticeDetail() {
-		return "ATNoticeDetail";
-	}
-	
 	/*
 	 * @GetMapping("ATSupportMg")//응원의 메세지로 이동하는 메소드 public String goATSupportMg() {
 	 * return "ATSupportMg"; }
@@ -102,12 +92,6 @@ public class AT_Controller {
 	@GetMapping("ATProduct")//판매물품으로 이동하는 메소드
 	public String goATProduct() {
 		return "ATProduct";
-	}
-	
-	
-	@GetMapping("ATManager")//공방 관리로 이동하는 메소드
-	public String goATManager() {
-		return "ATManager";
 	}
 	
 	@GetMapping("ATInfoModify")//공방 수정으로 이동하는 메소드
@@ -176,20 +160,6 @@ public class AT_Controller {
 		String[] checkedBoxArr = request.getParameterValues("prodChk");
 		
 		mav = atServ.prodRegistCancleProc(pdDto, checkedBoxArr, rttr);
-		
-		return mav;
-	}
-	
-	/* ---------------------------------------------------------------------------------
-	  * 기능: 발주 조회 리스트 출력 메소드(발주조회 페이지 만드시는 분 수정하세욤!!!)
-	  * 작성자: KYH
-	  * 작성일 : 2019.02.08
-	  -----------------------------------------------------------------------------------*/	
-	@GetMapping("ATOrderSearch")
-	public ModelAndView getATOrderInfoList() {
-		//log.warn("발주 조회 리스트 출력 컨트롤러");
-		mav = atServ.getATOrderInfoList();
-		//log.warn("데이터가 들어왔을까" + mav);
 		
 		return mav;
 	}
@@ -431,4 +401,30 @@ public class AT_Controller {
 
 		}
 		
+		/*-------------------------------------------------------------------
+		 * 기능 : 발주 리스트 조회 컨트롤러
+		 * 작성자: JSH
+		 * 작성일 : 2020.02.11
+		 ------------------------------------------------------------------- */
+		@GetMapping("ATOrderSearch")
+		public ModelAndView ATOrderSearchList(HttpServletRequest request) {
+			log.warn("발주 리스트 조회 컨트롤러 시작");
+			
+			mav = mServ.getATOrderSearchList(request);
+			return mav;
+		}
+		
+		/*-------------------------------------------------------------------
+		 * 기능 : 공방 관리 홈 리스트 출력 컨트롤러
+		 * 작성자: JSH
+		 * 작성일 : 2020.02.11
+		 ------------------------------------------------------------------- */
+		@GetMapping("ATManager")
+		public ModelAndView ATManagerList() {
+			log.warn("공방 관리 홈 리스트 출력 컨트롤러 시작");
+			
+			mav = mServ.getATManagerList();
+			
+			return mav;
+		}
 }
