@@ -63,7 +63,7 @@
 	
 	<body>
 	<!-- 상단바 Include -->
-	<jsp:include page="Main_Upper_RemoveCate.jsp" flush="false"/>
+	<jsp:include page="Main_Upper_RC.jsp" flush="false"/>
 
     <!-------------------------------------------------------여기서부터 좌측바 메뉴입니다.---------------------------------------------------------------------->
 	<div id="colorlib-page">
