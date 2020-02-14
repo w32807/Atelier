@@ -137,6 +137,7 @@
 				<li style="font-size: 18px"><a href="ATMessageRQ"
 					onclick="window.open(this.href, '_blank', 'width=655px,height=650px,toolbars=no,scrollbars=no');return false;">메인관리자에게
 						문의</a></li>
+				<li style="font-size: 18px"><a href="ATDetail" style="color: darkseagreen; font-weight: bold;">공방 홈으로 이동</a></li>
 			</ul>
 		</nav>
 	</aside>

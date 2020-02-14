@@ -133,7 +133,7 @@
                     <div class="depart-btn">
                         <i class="ti-menu"></i>
                         <span>Home</span>
-                        	<ul class="depart-hover">
+                        	<ul class="depart-hover" style="z-index: 999;">
                             <li class="active"><a href="main">Shop Home</a></li>
                             <li><a href="ATMain">Atelier Home</a></li>
                             <li><a href="/">Experience</a></li>

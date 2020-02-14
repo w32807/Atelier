@@ -71,7 +71,7 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="newslatter-item">
-                         <a href="/">
+                         <a href="main">
                                 <img src="./resources/main/img/logo_bottom.png" alt="" style="margin-top: 25px;">
                             </a>
                     </div>
