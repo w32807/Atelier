@@ -27,6 +27,7 @@ import com.atelier.dao.PD_Dao;
 import com.atelier.dao.RM_Dao;
 import com.atelier.dao.RO_Dao;
 import com.atelier.dto.AG_Dto;
+import com.atelier.dto.AT_NT_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.NT_Dto;
 import com.atelier.dto.PD_productDto;
@@ -88,8 +89,6 @@ public class AT_Service {
 			Map<String, Object> pageInt = new HashMap<String, Object>();
 			pageInt.put("pageNum", num);
 			pageInt.put("maxNum", maxNum);
-			pageInt.put("pd_at_id",pd_at_id);
-			
 			List<PD_productDto> pd = pdDao.getATProdList(pageInt);
 	
 			mav.addObject("pd", pd);
@@ -642,15 +641,15 @@ public class AT_Service {
 		
 		mav = new ModelAndView();
 		
-		String title = multi.getParameter("nt_title");
-		String contents = multi.getParameter("nt_contents");
-		String id = multi.getParameter("nt_id");
+		String title = multi.getParameter("at_nt_title");
+		String contents = multi.getParameter("at_nt_contents");
+		String id = multi.getParameter("at_nt_id");
 		log.info(title+","+contents+","+id);
 		
-		NT_Dto notice = new NT_Dto();
-		notice.setNt_title(title);
-		notice.setNt_contents(contents);
-		notice.setNt_id(id);
+		AT_NT_Dto notice = new AT_NT_Dto();
+		notice.setAt_nt_title(title);
+		notice.setAt_nt_contents(contents);
+		notice.setAt_nt_id(id);
 		
 		String view = null;
 		
@@ -667,13 +666,18 @@ public class AT_Service {
 		return mav;
 	}
 
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공지사항 출력
+	  * 작성자: KJH
+	  * 작성일 : 2020.02.10		최종수정일 : 2020.02.13
+	  -----------------------------------------------------------------------------------*/
 	public ModelAndView getATNoticeList(Integer pageNum) {
 		log.info("getATNoticeList() - pageNum : " + pageNum);
 		mav = new ModelAndView();
 		
 		int num = (pageNum == null)? 1 : pageNum;//맨 처음에는 넘어오는 페이지 넘버가 없기 때문에 1페이지부터 시작함
 
-		List<NT_Dto> nList = ntDao.getList(num);//페이지 번호를 가져오고, 그 번호에 해당하는 List를 가져온다.
+		List<AT_NT_Dto> nList = ntDao.getList(num);//페이지 번호를 가져오고, 그 번호에 해당하는 List를 가져온다.
 		mav.addObject("bList", nList);//bList라는 이름으로 bList 데이터를 넣겠다.
 		//------추가분-----------------------------------------------------------------------------------------
 		mav.addObject("paging",getPaging(num));//여기서 num은 페이지 번호
@@ -696,15 +700,20 @@ public class AT_Service {
 		return pagingHtml;
 	}
 
-	public ModelAndView getNoticeContents(Integer nt_num) {
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공지사항 세부내용 출력
+	  * 작성자: KJH
+	  * 작성일 : 2020.02.10		최종수정일 : 2020.02.13
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView getNoticeContents(Integer at_nt_num) {
 		mav = new ModelAndView();
-		ntDao.upView(nt_num);
-		NT_Dto nDto = ntDao.getContents(nt_num);
+		ntDao.upView(at_nt_num);
+		AT_NT_Dto anDto = ntDao.getContents(at_nt_num);
 		
-		NT_Dto getNoticeContents = ntDao.getContents(nt_num);
+		AT_NT_Dto getNoticeContents = ntDao.getContents(at_nt_num);
 		CM_Dto sessionMember = (CM_Dto)session.getAttribute("mb");
 		String getSessionId = sessionMember.getCm_id();
-		String getId = getNoticeContents.getNt_id();
+		String getId = getNoticeContents.getAt_nt_id();
 		
 		if(getId.equals(getSessionId)) {
 			
@@ -713,14 +722,38 @@ public class AT_Service {
 		else {
 			mav.addObject("deleteCheck",0);
 		}
-		mav.addObject("board", nDto);//board는 공지사항 내용출력 ${board.nt_contents}
+		mav.addObject("board", anDto);//board는 공지사항 내용출력 ${board.at_nt_contents}
 		
 		mav.setViewName("ATNoticeDetail");
 	
 		
 		return mav;
 	}
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공지사항 삭제
+	  * 작성자: KJH
+	  * 작성일 : 2020.02.10		최종수정일 : 2020.02.13
+	  -----------------------------------------------------------------------------------*/
+	public String delNotice(int at_nt_num, RedirectAttributes rttr) {
+		
+		AT_NT_Dto getBoardContents = ntDao.getContents(at_nt_num);
+		CM_Dto sessionMember =(CM_Dto)session.getAttribute("mb");
+		String getSessionId = sessionMember.getCm_id();
+		String getId = getBoardContents.getAt_nt_id();
+		if(getId.equals(getSessionId)) {
 
+			ntDao.delNoticeContents(at_nt_num);
+			
+			String view = "redirect:ATNotice?pageNum="+session.getAttribute("pageNum");//redirect로, writeFrm에 가라
+			rttr.addFlashAttribute("check","삭제 완료!");
+			return view;
+		}
+		else {
+			String view = "redirect:ATNoticeDetail?at_nt_num="+at_nt_num;
+			rttr.addFlashAttribute("check","다른 사람의 글은 삭제 할 수 없습니다. ");
+			return view;
+		}
+	}
 	/*-------------------------------------------------------------------
 	 * 기능 : 발주 리스트 조회 서비스
 	 * 작성자: JSH
