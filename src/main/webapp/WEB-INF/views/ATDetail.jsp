@@ -59,6 +59,23 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+	 <script type="text/javascript">
+      		window.onload = function() {//이 페이지가 실행 되면, 이 함수를 실행해라
+				var chk = "${check}";
+				if(chk != ""){
+					alert(chk);
+					location.reload(true);//화면을 다시 한번 불러오면서 check를 리셋함 
+				}
+			}
+      		window.onload = function() {//이 페이지가 실행 되면, 이 함수를 실행해라
+      			var delChk=${deleteCheck};
+      			if(delChk !=1){
+      				//input속성 중 type바꾸기
+      				console.log(delChk);
+      				document.getElementById("deleteButton").setAttribute("type","hidden");
+      			}
+      		}	
+</script>
 	</head>
 	
 	<body>
@@ -69,6 +86,7 @@
 	<div id="colorlib-page">
 		<jsp:include page="AT_LBar.jsp" flush="false"/>
 		
+ 
 		<div id="colorlib-main">
 			<aside id="colorlib-hero" style="height: 400px; margin-bottom: -10px;">
 				<div class="flexslider" style="height: 400px;">
@@ -77,19 +95,24 @@
 				   		<div class="overlay"></div>
 				   		<div class="container-fluid">
 				   			<div class="row">
-					   			<div class="col-md-8 col-md-offset-2 col-md-pull-2 slider-text">
+				   			<form id="addSubscription" action="Subscription" method="get">
+					   			<div class="col-md-12 col-md-offset-1 col-md-pull-1 slider-text">
 					   				<div class="slider-text-inner">
-					   					<div class="desc" style="background: none; top: 200px;">
-						   					<h1 style="font-size: 18px; font-weight: 600;">공방의 소개글이 들어갑니다.</h1>
-						   					<h2><a href="https://colorlib.com/" target="_blank" style="font-size: 18px; font-weight: 600; color: #A09182; border-bottom: 1px solid #A09182;">공방 사이트 주소</a></h2>
-											<p><a class="btn btn-primary btn-learn" style="font-weight: 600;">구독 & 좋아요</a></p>
+					   					<div class="desc" style="background: none; top: 100px;">
+					   					<input type="hidden" name="sc_cm_id" id="SC_CM_ID" value="${mb.cm_id}">
+					   					<input type="hidden" name="sc_at_id" id="SC_AT_ID" value="#1">
+					   					<h1 style="font-size: 18px; font-weight: 600; width:300px;">공방의 소개글이 들어갑니다.</h1>
+						   					<h2><a href="https://colorlib.com/" target="_blank" style="font-size: 18px; font-weight: 600; color: #A09182; border-bottom: 1px solid #A09182;">공방 주소</a></h2>
+											<button id="subcancle" type="submit" class="btn btn-primary btn-learn" style="font-weight: 600;" value="구독">&nbsp;&nbsp;&nbsp;구독&nbsp;&nbsp;&nbsp;   </button>
+											
 										</div>
 					   				</div>
 					   			</div>
+					   			</form>
 					   		</div>
 				   		</div>
 				   	</li>
-				   	<li style="background-image: url(resources/AT_front/images/img_bg_2.jpg);">
+				 <!--   	<li style="background-image: url(resources/AT_front/images/img_bg_2.jpg);">
 				   		<div class="overlay"></div>
 				   		<div class="container-fluid">
 				   			<div class="row">
@@ -104,8 +127,8 @@
 					   			</div>
 					   		</div>
 				   		</div>
-				   	</li>
-				   	<li style="background-image: url(resources/AT_front/images/img_bg_3.jpg);">
+				   	</li> -->
+				<!--    	<li style="background-image: url(resources/AT_front/images/img_bg_3.jpg);">
 				   		<div class="overlay"></div>
 				   		<div class="container-fluid">
 				   			<div class="row">
@@ -120,7 +143,7 @@
 					   			</div>
 					   		</div>
 				   		</div>
-				   	</li>
+				   	</li> -->
 				  	</ul>
 			  	</div>
 			</aside>
