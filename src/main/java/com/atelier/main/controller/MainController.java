@@ -132,9 +132,9 @@ public class MainController {
 	 
 	//HOME
 	//Shop Home
-	@RequestMapping(value = "main", method = RequestMethod.GET)
-	public String main(Locale locale, Model model) {
-
+	@GetMapping("main")
+	public String main() {
+		log.warn("메인으로 가는 컨트롤러");
 		return "main";
 	}
 	//Atelier Home

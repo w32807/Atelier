@@ -90,7 +90,7 @@
                 <div class="row">
                     <div class="col-lg-2 col-md-2">
                         <div class="logo">
-                            <a href="/">
+                            <a href="main">
                                 <img src="./resources/main/img/logo_main.jpg" alt="">
                             </a>
                         </div>

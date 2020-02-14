@@ -88,6 +88,8 @@ public class AT_Service {
 			Map<String, Object> pageInt = new HashMap<String, Object>();
 			pageInt.put("pageNum", num);
 			pageInt.put("maxNum", maxNum);
+			pageInt.put("pd_at_id",pd_at_id);
+			
 			List<PD_productDto> pd = pdDao.getATProdList(pageInt);
 	
 			mav.addObject("pd", pd);

@@ -65,66 +65,9 @@
 	<!-- 상단바 Include -->
 	<jsp:include page="Main_Upper.jsp" flush="false"/>
 
-    <!----------------------------------------------------------여기까지 상단바입니다.-------------------------------------------------------------------------->
-    
-    <!-------------------------------------------------------여기서부터 좌측바 메뉴입니다.---------------------------------------------------------------------->
+    <!-- 좌측바 Include -->
 	<div id="colorlib-page">
-		<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle"><i></i></a>
-		<aside id="colorlib-aside" role="complementary" class="border js-fullheight"
-				style="overflow-y: hidden; overflow-x: hidden; position: absolute; border-bottom: white; height: auto; min-height: 1400px; z-index: 998;">
-			<h1 id="colorlib-logo" style="margin-bottom: 0; text-align: center;">
-				<a href="ATDatail" style="background-color: white; padding: 10px 0px;">
-				<img src="http://www.topstarnews.net/news/photo/201905/629556_323603_2217.jpg" style="width: 180px; padding-bottom: 0px;"> 
-				</a>
-				<h1 id="AT_SNS" style="text-align: center;"></h1>	
-			</h1>
-			
-			<nav id="colorlib-main-menu" role="navigation">
-				<ul style="margin-top: 10px">
-					<li class="colorlib-active" style="font-size: 20px; text-align: center; margin-bottom: 120px;">
-						<a href="ATDetail" style="font-weight: bolder;">공방들의 이름ㅋㅋ</a>
-					</li>
-				</ul>
-			</nav>
-			<div class="colorlib-middle-icon" style="position: relative; bottom: 40px; font-size: 25px; text-align: center; font-weight: 400; margin: -70px 0; padding: 0 20px;">
-				<ul style="padding: 0; list-style: none; display: inline-flex;">
-					<li style="margin-right: 10px;">
-						<a href="http://www.facebook.com" target="blank" style="color: rgba(0, 0, 0, 0.6);">
-							<i class="icon-facebook2"></i>
-						</a>
-					</li>
-					<li style="margin-right: 10px;">
-						<a href="http://twitter.com" target="blank" style="color: rgba(0, 0, 0, 0.6);">
-							<i class="icon-twitter2"></i>
-						</a>
-					</li>
-					<li style="margin-right: 10px;">
-						<a href="http://www.instagram.com" target="blank" style="color: rgba(0, 0, 0, 0.6);">
-							<i class="icon-instagram"></i>
-						</a>
-					</li>
-					<li style="margin-right: 10px;">
-						<a href="http://www.linkedin.com" target="blank" style="color: rgba(0, 0, 0, 0.6);">
-							<i class="icon-linkedin2"></i>
-						</a>
-					</li>
-				</ul>
-			</div>
-			<nav id="colorlib-main-menu" role="navigation">
-				<ul style="margin-top: 100px">
-				<li class="colorlib-active" style="font-size: 20px">공방 관리</li>
-						<li style="font-size: 18px"><a href="ATManager">공방 관리 홈</a></li>
-						<li style="font-size: 18px"><a href="ATInfoModify">공방 페이지 수정</a></li>
-						<li style="font-size: 18px"><a href="ATOrderRequest">거래처 조회</a></li>
-						<li style="font-size: 18px"><a href="ATOrderState">주문 조회</a></li>
-						<li style="font-size: 18px"><a href="ATOrderSearch">발주 조회</a></li>
-						<li style="font-size: 18px"><a href="ATProdManage">제품 관리</a></li>
-						<li style="font-size: 18px"><a href="#">체험 관리</a></li>
-						<li style="font-size: 18px"><a href="ATMessageRQ" onclick="window.open(this.href, '_blank', 'width=655px,height=650px,toolbars=no,scrollbars=no');return false;">메인관리자에게 문의</a></li>
-				</ul>
-			</nav>
-		</aside>
-	<!-------------------------------------------------------여기까지 좌측바 메뉴입니다.---------------------------------------------------------------------->
+		<jsp:include page="ATM_LBar.jsp" flush="false"/>
 	
 		<div id="colorlib-main">
 			<div class="colorlib-contact" style="padding-bottom: 7.5em;">

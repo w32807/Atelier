@@ -110,13 +110,8 @@ nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
 </style>
 </head>
 <body>
-	<!-- Page Preloder -->
-	<div id="preloder">
-		<div class="loader"></div>
-	</div>
-
 	<!-- 상단바 Include -->
-	<jsp:include page="Main_Upper.jsp" flush="false"/>
+	<jsp:include page="Main_Upper_RC.jsp" flush="false"/>
 
 	<div class="container">
 		<div class="row">

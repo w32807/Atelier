@@ -6,7 +6,6 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<title>Atelier | Atelier</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="" />
 <meta name="keywords" content="" />
@@ -81,117 +80,66 @@
 <!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-<style type="text/css">
-.support-notice {
-	letter-spacing: 1px;
-	font-size: 14px;
-	text-align: center;
-	color: #3C6056;
-	font-weight: 600;
-	margin-bottom: 50px;
-}
-
-table {
-	width: 950px;
-	line-height: 1.5;
-	margin-left: 260px;
-}
-
-table, th {
-	margin-bottom: 15px;
-	padding: 12px 0;
-	color: #353535;
-	vertical-align: middle;
-	font-size: 14px;
-	font-weight: 600;
-}
-
-table, tr, td {
-	text-align: center;
-}
-
-.info_btn {
-	margin-left: 150px;
-	margin-bottom: -20px;
-	background: #A09182;
-	color: #fff;
-	border: 2px solid #A09182;
-	font-size: 13px;
-	font-weight: bolder;
-}
-</style>
-<script type="text/javascript">
-      		window.onload = function() {//이 페이지가 실행 되면, 이 함수를 실행해라
-				var chk = ${check};
-				if(chk == 1){
-					alert("글 등록 실패");
-				}
-			}
-      </script>
 </head>
-
 <body>
-	<!-- 상단바 Include -->
-	<jsp:include page="Main_Upper.jsp" flush="false"/>
+	<aside id="colorlib-aside" role="complementary"
+		class="border js-fullheight"
+		style="overflow-y: hidden; overflow-x: hidden; position: absolute; border-bottom: white; height: auto; min-height: 1400px; z-index: 998;">
+		<h1 id="colorlib-logo" style="margin-bottom: 0; text-align: center;">
+			<a href="ATDatail"
+				style="background-color: white; padding: 10px 0px;"> <img
+				src="http://www.topstarnews.net/news/photo/201905/629556_323603_2217.jpg"
+				style="width: 180px; padding-bottom: 0px;">
+			</a>
+			<h1 id="AT_SNS" style="text-align: center;"></h1>
+		</h1>
 
-	<!-- 좌측바 Include -->
-	<div id="colorlib-page">
-		<jsp:include page="AT_LBar.jsp" flush="false"/>
-
-		<div id="colorlib-main">
-			<div class="colorlib-about">
-				<div class="container-fluid"
-					style="height: auto; min-height: 800px;">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3">
-							<h2 class="colorlib-heading animate-box"
-								data-animate-effect="fadeInLeft"
-								style="margin-left: 100px; font-weight: bolder; font-size: 23px; letter-spacing: 0.5px;">
-								공지사항 작성
-								<hr>
-							</h2>
-						</div>
-					</div>
-					<div class="support-notice">공지사항 작성 게시판</div>
-					<form action="noticeWrite" method="post" enctype="multipart/form-data">
-						<input type="hidden" name="nt_id" value="${mb.cm_id}"><!-- 여기에 원래 mb.at_id 넣어야함-->
-						<table>
-							<tr>
-								<th style="width: 50px; text-align: center; color: #353535;">제목</th>
-								<th
-									style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">
-									<center>
-										<input style="width: 550px" type="text" name="nt_title"></input>
-									</center>
-								</th>
-							</tr>
-							<tr style="border-bottom: 1px solid #A09182;">
-								<th style="width: 50px; text-align: center; color: #353535;">작성자</th>
-								<th
-									style="width: 550px; text-align: left; padding-left: 15px; color: #353535;"><center>${mb.cm_name}</center></th>
-							</tr>
-							<tr colspan="4">
-								<th style="height: 350px; display: block;">내용</th>
-								<td><textarea style="width: 550px" name="nt_contents"
-										rows="10"></textarea></td>
-							</tr>
-							<tr>
-								<td colspan="2" align="center"><input type="submit"
-									value="글작성"> <input type="reset" value="취소">
-								</td>
-							</tr>
-						</table>
-
-					</form>
-					<a href="ATNotice" class="btn info_btn btn-send-message"
-						style="margin-left: 700px; margin-bottom: 100px;">목록</a>
-				</div>
-			</div>
+		<nav id="colorlib-main-menu" role="navigation">
+			<ul style="margin-top: 10px">
+				<li class="colorlib-active"
+					style="font-size: 20px; text-align: center; margin-bottom: 120px;">
+					<a href="ATDetail" style="font-weight: bolder;">공방들의 이름ㅋㅋ</a>
+				</li>
+			</ul>
+		</nav>
+		<div class="colorlib-middle-icon"
+			style="position: relative; bottom: 40px; font-size: 25px; text-align: center; font-weight: 400; margin: -70px 0; padding: 0 20px;">
+			<ul style="padding: 0; list-style: none; display: inline-flex;">
+				<li style="margin-right: 10px;"><a
+					href="http://www.facebook.com" target="blank"
+					style="color: rgba(0, 0, 0, 0.6);"> <i class="icon-facebook2"></i>
+				</a></li>
+				<li style="margin-right: 10px;"><a href="http://twitter.com"
+					target="blank" style="color: rgba(0, 0, 0, 0.6);"> <i
+						class="icon-twitter2"></i>
+				</a></li>
+				<li style="margin-right: 10px;"><a
+					href="http://www.instagram.com" target="blank"
+					style="color: rgba(0, 0, 0, 0.6);"> <i class="icon-instagram"></i>
+				</a></li>
+				<li style="margin-right: 10px;"><a
+					href="http://www.linkedin.com" target="blank"
+					style="color: rgba(0, 0, 0, 0.6);"> <i class="icon-linkedin2"></i>
+				</a></li>
+			</ul>
 		</div>
-	</div>
-
-	<!-- 하단바 Include -->
-	<jsp:include page="Main_Footer.jsp" flush="false"/>
+		<nav id="colorlib-main-menu" role="navigation">
+			<ul style="margin-top: 100px">
+				<li class="colorlib-active" style="font-size: 20px">공방 관리</li>
+				<li style="font-size: 18px"><a href="ATManager">공방 관리 홈</a></li>
+				<li style="font-size: 18px"><a href="ATInfoModify">공방 페이지
+						수정</a></li>
+				<li style="font-size: 18px"><a href="ATOrderRequest">거래처 조회</a></li>
+				<li style="font-size: 18px"><a href="ATOrderState">주문 조회</a></li>
+				<li style="font-size: 18px"><a href="ATOrderSearch">발주 조회</a></li>
+				<li style="font-size: 18px"><a href="ATProdManage">제품 관리</a></li>
+				<li style="font-size: 18px"><a href="#">체험 관리</a></li>
+				<li style="font-size: 18px"><a href="ATMessageRQ"
+					onclick="window.open(this.href, '_blank', 'width=655px,height=650px,toolbars=no,scrollbars=no');return false;">메인관리자에게
+						문의</a></li>
+			</ul>
+		</nav>
+	</aside>
 
 	<!-- Js Plugins -->
 	<script src="resources/main/js/jquery-3.3.1.min.js"></script>
@@ -220,7 +168,5 @@ table, tr, td {
 
 	<!-- MAIN JS -->
 	<script src="resources/AT_front/js/main.js"></script>
-	
-
 </body>
 </html>
