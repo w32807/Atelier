@@ -75,7 +75,7 @@
                      
                     <!-- SNS광고란 -->
                     <div class="top-social">
-                  	    <temp class="hideandshow">${mb.cm_name}님 환영합니다.</temp>
+                  	    <temp class="hideandshow" style="font-size: 14px;">${mb.cm_name}님 환영합니다.</temp>
                         <a href="https://www.facebook.com/"><i class="ti-facebook"></i></a>
                         <a href="https://twitter.com/"><i class="ti-twitter-alt"></i></a>
                         <a href="https://www.instagram.com/"><i class="ti-linkedin"></i></a>

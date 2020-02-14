@@ -98,10 +98,10 @@
 	<body>
 	<!-- 상단바 Include -->
 	<jsp:include page="Main_Upper.jsp" flush="false"/>
-
-    <!-- 마이페이지 좌측바 Include -->
-                <jsp:include page="myPageLBar.jsp" flush="false"/>
-
+    
+    <!-- 좌측바 Include -->
+	<div id="colorlib-page">
+		<jsp:include page="AT_LBar.jsp" flush="false"/>
 
 		<div id="colorlib-main" style="float: none; margin-left: 380px;">
 			<div class="colorlib-blog">
