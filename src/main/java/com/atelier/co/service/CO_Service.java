@@ -39,6 +39,13 @@ public class CO_Service {
 	public ModelAndView getNoticeList(Integer noticePageNum, Integer FAQPageNum) {
 		//공지사항 리스트(작성자:JSG)
 		mav = new ModelAndView();
+		String chk = null;
+		if(noticePageNum == null) {
+			chk = "FAQ보는중";
+		}else if(FAQPageNum == null) {
+			chk = "공지사항보는중";
+		}
+		
 		int num1 = (noticePageNum == null)? 1 : noticePageNum;
 		List<CO_NoticeDto> noticeList = coDao.getNoticeList(num1);		
 		mav.addObject("noticeList", noticeList);
@@ -58,6 +65,7 @@ public class CO_Service {
 		}
 		mav.addObject("faqListBoard", faqListBoard);
 		mav.addObject("FAQpaging", getFAQPaging(num2));
+		mav.addObject("check",chk);
 		session.setAttribute("FAQpaging", num2);
 		
 		mav.setViewName("CONotice");
