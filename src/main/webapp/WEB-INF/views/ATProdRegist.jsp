@@ -179,7 +179,7 @@
 				style="overflow-y: hidden; overflow-x: hidden; position: absolute; border-bottom: white; height: auto; min-height: 1400px; z-index: 998;">
 			<h1 id="colorlib-logo" style="margin-bottom: 0; text-align: center;">
 				<a href="ATDatail" style="background-color: white; padding: 10px 0px;">
-				<img src="http://www.topstarnews.net/news/photo/201905/629556_323603_2217.jpg" width="180px" height="180px"> 
+				<img src="http://www.topstarnews.net/news/photo/201905/629556_323603_2217.jpg" style="width: 180px; padding-bottom: 0px;"> 
 				</a>
 				<h1 id="AT_SNS" style="text-align: center;"></h1>	
 			</h1>

@@ -75,19 +75,29 @@ public class AT_Service {
 	
 	public ModelAndView getATProdList(Integer pageNum, Integer maxNum) {
 		mav = new ModelAndView();
-
+		PD_productDto pdDto = new PD_productDto();
+		
 		int num = (pageNum == null) ? 1 : pageNum;
 		maxNum = pdDao.getATProdListCount();
-		Map<String, Integer> pageInt = new HashMap<String, Integer>();
+		Map<String, Object> pageInt = new HashMap<String, Object>();
 		pageInt.put("pageNum", num);
 		pageInt.put("maxNum", maxNum);
-		List<PD_productDto> pd = pdDao.getATProdList(pageInt);
-
+		pageInt.put("pd_at_id", "tester@gmail.com");
+		
+		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");		
+		pdDto.setPd_at_id(cmDto.getCm_id());
+		
+		List<PD_productDto> pd = pdDao.getATProdList(pageInt);// 상품을 가져옴
+	
+		for(int i = 0; i < pd.size(); i++) {
+			int pd_code = pd.get(i).getPd_code();
+			String imgOriName = pdDao.getPi_oriName(pd_code);
+			pd.get(i).setImgOriName(imgOriName);
+		}
+		
 		mav.addObject("pd", pd);
-		mav.addObject("paging", getATProdPaging(num));
-		session.setAttribute("pageNum", num);
-
 		mav.setViewName("ATProdManage");
+
 		return mav;
 	}
 
@@ -198,7 +208,6 @@ public class AT_Service {
 		
 		List<RM_Dto> rmList = rmDao.getRMList();
 	
-	
 		mav.addObject("rmList",rmList);
 		mav.setViewName("ATOrderRequest");
 		   
@@ -227,14 +236,11 @@ public class AT_Service {
 			roDto.setRo_rm_num(rmDto.getRm_num());
 			roDto.setRo_count(numOfProd);
 			
-			//임시 아이디 지정
-			roDto.setRo_buyer("atelier");
-			//로그인하면 아래 주석 해제 후 실행
-			//CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");		
-			//roDto.setRo_buyer(cmDto.getCm_id());
+			CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");		
+			roDto.setRo_buyer(cmDto.getCm_id());
 			
 			//dao 에서 roDto를 넣는 메소드 작성
-			roDao.rmPaymentProd(roDto);	
+			roDao.rmPaymentProd(roDto);
 		}				
 		
 		view = "redirect:ATOrderRequest";
@@ -721,10 +727,6 @@ public class AT_Service {
 		CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
 		String id = cmDto.getCm_id();
 		log.warn(id);
-		
-		
-		
-		
 		
 		//취소를 위한 처리
 		String[] chkedBoxArr = request.getParameterValues("prod");//체크박스의 값들이 넘어옴

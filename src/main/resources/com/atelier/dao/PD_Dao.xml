@@ -7,8 +7,9 @@
 		SELECT * FROM 
         (SELECT ROWNUM RONUM, PD.* FROM 
         (SELECT * FROM PD ORDER BY PD_CODE)PD)
-        WHERE RONUM <=#{maxNum}-(#{pageNum}-1)*9d
+        WHERE RONUM <=#{maxNum}-(#{pageNum}-1)*9
 		AND RONUM>=#{maxNum}-(#{pageNum}-1)*9-8
+		AND PD_AT_ID = #{pd_at_id}
 		ORDER BY PD_CODE DESC
 		]]>
 	</select>
@@ -32,4 +33,8 @@
 		UPDATE PD SET PD_REGIST='F'
 		WHERE PD_CODE=#{pd_code}
 	</update>
+	
+	<select id="getPi_oriName" parameterType="Integer" resultType="String">
+		SELECT PI_ORINAME FROM PI WHERE PI_PD_CODE = #{pd_code}
+	</select>
 </mapper>

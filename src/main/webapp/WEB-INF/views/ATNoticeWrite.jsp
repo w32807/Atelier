@@ -275,7 +275,7 @@ table, tr, td {
 				<a href="ATDetail"
 					style="background-color: white; padding: 10px 0px;"> <img
 					src="http://www.topstarnews.net/news/photo/201905/629556_323603_2217.jpg"
-					width="180px" height="180px">
+					style="width: 180px; padding-bottom: 0px;">
 				</a>
 				<h1 id="AT_SNS" style="text-align: center;"></h1>
 			</h1>

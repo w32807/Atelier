@@ -2,8 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.atelier.dao.RO_Dao">
-	<select id="getATOrderInfoList" resultType="com.atelier.dto.RO_Dto">
+	<select id="getATOrderInfoList" parameterType="String" resultType="com.atelier.dto.RO_Dto">
 		SELECT * FROM RO
+		WHERE RO_BUYER=#{id}
 	</select>
 	<delete id="rmOrderListCancle" parameterType="String">
 		DELETE RO WHERE RO_NUM=#{ro_num}

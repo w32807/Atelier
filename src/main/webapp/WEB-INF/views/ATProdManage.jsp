@@ -209,7 +209,7 @@
 				style="overflow-y: hidden; overflow-x: hidden; position: absolute; border-bottom: white; height: auto; min-height: 1400px; z-index: 998;">
 			<h1 id="colorlib-logo" style="margin-bottom: 0; text-align: center;">
 				<a href="ATDetail" style="background-color: white; padding: 10px 0px;">
-				<img src="http://www.topstarnews.net/news/photo/201905/629556_323603_2217.jpg" width="180px" height="180px"> 
+				<img src="http://www.topstarnews.net/news/photo/201905/629556_323603_2217.jpg" style="width: 180px; padding-bottom: 0px;"> 
 				</a>
 				<h1 id="AT_SNS" style="text-align: center;"></h1>	
 			</h1>
@@ -261,7 +261,7 @@
 		</aside>
 		<!-------------------------------------------------------여기까지 좌측바 메뉴입니다.---------------------------------------------------------------------->
 		
-		<form action="prodRegist" method="post" id="prodManageFrm" name="prodManageFrm">
+		<form action="prodRegist" method="post" id="prodManageFrm" name="prodManageFrm" enctype="multipart/form-data">
 			<!--여기부터 각각 하나의 상품이 됩니다. 실제로 구현시에는 HTML에서 JSTL의 forEach구문과 자바 코딩부에서 페이징 처리를 하면 될 듯 합니다. -->
 			<div id="colorlib-main">
 			<div class="colorlib-blog">
@@ -284,37 +284,37 @@
 					
 					<div class="row" style="margin: 20px 80px;">
 						<c:forEach var="product" items="${pd}">
-						<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
-							<div class="blog-entry">
-								<label for="${product.pd_code}">
-									<input type="checkbox" id="${product.pd_code}" name="prodChk" value="${product.pd_code}"
-											style="background-color: transparent; position: relative; top: 6px; left: 12px;">
-									<img src="resources/AT_front/images/img-1.jpg" class="img-responsive"
-											style="margin-top: -26px; width: 400px;">
-									<div class="desc" style="font-size: 15px; font-weight: 500;">
-										<span style="font-size: 16px;">
-											<small>${product.pd_regdate}</small> | 
-											<small> ${product.pd_cate} </small> |
-											<small> <i class="icon-bubble3"></i></small>
-										</span>
-										<h3 style="margin-bottom: 40px; font-size: 22px; font-weight: bolder;">
-											<a href="blog.html">${product.pd_name}</a>
-										</h3>			
-										&nbsp;제품명 : <input type="hidden" name="prodName"
-																value="${product.pd_name}">${product.pd_name}<br>
-										&nbsp;재고량 : <input type="hidden" name="stock"
-																value="${product.pd_numofstock}">${product.pd_numofstock}<br>
-										&nbsp;단가 : <input type="hidden" name="price"
-																value="${product.pd_price}">${product.pd_price}<br>
-										<input type="hidden" id="pd_regist" name="pd_regist" value="${product.pd_regist}">
-										<div style="text-align: right; margin-bottom: 0px;">
-											<input type="submit" value="상세보기"
-													style="border: none; color: #A09182; background-color: white; font-weight: 700; margin: 10px;">
+							<div class="col-md-4 col-sm-6 animate-box" data-animate-effect="fadeInLeft">
+								<div class="blog-entry">
+									<label for="${product.pd_code}">
+										<input type="checkbox" id="${product.pd_code}" name="prodChk" value="${product.pd_code}"
+												style="background-color: transparent; position: relative; top: 6px; left: 12px;">
+										<img src="./resources/main/img/products/${product.imgOriName}" class="img-responsive"
+												style="margin-top: -26px; width: 400px;">
+										<div class="desc" style="font-size: 15px; font-weight: 500;">
+											<span style="font-size: 16px;">
+												<small>${product.pd_regdate}</small> | 
+												<small> ${product.pd_cate} </small> |
+												<small> <i class="icon-bubble3"></i></small>
+											</span>
+											<h3 style="margin-bottom: 40px; font-size: 22px; font-weight: bolder;">
+												<a href="blog.html">${product.pd_name}</a>
+											</h3>			
+											&nbsp;제품명 : <input type="hidden" name="prodName"
+																	value="${product.pd_name}">${product.pd_name}<br>
+											&nbsp;재고량 : <input type="hidden" name="stock"
+																	value="${product.pd_numofstock}">${product.pd_numofstock}<br>
+											&nbsp;단가 : <input type="hidden" name="price"
+																	value="${product.pd_price}">${product.pd_price}<br>
+											<input type="hidden" id="pd_regist" name="pd_regist" value="${product.pd_regist}">
+											<div style="text-align: right; margin-bottom: 0px;">
+												<input type="submit" value="상세보기"
+														style="border: none; color: #A09182; background-color: white; font-weight: 700; margin: 10px;">
+											</div>
 										</div>
-									</div>
-								</label>	
+									</label>	
+								</div>
 							</div>
-						</div>
 						</c:forEach>
 					</div>
 					<div class="row" style="margin-left: 80px;">
@@ -467,17 +467,17 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 
 	<!-- MAIN JS -->
-			<script src="resources/AT_front/js/main.js"></script>
+	<script src="resources/AT_front/js/main.js"></script>
 
-			<script type="text/javascript">
-			window.onload = function() {
-				var chk = "${check}";
-				console.log(chk);
-				if(chk != ""){
-					alert(chk);
-					location.reload(true); 
-				}
+	<script type="text/javascript">
+		window.onload = function() {
+			var chk = "${check}";
+			console.log(chk);
+			if(chk != ""){
+				alert(chk);
+				location.reload(true); 
 			}
+		}
 			
 			
 			//체크박스로 다중 선택을 하여 판매 등록을 누르면 해당 상품의 상품코드와 체크박스의 데이터가 넘어감
