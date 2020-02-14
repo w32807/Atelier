@@ -99,7 +99,7 @@
 	<jsp:include page="Main_Upper_RC.jsp" flush="false"/>
 
 	<!-- 좌측바 Include -->
-	<div id="colorlib-page">
+		<div id="colorlib-page">
 		<jsp:include page="ATM_LBar.jsp" flush="false"/>
 
 		<div id="colorlib-main">
