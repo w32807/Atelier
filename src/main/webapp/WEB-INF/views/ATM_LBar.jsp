@@ -122,7 +122,7 @@
 					style="color: rgba(0, 0, 0, 0.6);"> <i class="icon-linkedin2"></i>
 				</a></li>
 			</ul>
-		</div>
+		</div> 
 		<nav id="colorlib-main-menu" role="navigation">
 			<ul style="margin-top: 100px">
 				<li class="colorlib-active" style="font-size: 20px">공방 관리</li>
