@@ -240,9 +240,9 @@
                              <div class="myInfo_upper">
                              <h4>My Informations</h4>
 	                             <ul>
-	                             	<li style="background-color: lightcoral">배송중인 상품 <a href="#">${sendingProd}</a>개</li>
-	                             	<li style="background-color: powderblue">구독 중인 공방 <a href="#">${subscribedNum}</a>개</li>
-	                             	<li style="background-color: palegreen">읽지 않은 쪽지 <a href="#">${uncheckedMessageNum}</a>개</li>                             		
+	                             	<li style="background-color: lightcoral">배송중인 상품 <a href="myOrder?po_cm_id=${mb.cm_id}">${sendingProd}</a>개</li>
+	                             	<li style="background-color: powderblue">구독 중인 공방 <a href="mySubscript?sc_cm_id=${mb.cm_id}">${subscribedNum}</a>개</li>
+	                             	<li style="background-color: palegreen">읽지 않은 쪽지 <a href="messager?mg_receiver=${mb.cm_id}">${uncheckedMessageNum}</a>개</li>                             		
 	                             </ul>
                              </div>
                              
