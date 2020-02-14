@@ -59,7 +59,6 @@
 	<!-- 상단바 Include -->
 	<jsp:include page="Main_Upper.jsp" flush="false"/>
 
-
 	<!-- Breadcrumb Section Begin -->
 	<div class="breacrumb-section">
 		<div class="container">
@@ -214,6 +213,9 @@
 										<input type="hidden" name="orderProdCount" value="${pdDto.pd_numofstock}"/>
 										<input type="hidden" name="orderProdPrice" value="${pdDto.pd_price}"/>
 									</c:forEach>
+									<c:forEach var="btNum" items="${orderBtNum}">
+										<input type="hidden" name="orderBtNum" value="${btNum}">
+									</c:forEach>
 										<input type="hidden" id="orderAddr" name="orderAddr" value="${mb.cm_addr}"/>			
 									
 									<li class="total-price">Total<span class="prodInfo">${totalPrice}</span></li>
@@ -242,6 +244,9 @@
 	</section>
 	<!-- 하단바 Include -->
 	<jsp:include page="Main_Footer.jsp" flush="false"/>
+
+
+
 
 	<!-- Js Plugins -->
 	<script
@@ -297,18 +302,42 @@ function btn(){
 			var addr1 = $("#addr1").val();
 			console.log("배송지 1 : "+addr1);
 			$("#orderAddr").val(addr1);
+			console.log($("#orderAddr").val());
 		})
 		
 		$("#tab2").click(function() {
 			var addr2 = $("#addr2").val();
 			console.log("배송지 2 : "+addr2);
 			$("#orderAddr").val(addr2);
+			console.log($("#orderAddr").val());
 		})
 		
 		$("#tab3").click(function() {
 			var addr3 = $("#addr3").val();
 			console.log("배송지 3 : "+addr3);
 			$("#orderAddr").val(addr3);
+			console.log($("#orderAddr").val());
+		})
+		
+		$("#addr1").focusout(function() {
+			var addr1 = $("#addr1").val();
+			console.log("배송지 1 : "+addr1);
+			$("#orderAddr").val(addr1);
+			console.log($("#orderAddr").val());
+		})
+		
+		$("#addr2").focusout(function() {
+			var addr2 = $("#addr2").val();
+			console.log("배송지 2 : "+addr2);
+			$("#orderAddr").val(addr2);
+			console.log($("#orderAddr").val());
+		})
+		
+		$("#addr3").focusout(function() {
+			var addr3 = $("#addr3").val();
+			console.log("배송지 3 : "+addr3);
+			$("#orderAddr").val(addr3);
+			console.log($("#orderAddr").val());
 		})
 	</script>
 </body>

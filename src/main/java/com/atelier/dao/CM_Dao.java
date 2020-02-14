@@ -5,6 +5,7 @@ import java.util.List;
 import com.atelier.dto.BT_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.PD_productDto;
+import com.atelier.vo.PO_Vo;
 
 
 
@@ -41,4 +42,6 @@ public interface CM_Dao {
 	public void insertbasket(BT_Dto btDto);
 
 	public int getPd_code(int getorderVtNum);
+
+	public void orderInsert(PO_Vo poVo);
 }

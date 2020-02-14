@@ -76,7 +76,11 @@
   		SELECT BT_PD_CODE FROM BT WHERE BT_NUM = #{getorderVtNum}
   	</select>
   	
-  	
+  	<insert id="orderInsert" parameterType="com.atelier.vo.PO_Vo">
+  		INSERT INTO PO
+  		VALUES (PO_NUM_SEQ.NEXTVAL, #{po_cm_id}, #{po_pd_code},	DEFAULT, #{po_count}, 
+  		#{po_price},SYSDATE,#{po_addr},#{po_at_id},#{po_at_name})
+  	</insert>
   	
   	
   	

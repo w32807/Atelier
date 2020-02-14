@@ -112,5 +112,7 @@
    		SELECT COUNT(*) FROM PRODUCT WHERE PD_AT_ID=#{id}
    </select>
 	
-   	
+   	<select id="getAt_state" parameterType="String" resultType="String">
+   		SELECT AT_STATE FROM AT WHERE AT_ID = #{pd_at_id}
+   	</select>
 </mapper>

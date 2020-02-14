@@ -3,7 +3,7 @@ package com.atelier.main.controller;
 
 import java.util.Locale;
 
-
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -216,13 +216,7 @@ public class MainController {
 		mav = mServ.getprodDetail(pd_code);
 		return mav;
 	}
-	//상품구매
-	@RequestMapping(value = "prodBuy", method = RequestMethod.GET)
-	public String prodBuy(Locale locale, Model model) {
-
-		return "prodBuy";
-	}
-
+	
 	//비밀번호변경
 	@GetMapping("myChangePwd")
 	public String myChangePwd() {
@@ -262,5 +256,41 @@ public class MainController {
 	public String myAdminRQ() {
 		return "myAdminRQ";
 	}
-	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 장바구니에서 주문 페이지로 이동
+	 * 작성자: JWJ
+	 * 작성일: 2020.02.13
+	 -----------------------------------------------------------------------------------------*/
+	 @PostMapping("prodBuy") 
+	 public ModelAndView prodBuy(HttpServletRequest request){
+		 
+		mav = mServ.prodBuy(request);
+	  return mav; 
+	  }
+	 
+	 /* ---------------------------------------------------------------------------------------
+	  * 기능: 주문하기 
+	  * 작성자: JWJ
+	  * 작성일: 2020.02.13
+		 -----------------------------------------------------------------------------------------*/
+	 @PostMapping("orderInsert")
+	 public ModelAndView orderInsert(HttpServletRequest request){
+		
+		 mav = mServ.orderInsert(request);
+		 return mav;
+	 }
+	 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

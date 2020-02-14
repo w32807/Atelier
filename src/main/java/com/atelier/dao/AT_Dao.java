@@ -59,5 +59,7 @@ public interface AT_Dao {
 	public int getProdOrderNum(String id);
 
 	public int getprodNum(String id);
+
+	public String getAt_state(String pd_at_id);
 	
 }

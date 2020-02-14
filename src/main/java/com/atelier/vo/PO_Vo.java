@@ -16,10 +16,11 @@ public class PO_Vo {
 
 	//주문 테이블의 VO
 	private int po_num; //주문번호
-	private String po_pd_code; //상품코드
+	//private String po_pd_code; //상품코드
+	private int po_pd_code; //상품코드
 	private String po_state; // 배송상태
 	private int po_count; // 주문수량
-	private int po_price; // 총 가격
+	private int po_price; // 가격
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Timestamp po_date; // 주문날짜
 	private String po_addr; // 배송지
@@ -27,7 +28,7 @@ public class PO_Vo {
 	private String po_cm_id; // 이메일
 	private String pi_oriname;
 	private String pi_num; 
-	private String pi_pd_code;
+	//private String pi_pd_code;
 	private String converedPo_date;
 	 
 	
@@ -38,5 +39,11 @@ public class PO_Vo {
 	private String pd_name;//상품 이름
 	private String pd_option;//상품 옵션
 
+	
+	//2020.02.14 추가 생성 변수
+	private String po_at_id;//공방 이메일
+	private String receiverName;//받는사람 이름
+	private String receiverPhone;//받는사람 전화번호
+	
 
 }

@@ -74,30 +74,31 @@ public class AT_Service {
 	 * ----------------------------------------------------------------------------- */
 	
 	public ModelAndView getATProdList(Integer pageNum, Integer maxNum) {
-		mav = new ModelAndView();
-		PD_productDto pdDto = new PD_productDto();
+		//세션에 있는 아이디로, AT의 AT_STATE를 가져와서, 활성이면 진행, 아니면 못들어감.
+		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
+		String pd_at_id = cmDto.getCm_id();
+		String at_state = atDao.getAt_state(pd_at_id);
 		
-		int num = (pageNum == null) ? 1 : pageNum;
-		maxNum = pdDao.getATProdListCount();
-		Map<String, Object> pageInt = new HashMap<String, Object>();
-		pageInt.put("pageNum", num);
-		pageInt.put("maxNum", maxNum);
-		pageInt.put("pd_at_id", "tester@gmail.com");
+		if(at_state.equals("활성")) {
 		
-		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");		
-		pdDto.setPd_at_id(cmDto.getCm_id());
-		
-		List<PD_productDto> pd = pdDao.getATProdList(pageInt);// 상품을 가져옴
+			mav = new ModelAndView();
 	
-		for(int i = 0; i < pd.size(); i++) {
-			int pd_code = pd.get(i).getPd_code();
-			String imgOriName = pdDao.getPi_oriName(pd_code);
-			pd.get(i).setImgOriName(imgOriName);
+			int num = (pageNum == null) ? 1 : pageNum;
+			maxNum = pdDao.getATProdListCount();
+			Map<String, Object> pageInt = new HashMap<String, Object>();
+			pageInt.put("pageNum", num);
+			pageInt.put("maxNum", maxNum);
+			List<PD_productDto> pd = pdDao.getATProdList(pageInt);
+	
+			mav.addObject("pd", pd);
+			mav.addObject("paging", getATProdPaging(num));
+			session.setAttribute("pageNum", num);
+	
+			mav.setViewName("ATProdManage");
+		}else {
+			mav.setViewName("예외페이지로 넘어갑니다!");
 		}
 		
-		mav.addObject("pd", pd);
-		mav.setViewName("ATProdManage");
-
 		return mav;
 	}
 
@@ -208,6 +209,7 @@ public class AT_Service {
 		
 		List<RM_Dto> rmList = rmDao.getRMList();
 	
+	
 		mav.addObject("rmList",rmList);
 		mav.setViewName("ATOrderRequest");
 		   
@@ -236,11 +238,14 @@ public class AT_Service {
 			roDto.setRo_rm_num(rmDto.getRm_num());
 			roDto.setRo_count(numOfProd);
 			
-			CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");		
-			roDto.setRo_buyer(cmDto.getCm_id());
+			//임시 아이디 지정
+			roDto.setRo_buyer("atelier");
+			//로그인하면 아래 주석 해제 후 실행
+			//CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");		
+			//roDto.setRo_buyer(cmDto.getCm_id());
 			
 			//dao 에서 roDto를 넣는 메소드 작성
-			roDao.rmPaymentProd(roDto);
+			roDao.rmPaymentProd(roDto);	
 		}				
 		
 		view = "redirect:ATOrderRequest";
@@ -727,6 +732,10 @@ public class AT_Service {
 		CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
 		String id = cmDto.getCm_id();
 		log.warn(id);
+		
+		
+		
+		
 		
 		//취소를 위한 처리
 		String[] chkedBoxArr = request.getParameterValues("prod");//체크박스의 값들이 넘어옴

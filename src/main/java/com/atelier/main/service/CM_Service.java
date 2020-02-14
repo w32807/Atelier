@@ -13,10 +13,13 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atelier.dao.AT_Dao;
+import com.atelier.dao.BT_Dao;
 import com.atelier.dao.CM_Dao;
 import com.atelier.dto.BT_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.PD_productDto;
+import com.atelier.mypage.service.MP_BasketService;
+import com.atelier.vo.PO_Vo;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +30,8 @@ public class CM_Service {
 
 	ModelAndView mav;
 	
+	@Setter(onMethod_=@Autowired)
+	BT_Dao btDao;
 
 	@Setter(onMethod_ = @Autowired)
 	AT_Dao atDao;
@@ -36,6 +41,9 @@ public class CM_Service {
 	
 	@Setter(onMethod_ = {@Autowired}) 
 	private HttpSession session;
+	
+	@Setter(onMethod_ = {@Autowired}) 
+	private MP_BasketService mServ;
 	
 	/*----------------------------------------------------------
 	 * 기   능 : 로그인 프로세스, 입력된 아이디와 비밀번호를 DB와 대조 후 일치 시 세션에 저장
@@ -291,11 +299,53 @@ public class CM_Service {
 		
 		//모든 가격의 총 합 구하기
 		
-		
+		mav.addObject("orderBtNum",orderBtNum);
 		mav.addObject("totalPrice",totalPrice);
 		mav.addObject("orderedProdList",orderedProdList);
 		mav.setViewName("prodBuy");
 		
+		return mav;
+	}
+
+	
+	 /* ---------------------------------------------------------------------------------------
+	  * 기능: 주문하기 
+	  * 작성자: JWJ
+	  * 작성일: 2020.02.14
+		 -----------------------------------------------------------------------------------------*/
+	public ModelAndView orderInsert(HttpServletRequest request) {
+
+		 CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
+		 String[] orderProdList = request.getParameterValues("orderProdList");
+		 String[] orderProdCount = request.getParameterValues("orderProdCount");
+		 String[] orderProdPrice = request.getParameterValues("orderProdPrice");
+		 String[] orderBtNum = request.getParameterValues("orderBtNum");
+		 String receiverName = request.getParameter("receiverName");
+		 String receiverPhone = request.getParameter("receiverPhone");
+		 String orderAddr = request.getParameter("orderAddr");
+		 
+		 mav = new ModelAndView();
+		 
+		 for (int i = 0; i < orderProdList.length; i++) {
+			PO_Vo poVo = new PO_Vo();
+			PD_productDto prodDto = cm_Dao.getprodDetail(Integer.parseInt(orderProdList[i]));
+		 
+			poVo.setPo_cm_id(cmDto.getCm_id());
+			poVo.setPo_pd_code(Integer.parseInt(orderProdList[i]));
+			poVo.setPo_count(Integer.parseInt(orderProdCount[i]));
+			poVo.setPo_price(Integer.parseInt(orderProdPrice[i]));
+			poVo.setPo_addr(orderAddr);
+			poVo.setPo_at_id(prodDto.getPd_at_id());
+			poVo.setPo_at_name(prodDto.getPd_name());
+			poVo.setReceiverName(receiverName);
+			poVo.setReceiverPhone(receiverPhone);
+			
+			cm_Dao.orderInsert(poVo);
+			btDao.deleteBasket(Integer.parseInt(orderBtNum[i]));
+			
+		 }
+		 mav = mServ.getBasketList(cmDto.getCm_id());
+		 
 		return mav;
 	}
 
