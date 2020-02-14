@@ -1,6 +1,8 @@
 
 package com.atelier.co.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,8 @@ public class CO_Controller {
 	@ResponseBody
 	public ModelAndView noticeList(Integer noticePageNum, Integer FAQPageNum) {
 		//log.info("boardList()");
+		log.warn("고객센터ㅏ-----------------------------------------------");
+		
 		mav = mServ.getNoticeList(noticePageNum, FAQPageNum);
 		
 		return mav;
@@ -81,4 +85,6 @@ public class CO_Controller {
 		
 		return mav;
 	}
+	
+	
 }//class end
