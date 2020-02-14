@@ -146,17 +146,17 @@
 						<c:forEach var="nitem" items ="${bList}">
 								<tr style="background-color: white; border-bottom: 2px solid #A09182; height:40px;">
 									<td style="width: 60px; text-align: center;">
-										${nitem.nt_num}
+										${nitem.at_nt_num}
 									</td>
 									<td style="width: 550px; text-align: center; padding-left: 15px;">
-										<a href="ATNoticeDetail?nt_num=${nitem.nt_num}" style="color: #353535;">${nitem.nt_title}</a>
+										<a href="ATNoticeDetail?at_nt_num=${nitem.at_nt_num}" style="color: #353535;">${nitem.at_nt_title}</a>
 									</td>
 									
 									<td style="width: 100px;">
-										${nitem.nt_id}
+										${nitem.at_nt_id}
 									</td>
 									<td style="width: 140px;">
-										${nitem.nt_count}
+										${nitem.at_nt_count}
 									</td>
 								</tr>
 								</c:forEach>
