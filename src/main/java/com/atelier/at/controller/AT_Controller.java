@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -347,9 +348,9 @@ public class AT_Controller {
 		 * 작성일 : 2020.02.11		최종수정일 : 2020.02.11
 		-------------------------------------------------------------------*/
 		@GetMapping("ATNoticeDetail")
-		public ModelAndView getNoticeContents(Integer nt_num) {//form에서 넘겨주는 name과 controller의 매개변수 명과 같아야 한다.
-			log.info("getNoticeContents - nt_num = " + nt_num);
-			mav = atServ.getNoticeContents(nt_num);
+		public ModelAndView getNoticeContents(Integer at_nt_num) {//form에서 넘겨주는 name과 controller의 매개변수 명과 같아야 한다.
+			log.info("getNoticeContents - at_nt_num = " + at_nt_num);
+			mav = atServ.getNoticeContents(at_nt_num);
 			
 			return mav;
 		}
@@ -380,6 +381,13 @@ public class AT_Controller {
 			return mav;
 
 		}
+		@GetMapping("delNotice")//글 삭제를 위한 controller 메소드
+		public String delNotice (@RequestParam("at_nt_num")int at_nt_num, RedirectAttributes rttr) {
+			String view = atServ.delNotice(at_nt_num,rttr);
+			return view;
+		}
+		
+
 		
 		/*-------------------------------------------------------------------
 		 * 기능 : 발주 리스트 조회 컨트롤러
