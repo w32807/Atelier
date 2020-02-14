@@ -352,21 +352,50 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 
 						<!-- Map Section Begin -->
 							<!-- 지도를 표시할 div 입니다 -->
-						<div id="map" style="width:1390;height:500px; display: block; "></div>
-						
-						<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ed83f9fdd2a5201a968831f586aa62e4"></script>
+						<div id="map" style="width:100%;height:800px; display: block; "></div>
+
 						<script>
-								var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-								    mapOption = { 
-								        center: new kakao.maps.LatLng(37.439139, 126.675124), // 지도의 중심좌표
-								        level: 3 // 지도의 확대 레벨
-								    };
+							// Initialize and add the map
+
+							function initMap() {
+								// The location of Uluru
+								var uluru = {
+									lat : 37.438767,
+									lng : 126.675085
+								};
+								// The map, centered at Uluru
+								var map = new google.maps.Map(
+								document.getElementById('map'), {
+									zoom : 17,
+									center : uluru
+								});
+								// The marker, positioned at Uluru
+								var marker = new google.maps.Marker({
+									position : uluru,
+									map : map,
+									info: '말풍선 안에 들어갈 내용',
+									title: 'Atelier'
+								});
 								
-								var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다
+								var content = "<h5><b>Atelier Building</b></h5><p>인천광역시 미추홀구 학익동 663-1 Atelier 빌딩";
 								
-							
+								var infowindow = new google.maps.InfoWindow({content: content});
+								
+								google.maps.event.addListener(marker, "click", function() {
+						            infowindow.open(map,marker);
+								});
+
+							}
 						</script>
-						
+						<!--Load the API from the specified URL
+						    * The async attribute allows the browser to render the page while the API loads
+						    * The key parameter will contain your own API key (which is not needed for this tutorial)
+						    * The callback parameter executes the initMap() function
+						    -->
+						<script async defer
+							src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAc_ZbCtkK4m_JITKv4tiuyM3XcKcgiAYo&callback=initMap">
+						</script>
+
 						<!-- Map Section Begin -->
 
 						<!-- Contact Section Begin -->
@@ -376,9 +405,7 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 									<div class="col-lg-5">
 										<div class="contact-title">
 											<h4>Contacts Us</h4>
-											<p>Contrary to popular belief, Lorem Ipsum is simply
-												random text. It has roots in a piece of classical Latin
-												literature from 45 BC, maki years old.</p>
+											<p>Atelier로의 연락은 아래로 부탁드립니다!</p>
 										</div>
 										<div class="contact-widget">
 											<div class="cw-item">
@@ -387,7 +414,7 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 												</div>
 												<div class="ci-text">
 													<span>Address:</span>
-													<p>60-49 Road 11378 New York</p>
+													<p>인천광역시 미추홀구 Atelier 빌딩</p>
 												</div>
 											</div>
 											<div class="cw-item">
@@ -396,7 +423,7 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 												</div>
 												<div class="ci-text">
 													<span>Phone:</span>
-													<p>+65 11.188.888</p>
+													<p>+81 10.5453.1234</p>
 												</div>
 											</div>
 											<div class="cw-item">
@@ -405,7 +432,7 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 												</div>
 												<div class="ci-text">
 													<span>Email:</span>
-													<p>hellocolorlib@gmail.com</p>
+													<p>AtelierAdmin@Atelier.com</p>
 												</div>
 											</div>
 										</div>
@@ -413,21 +440,21 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 									<div class="col-lg-6 offset-lg-1">
 										<div class="contact-form">
 											<div class="leave-comment">
-												<h4>Leave A Comment</h4>
-												<p>Our staff will call back later and answer your
-													questions.</p>
+												<h4>Sign In</h4>
+												<p>Atelier의 회원이 되어 즐거운 쇼핑을 즐겨 보세요!</p>
 												<form action="#" class="comment-form">
 													<div class="row">
-														<div class="col-lg-6">
-															<input type="text" placeholder="Your name">
+														<div class="col-lg-6">														
+															<button type="button" class="site-btn" onclick="location.href='memJoinFrm'">Sign In</button>
 														</div>
-														<div class="col-lg-6">
-															<input type="text" placeholder="Your email">
-														</div>
+													</div>
+														<br>
+														<br>
+														<h4>Log In</h4>
+														<p>이미 Atelier의 회원이시라면, 로그인 후 관리자에게 문의사항을 남겨주세요!</p>
+														<div class="row">
 														<div class="col-lg-12">
-															<textarea placeholder="Your message"></textarea>
-															<button type="submit" class="site-btn">Send
-																message</button>
+															<button type="button" class="site-btn" onclick="location.href='login'">Log In</button>
 														</div>
 													</div>
 												</form>
