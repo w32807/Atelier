@@ -103,26 +103,6 @@ public class AT_Controller {
 	//--------------------------------------------------------------------------------------------
 	// 책임자 : 장원준
 	//--------------------------------------------------------------------------------------------
-	
-	@GetMapping("ATOrder")//거래처 조회 및 발주신청 페이지에서 발주(주문)를 하기 위한 메소드
-	public String gorawOrder(HttpServletRequest request) {
-		//여기의 작업은 service에서  처리해도 됩니다. 일단 써놨습니다.
-		
-		
-		//발주를 위한 데이터들이 넘어옴
-		String[] chkedBoxArr = request.getParameterValues("prod");//체크박스의 값들이 넘어옴
-		if (chkedBoxArr == null) {
-			//발주신청한 품목이 없음..
-		} else {
-			//발주를 신청한 품목이 있다면
-			for(String chkedBoxValue : chkedBoxArr) {
-				String numOfprod = request.getParameter("chkedBoxValue");//해당 상품의 수량을 가져옴
-				int numOfProd = Integer.parseInt(numOfprod);//넘어온 수량은 String이지만 계산을 위해 int로 변환
-			}
-		}
-		return null;
-	}
-
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 제작한 상품 리스트 전체 출력
 	  * 작성자: KYH
@@ -130,7 +110,7 @@ public class AT_Controller {
 	  -----------------------------------------------------------------------------------*/
 	@GetMapping("ATProdManage")
 	public ModelAndView getATProdList(Integer pageNum, Integer maxNum) {
-		log.warn("제작한 상품 리스트 전체 출력 컨트롤러");
+		//log.warn("제작한 상품 리스트 전체 출력 컨트롤러");
 		mav = atServ.getATProdList(pageNum, maxNum);
 		
 		return mav;
@@ -143,7 +123,7 @@ public class AT_Controller {
 	  -----------------------------------------------------------------------------------*/
 	@PostMapping("ATProdRegistTrueList")
 	public ModelAndView getATProdRegistTrueList(Integer pageNum, Integer maxNum) {
-		log.warn("판매 등록한 상품 리스트 출력 컨트롤러");
+		//log.warn("판매 등록한 상품 리스트 출력 컨트롤러");
 		mav = atServ.getATProdRegistTrueList(pageNum, maxNum);
 		
 		return mav;
@@ -156,7 +136,7 @@ public class AT_Controller {
 	  -----------------------------------------------------------------------------------*/
 	@PostMapping("prodRegistCancle")
 	public ModelAndView prodRegistCancleProc(PD_productDto pdDto, HttpServletRequest request, RedirectAttributes rttr) {
-		log.warn("판매 등록해제 컨트롤러");
+		//log.warn("판매 등록해제 컨트롤러");
 		String[] checkedBoxArr = request.getParameterValues("prodChk");
 		
 		mav = atServ.prodRegistCancleProc(pdDto, checkedBoxArr, rttr);
