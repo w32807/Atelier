@@ -1,58 +1,78 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Fashi Template">
-    <meta name="keywords" content="Fashi, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Atelier | My Page</title>
+<meta charset="UTF-8">
+<meta name="description" content="Fashi Template">
+<meta name="keywords" content="Fashi, unica, creative, html">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Atelier | My Page</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+<!-- Google Font -->
+<link
+	href="https://fonts.googleapis.com/css?family=Muli:300,400,500,600,700,800,900&display=swap"
+	rel="stylesheet">
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/themify-icons.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/style.css" type="text/css">
-    
-    <style type="text/css">
-    	.btn-warning {
-    		color: #fff;
-    		font-size: .945rem;
-    	}
-    </style>
+<!-- Css Styles -->
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/main/css/bootstrap.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/main/css/font-awesome.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/main/css/themify-icons.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/main/css/elegant-icons.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/main/css/owl.carousel.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/main/css/nice-select.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/main/css/jquery-ui.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/main/css/slicknav.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/main/css/style.css"
+	type="text/css">
+
+<style type="text/css">
+.btn-warning {
+	color: #fff;
+	font-size: .945rem;
+}
+</style>
 </head>
 
 <body>
-    <!-- 상단바 Include -->
-	<jsp:include page="Main_Upper.jsp" flush="false"/>
+	<!-- 상단바 Include -->
+	<jsp:include page="Main_Upper.jsp" flush="false" />
 
 
-    <!-- Breadcrumb Section Begin -->
-    <div class="breacrumb-section">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb-text">
-                        <a href="/"><i class="fa fa-home"></i> Home</a>
-                        <span>My Page</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb Section Begin -->
+	<!-- Breadcrumb Section Begin -->
+	<div class="breacrumb-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="breadcrumb-text">
+						<a href="/"><i class="fa fa-home"></i> Home</a> <span>My
+							Page</span>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Breadcrumb Section Begin -->
 
     <!-- Blog Section Begin -->
     <section class="blog-section spad">
@@ -68,116 +88,137 @@
                             <!-- 
                             	마이페이지 메인
                              -->
-                             <div class="myInfo_upper">
-                             <h4>My Informations</h4>
-	                             <ul>
-	                             	<li style="background-color: lightcoral">배송중인 상품 <a href="myOrder?po_cm_id=${mb.cm_id}">${sendingProd}</a>개</li>
-	                             	<li style="background-color: powderblue">구독 중인 공방 <a href="mySubscript?sc_cm_id=${mb.cm_id}">${subscribedNum}</a>개</li>
-	                             	<li style="background-color: palegreen">읽지 않은 쪽지 <a href="messager?mg_receiver=${mb.cm_id}">${uncheckedMessageNum}</a>개</li>                             		
-	                             </ul>
-                             </div>
-                             
-                             <div class="myInfo_middle">
-                             <h4>주문 / 배송 중인 상품</h4>
-                             	<div class="row">
-						          <div class="col-lg-12">
-						            <section class="panel">
-						              <header class="panel-heading">
-						              </header>
-						
-						              <table class="table table-striped table-advance table-hover">
-						                <tbody>
-						                  <tr>
-						                    <th><i class="icon_profile"></i> 제품명</th>
-						                    <th><i class="icon_calendar"></i> 구매한 날짜</th>
-											<th><i class="icon_pin_alt"></i> 배송상태</th>
-						                    <th><i class="icon_mail_alt"></i> 판매자에게 문의</th>
-						                    <th><i class="icon_cogs"></i> 제품 바로가기</th>
-						                    <th><i class="icon_cogs"></i> 주문 취소</th>
-						                  </tr>
-						                  <!-- 주문/배송중인 상품 -->
-						                  <c:forEach var="poList" items ="${poList}">
-							                  <tr>
-							                    <td>${poList.po_pd_name}</td>
-							                    <td>${poList.po_date_simple}</td>
-							                    <td>${poList.po_state}</td>
-							                    <td style="text-align: center;">
-							                      <div class="btn-group">
-							                      	<a class="btn btn-primary" href="myPageMessageSend?po_at_id=${poList.po_at_id}" onclick="window.open(this.href, '_blank', 'width=655px,height=650px,toolbars=no,scrollbars=no');return false;"><i class="icon_plus_alt2"></i></a>
-							                      </div>
-							                    </td>
-							                    <td style="text-align: center;">
-							                      <div class="btn-group">
-							                        <a class="btn btn-success" href="myPageGoProd?po_pd_code=${poList.po_pd_code}"><i class="icon_check_alt2"></i></a>
-							                      </div>
-							                    </td>
-							                    <td style="text-align: center;">
-							                      <div class="btn-group">
-							                        <a class="btn btn-danger" href="myPageOrderCancle?po_num=${poList.po_num}"><i class="icon_close_alt2"></i></a>
-							                      </div>
-							                    </td>
-							                  </tr>
-						                  </c:forEach>
-						                </tbody>
-						              </table>
-						            </section>
-						          </div>
-						        </div>
-                             </div>
-                             <div>
-                             	<div class="col-lg-12">
-						            <section class="panel">
-						              <header class="panel-heading">
-						              <h4>구독 정보</h4>
-						              </header>
-						              <table class="table">
-						                <thead>
-						                  <tr>
-						                    <th>#</th>
-						                    <th>공방명</th>
-						                    <th>공방 바로가기</th>
-						                    <th>구독 해제</th>
-						                  </tr>
-						                </thead>
-						                <tbody>
-						                <!-- 구독 정보 출력 -->
-						                <c:forEach var="mpsList" items ="${mpsList}" varStatus="status">
-						                  <tr class="active">
-						                    <td>${status.count}</td>
-						                    <td>${mpsList.sc_at_name}</td>
-						                    <td><a class="btn btn-warning btn-sm" href="myPageGoAtelier?sc_at_id=${mpsList.sc_at_id}" title="Bootstrap 3 themes generator"><span class="icon_house_alt"></span> 바로가기</a></td>
-						                    <td><a class="btn btn-danger btn-sm" href="myPageDelSubs?sc_at_id=${mpsList.sc_at_id}" title="Bootstrap 3 themes generator"><span class="icon_target"></span> 구독 해제</a></td>
-						                  </tr>
-						                </c:forEach>
-						                </tbody>
-						              </table>
-						            </section>
-						          </div>
-                             </div>
-                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Blog Section End -->
+							<div class="myInfo_upper">
+								<h4>My Informations</h4>
+								<ul>
+									<li style="background-color: lightcoral">배송중인 상품 <a
+										href="myOrder?po_cm_id=${mb.cm_id}">${sendingProd}</a>개
+									</li>
+									<li style="background-color: powderblue">구독 중인 공방 <a
+										href="mySubscript?sc_cm_id=${mb.cm_id}">${subscribedNum}</a>개
+									</li>
+									<li style="background-color: palegreen">읽지 않은 쪽지 <a
+										href="messager?mg_receiver=${mb.cm_id}">${uncheckedMessageNum}</a>개
+									</li>
+								</ul>
+							</div>
 
-    <!-- 하단바 Include -->
-	<jsp:include page="Main_Footer.jsp" flush="false"/>
+							<div class="myInfo_middle">
+								<h4>주문 / 배송 중인 상품</h4>
+								<div class="row">
+									<div class="col-lg-12">
+										<section class="panel">
+											<header class="panel-heading"> </header>
 
-    <!-- Js Plugins -->
-    <script src="<c:url value="/resources/main/js/jquery-3.3.1.min.js"/>"></script>
-    <script src="<c:url value="/resources/main/js/bootstrap.min.js"/>"></script>
-    <script src="<c:url value="/resources/main/js/jquery-ui.min.js"/>"></script>
-    <script src="<c:url value="/resources/main/js/jquery.countdown.min.js"/>"></script>
-    <script src="<c:url value="/resources/main/js/jquery.nice-select.min.js"/>"></script>
-    <script src="<c:url value="/resources/main/js/jquery.zoom.min.js"/>"></script>
-    <script src="<c:url value="/resources/main/js/jquery.dd.min.js"/>"></script>
-    <script src="<c:url value="/resources/main/js/jquery.slicknav.js"/>"></script>
-    <script src="<c:url value="/resources/main/js/owl.carousel.min.js"/>"></script>
-    <script src="<c:url value="/resources/main/js/main.js"/>"></script>
-    
-    <script type="text/javascript">
+											<table class="table table-striped table-advance table-hover">
+												<tbody>
+													<tr>
+														<th><i class="icon_profile"></i> 제품명</th>
+														<th><i class="icon_calendar"></i> 구매한 날짜</th>
+														<th><i class="icon_pin_alt"></i> 배송상태</th>
+														<th><i class="icon_mail_alt"></i> 판매자에게 문의</th>
+														<th><i class="icon_cogs"></i> 제품 바로가기</th>
+														<th><i class="icon_cogs"></i> 주문 취소</th>
+													</tr>
+													<!-- 주문/배송중인 상품 -->
+													<c:forEach var="poList" items="${poList}">
+														<tr>
+															<td>${poList.po_pd_name}</td>
+															<td>${poList.po_date_simple}</td>
+															<td>${poList.po_state}</td>
+															<td style="text-align: center;">
+																<div class="btn-group">
+																	<a class="btn btn-primary"
+																		href="myPageMessageSend?po_at_id=${poList.po_at_id}"
+																		onclick="window.open(this.href, '_blank', 'width=655px,height=650px,toolbars=no,scrollbars=no');return false;"><i
+																		class="icon_plus_alt2"></i></a>
+																</div>
+															</td>
+															<td style="text-align: center;">
+																<div class="btn-group">
+																	<a class="btn btn-success"
+																		href="myPageGoProd?po_pd_code=${poList.po_pd_code}"><i
+																		class="icon_check_alt2"></i></a>
+																</div>
+															</td>
+															<td style="text-align: center;">
+																<div class="btn-group">
+																	<a class="btn btn-danger"
+																		href="myPageOrderCancle?po_num=${poList.po_num}"><i
+																		class="icon_close_alt2"></i></a>
+																</div>
+															</td>
+														</tr>
+													</c:forEach>
+												</tbody>
+											</table>
+										</section>
+									</div>
+								</div>
+							</div>
+							<div>
+								<div class="col-lg-12">
+									<section class="panel">
+										<header class="panel-heading">
+											<h4>구독 정보</h4>
+										</header>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>#</th>
+													<th>공방명</th>
+													<th>공방 바로가기</th>
+													<th>구독 해제</th>
+												</tr>
+											</thead>
+											<tbody>
+												<!-- 구독 정보 출력 -->
+												<c:forEach var="mpsList" items="${mpsList}"
+													varStatus="status">
+													<tr class="active">
+														<td>${status.count}</td>
+														<td>${mpsList.sc_at_name}</td>
+														<td><a class="btn btn-warning btn-sm"
+															href="myPageGoAtelier?sc_at_id=${mpsList.sc_at_id}"
+															title="Bootstrap 3 themes generator"><span
+																class="icon_house_alt"></span> 바로가기</a></td>
+														<td><a class="btn btn-danger btn-sm"
+															href="myPageDelSubs?sc_at_id=${mpsList.sc_at_id}"
+															title="Bootstrap 3 themes generator"><span
+																class="icon_target"></span> 구독 해제</a></td>
+													</tr>
+												</c:forEach>
+											</tbody>
+										</table>
+									</section>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Blog Section End -->
+
+	<!-- 하단바 Include -->
+	<jsp:include page="Main_Footer.jsp" flush="false" />
+
+	<!-- Js Plugins -->
+	<script src="<c:url value="/resources/main/js/jquery-3.3.1.min.js"/>"></script>
+	<script src="<c:url value="/resources/main/js/bootstrap.min.js"/>"></script>
+	<script src="<c:url value="/resources/main/js/jquery-ui.min.js"/>"></script>
+	<script
+		src="<c:url value="/resources/main/js/jquery.countdown.min.js"/>"></script>
+	<script
+		src="<c:url value="/resources/main/js/jquery.nice-select.min.js"/>"></script>
+	<script src="<c:url value="/resources/main/js/jquery.zoom.min.js"/>"></script>
+	<script src="<c:url value="/resources/main/js/jquery.dd.min.js"/>"></script>
+	<script src="<c:url value="/resources/main/js/jquery.slicknav.js"/>"></script>
+	<script src="<c:url value="/resources/main/js/owl.carousel.min.js"/>"></script>
+	<script src="<c:url value="/resources/main/js/main.js"/>"></script>
+
+	<script type="text/javascript">
     /* ---------------------------------------------------------------------------------------
 	 * 기능: 로그인 여부에 따른 버튼 출력여부 결정
 	 * 작성자: JSG
