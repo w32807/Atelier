@@ -37,4 +37,15 @@
 	<select id="getPi_oriName" parameterType="Integer" resultType="String">
 		SELECT PI_ORINAME FROM PI WHERE PI_PD_CODE = #{pd_code}
 	</select>
+	
+	<select id="getPDListByAT" resultType="com.atelier.dto.PD_productDto">
+		SELECT * FROM PD
+		WHERE PD_AT_ID = #{at_id}
+	</select>
+	
+	<delete id="deleteATUserPDData" parameterType="String">
+		DELETE FROM PD
+		WHERE PD_AT_ID = #{cm_id}
+	</delete>
+	
 </mapper>

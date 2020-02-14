@@ -388,69 +388,20 @@
                 </div>s
             </div>
             <div class="row">
+                <c:forEach var = "main_at_recommend_list" items = "${main_at_recommend_list}">
                 <div class="col-lg-4 col-md-6">
                     <div class="single-latest-blog">
-                        <img src="./resources/main/img/latest-1.jpg" alt="">
+                    <a href="ATDetail?at_num=${main_at_recommend_list.at_seq}">
+                        <img src="resources\upload\logo/${main_at_recommend_list.at_logo}" alt="">
                         <div class="latest-text">
-                            <div class="tag-list">
-                                <div class="tag-item">
-                                    <i class="fa fa-calendar-o"></i>
-                                    May 4,2019
-                                </div>
-                                <div class="tag-item">
-                                    <i class="fa fa-comment-o"></i>
-                                    5
-                                </div>
-                            </div>
-                            <a href="#">
-                                <h4>The Best Street Style From London Fashion Week</h4>
+                            
+                                <h4>이 집 가죽 잘하네 - ${main_at_recommend_list.at_name}</h4>
                             </a>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
+                            <p>#${main_at_recommend_list.at_cate1}, #${main_at_recommend_list.at_cate2}, #${main_at_recommend_list.at_cate3}</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-latest-blog">
-                        <img src="./resources/main/img/latest-2.jpg" alt="">
-                        <div class="latest-text">
-                            <div class="tag-list">
-                                <div class="tag-item">
-                                    <i class="fa fa-calendar-o"></i>
-                                    May 4,2019
-                                </div>
-                                <div class="tag-item">
-                                    <i class="fa fa-comment-o"></i>
-                                    5
-                                </div>
-                            </div>
-                            <a href="#">
-                                <h4>Vogue's Ultimate Guide To Autumn/Winter 2019 Shoes</h4>
-                            </a>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6">
-                    <div class="single-latest-blog">
-                        <img src="./resources/main/img/latest-3.jpg" alt="">
-                        <div class="latest-text">
-                            <div class="tag-list">
-                                <div class="tag-item">
-                                    <i class="fa fa-calendar-o"></i>
-                                    May 4,2019
-                                </div>
-                                <div class="tag-item">
-                                    <i class="fa fa-comment-o"></i>
-                                    5
-                                </div>
-                            </div>
-                            <a href="#">
-                                <h4>How To Brighten Your Wardrobe With A Dash Of Lime</h4>
-                            </a>
-                            <p>Sed quia non numquam modi tempora indunt ut labore et dolore magnam aliquam quaerat </p>
-                        </div>
-                    </div>
-                </div>
+                </c:forEach>
             </div>
             <div class="benefit-items">
                 <div class="row">
@@ -551,6 +502,19 @@
     	if(mid1 != ''){
     		$('.showandhide').hide();
     	}
+    	
+    	
+    	/* ---------------------------------------------------------------------------------------
+    	 * 기능: 로그인 여부 수정
+    	 * 작성자: JSG
+    	 * 작성일: 2020.02.13
+    	 -----------------------------------------------------------------------------------------*/
+    	var chk = "${check}";
+		if(chk != ""){
+			alert(chk);
+			location.reload(true);//화면을 다시 한번 불러오면서 check를 리셋함 
+		}
+    	
     	
     }
     </script>

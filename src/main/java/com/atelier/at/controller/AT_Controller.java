@@ -67,22 +67,26 @@ public class AT_Controller {
 		return "main";
 	}
 	
-	
-	
-	
-	//--------------------------------------------------------------------------------------------
-	// 책임자 : 김예희
-	//--------------------------------------------------------------------------------------------
-
-
-	@GetMapping("ATDetail")//공방 상세 페이지로 이동하는 메소드
-	public String goATDetail() {
-		return "ATDetail";
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방 상세 페이지 이동 및 데이터 출력
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.10
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ATDetail")
+	public ModelAndView goATDetail(int at_num) {
+		mav = mServ.getATDetail(at_num);
+		return mav;
 	}
 	
-	@GetMapping("ATMain")//공방 메인 페이지로 이동하는 메소드
-	public String goATMain() {
-		return "ATMain";
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방 메인 페이지에 공방 리스트 출력
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.10
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ATMain")
+	public ModelAndView goATMain() {
+		mav = mServ.printATList();
+		return mav;
 	}
 	
 	/*
@@ -100,6 +104,18 @@ public class AT_Controller {
 		return "ATInfoModify";
 	}
 	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방 정보 업데이트(수정)
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.10
+	  -----------------------------------------------------------------------------------*/
+	@PostMapping("ATUpdateAtelier")
+	public ModelAndView ATUpdateAtelierData(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
+		
+		mav = atServ.updateATData(multi,rttr);
+		
+		return mav;
+	}
 	
 	//--------------------------------------------------------------------------------------------
 	// 책임자 : 장원준
@@ -415,4 +431,6 @@ public class AT_Controller {
 			
 			return mav;
 		}
+		
+		
 }

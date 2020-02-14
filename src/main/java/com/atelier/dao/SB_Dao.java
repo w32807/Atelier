@@ -10,4 +10,6 @@ public interface SB_Dao {
 	public boolean getSubscription(SB_Dto sbDto);
 
 	public List<SBS_Dto> getSubList(String sc_cm_id);
+	
+	public void deleteATUserSCData(String cm_id);
 }

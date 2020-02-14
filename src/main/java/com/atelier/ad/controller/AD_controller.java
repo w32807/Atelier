@@ -175,9 +175,38 @@ public class AD_controller {
 		return mav;
 	}
 	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방 리스트로 이동
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.13
+	  -----------------------------------------------------------------------------------*/
 	@GetMapping("ADATList")
-	public String goADATList() {
-		return "ADATList";
+	public ModelAndView goADATList() {
+		mav = aServ.ADATListProc();
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방의 상태를 변경
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.13
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ADATListStateProc")
+	public ModelAndView ADATListStateProc(String id, String state, RedirectAttributes rttr, String check) {
+		//String[] chkedBoxArr = request.getParameterValues("at_listchk");
+		mav = aServ.ADATListStateProc(id, state, rttr, check);
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방을 검색 후 ADATListSearch 페이지에 출력
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.13
+	  -----------------------------------------------------------------------------------*/
+	@GetMapping("ADATListSearch")
+	public ModelAndView ADATListSearchProc(String searchName) {
+		mav = aServ.ADATListSearchProc(searchName);
+		return mav;
 	}
 	
 	/*

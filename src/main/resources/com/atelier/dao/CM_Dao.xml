@@ -82,7 +82,11 @@
   		#{po_price},SYSDATE,#{po_addr},#{po_at_id},#{po_at_name})
   	</insert>
   	
-  	
+  	<update id="userStateChange" parameterType="com.atelier.dto.CM_Dto">
+		UPDATE CM 
+		SET CM_STATE=#{cm_state}
+		WHERE CM_ID=#{cm_id}
+	</update>
   	
   	
 </mapper>

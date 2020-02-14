@@ -87,8 +87,8 @@
 		style="overflow-y: hidden; overflow-x: hidden; position: absolute; border-bottom: white; height: auto; min-height: 1400px; z-index: 998;">
 		<h1 id="colorlib-logo" style="margin-bottom: 0; text-align: center;">
 			<a href="ATDatail"
-				style="background-color: white; padding: 10px 0px;"> <img
-				src="http://www.topstarnews.net/news/photo/201905/629556_323603_2217.jpg"
+				style="background-color: white; padding: 10px 0px;"> 
+				<img class="profile_img" id="profile_img" src="resources\upload\logo/${at.at_logo}"
 				style="width: 180px; padding-bottom: 0px;">
 			</a>
 			<h1 id="AT_SNS" style="text-align: center;"></h1>
@@ -98,7 +98,7 @@
 			<ul style="margin-top: 10px">
 				<li class="colorlib-active"
 					style="font-size: 20px; text-align: center; margin-bottom: 120px;">
-					<a href="ATDetail" style="font-weight: bolder;">공방들의 이름ㅋㅋ</a>
+					<a href="ATDetail" style="font-weight: bolder;">${at_dto.at_name}</a>
 				</li>
 			</ul>
 		</nav>

@@ -101,7 +101,7 @@
 					   					<div class="desc" style="background: none; top: 100px;">
 					   					<input type="hidden" name="sc_cm_id" id="SC_CM_ID" value="${mb.cm_id}">
 					   					<input type="hidden" name="sc_at_id" id="SC_AT_ID" value="#1">
-					   					<h1 style="font-size: 18px; font-weight: 600; width:300px;">공방의 소개글이 들어갑니다.</h1>
+					   					<h1 style="font-size: 18px; font-weight: 600; width:300px;">${at_dto.at_name} 공방에 오신 것을 환영합니다.</h1>
 						   					<h2><a href="https://colorlib.com/" target="_blank" style="font-size: 18px; font-weight: 600; color: #A09182; border-bottom: 1px solid #A09182;">공방 주소</a></h2>
 											<button id="subcancle" type="submit" class="btn btn-primary btn-learn" style="font-weight: 600;" value="구독">&nbsp;&nbsp;&nbsp;구독&nbsp;&nbsp;&nbsp;   </button>
 											
@@ -158,66 +158,22 @@
 						</div>
 					</div>
 					<div class="row">
+						<c:forEach var = "pdList" items = "${pdList}">
 						<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft" style="margin-left: 160px;">
-							<div class="project" style="background-image: url(resources/AT_front/images/work-1.jpg); width: 350px; height: 280px;">
+							<c:forEach var = "piList" items = "${piList }">
+								<c:if test = "${pdList.pd_code eq  piList.pi_pd_code}">
+									<div class="project" style="background-image: url(resources/main/img/products/${piList.pi_oriname}); width: 350px; height: 280px;">
+								</c:if>
+							</c:forEach>
 								<div class="desc" style="text-align: center;">
 									<div class="con" style="margin-top: 100px;">
-										<span style="font-size: 17px;">CATEGORY : ㅇㅇㅇ</span>
-										<h3><a>상품명</a></h3>		
+										<span style="font-size: 17px;">CATEGORY : #${pdList.pd_cate}</span>
+										<h3><a>${pdList.pd_name}</a></h3>		
 									</div>
 								</div>
 							</div>
 						</div>
-						<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(resources/AT_front/images/work-2.jpg); width: 350px; height: 280px;">
-								<div class="desc" style="text-align: center;">
-									<div class="con" style="margin-top: 100px;">
-										<span style="font-size: 17px;">CATEGORY : ㅇㅇㅇ</span>
-										<h3><a>상품명</a></h3>		
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-2 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(resources/AT_front/images/work-3.jpg); width: 350px; height: 280px;">
-								<div class="desc" style="text-align: center;">
-									<div class="con" style="margin-top: 100px;">
-										<span style="font-size: 17px;">CATEGORY : ㅇㅇㅇ</span>
-										<h3><a>상품명</a></h3>		
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft" style="margin-left: 160px;">
-							<div class="project" style="background-image: url(resources/AT_front/images/work-1.jpg); width: 350px; height: 280px;">
-								<div class="desc" style="text-align: center;">
-									<div class="con" style="margin-top: 100px;">
-										<span style="font-size: 17px;">CATEGORY : ㅇㅇㅇ</span>
-										<h3><a>상품명</a></h3>		
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(resources/AT_front/images/work-2.jpg); width: 350px; height: 280px;">
-								<div class="desc" style="text-align: center;">
-									<div class="con" style="margin-top: 100px;">
-										<span style="font-size: 17px;">CATEGORY : ㅇㅇㅇ</span>
-										<h3><a>상품명</a></h3>		
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-2 animate-box" data-animate-effect="fadeInLeft">
-							<div class="project" style="background-image: url(resources/AT_front/images/work-3.jpg); width: 350px; height: 280px;">
-								<div class="desc" style="text-align: center;">
-									<div class="con" style="margin-top: 100px;">
-										<span style="font-size: 17px;">CATEGORY : ㅇㅇㅇ</span>
-										<h3><a>상품명</a></h3>		
-									</div>
-								</div>
-							</div>
-						</div>
+					</c:forEach>
 					</div>
 				</div>
 			</div>

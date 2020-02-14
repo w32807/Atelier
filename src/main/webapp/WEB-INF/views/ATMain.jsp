@@ -72,59 +72,18 @@
                         </div>
                         <div class="recent-post">
                             <h4>추천 공방</h4>
-                            <div class="recent-blog">
-                            	<form action="공방 사진 눌렀을 때 실행할 메소드" name="" method="get">
+                        	<div class="recent-blog">
+	                                <c:forEach var = "at_recommend_list" items = "${at_recommend_list}">
 	                                <div class="rb-item" style="margin-bottom: -10px;">
 	                                    <div class="rb-pic">
-	                                       <a href="ATDetail"><img src="resources/main/img/blog/recent-1.jpg" alt="" style="width: 120px; height: 120px;"></a>
+	                                       <a href="ATDetail?at_num=${at_recommend_list.at_seq}"><img src="resources\upload\logo/${at_recommend_list.at_logo}" alt="" style="width: 120px; height: 120px;"></a>
 	                                    </div>
 	                                    <div class="rb-text" style="margin-top: 10px;">
-	                                    	<p><span style="font-size: 13px;">공방 카테고리</span></p>
-	                                    	<a href="ATDetail"><p style="font-size: 16px;">공방명</p></a>
-	                                        <h6 style="font-size: 13px; margin-top: 13px; height: 80px;">공방설명 첫째 줄<br>공방설명 둘째 줄</h6>
+	                                    	<p><span style="font-size: 13px;">#${at_recommend_list.at_cate1} #${at_recommend_list.at_cate2} #${at_recommend_list.at_cate3}</span></p>
+	                                    	<a href="ATDetail?at_num=${at_recommend_list.at_seq}"><p style="font-size: 16px;">${at_recommend_list.at_name}</p></a>
 	                                    </div>
 	                                </div>
-                                </form>
-                                <div class="rb-item" style="margin-bottom: -10px;">
-                                    <div class="rb-pic">
-                                        <a href="ATDetail"><img src="resources/main/img/blog/recent-1.jpg" alt="" style="width: 120px; height: 120px;"></a>
-                                    </div>
-                                    <div class="rb-text" style="margin-top: 10px;">
-                                    	<p><span style="font-size: 13px;">공방 카테고리</span></p>
-                                    	<a href="ATDetail"><p style="font-size: 16px;">공방명</p></a>
-                                        <h6 style="font-size: 13px; margin-top: 13px; height: 80px;">공방설명 첫째 줄<br>공방설명 둘째 줄</h6>
-                                    </div>
-                                </div>
-                                <div class="rb-item" style="margin-bottom: -10px;">
-                                    <div class="rb-pic">
-                                        <a href="ATDetail"><img src="resources/main/img/blog/recent-1.jpg" alt="" style="width: 120px; height: 120px;"></a>
-                                    </div>
-                                    <div class="rb-text" style="margin-top: 10px;">
-                                    	<p><span style="font-size: 13px;">공방 카테고리</span></p>
-                                    	<a href="ATDetail"><p style="font-size: 16px;">공방명</p></a>
-                                        <h6 style="font-size: 13px; margin-top: 13px; height: 80px;">공방설명 첫째 줄<br>공방설명 둘째 줄</h6>
-                                    </div>
-                                </div>
-                                <div class="rb-item" style="margin-bottom: -10px;">
-                                    <div class="rb-pic">
-                                        <a href="ATDetail"><img src="resources/main/img/blog/recent-1.jpg" alt="" style="width: 120px; height: 120px;"></a>
-                                    </div>
-                                    <div class="rb-text" style="margin-top: 10px;">
-                                    	<p><span style="font-size: 13px;">공방 카테고리</span></p>
-                                    	<a href="ATDetail"><p style="font-size: 16px;">공방명</p></a>
-                                        <h6 style="font-size: 13px; margin-top: 13px; height: 80px;">공방설명 첫째 줄<br>공방설명 둘째 줄</h6>
-                                    </div>
-                                </div>
-                                <div class="rb-item" style="margin-bottom: -10px;">
-                                    <div class="rb-pic">
-                                        <a href="ATDetail"><img src="resources/main/img/blog/recent-1.jpg" alt="" style="width: 120px; height: 120px;"></a>
-                                    </div>
-                                    <div class="rb-text" style="margin-top: 10px;">
-                                    	<p><span style="font-size: 13px;">공방 카테고리</span></p>
-                                    	<a href="ATDetail"><p style="font-size: 16px;">공방명</p></a>
-                                        <h6 style="font-size: 13px; margin-top: 13px; height: 80px;">공방설명 첫째 줄<br>공방설명 둘째 줄</h6>
-                                    </div>
-                                </div>
+	                                </c:forEach>
                             </div>
                         </div>
                     </div>
@@ -132,174 +91,24 @@
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="row">
                     <!-- 여기서부터 for문으로 돌림 -->
+                        <c:forEach var="at_list" items="${at_list}">
                         <div class="col-lg-6 col-sm-6">
                             <div class="blog-item">
                                 <div class="bi-pic">
-                                    <a href="ATDetail"><img src="resources/main/img/blog/blog-2.jpg" alt=""></a>
+                                    <a href="ATDetail?at_num=${at_list.at_seq}"><img src="resources\upload\logo/${at_list.at_logo}" alt="" style="width: 300px;"></a>
                                 </div>
                                 <div class="bi-text">
-                                	<p><span>공방 카테고리</span></p>
+                                	<h4>${at_list.at_name}</h4><br>
+                                	<p><span>#${at_list.at_cate1} #${at_list.at_cate2} #${at_list.at_cate3}</span></p>
                                     <a href="ATDetail">
-                                        <h4>공방명</h4>
+                                        
+                                        <br>
                                     </a>
-                                    <p>: 공방 설명</p>
+                                   
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <a href="ATDetail"><img src="resources/main/img/blog/blog-2.jpg" alt=""></a>
-                                </div>
-                                <div class="bi-text">
-                                	<p><span>공방 카테고리</span></p>
-                                    <a href="ATDetail">
-                                        <h4>공방명</h4>
-                                    </a>
-                                    <p>: 공방 설명</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <a href="ATDetail"><img src="resources/main/img/blog/blog-2.jpg" alt=""></a>
-                                </div>
-                                <div class="bi-text">
-                                	<p><span>공방 카테고리</span></p>
-                                    <a href="ATDetail">
-                                        <h4>공방명</h4>
-                                    </a>
-                                    <p>: 공방 설명</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <a href="ATDetail"><img src="resources/main/img/blog/blog-2.jpg" alt=""></a>
-                                </div>
-                                <div class="bi-text">
-                                	<p><span>공방 카테고리</span></p>
-                                    <a href="ATDetail">
-                                        <h4>공방명</h4>
-                                    </a>
-                                    <p>: 공방 설명</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <a href="ATDetail"><img src="resources/main/img/blog/blog-2.jpg" alt=""></a>
-                                </div>
-                                <div class="bi-text">
-                                	<p><span>공방 카테고리</span></p>
-                                    <a href="ATDetail">
-                                        <h4>공방명</h4>
-                                    </a>
-                                    <p>: 공방 설명</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <a href="ATDetail"><img src="resources/main/img/blog/blog-2.jpg" alt=""></a>
-                                </div>
-                                <div class="bi-text">
-                                	<p><span>공방 카테고리</span></p>
-                                    <a href="ATDetail">
-                                        <h4>공방명</h4>
-                                    </a>
-                                    <p>: 공방 설명</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <a href="ATDetail"><img src="resources/main/img/blog/blog-2.jpg" alt=""></a>
-                                </div>
-                                <div class="bi-text">
-                                	<p><span>공방 카테고리</span></p>
-                                    <a href="ATDetail">
-                                        <h4>공방명</h4>
-                                    </a>
-                                    <p>: 공방 설명</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <a href="ATDetail"><img src="resources/main/img/blog/blog-2.jpg" alt=""></a>
-                                </div>
-                                <div class="bi-text">
-                                	<p><span>공방 카테고리</span></p>
-                                    <a href="ATDetail">
-                                        <h4>공방명</h4>
-                                    </a>
-                                    <p>: 공방 설명</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <a href="ATDetail"><img src="resources/main/img/blog/blog-2.jpg" alt=""></a>
-                                </div>
-                                <div class="bi-text">
-                                	<p><span>공방 카테고리</span></p>
-                                    <a href="ATDetail">
-                                        <h4>공방명</h4>
-                                    </a>
-                                    <p>: 공방 설명</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <a href="ATDetail"><img src="resources/main/img/blog/blog-2.jpg" alt=""></a>
-                                </div>
-                                <div class="bi-text">
-                                	<p><span>공방 카테고리</span></p>
-                                    <a href="ATDetail">
-                                        <h4>공방명</h4>
-                                    </a>
-                                    <p>: 공방 설명</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <a href="ATDetail"><img src="resources/main/img/blog/blog-2.jpg" alt=""></a>
-                                </div>
-                                <div class="bi-text">
-                                	<p><span>공방 카테고리</span></p>
-                                    <a href="ATDetail">
-                                        <h4>공방명</h4>
-                                    </a>
-                                    <p>: 공방 설명</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="blog-item">
-                                <div class="bi-pic">
-                                    <a href="ATDetail"><img src="resources/main/img/blog/blog-2.jpg" alt=""></a>
-                                </div>
-                                <div class="bi-text">
-                                	<p><span>공방 카테고리</span></p>
-                                    <a href="ATDetail">
-                                        <h4>공방명</h4>
-                                    </a>
-                                    <p>: 공방 설명</p>
-                                </div>
-                            </div>
-                        </div>
+                       </c:forEach>
                         <!-- 여기서까지 for문으로 돌림 -->
                         <div class="col-lg-12">
                             <div class="loading-more">

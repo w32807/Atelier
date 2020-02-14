@@ -3,6 +3,7 @@ package com.atelier.dao;
 import java.util.List;
 
 import com.atelier.dto.AG_Dto;
+import com.atelier.dto.AT_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
 import com.atelier.dto.PO_Dto;
@@ -61,5 +62,22 @@ public interface AT_Dao {
 	public int getprodNum(String id);
 
 	public String getAt_state(String pd_at_id);
+	
+	public List<AT_Dto> getATList();
+	
+	public void updateATState(AT_Dto at_dto);
+	
+	public List<AT_Dto> getATListSearch(AT_Dto at_dto);
+	
+	public AT_Dto getRecommendAT(int ran);
+	
+	public AT_Dto getATDetailData(int at_seq);
+	
+	public void updateATData(AT_Dto at_dto);
+	
+	public boolean pfPhoto(AT_Dto at_dto);
+	
+	public void deleteATUserATData(String cm_id);
+	
 	
 }

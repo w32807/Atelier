@@ -15,6 +15,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.atelier.dao.AT_Dao;
 import com.atelier.dao.BT_Dao;
 import com.atelier.dao.CM_Dao;
+import com.atelier.dto.AT_Dto;
 import com.atelier.dto.BT_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.PD_productDto;
@@ -350,7 +351,41 @@ public class CM_Service {
 		return mav;
 	}
 
-	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 메인화면 오늘의 공방 출력
+	 * 작성자: JSG
+	 * 작성일: 2020.02.14
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView getTodayAT() {
+		mav = new ModelAndView();
+		List<AT_Dto> at_list = atDao.getATList(); 
+		
+		int listsize = at_list.size();
+		
+		System.out.println(listsize);
+		List<AT_Dto> main_at_recommend_list = new ArrayList<AT_Dto>();
+		
+		// 추천공방 3개를 추첨
+		for(int i = 0; i < 3; i++) {
+			int ran = (int)(Math.random() * listsize + 1);
+			
+			main_at_recommend_list.add(atDao.getRecommendAT(ran));
+			
+			// 추천공방 중복 방지
+			for(int j=0; j<i-1; j++) {
+				if(main_at_recommend_list.get(i).getAt_seq() == main_at_recommend_list.get(j).getAt_seq()) {
+					main_at_recommend_list.remove(i);
+					i--;
+					System.out.println("중복이다");
+				}
+			}
+		}
+		
+		mav.addObject("main_at_recommend_list", main_at_recommend_list);
+		mav.setViewName("main");
+		
+		return mav;
+	}
 	
 	
 	

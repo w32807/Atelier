@@ -44,4 +44,6 @@ public interface CM_Dao {
 	public int getPd_code(int getorderVtNum);
 
 	public void orderInsert(PO_Vo poVo);
+	
+	public void userStateChange(CM_Dto cm_dto);
 }

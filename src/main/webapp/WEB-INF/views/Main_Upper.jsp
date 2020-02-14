@@ -75,7 +75,7 @@
                      
                     <!-- SNS광고란 -->
                     <div class="top-social">
-                  	    <temp class="hideandshow" style="font-size: 14px;">${mb.cm_name}님 환영합니다.</temp>
+                  	    <temp class="hideandshow">${mb.cm_name}님 환영합니다.</temp>
                         <a href="https://www.facebook.com/"><i class="ti-facebook"></i></a>
                         <a href="https://twitter.com/"><i class="ti-twitter-alt"></i></a>
                         <a href="https://www.instagram.com/"><i class="ti-linkedin"></i></a>
@@ -145,15 +145,15 @@
                     	<!-- 선택된 카테고리 색 변경
                         <li class="active">
                          -->
-                        <li><a href="prodList_All">전체 보기</a></li>
-                        <li><a href="prodList_Clo">의류</a></li>
-                        <li><a href="prodList_Bag">가방</a></li>
-                        <li><a href="prodList_shoes">신발</a></li>
-                        <li><a href="prodList_Wallet">지갑</a></li>
-                        <li><a href="prodList_Belt">벨트</a></li>
-                        <li><a href="prodList_Gloves">장갑</a></li>
-                        <li><a href="prodList_House">가구</a></li>
-                        <li><a href="prodList_Etc">기타 악세사리</a></li>
+                         <li><a href="prodList_All">전체 보기</a></li>
+                        <li><a href="prodList_Clo?pd_cate=의류">의류</a></li>
+                        <li><a href="prodList_Bag?pd_cate=가방">가방</a></li>
+                        <li><a href="prodList_shoes?pd_cate=신발">신발</a></li>
+                        <li><a href="prodList_Wallet?pd_cate=지갑">지갑</a></li>
+                        <li><a href="prodList_Belt?pd_cate=벨트">벨트</a></li>
+                        <li><a href="prodList_Gloves?pd_cate=장갑">장갑</a></li>
+                        <li><a href="prodList_House?pd_cate=가구">가구</a></li>
+                        <li><a href="prodList_Etc?pd_cate=기타 악세사리">기타 악세사리</a></li>
                     </ul>
                 </nav>
                 <div id="mobile-menu-wrap"></div>

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -21,8 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atelier.at.service.AT_Service;
+import com.atelier.dao.AT_Dao;
 import com.atelier.dao.CM_Dao;
 import com.atelier.dao.MP_Dao;
+import com.atelier.dao.PD_Dao;
+import com.atelier.dao.SB_Dao;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.MG_Dto;
 import com.atelier.dto.MP_SubscribeDto;
@@ -54,6 +58,15 @@ public class MyPageService {
 	
 	@Setter(onMethod_ = @Autowired)
 	private AT_Service atServ;
+	
+	@Setter(onMethod_ = @Autowired)
+	private AT_Dao at_Dao;
+	
+	@Setter(onMethod_ = @Autowired)
+	private PD_Dao pd_Dao;
+	
+	@Setter(onMethod_ = @Autowired)
+	private SB_Dao sb_Dao;
 	
 	/* ---------------------------------------------------------------------------------------
 	 * 기능: 마이페이지 수정 서비스
@@ -385,6 +398,51 @@ public class MyPageService {
 		mav = getmyPage();
 		
 		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 회원 탈퇴 기능
+	 * 작성자: JSG
+	 * 작성일: 2020.02.13
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView myDropoutProc(CM_Dto cm_dto, RedirectAttributes rttr) {
+		mav = new ModelAndView();
+		String view = null;
+		BCryptPasswordEncoder pwdEncode = new BCryptPasswordEncoder();
+
+		//DB에서 암호화된 비번 구하기
+		String encPwd = cm_Dao.getSecurityPwd(cm_dto.getCm_id());
+		if(encPwd != null) {
+			if(pwdEncode.matches(cm_dto.getCm_pwd(), encPwd)) {			
+				cm_dto = cm_Dao.getMemberInfo(cm_dto.getCm_id());
+				
+				if(cm_dto.getCm_state().equals("공방회원")) {
+					deleteATUserData(cm_dto.getCm_id());
+					System.out.println("데이터 삭제 완료");
+				}
+				
+				cm_dto.setCm_state("탈퇴회원");
+				cm_Dao.userStateChange(cm_dto);
+				session.invalidate();	// 회원 세션 초기화
+				view = "redirect:main";
+				rttr.addFlashAttribute("check","이용해주셔서 ㄳㅇ. ㅃㅇ!");
+			}
+			else {
+				view = "redirect:/";
+				rttr.addFlashAttribute("check","패스워드가 틀립니다.");
+			}
+		}
+		
+		mav.setViewName(view);
+		return mav;
+		
+	}
+
+	private void deleteATUserData(String cm_id) {
+		pd_Dao.deleteATUserPDData(cm_id);	// 상품 테이블에서 삭제
+		sb_Dao.deleteATUserSCData(cm_id);	// 구독 테이블에서 삭제
+		at_Dao.deleteATUserATData(cm_id);	// 공방 테이블에서 삭제
+		at_Dao.deleteAGRequest(cm_id);		// 공방신청 테이블에서 삭제
 	}
 	
 }

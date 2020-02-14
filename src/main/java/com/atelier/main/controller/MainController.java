@@ -47,10 +47,20 @@ public class MainController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home(Locale locale, Model model) {
+	public ModelAndView home(Locale locale, Model model) {
 		log.info("1번");
-		return "main";
+		
+		/* ---------------------------------------------------------------------------------------
+		 * 기능: 공방 메인에 오늘의 추천공방 띄우기
+		 * 작성자: JSG
+		 * 작성일: 2020.02.14
+		 -----------------------------------------------------------------------------------------*/
+		mav = new ModelAndView();
+		mav = mServ.getTodayAT();
+
+		return mav;
 	}
+	
 	/* ---------------------------------------------------------------------------------------
 	 * 기능: 로그인창 출력 메소드
 	 * 작성자: JSG
@@ -134,9 +144,11 @@ public class MainController {
 	//Shop Home
 
 	 @GetMapping("main")
-		public String main() {
+		public ModelAndView main() {
+		 mav = new ModelAndView();
+		 mav = mServ.getTodayAT();
 			log.warn("메인으로 가는 컨트롤러");
-			return "main";
+			return mav;
 		}
 	 /* ---------------------------------------------------------------------------------------
 		 * 기능: 상품 목록 전체 보기

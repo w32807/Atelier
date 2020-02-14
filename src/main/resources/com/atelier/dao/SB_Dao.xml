@@ -14,5 +14,10 @@
 	SELECT * FROM SUBSCRIBE INNER JOIN ATELIER ON SUBSCRIBE.SC_AT_ID = ATELIER.AT_ID
       WHERE SUBSCRIBE.SC_CM_ID = #{sc_cm_id}
      </select> 
+     
+     <delete id="deleteATUserSCData" parameterType="String">
+		DELETE FROM SC
+		WHERE SC_CM_ID = #{cm_id}
+	</delete>
 
 </mapper>

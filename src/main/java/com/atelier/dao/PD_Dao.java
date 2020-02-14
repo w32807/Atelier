@@ -15,4 +15,8 @@ public interface PD_Dao {
 	public boolean prodRegistCancle(String pd_code);
 
 	public String getPi_oriName(int pd_code);
+	
+	public List<PD_productDto> getPDListByAT(String at_id);
+	
+	public void deleteATUserPDData(String cm_id);
 }

@@ -114,55 +114,103 @@
 					<div class="row">
 						<div class="col-md-7" style="margin: 0 350px;">
 							<div class="row">
-								<form name="modifyFrm" action="/ATInfoModify" onsubmit="return modifyChk()">
+								<form name="modifyFrm" action="ATUpdateAtelier" method="post" onsubmit="return modifyChk()" enctype="multipart/form-data">
 								<table class="col-md-10 col-md-offset-1 col-md-pull-1 animate-box" data-animate-effect="fadeInLeft" style="margin-bottom: 30px;">
 										<tr style="font-size: 15px;">
 											<td style="font-weight: bold;">카테고리</td>
-			                                <td><input type="checkbox" name="category" value="clothing" style="margin">의류&nbsp;&nbsp;&nbsp;
-			                                <input type="checkbox" name="category" value="bag">가방&nbsp;&nbsp;&nbsp;
-			                               	<input type="checkbox" name="category" value="shoes">신발&nbsp;&nbsp;&nbsp;
-			                                <input type="checkbox" name="category" value="wallet">지갑&nbsp;&nbsp;&nbsp;
-			                                <input type="checkbox" name="category" value="belt">벨트&nbsp;&nbsp;&nbsp;
-			                                <input type="checkbox" name="category" value="gloves">장갑&nbsp;&nbsp;&nbsp;
-			                               	<input type="checkbox" name="category" value="furniture">가구&nbsp;&nbsp;&nbsp;
-			                                <input type="checkbox" name="category" value="other">기타</td>
+			                                <td><label for="AT_CATE1 "><b>카테고리1 *&nbsp&nbsp&nbsp</b></label>
+                                <select id="AT_CATE1 " name="at_cate1">
+                                	<option value="">선택</option>
+                                	<option value="의류">의류</option>
+                                	<option value="가방">가방</option>
+                                	<option value="신발">신발</option>
+                                	<option value="지갑">지갑</option>
+                                	<option value="벨트">벨트</option>
+                                	<option value="장갑">장갑</option>
+                                	<option value="가구">가구</option>
+                                	<option value="기타">기타</option>
+                                </select>
+                           
+                                <label for="AT_CATE2 "><b>&nbsp&nbsp&nbsp카테고리2 *&nbsp&nbsp&nbsp</b></label>
+                                <select id="AT_CATE2 " name="at_cate2">
+                                	<option value="">선택</option>
+                                	<option value="의류">의류</option>
+                                	<option value="가방">가방</option>
+                                	<option value="신발">신발</option>
+                                	<option value="지갑">지갑</option>
+                                	<option value="벨트">벨트</option>
+                                	<option value="장갑">장갑</option>
+                                	<option value="가구">가구</option>
+                                	<option value="기타">기타</option>
+                                </select>
+                           
+                                <label for="AT_CATE3 "><b>&nbsp&nbsp&nbsp카테고리3 *&nbsp&nbsp&nbsp</b></label>
+                                <select id="AT_CATE3 " name="at_cate3">
+                                	<option value="">선택</option>
+                                	<option value="의류">의류</option>
+                                	<option value="가방">가방</option>
+                                	<option value="신발">신발</option>
+                                	<option value="지갑">지갑</option>
+                                	<option value="벨트">벨트</option>
+                                	<option value="장갑">장갑</option>
+                                	<option value="가구">가구</option>
+                                	<option value="기타">기타</option>
+                                </select>
+                           </td>
 										</tr>
 										<tr style="font-size: 15px;">
 										 	<td  style="font-weight: bold;">공방 이름</td>
-											<td><input type="text" class="input_text form-control" value="신청서에 有(수정가능)"></td>
+											<td>
+												<input type="text" class="input_text form-control" name="at_name" value=${at.at_name}>
+											</td>
 										</tr>
-										<tr style="font-size: 15px;">
+										<!--
+										<tr style="font-size: 15px;">	 
 										 	<td style="font-weight: bold;">공방 소개글</td>
 											<td>
 												<textarea class="input_text form-control " cols="30" rows="7" name="">메인 페이지 공방 소개글 출력</textarea>
 											</td>
 										</tr>
+										 -->
 										<tr style="font-size: 15px;">
 										 	<td style="font-weight: bold;">공방 사이트</td>
-											<td><input type="text" class="input_text form-control"></td>
+											<td><input type="text" class="input_text form-control" name="at_snsaddr" value=${at.at_snsaddr}></td>
 										</tr>
 										<tr style="font-size: 15px;">
 										 	<td style="font-weight: bold;">공방 로고</td>
-											<td class="logo">
-												<div class="profile_img">
-													<img id="" src="https://i.imgur.com/p05UZV8.jpg" style="width: 161px;">
+											<td class="logo " >
+											<!-- 
+												<div class="img_wrap" style="margin: auto;">
+													<img src="resources/main/img/blog/a.png" style ="border:3px solid darkgrey; max-width: 100%; border-radius:20% ;" id="img" />
+													<input type="file" id= "input_img" name="input_img" onchange="fileChk(this)" />
+													<input type="hidden" id="filecheck" value="0" name="fileCheck">
 												</div>
-												<input class="input_text form-control" type="file" 
-													onchange="fileChk(this)" style="margin: 130px 0 0; border: 0" multiple>
+											 -->
+											 
+											 <label for="CM_ID"><p><b>프로필 사진</b></p></label>
+												<div class="img_wrap" style="margin: auto;">
+													<img src="resources/main/img/blog/a.png" style ="border:3px solid darkgrey; width: 300px; border-radius:20% ; "id="img"/ >
+												</div>
+											</div>
+											<hr>
+											<div>
+												<input type="file" id= "input_img" name=input_img onchange="fileChk(this)" />
+												<input type="hidden" 	id="filecheck" value="0" name="fileCheck">
+											</div>
 											</td>
 										</tr>
 										<tr style="font-size: 15px;">
 										 	<td style="font-weight: bold;">공방 주소</td>
-											<td><input type="text" class="input_text form-control"></td>
+											<td><input type="text" class="input_text form-control" name = "at_addr" value=${at.at_addr}></td>
 										</tr>
 										<tr style="font-size: 15px;">
 										 	<td style="font-weight: bold;">공방 연락처</td>
-											<td><input type="text" class="input_text form-control"></td>
+											<td><input type="text" class="input_text form-control" name = "at_phone" value=${at.at_phone}></td>
 										</tr>						
 									</table>
 									<input type="submit" class="btn info_btn btn-send-message" value="submit"
 											onsubmit="modifyChk();" style="margin-bottom: 100px;">
-									<a href="./" class="btn info_btn btn-send-message" style="margin-left: 10px; margin-bottom: 100px;">CANCLE</a>
+									<a href="./ATDetail" class="btn info_btn btn-send-message" style="margin-left: 10px; margin-bottom: 100px;">CANCLE</a>
 								</form>
 							</div>
 						</div>
@@ -228,6 +276,101 @@
 		
 		
 	</script>
+	 <script type="text/javascript">
+    /* ---------------------------------------------------------------------------------------
+	 * 기능: 프로필 사진 출력
+	 * 작성자: JSH
+	 * 작성일: 2020.02.05
+	 -----------------------------------------------------------------------------------------*/
+	 
+   var sel_file;
+   
+   $(document).ready(function(){
+      $("#input_img").on("change", handleImgFileSelect);
+   });
+   
+   function handleImgFileSelect(e) {
+      var files = e.target.files;
+      var filesArr = Array.prototype.slice.call(files);
+      
+      filesArr.forEach(function(f) {
+         if(!f.type.match("image.*")) {
+            alert("확장자는 이미지 확장자만 가능합니다.");
+            return;
+         }
+         
+         sel_file = f;
+         
+         var reader = new FileReader();
+         reader.onload = function(e) {
+            $("#img").attr("src",e.target.result);
+            
+         }
+         reader.readAsDataURL(f);
+      });
+   }
+   
+</script>
+
+<script type="text/javascript">
+/* ---------------------------------------------------------------------------------------
+ * 기능: 프로필 이미지 업로드 체크
+ * 수정자: JSG
+ * 작성자: JSH
+ * 작성일: 2020.02.05
+ -----------------------------------------------------------------------------------------*/
+	
+	//파일 입력이 되었을 때, > <input type="hidden" id="filecheck" value="0" name="fileCheck">의 value 값을 1로 바꿔주자.
+	function fileChk(elem) {
+		console.log(elem);
+		console.dir(elem.value);
+		
+		if(elem.value == ""){
+			console.log("empty");
+			$("#filecheck").val(0); 
+		}
+		else{
+			console.log("not empty");
+			$("#filecheck").val(1);
+		}
+	}
+</script>
+
+<script type="text/javascript">
+/* ---------------------------------------------------------------------------------------
+ * 기능: 프로필 이미지 출력
+ * 수정자: JSG
+ * 작성자: JSH
+ * 작성일: 2020.02.06
+ -----------------------------------------------------------------------------------------*/
+	var imgRoot = 'resources/upload/logo/';
+	var sessionImg = '${at.at_logo}';
+	var sessionImgRP = sessionImg.replace('com','jpg');
+	console.log(sessionImgRP);
+	
+	var sessionImgView = imgRoot+sessionImgRP;
+	console.log(sessionImgView);
+	
+	document.getElementById('profile_img').setAttribute('src',sessionImgView);
+</script>
+<script type="text/javascript">
+/* ---------------------------------------------------------------------------------------
+ * 기능: 프로필 이미지 미리보기 출력
+ * 수정자: JSG
+ * 작성자: JSH
+ * 작성일: 2020.02.06
+ -----------------------------------------------------------------------------------------*/
+	var imgRoot = 'resources/upload/logo/';
+	var sessionImg = '${at.at_logo}';
+	var sessionImgRP = sessionImg.replace('com','jpg');
+	console.log(sessionImgRP);
+	
+	var sessionImgView = imgRoot+sessionImgRP;
+	console.log(sessionImgView);
+	
+	document.getElementById('img').setAttribute('src',sessionImgView);
+</script>
+	
 	</body>
 </html>
 

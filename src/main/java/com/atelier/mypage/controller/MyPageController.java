@@ -12,6 +12,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.atelier.dto.CM_Dto;
 import com.atelier.dto.MG_Dto;
 import com.atelier.mypage.service.MyPageService;
 
@@ -139,6 +140,28 @@ public class MyPageController {
 		log.warn("구독 해제 컨트롤러 실행");
 		mav = mpServ.actMyPageDelSubs(sc_at_id);
 		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 회원 탈퇴 페이지로 이동
+	 * 작성자: JSG
+	 * 작성일: 2020.02.13
+	 -----------------------------------------------------------------------------------------*/
+	@GetMapping("myDropout")
+	public String myDropout() {
+			
+		return "myDropout";
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 회원 탈퇴 기능
+	 * 작성자: JSG
+	 * 작성일: 2020.02.13
+	 -----------------------------------------------------------------------------------------*/
+	@PostMapping("DropoutProc")
+	public ModelAndView DropoutProc(CM_Dto cm_dto, RedirectAttributes rttr) {
+		mav = mpServ.myDropoutProc(cm_dto, rttr);
 		return mav;
 	}
 }

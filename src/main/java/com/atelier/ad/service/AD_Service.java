@@ -29,6 +29,7 @@ import com.atelier.dao.PD_Dao;
 import com.atelier.dto.AD_MaterialDto;
 import com.atelier.dto.AG_Dto;
 import com.atelier.dto.AM_Dto;
+import com.atelier.dto.AT_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.CO_NoticeDto;
 import com.atelier.dto.FT_FAQDto;
@@ -729,6 +730,95 @@ public class AD_Service {
 		return mav;
 	}
 
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방의 전체 리스트를 가져 옴
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.13
+	  -----------------------------------------------------------------------------------*/
+	public ModelAndView ADATListProc() {
+		mav = new ModelAndView();
+		List<AT_Dto>at_list = atDao.getATList();
+		
+		mav.addObject("at_list", at_list);
+		mav.setViewName("ADATList");
+		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공방의 상태를 활성 / 비활성 으로 변경
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.13
+	-----------------------------------------------------------------------------------*/
+	public ModelAndView ADATListStateProc(String id, String state, RedirectAttributes rttr, String check) {
+		String view = null;
+		
+		AT_Dto at_dto = new AT_Dto();
 
+		if(state.equals("active")) {
+			at_dto.setAt_id(id);
+			at_dto.setAt_state("활성");
+			
+			atDao.updateATState(at_dto);
+			if(check.equals("true")) {
+				//view = "ADATList";
+				//mav.setViewName(view);
+				mav = ADATListProc();
+			}
+			else {
+				String SearchName = (String)session.getAttribute("search");
+				//System.out.println(SearchName);
+				//view = "redirect:ADATListSearch?searchName="+SearchName;
+				mav = ADATListSearchProc(SearchName);
+				//System.out.println(view);
+			}
+			
+			rttr.addFlashAttribute("check","해당 공방이 활성화 되었습니다.");
+		}
+		else {
+			at_dto.setAt_id(id);
+			at_dto.setAt_state("비활성");
+			
+			atDao.updateATState(at_dto);
+			
+			if(check.equals("true")) {
+				//view = "ADATList";
+				//mav.setViewName(view);
+				mav = ADATListProc();
+			}
+			else {
+				//view = "redirect:ADATListSearch";
+				String SearchName = (String)session.getAttribute("search");
+				//System.out.println(SearchName);
+				mav = ADATListSearchProc(SearchName);
+				//view = "redirect:ADATListSearch?searchName"+SearchName;
+				//System.out.println(view);
+			}
+			
+			//view = "redirect:ADATList";
+			rttr.addFlashAttribute("check","해당 공방이 비활성화 되었습니다.");
+		}
+		
+		//mav.setViewName(view);
+		
+		return mav;
+	}
+
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 검색된 공방의 리스트를 출력
+	  * 작성자: JSG
+	  * 작성일 : 2019.02.13
+	-----------------------------------------------------------------------------------*/
+	public ModelAndView ADATListSearchProc(String searchName) {
+		AT_Dto at_dto = new AT_Dto();
+		session.setAttribute("search", searchName);
+		at_dto.setAt_name(searchName);
+		List<AT_Dto>at_list = atDao.getATListSearch(at_dto);
+		mav.addObject("at_list", at_list);
+		mav.setViewName("ADATListSearch"); 
+		//rttr.addFlashAttribute("check","이용해주셔서 ㄳㅇ. ㅃㅇ!");
+		
+		return mav;
+	}
 
 }

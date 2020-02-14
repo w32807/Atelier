@@ -3,14 +3,19 @@ package com.atelier.at.service;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +29,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.atelier.dao.AT_Dao;
 import com.atelier.dao.NT_Dao;
 import com.atelier.dao.PD_Dao;
+import com.atelier.dao.PI_Dao;
 import com.atelier.dao.RM_Dao;
 import com.atelier.dao.RO_Dao;
 import com.atelier.dto.AG_Dto;
+import com.atelier.dto.AT_Dto;
 import com.atelier.dto.AT_NT_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.NT_Dto;
@@ -66,6 +73,9 @@ public class AT_Service {
 	
 	@Setter(onMethod_ = @Autowired)
 	NT_Dao ntDao;
+	
+	@Setter(onMethod_ = @Autowired)
+	PI_Dao piDao;
 
 	/*
 	 * -----------------------------------------------------------------------------
@@ -887,6 +897,228 @@ public class AT_Service {
 		int prodNum = atDao.getprodNum(id);
 		
 		return prodNum;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 공방의 리스트를 출력
+	 * 작성자: 정성규
+	 * 작성일: 2020.02.10
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView printATList() {
+		mav = new ModelAndView();
+		List<AT_Dto> at_list = atDao.getATList(); 
+		
+		int listsize = at_list.size();
+		
+		System.out.println(listsize);
+		List<AT_Dto> at_recommend_list = new ArrayList<AT_Dto>();
+		
+		// 추천공방 5개를 추첨
+		for(int i = 0; i < 5; i++) {
+			int ran = (int)(Math.random() * listsize + 1);
+			
+			at_recommend_list.add(atDao.getRecommendAT(ran));
+			
+			// 추천공방 중복 방지
+			for(int j=0; j<i-1; j++) {
+				if(at_recommend_list.get(i).getAt_seq() == at_recommend_list.get(j).getAt_seq()) {
+					at_recommend_list.remove(i);
+					i--;
+					System.out.println("중복이다");
+				}
+			}
+		}
+		
+		mav.addObject("at_list", at_list);
+		mav.addObject("at_recommend_list", at_recommend_list);
+		mav.setViewName("ATMain");
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 공방에서 만든 상품의 리스트를 출력
+	 * 작성자: 정성규
+	 * 작성일: 2020.02.10
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView getATDetail(int at_num) {
+		// TODO Auto-generated method stub
+		mav = new ModelAndView();
+		AT_Dto at_dto = new AT_Dto();
+		PD_productDto pd_dto = new PD_productDto();
+		PI_productImgDto pi_dto = new PI_productImgDto();
+		
+		at_dto = atDao.getATDetailData(at_num);
+		
+		session.setAttribute("at", at_dto);
+		
+		List<PI_productImgDto>piList = new ArrayList<PI_productImgDto>();
+
+		List<PD_productDto> pdList = pdDao.getPDListByAT(at_dto.getAt_id());
+		
+		for(int i = 0; i < pdList.size(); i++) {
+			//piList = piDao.getPDImageList(pd_dto.getPd_code());
+			piList.add(piDao.getPDImageList(pdList.get(i).getPd_code()));
+			//piList.add(pi_dto);
+		}
+		
+		mav.addObject("at_dto", at_dto);
+		mav.addObject("pdList", pdList);
+		mav.addObject("piList", piList);
+		mav.setViewName("ATDetail");
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 공방 정보 수정 
+	 * 작성자: 정성규
+	 * 작성일: 2020.02.10
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView updateATData(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
+		AT_Dto at_dto = new AT_Dto();
+		AT_Dto at_dto_temp = new AT_Dto();
+
+		int check = Integer.parseInt(multi.getParameter("fileCheck"));
+		
+		at_dto_temp = (AT_Dto)session.getAttribute("at");
+		
+		at_dto.setAt_id(at_dto_temp.getAt_id());
+		at_dto.setAt_addr(multi.getParameter("at_addr"));
+		at_dto.setAt_snsaddr(multi.getParameter("at_snsaddr"));
+		at_dto.setAt_name(multi.getParameter("at_name"));
+		at_dto.setAt_phone(multi.getParameter("at_phone"));
+		at_dto.setAt_cate1(multi.getParameter("at_cate1"));
+		at_dto.setAt_cate2(multi.getParameter("at_cate2"));
+		at_dto.setAt_cate3(multi.getParameter("at_cate3"));
+		String view = null;
+		try {
+			atDao.updateATData(at_dto);
+			view = "ATDetail";
+			rttr.addFlashAttribute("check",2);
+		} catch(Exception e) {
+			view = "redirect:ATInfoModify";
+			rttr.addFlashAttribute("check",1);
+		}
+		
+		if(check == 1) {//파일이 들어왔을 때...
+			//파일 처리 메소드 호출
+			fileup(multi,at_dto.getAt_id(), at_dto);
+		}
+		
+		mav.setViewName(view);
+		
+		//session.setAttribute(name, value);
+		session.removeAttribute("at");
+		
+		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 마이페이지 수정 서비스 / 프로필 이미지 업로드
+	 * 수정자 : JSG
+	 * 작성자: JSH
+	 * 작성일: 2020.02.05
+	 -----------------------------------------------------------------------------------------*/
+	public boolean fileup(MultipartHttpServletRequest multi, String AT_ID, AT_Dto at_dto) {
+		
+		log.warn("이미지 업로드 시작");
+		String milsec = String.valueOf(System.currentTimeMillis());
+		String AT_ID_milsec = milsec+AT_ID;
+		
+		AT_ID_milsec = AT_ID_milsec.replace(".com", ".jpg");
+		
+		System.out.println("예상 파일명 :: " + AT_ID_milsec);
+		
+		at_dto.setAt_logo(AT_ID_milsec);
+		
+		System.out.println("시간 :: " + AT_ID_milsec);
+		
+		MultipartFile mf = multi.getFile("input_img");
+		String path = multi.getSession().getServletContext().getRealPath("/");
+		path += "resources/upload/logo/";
+		log.warn(path);
+
+		
+		File dir = new File(path);//path 경로에 있는 파일에 관한 객체
+		if(dir.isDirectory() == false) {//경로(저장할 upload폴더가 없으면 만들어주자.
+			dir.mkdir();//directory를 만들자(upload폴더 생성), 위의 path에 경로를 저장했기때문에 없으면 upload를 만든다
+							 //servlet-context에서 resources경로를 가지고 있는 애들은 다 resources로 보내주는 태그가 있다.
+		}
+		
+		boolean fResult = false;
+
+		String profileName = AT_ID;
+		String fileName = AT_ID_milsec.replace("com", "jpg");
+		//String nameFile = fileName.replace(".jpg", "");
+		
+		try {
+			log.warn("파일업로드 try 문 시작");
+			mf.transferTo(new File(path+fileName));
+			fResult = atDao.pfPhoto(at_dto);
+		} catch (IOException e) {
+			fResult = false;
+		}
+
+		return fResult;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 회원 정보 / 프로필 사진 출력
+	 * 수정자 : JSG
+	 * 작성자: JSH
+	 * 작성일: 2020.02.06
+	 -----------------------------------------------------------------------------------------*/
+	public void profileIMG(String name, HttpServletRequest req, HttpServletResponse resp) {
+		//서버의 파일 위치를 얻자.
+		log.warn("이미지 출력 시작");
+		String path = req.getSession().getServletContext().getRealPath("/") + "resources/upload/logo/";
+		log.warn(path);
+		
+		String profileName = name;
+		String fileName = profileName.replace("com", "jpg");
+		
+		log.warn(path);
+		log.warn(fileName);
+
+		InputStream is = null;// 서버 컴퓨터 안에 저장된 파일을 읽어오는 것
+		OutputStream os = null;// 파일을 사용자 컴퓨터로 전송하기 위한 것
+		
+		String realPath = path+fileName;
+		log.warn(realPath);
+		
+		try {
+			// 파일 객체 생성
+			File file = new File(realPath);
+			is = new FileInputStream(file);
+			
+			//응답 객체 (resp)의 헤더 설정
+			//파일 전송용 contentType 설정
+			resp.setContentType("application/octet-stream");
+			//resp.setHeader("content-Disposition", "attachment; filename=\"" + fileName +"\"");
+			resp.setHeader("content-Disposition", "attachment; filename=" + fileName);
+			//attachment; filename=\파일명.txt"\가 됨
+			
+			//응답 객체(resp)를 통해서 파일 전송
+			os = resp.getOutputStream();
+			
+			//전송하기
+			byte[] buffer = new byte[1024];//파일의 데이터를 buffer에 넣음
+			int length;
+			while((length = is.read(buffer)) != -1) {
+				os.write(buffer,0,length);
+			}
+		
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				os.flush();
+				os.close();
+				is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
 	}
 
 }//AT_Service 클래스의 끝

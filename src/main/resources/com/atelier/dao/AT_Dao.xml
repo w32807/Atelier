@@ -115,4 +115,51 @@
    	<select id="getAt_state" parameterType="String" resultType="String">
    		SELECT AT_STATE FROM AT WHERE AT_ID = #{pd_at_id}
    	</select>
+   	
+   	<select id="getATList" resultType="com.atelier.dto.AT_Dto">
+	   SELECT *
+	   FROM AT
+	</select>
+	
+	<select id="getATDetailData" resultType="com.atelier.dto.AT_Dto">
+	   SELECT *
+	   FROM AT
+	   WHERE AT_SEQ = #{at_seq}
+	</select>
+	
+	<update id="updateATData" parameterType="com.atelier.dto.AT_Dto">
+    	UPDATE AT SET 
+    	AT_ADDR = #{at_addr}, AT_SNSADDR = #{at_snsaddr}, AT_NAME = #{at_name}, AT_PHONE = #{at_phone},
+    	AT_CATE1 = #{at_cate1}, AT_CATE2 = #{at_cate2}, AT_CATE3 = #{at_cate3}
+    	WHERE AT_ID = #{at_id}
+    </update>
+    
+    <update id="pfPhoto" parameterType="com.atelier.dto.AT_Dto">
+    	UPDATE AT SET AT_LOGO = #{at_logo} WHERE AT_ID=#{at_id}
+    </update>
+    
+    <delete id="deleteATUserATData" parameterType="String">
+		DELETE FROM AT
+		WHERE AT_ID = #{cm_id}
+	</delete>
+	
+	 <update id="updateATState" parameterType="com.atelier.dto.AT_Dto">
+		UPDATE AT SET
+		AT_STATE = #{at_state}
+		WHERE AT_ID = #{at_id}
+	</update>
+   
+   	<select id="getATListSearch" resultType="com.atelier.dto.AT_Dto">
+	   SELECT *
+	   FROM AT
+	   WHERE AT_NAME LIKE '%${at_name}%'
+	</select>
+	
+	<select id="getRecommendAT" resultType="com.atelier.dto.AT_Dto">
+	   select at_id,at_logo, at_state, at_seq, at_addr, at_snsaddr, at_name, at_phone, at_cate1, at_cate2, at_cate3 from 
+		(select rownum as num, at_id,at_logo, at_state, at_seq, at_addr, 
+    	at_snsaddr, at_name, at_phone, at_cate1, at_cate2, at_cate3 from AT) 
+		a where a.num=#{ran}
+	</select>
+   	
 </mapper>
