@@ -30,7 +30,7 @@
 
 <body>
   <!-- 상단바 Include -->
-	<jsp:include page="Main_Upper.jsp" flush="false"/>
+	<jsp:include page="Main_Upper.jsp" flush="false" />
 
 	<!-- Breadcrumb Section Begin -->
     <div class="breacrumb-section">
@@ -60,82 +60,21 @@
                             <div class="myInfo_upper">
                              	<h4 style="font-weight: bolder; margin: 30px 20px;">My Subscribe List</h4>
                             </div>
-				                <div class="col-lg-9 order-1 order-lg-2">
-				                    <div class="single-latest-blog" style="width: 380px;">
-				                        <a href="#"><img src="./resources/main/img/latest-1.jpg" alt=""></a>
+                            <c:forEach var="b" items="${sList}">
+				                <div class="col-lg-9 order-1 order-lg-2" style="left:50px;">
+				                    <div class="single-latest-blog" style="width: 280px;">
+				                        <a href="ATDetail?am_id=${mb.cm_id}"><img src="resources/main/img/blog/${b.at_logo}.png" alt=""></a>
 				                        <div class="latest-text" style="text-align: center;">
 				                            <div class="blog-detail-title">
-				                            	<a href="#">
-				                                	<h4 style="margin-top: -47px; font-size: 24px; color: #F0AD46;">공방명</h4>
+				                            	<a href="ATDetail?am_id=${mb.cm_id}">
+				                                	<h4 style="margin-top: -47px; font-size: 24px; color: #F0AD46;">${b.at_name}</h4>
 				                                </a>
 					                        	</div>	   
-				                            <p style="font-size: 16px; font-weight: 600; margin: -10px 0 70px 0;">구독자 100만명</p>
+				                            <p style="font-size: 16px; font-weight: 600; margin: -10px 0 70px 0;">${b.at_phone}</p>
 				                        </div>
 				                    </div>
-					                <div class="col-lg-4 col-md-6" style="position: absolute; margin: -425px 0 0 390px;">
-					                    <div class="single-latest-blog" style="width: 380px;">
-					                        <a href="#"><img src="./resources/main/img/latest-2.jpg" alt=""></a>
-					                        <div class="latest-text" style="text-align: center;">
-					                            <div class="blog-detail-title">
-					                            	<a href="#">
-					                                	<h4 style="margin-top: -47px; font-size: 24px; color: #F0AD46;">공방명</h4>
-					                                </a>
-						                        </div>	   
-					                            <p style="font-size: 16px; font-weight: 600; margin: -10px 0 70px 0;">구독자 100만명</p>
-				                        	</div>
-					                    </div>
-					                </div>
-					                <div class="col-lg-4 col-md-6" style="position: absolute; margin: -425px 0 0 795px;">
-					                    <div class="single-latest-blog" style="width: 380px;">
-					                        <a href="#"><img src="./resources/main/img/latest-3.jpg" alt=""></a>
-					                        <div class="latest-text" style="text-align: center;">
-					                            <div class="blog-detail-title">
-					                            	<a href="#">
-					                                	<h4 style="margin-top: -47px; font-size: 24px; color: #F0AD46;">공방명</h4>
-					                                </a>
-						                        </div>	   
-					                            <p style="font-size: 16px; font-weight: 600; margin: -10px 0 70px 0;">구독자 100만명</p>
-				                        	</div>
-					                   </div>
-				        			</div>
-				        			<div class="single-latest-blog" style="width: 380px;">
-				                        <a href="#"><img src="./resources/main/img/latest-1.jpg" alt=""></a>
-				                        <div class="latest-text" style="text-align: center;">
-				                            <div class="blog-detail-title">
-				                            	<a href="#">
-				                                	<h4 style="margin-top: -47px; font-size: 24px; color: #F0AD46;">공방명</h4>
-				                                </a>
-					                        	</div>	   
-				                            <p style="font-size: 16px; font-weight: 600; margin: -10px 0 70px 0;">구독자 100만명</p>
-				                        </div>
-				                    </div>
-					                <div class="col-lg-4 col-md-6" style="position: absolute; margin: -425px 0 0 390px;">
-					                    <div class="single-latest-blog" style="width: 380px;">
-					                        <a href="#"><img src="./resources/main/img/latest-2.jpg" alt=""></a>
-					                        <div class="latest-text" style="text-align: center;">
-					                            <div class="blog-detail-title">
-					                            	<a href="#">
-					                                	<h4 style="margin-top: -47px; font-size: 24px; color: #F0AD46;">공방명</h4>
-					                                </a>
-						                        </div>	   
-					                            <p style="font-size: 16px; font-weight: 600; margin: -10px 0 70px 0;">구독자 100만명</p>
-				                        	</div>
-					                    </div>
-					                </div>
-				        			<div class="col-lg-4 col-md-6" style="position: absolute; margin: -425px 0 0 795px;">
-					                    <div class="single-latest-blog" style="width: 380px;">
-					                        <a href="#"><img src="./resources/main/img/latest-3.jpg" alt=""></a>
-					                        <div class="latest-text" style="text-align: center;">
-					                            <div class="blog-detail-title">
-					                            	<a href="#">
-					                                	<h4 style="margin-top: -47px; font-size: 24px; color: #F0AD46;">공방명</h4>
-					                                </a>
-						                        </div>	   
-					                            <p style="font-size: 16px; font-weight: 600; margin: -10px 0 70px 0;">구독자 100만명</p>
-				                        	</div>
-					                   </div>
-				        			</div>
 				    	</div>
+				    	</c:forEach>
 					</div>
 				</div>
 			</div>
@@ -157,7 +96,8 @@
     <script src="<c:url value="/resources/main/js/jquery.slicknav.js"/>"></script>
     <script src="<c:url value="/resources/main/js/owl.carousel.min.js"/>"></script>
     <script src="<c:url value="/resources/main/js/main.js"/>"></script>
-
+	
+	
 
 	<!-- 메뉴태그 클래스 변경	 -->
 	<script type="text/javascript">
@@ -167,5 +107,37 @@
 	});
     </script>
     
+      <script type="text/javascript">
+    
+   
+    /* ---------------------------------------------------------------------------------------
+	 * 기능: 로그인 여부에 따른 버튼 출력여부 결정
+	 * 작성자: JSG
+	 * 작성일: 2020.02.04
+	 -----------------------------------------------------------------------------------------*/
+    window.onload = function(){
+    	$('.hideandshow').hide();
+    	var mid = '${mb.cm_id}';
+    	var mname = '${mb.cm_name}';
+    	console.log('세션값'+'${mb}');
+    	console.log(mid);
+    	console.log(mname);
+    	if(mid != ''){
+    		$('.hideandshow').show();
+    	}
+    	
+    	$('.showandhide').show();
+    	var mid1 = '${mb.cm_id}';
+    	var mname1 = '${mb.cm_name}';
+    	console.log('세션값'+'${mb}');
+    	console.log(mid1);
+    	console.log(mname1);
+    	if(mid1 != ''){
+    		$('.showandhide').hide();
+    	}
+    	
+    }
+    </script>
+ 
     </body>
 </html>

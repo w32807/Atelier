@@ -3,6 +3,7 @@ package com.atelier.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.atelier.dto.AT_NT_Dto;
 import com.atelier.dto.CO_NoticeDto;
 import com.atelier.dto.NT_Dto;
 
@@ -21,13 +22,16 @@ public interface NT_Dao {
 
 	public void viewCountUpdate(Integer nt_num);
 	
-	public boolean noticeWrite(NT_Dto ntDto);
+	//공방 공지사항 인터페이스
+		public boolean noticeWrite(AT_NT_Dto anDto);
 
-	public List<NT_Dto> getList(int pageNum);
+		public List<AT_NT_Dto> getList(int pageNum);
 
-	public int getBoardCount();
+		public int getBoardCount();
 
-	public boolean upView(Integer nt_num);
+		public boolean upView(Integer at_nt_num);
 
-	public NT_Dto getContents(Integer nt_num);
-}
+		public AT_NT_Dto getContents(Integer at_nt_num);
+
+		public boolean delNoticeContents(Integer at_nt_num);
+	}

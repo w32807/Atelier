@@ -132,19 +132,17 @@ public class MainController {
 	 
 	//HOME
 	//Shop Home
-	@GetMapping("main")
-	public String main() {
-		log.warn("메인으로 가는 컨트롤러");
-		return "main";
-	}
-	//Atelier Home
 
-
-	/* ---------------------------------------------------------------------------------------
-	 * 기능: 상품 목록 전체 보기
-	 * 작성자: JWJ
-	 * 작성일: 2020.02.10
-	 -----------------------------------------------------------------------------------------*/
+	 @GetMapping("main")
+		public String main() {
+			log.warn("메인으로 가는 컨트롤러");
+			return "main";
+		}
+	 /* ---------------------------------------------------------------------------------------
+		 * 기능: 상품 목록 전체 보기
+		 * 작성자: JWJ
+		 * 작성일: 2020.02.10
+		 -----------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "prodList_All", method = RequestMethod.GET)
 	public ModelAndView product_All(Locale locale, Model model) {
 		mav = mServ.getproduct_AllList();
@@ -245,12 +243,12 @@ public class MainController {
 	 * 
 	 * @GetMapping("orderCancle") public String orderCancle() { return "myOrder"; }
 	 */
-	//구독 리스트 출력
-	@RequestMapping(value = "mySubscript", method = RequestMethod.GET)
-	public String mySubscript(Locale locale, Model model) {
-
-		return "mySubscript";
-	}
+//	//구독 리스트 출력
+//	@RequestMapping(value = "mySubscript", method = RequestMethod.GET)
+//	public String mySubscript(Locale locale, Model model) {
+//
+//		return "mySubscript";
+//	}
 	//	관리자에게 문의하기
 	@GetMapping("myAdminRQ")
 	public String myAdminRQ() {

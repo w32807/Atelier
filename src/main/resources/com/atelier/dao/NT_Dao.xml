@@ -40,21 +40,22 @@
    		WHERE NT_NUM=#{nt_num}
    </update>
    
-   <!-- 공지사항 작성 -->
-   <insert id="noticeWrite"  parameterType="com.atelier.dto.NT_Dto"  useGeneratedKeys="true" keyProperty="nt_num">
-		<selectKey keyProperty="nt_num" resultType="int" order="BEFORE">
-			SELECT NT_NUM_SEQ.NEXTVAL FROM DUAL
+
+	<!-- 공지사항 작성 -->
+   <insert id="noticeWrite"  parameterType="com.atelier.dto.AT_NT_Dto"  useGeneratedKeys="true" keyProperty="at_nt_num">
+		<selectKey keyProperty="at_nt_num" resultType="int" order="BEFORE">
+			SELECT AT_NT_NUM_SEQ.NEXTVAL FROM DUAL
 		</selectKey>
-		INSERT INTO NT VALUES (${nt_num},#{nt_title},#{nt_contents},#{nt_id},DEFAULT)
+		INSERT INTO AN VALUES (${at_nt_num},#{at_nt_title},#{at_nt_contents},#{at_nt_id},DEFAULT)
 	</insert>
 	
 	<!--  공지사항 리스트 출력 -->
-	<select id = "getList" resultType="com.atelier.dto.NT_Dto">
+	<select id = "getList" resultType="com.atelier.dto.AT_NT_Dto">
 	<!-- id는 인터페이스에서 사용할 변수이름, resultType은 해당 데이터를 넣을 Dto를 써줌 
 			resultType의 반환 형태는 String,int 등의 데이터 1개가 됨. 인터페이스에서 쓰는 형태는 list이지만,
 			가져오는 데이터 값은 묶음이 아닌 하나하나의 데이터로 취급. 즉 가져오는 데이터가 1개이면 그 형태이고 가져올 때는 list로 mybatis가 보내준다-->
 	<![CDATA[
-			SELECT * FROM NT_LIST1
+			SELECT * FROM AT_NT_LIST1
 			WHERE RONUM>=#{pageNum}*10-9
 			AND RONUM<=#{pageNum}*10
 	]]><!-- xml 태그에 걸려, 특수문자가 처리가 안되는데, 특수문자를 써주고 싶을 때  <![CDATA[]]> 이 태그를 쓰면 그냥 문자열로 인식한다-->
@@ -63,19 +64,27 @@
 	</select>
    <!-- 전체 공지사항 글 갯수 구하기 -->
    <select id="getBoardCount" resultType="Integer" >
-			SELECT COUNT(*) FROM NT
+			SELECT COUNT(*) FROM AN
 	</select>
 	<!--  공지사항 조회수 증가 -->
 	<update id="upView" parameterType="Integer">
-		UPDATE NT SET NT_COUNT=NT_COUNT+1
-		WHERE NT_NUM=#{nt_num}
-	</update>	
-	
-	
-	<!--  공지사항 세부내용 출력 -->
-	<select id="getContents"  parameterType="Integer" resultType="com.atelier.dto.NT_Dto" >
-	
-			SELECT * FROM NT_LIST1
-				WHERE NT_NUM=#{nt_num}
+		UPDATE AN SET AT_NT_COUNT=AT_NT_COUNT+1
+		WHERE AT_NT_NUM=#{at_nt_num}
+	</update>
+
+
+	<!-- 공지사항 세부내용 출력 -->
+	<select id="getContents" parameterType="Integer"
+		resultType="com.atelier.dto.AT_NT_Dto">
+
+		SELECT * FROM AT_NT_LIST1
+		WHERE AT_NT_NUM=#{at_nt_num}
 	</select>
+	<!-- 공지사항 글 삭제 -->
+	<delete id="delNoticeContents" parameterType="Integer">
+		DELETE FROM AN
+		WHERE AT_NT_NUM=#{at_nt_bnum}
+	</delete>
+	
+	
 </mapper>
