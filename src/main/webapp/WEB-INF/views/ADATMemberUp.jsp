@@ -199,7 +199,7 @@
                
 
 
-
+				<!-- 공방 신청서 리스트 페이징 처리 추가 필요
                <div class="row">
                   <div class="container">
                      <ul class="pagination" style="padding-left: 35%;">
@@ -215,6 +215,7 @@
                      </ul>
                   </div>
                </div>
+                -->
             </div>
          </div>
       </div>
