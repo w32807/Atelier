@@ -115,82 +115,8 @@ nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
 		<div class="loader"></div>
 	</div>
 
-	<!-- 상단바 -->
-	<!-- 이메일 전화번호 회원가입 로그인 -->
-	<header class="header-section">
-		<div class="header-top">
-			<div class="container">
-				<div class="ht-left">
-					<!-- 헤더 이메일
-                    <div class="mail-service">
-                        <i class=" fa fa-envelope"></i>
-                    </div>
-                     -->
-					<!-- 헤더 전화번호 
-                    <div class="phone-service">
-                        <i class=" fa fa-phone"></i>
-                    </div>
-                     -->
-				</div>
-				<!-- 로그인, 회원가입 -->
-				<div class="ht-right">
-					<a href="login" class="login-panel"><i class="fa fa-user"></i>로그인</a>
-					<a href="memJoinFrm" class="login-panel"><i class="fa fa-user"></i>회원가입</a>
-					<a href="CONotice" class="login-panel"><i class="fa fa-user"></i>고객센터</a>
-					<!-- 히든 버튼 처리
-					<a href="#" class="login-panel"  style="visibility:hidden;"><i class="fa fa-user"></i>로그아웃</a>
-					-->
-					<!-- SNS광고란 -->
-					<div class="top-social">
-						<a href="https://www.facebook.com/"><i class="ti-facebook"></i></a>
-						<a href="https://twitter.com/"><i class="ti-twitter-alt"></i></a>
-						<a href="https://www.instagram.com/"><i class="ti-linkedin"></i></a>
-						<a href="https://www.pinterest.co.kr/"><i class="ti-pinterest"></i></a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="container">
-			<div class="inner-header">
-				<div class="row">
-					<div class="col-lg-2 col-md-2">
-						<div class="logo">
-							<a href="/"> <img src="./resources/main/img/logo_main.jpg"
-								alt="">
-							</a>
-						</div>
-					</div>
-					<div class="col-lg-7 col-md-7">
-						<div class="advanced-search">
-							<button type="button" class="category-btn">검색창</button>
-							<div class="input-group">
-								<input type="text" placeholder="원하시는 공방명/상품을 입력해주세요.">
-								<button type="button">
-									<i class="ti-search"></i>
-								</button>
-							</div>
-						</div>
-						<!-- 마이페이지 -->
-					</div>
-					<div class="col-lg-3 text-right col-md-3">
-						<ul class="nav-right">
-							<li class="heart-icon"><a href="myPage"> <i
-									class="icon_heart_alt"></i> <span>6</span></li>
-							<li class="cart-price">MyPage</li>
-							</a>
-
-							<li class="cart-icon"><a href="basket"> <i
-									class="icon_bag_alt"></i> <span>9</span></li>
-							<li class="cart-price">basket</li>
-							</a>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-	</header>
-	<!-- Header End -->
-	<!-- 상단바 End -->
+	<!-- 상단바 Include -->
+	<jsp:include page="Main_Upper.jsp" flush="false"/>
 
 	<div class="container">
 		<div class="row">
@@ -573,83 +499,8 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 
 
 
-	<!-- 하단바 -->
-	<!-- Footer Section Begin -->
-	<footer class="footer-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-3">
-					<div class="footer-left">
-						<ul>
-							<li>Address: 인천 미추홀구 학익동 663-1 태승빌딩 5층</li>
-							<li>Phone: 032-876-3332</li>
-							<li>Email: whdgus5841@gmail.com</li>
-						</ul>
-						<div class="footer-social">
-							<a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
-							<a href="https://www.instagram.com/"><i
-								class="fa fa-instagram"></i></a> <a href="https://twitter.com/"><i
-								class="fa fa-twitter"></i></a> <a
-								href="https://www.pinterest.co.kr/"><i
-								class="fa fa-pinterest"></i></a>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-2 offset-lg-1">
-					<div class="footer-widget">
-						<h5>Information</h5>
-						<ul>
-							<li><a href="CONotice">고객 센터</a></li>
-							<li><a href="CONotice">약관</a></li>
-							<li><a href="CONotice">개인 정보 처리 방침</a></li>
-							<li><a href="CONotice">QNA</a></li>
-							<li><a href="CONotice">Contact US</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-2">
-					<div class="footer-widget">
-						<h5>My Account</h5>
-						<ul>
-							<li><a href="myPage">myPage</a></li>
-							<li><a href="basket">Basket</a></li>
-							<li><a href="ATRegist">공방 회원 신청</a></li>
-							<li><a href="ADNoticeList">Admin</a></li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="newslatter-item">
-						<a href="/"> <img src="./resources/main/img/logo_bottom.png"
-							alt="" style="margin-top: 25px;">
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="copyright-reserved">
-			<div class="container">
-				<div class="row">
-					<div class="col-lg-12">
-						<div class="copyright-text">
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;
-							<script>document.write(new Date().getFullYear());</script>
-							All rights reserved | This template is made with <i
-								class="fa fa-heart-o" aria-hidden="true"></i> by <a
-								href="https://colorlib.com" target="_blank">Colorlib</a>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-						</div>
-						<div class="payment-pic">
-							<img src="./resources/main/img/payment-method.png" alt="">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</footer>
-	<!-- Footer Section End -->
-	<!-- 하단바 End -->
+	<!-- 하단바 Include -->
+	<jsp:include page="Main_Footer.jsp" flush="false"/>
 
 	<!-- Js Plugins -->
 	<script src="<c:url value="/resources/main/js/jquery-3.3.1.min.js"/>"></script>
