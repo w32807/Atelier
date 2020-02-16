@@ -162,4 +162,12 @@
 		a where a.num=#{ran}
 	</select>
    	
+   	<select id="prodSearch" parameterType="String" resultType="com.atelier.dto.RM_Dto">
+   		SELECT * FROM RM WHERE RM_TYPE = #{keyword}
+   	</select>
+   	
+   	<select id="getregistSelProd" parameterType="map" resultType="com.atelier.dto.PD_productDto">
+   		SELECT * FROM PD WHERE PD_REGIST = #{pd_regist} AND PD_AT_ID = #{cm_id}
+   	</select>
+   	
 </mapper>

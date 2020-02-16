@@ -1120,5 +1120,41 @@ public class AT_Service {
 		}
 		
 	}
+	
+	/*-------------------------------------------------------------------
+	 * 기능 : 거래처 조회 검색
+	 * 작성자: JWJ
+	 * 작성일 : 2020.02.14
+	 ------------------------------------------------------------------- */
+	public ModelAndView prodSearch(String keyword) {
+		mav = new ModelAndView();
+		List<RM_Dto> searchList = atDao.prodSearch(keyword);
+		mav.addObject("rmList", searchList);
+		mav.setViewName("ATOrderRequest");
+		
+		return mav;
+	}
+
+	/*-------------------------------------------------------------------
+	 * 기능 : 판매 등록 여부별 상품 출력
+	 * 작성자: JWJ
+	 * 작성일 : 2020.02.14
+	 ------------------------------------------------------------------- */
+	public ModelAndView getregistSelProd(String registSelect) {
+		mav = new ModelAndView();
+		CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
+		String id = cmDto.getCm_id();
+		
+		Map<String , String> dataMap = new HashMap<String, String>();
+		dataMap.put("cm_id", id);
+		dataMap.put("pd_regist", registSelect);
+		List<PD_productDto> pdList = atDao.getregistSelProd(dataMap);
+		
+		mav.addObject("check",registSelect);
+		mav.addObject("pd",pdList);
+		mav.setViewName("ATProdManage");
+		
+		return mav;
+	}
 
 }//AT_Service 클래스의 끝

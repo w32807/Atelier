@@ -302,11 +302,37 @@
 				
 			});
 			
-			function changeProdRegist(){
-				
-			}
+			$('#registSelectBox').change(function() {
+				 var value = document.getElementById('registSelectBox').value;
+				 console.log(value);
+				 $("form[name=prodManageFrm]").attr("action","registSelect");
+				 $("form[name=prodManageFrm]").submit();
+				 
+			 });
+			
+			window.onload = function(){
+			     var chk = "${check}";
+			     if(chk!=''){
+			     removeSelected();
+			     switch (chk) {
+				 	case "T":
+				 		$('select[name="registSelect"]').find('option[value="T"]').attr("selected",true);
+				 	break;
+				 	case "F":
+				 		$('select[name="registSelect"]').find('option[value="F"]').attr("selected",true);
+				 	break;
+				 
+			 		}
+			     
+			    }
+			 };
+			 function removeSelected(){
+					$('select[name="registSelect"]').find('option[value="T"]').attr("selected",false);
+					$('select[name="registSelect"]').find('option[value="F"]').attr("selected",false);
+				 }
 
-			</script>
+
+		</script>
 
 </body>
 </html>

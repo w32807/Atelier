@@ -432,5 +432,32 @@ public class AT_Controller {
 			return mav;
 		}
 		
+		/*-------------------------------------------------------------------
+		 * 기능 : 거래처 조회 검색
+		 * 작성자: JWJ
+		 * 작성일 : 2020.02.14
+		 ------------------------------------------------------------------- */
+		@GetMapping("prodSearch")
+		public ModelAndView prodSearch(String keyword) {
+
+			mav = atServ.prodSearch(keyword);
+
+			return mav;
+
+		}
+		
+		/*-------------------------------------------------------------------
+		 * 기능 : 판매 등록 여부별 상품 출력
+		 * 작성자: JWJ
+		 * 작성일 : 2020.02.14
+		 ------------------------------------------------------------------- */
+		@PostMapping("registSelect")
+		public ModelAndView getregistSelProd(String registSelect) {
+			
+			mav = atServ.getregistSelProd(registSelect);
+			
+			return mav;
+		}
+		
 		
 }

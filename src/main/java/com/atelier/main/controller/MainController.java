@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 //import org.springframework.web.bind.annotation.PostMapping;
@@ -290,6 +291,17 @@ public class MainController {
 		 return mav;
 	 }
 	 
+	 /* ---------------------------------------------------------------------------------------
+	  * 기능: 500 에러 페이지로 이동 
+	  * 작성자: JWJ
+	  * 작성일: 2020.02.16
+		 -----------------------------------------------------------------------------------------*/
+	 @ExceptionHandler(RuntimeException.class)
+	 public String expHandler(Model model, Exception e) {
+		 e.printStackTrace();
+		 model.addAttribute("exception",e);
+		 return "error/error500";
+	 }
 }
 
 

@@ -228,7 +228,6 @@
 				console.log("numOfprod 의 값 : " + numOfprod);
 				var price = parseInt(d)*parseInt(numOfprod.val());//상품 1개에 대해 가격 계산
 				console.log(price);
-
 				cur_total += price;
 			});
 			console.log(cur_total);
@@ -290,89 +289,6 @@
 			}
 		});
 			
-		
-		//검색어를 입력하고 검색 결과를 출력할 ajax 함수      
-	      $("#searchBtn").click(function() {//검색 버튼을 누르면 함수 실행
-	         console.log($("#keyword").val());
-	         var searchFrm = $("#searchFrm").serializeObject();//검색어가 들어있는 form을 객체화
-	         searchFrm.keyword = $("#keyword").val();//검색어를 입력하는 input태그의 value값을 객체에 추가
-	         console.log(searchFrm);
-	            
-	         $.ajax({
-	         	url: "RMProdSearch",//컨트롤러의 어디로 보낼 거니
-	         	type: "get",//방식은?
-	         	data: searchFrm,//어떤 데이터를 보낼거니?
-	         	dataType: "json",//json 형식으로 보낼 것임.   
-	         	success: function(data) {
-	         		console.log("성공인가요ㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠㅠ");
-	         		console.log(data.rmSearchList);
-	         		var rmList = '';
-	         		for(var i = 0; i < data.rmSearchList.length; i++) {
-	         			rmSearchList += '<div class="col-md-6" style="left: 100px">'
-	         			+ '<c:forEach begin="0" step="2" var="rmProd" items="${rmList}">'
-	         			+ '<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft" style="margin-bottom: 30px;">'
-						+ '<label for="${rmProd.rm_num}">'
-						+ '<div class="colorlib-icon" style="width: 130px; height: 130px;">'
-						+ '<i class="icon-tag">' + '</i>'
-						+ '</div>'
-						+ '<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">'
-						+ '<h3 style="display: inline-block; font-size: 18px; margin-bottom: 16px;">'
-						+ '<b>' + data.rmSearchList[i].rm_type + '</b>'
-						+ '</h3>'
-						+ '<input type="checkbox">'
-						+ '<br>'
-						+ '<b>' + '단가' + '</b>'
-						+ '<span name="prodPrice" id="상품코드1">'
-						+ '&nbsp;&nbsp;&nbsp;'
-						+  data.rmSearchList[i].rm_price
-						+ '&#8361;' + '</span>' + '<br>'
-						+ '<b>' + '수량' + '</b>' +'&nbsp;&nbsp;&nbsp;'
-						+ '<input type="number" name="상품코드1" value="0" class="numOfprod" min="0" style="border: none; width: 70px;" placeholder="입력">'
-						+ '<br>' + '<b>' + '색상' + '</b>'
-						+ '<span>' + '&nbsp;&nbsp;&nbsp;' + data.rmSearchList[i].rm_color + '</span>' + '<br>'
-						+ '</div>'
-						+ '</label>'
-						+ '</div>'
-						+ '</c:forEach>'
-						+ '</div>'
-						
-						+ '<div class="col-md-6" style="left: -70px;">'
-						+ '<c:forEach begin="1" step="2" var="rmProd" items="${rmList}">'
-						+ '<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft" style="margin-bottom: 30px;">'
-						+ '<label for="${rmProd.rm_num}">'
-						+ '<div class="colorlib-icon" style="width: 130px; height: 130px;">'
-						+ '<i class="icon-tag">' + '</i>'
-						+ '</div>'
-						+ '<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">'
-						+ '<h3 style="display: inline-block; font-size: 18px; margin-bottom: 16px;">'
-						+'<b>' + data.rmSearchList[i].rm_type + '</b>'
-						+ '</h3>'
-						+ '<input type="checkbox">'
-						+ '<br>'
-						+ '<b>' + '단가' + '</b>' 
-						+ '<span name="prodPrice" id="상품코드1">'
-						+ '&nbsp;&nbsp;&nbsp;' + data.rmSearchList[i].rm_price + '&#8361;'
-						+ '</span>' + '<br>'
-						+ '<b>' + '수량' + '</b>'
-						+ '&nbsp;&nbsp;&nbsp;'
-						+ '<input type="number" name="상품코드1" value="0" class="numOfprod" min="0" style="border: none; width: 70px;" placeholder="입력">'
-						+ '<br>' + '<b>' + '색상' + '</b>'
-						+ '<span>' + '&nbsp;&nbsp;&nbsp;' + data.rmSearchList[i].rm_color
-						+ '</span>' + '<br>'
-						+ '</div>'
-						+ '</label>'	
-						+ '</div>'
-						+ '</c:forEach>'
-						+ '</div>'
-	         		}
-	         		$('#rmTable').html(rmSearchList);
-	         	},
-	            error: function (error) {
-	               //검색실패 했을 때 처리 - 만약 검색어가 null 이면 돌아와서 
-	               alert("검색어를 입력 해 주세요!");
-	            }
-	         });
-	      });
 	</script>
 
 
