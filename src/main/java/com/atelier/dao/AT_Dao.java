@@ -1,12 +1,14 @@
 package com.atelier.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.atelier.dto.AG_Dto;
 import com.atelier.dto.AT_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
 import com.atelier.dto.PO_Dto;
+import com.atelier.dto.RM_Dto;
 import com.atelier.dto.RO_Dto;
 import com.atelier.dto.SM_Dto;
 import com.atelier.vo.PO_Vo;
@@ -79,5 +81,8 @@ public interface AT_Dao {
 	
 	public void deleteATUserATData(String cm_id);
 	
+	public List<RM_Dto> prodSearch(String keyword);
+
+	public List<PD_productDto> getregistSelProd(Map<String, String> dataMap);
 	
 }
