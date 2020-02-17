@@ -199,34 +199,24 @@ if(test.a.value && test.b.value) {
 
 }
 </script>
-
 <script type="text/javascript">
-    
-   
-    /* ---------------------------------------------------------------------------------------
-    * 기   능: 세션에 계정id가 없으면 로그인 화면으로 보냄.
-    * 작성일: 2020.02.04
-    * 작성자: JSG 
-    -----------------------------------------------------------------------------------------*/
-    window.onload = function(){
-       var mid = '${mb.cm_id}';
-       console.log(mid);
-       if(mid == ''){
-          document.location.href = "login";
-       }
-       
-    /* ---------------------------------------------------------------------------------------
-     * 기   능: 이미 신청한 경우 main으로 이동.
-     * 작성일: 2020.02.07
-     * 작성자: JSG 
-     -----------------------------------------------------------------------------------------*/
-       var chk = '${check}';
-       if(chk == 1){
-          alert("이미 신청을 하였습니다.");
-          document.location.href = "main";
-       }
-    }
-    </script>
+
+	/*
+		ATRegist가 준비가 되면 함수 실행 후 페이지 출력
+
+	*/
+	$(document).ready(function (){
+		 var mid = '${mb.cm_id}';
+	       console.log(mid);
+	       if(mid == ''){
+	          document.location.href = "login";
+	       }
+	});
+		
+		
+	
+
+</script>
 
 </body>
 

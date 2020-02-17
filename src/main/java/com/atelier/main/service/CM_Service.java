@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.atelier.dao.AM_Dao;
 import com.atelier.dao.AT_Dao;
 import com.atelier.dao.BT_Dao;
 import com.atelier.dao.CM_Dao;
@@ -54,6 +55,9 @@ public class CM_Service {
 	
 	@Setter(onMethod_ = @Autowired)
 	PR_Dao prDao;
+	
+	@Setter(onMethod_ = @Autowired)
+	AM_Dao amDao;
 	
 	/*----------------------------------------------------------
 	 * 기   능 : 로그인 프로세스, 입력된 아이디와 비밀번호를 DB와 대조 후 일치 시 세션에 저장
@@ -146,24 +150,27 @@ public class CM_Service {
 	}
 	
 	/* ---------------------------------------------------------------------------------------
-	 * 기능: 이미 공방회원싱청을 요청한 회원인지 체크
+	 * 기능: 이미 공방회원신청을 요청한 회원인지 체크
 	 * 작성자: JSG
 	 * 작성일: 2020.02.07
 	 -----------------------------------------------------------------------------------------*/
-	public ModelAndView registCheck(String id, RedirectAttributes rttr) {
+	public String registCheck(String id, RedirectAttributes rttr) {
 		// TODO Auto-generated method stub
 		mav = new ModelAndView();
+		String view = null;
 		
 		int check = cm_Dao.checkRegistOverllap(id);
+		check = amDao.checkRegistOverllapByAM(id);
 		if(check >= 1) {
-			rttr.addFlashAttribute("check", 1);
+			rttr.addFlashAttribute("check", "이미 가입하였습니다.");
+			view = "redirect:main";
 		}
 		else {
-			//view = "ATRegist";
-			mav.setViewName("ATRegist");
+			view = "ATRegist";
+			//mav.setViewName("ATRegist");
 		}
 		
-		return mav;
+		return view;
 	}
 
 	/* ---------------------------------------------------------------------------------------

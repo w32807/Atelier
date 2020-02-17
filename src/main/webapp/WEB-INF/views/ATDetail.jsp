@@ -100,7 +100,7 @@
 					   				<div class="slider-text-inner">
 					   					<div class="desc" style="background: none; top: 100px;">
 					   					<input type="hidden" name="sc_cm_id" id="SC_CM_ID" value="${mb.cm_id}">
-					   					<input type="hidden" name="sc_at_id" id="SC_AT_ID" value="#1">
+					   					<input type="hidden" name="sc_at_id" id="SC_AT_ID" value="${at.at_id}">
 					   					<h1 style="font-size: 18px; font-weight: 600; width:300px;">${at_dto.at_name} 공방에 오신 것을 환영합니다.</h1>
 						   					<h2><a href="https://colorlib.com/" target="_blank" style="font-size: 18px; font-weight: 600; color: #A09182; border-bottom: 1px solid #A09182;">공방 주소</a></h2>
 											<button id="subcancle" type="submit" class="btn btn-primary btn-learn" style="font-weight: 600;" value="구독">&nbsp;&nbsp;&nbsp;구독&nbsp;&nbsp;&nbsp;   </button>

@@ -6,5 +6,11 @@
 	   INSERT INTO AM VALUES(AM_NUM_SEQ.NEXTVAL,#{am_id},#{am_name},#{am_phone},#{am_addr},#{am_sns},
 		   #{am_cate1}, #{am_cate2}, #{am_cate3})
 	</insert>
+	
+	<select id="checkRegistOverllapByAM" resultType="Integer">
+		SELECT COUNT(*)
+		FROM AM
+		WHERE AM_ID = #{id}
+	</select>
 
 </mapper>

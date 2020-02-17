@@ -262,10 +262,11 @@ public class MainController {
 	 * 작성일: 2020.02.07
 	 -----------------------------------------------------------------------------------------*/
 	@GetMapping("ATRegist")
-	public ModelAndView ATRegist(String id, RedirectAttributes rttr) {
+	public String ATRegist(String id, RedirectAttributes rttr) {
 		mav = new ModelAndView();
-		mav = mServ.registCheck(id, rttr);
-		return mav;
+		String view = null;
+		view = mServ.registCheck(id, rttr);
+		return view;
 	}
 
 	/*

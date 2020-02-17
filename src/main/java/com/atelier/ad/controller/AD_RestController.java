@@ -47,7 +47,7 @@ public class AD_RestController {
  	  * 작성자: JWJ
  	  * 작성일 : 2019.02.02
  	  -----------------------------------------------------------------------------------*/
- 	
+
 	@PostMapping(value = "FAQInsert", produces = "application/json; charset=utf-8")
 	public Map<String, List<FT_FAQDto>> FAQInsert(FT_FAQDto faq, Integer pageNum, Integer maxNum) {
 		
