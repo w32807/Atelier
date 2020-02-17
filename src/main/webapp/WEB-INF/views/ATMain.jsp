@@ -98,9 +98,10 @@
                                     <a href="ATDetail?at_num=${at_list.at_seq}"><img src="resources\upload\logo/${at_list.at_logo}" alt="" style="width: 300px;"></a>
                                 </div>
                                 <div class="bi-text">
+                                 <a href="ATDetail?at_num=${at_list.at_seq}">
                                 	<h4>${at_list.at_name}</h4><br>
                                 	<p><span>#${at_list.at_cate1} #${at_list.at_cate2} #${at_list.at_cate3}</span></p>
-                                    <a href="ATDetail">
+                                   
                                         
                                         <br>
                                     </a>
