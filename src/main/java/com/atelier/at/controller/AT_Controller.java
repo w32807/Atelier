@@ -89,6 +89,7 @@ public class AT_Controller {
 		mav = mServ.printATList();
 		return mav;
 	}
+
 	
 	@GetMapping("ATInfoModify")//공방 수정으로 이동하는 메소드
 	public String goATInfoModify() {
@@ -151,22 +152,6 @@ public class AT_Controller {
 		
 		return mav;
 	}
-	
-	/* ---------------------------------------------------------------------------------
-	  * 기능: 발주 조회에서 넘어오는 목록을 취소하는 메소드
-	  * 작성자: KYH
-	  * 작성일 : 2019.02.08
-	  -----------------------------------------------------------------------------------*/	
-	/*
-	 * @GetMapping("rmOrderListCancle") public ModelAndView
-	 * rmOrderListCancleProc(HttpServletRequest request, RedirectAttributes rttr) {
-	 * //log.warn("발주 조회 취소 컨트롤러");
-	 * 
-	 * String[] roCheckedBoxArr = request.getParameterValues("rmProdCancleChk"); mav
-	 * = atServ.rmOrderListCancleProc(roCheckedBoxArr, rttr);
-	 * 
-	 * return mav; }
-	 */
 	
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 거래처 조회 리스트 출력 메소드
@@ -447,23 +432,6 @@ public class AT_Controller {
 		public ModelAndView getregistSelProd(String registSelect) {
 			
 			mav = atServ.getregistSelProd(registSelect);
-			
-			return mav;
-		}
-		
-		/*-------------------------------------------------------------------
-		 * 기능 : 판매물품 관리 메소드
-		 * 작성자: KBH
-		 * 작성일 : 2020.02.17
-		 ------------------------------------------------------------------- */
-		@GetMapping("ATProduct")
-		public ModelAndView ATProductList() {
-			
-			AT_Dto atDto = (AT_Dto)session.getAttribute("at");			
-			
-			String at_id = atDto.getAt_id();
-			
-			mav = atServ.getATProdList(at_id);
 			
 			return mav;
 		}

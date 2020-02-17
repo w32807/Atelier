@@ -72,7 +72,7 @@
 
     <!-- Product Shop Section Begin -->
     <section class="product-shop spad page-details">
-        <div class="container">
+        <div class="container" style="height: 1500px;">
             <div class="row">
                 <div class="col-lg-3">
                 <!--  필터  -->
@@ -262,7 +262,8 @@
                                 </div>
                                 
                                 <ul class="pd-tags">
-                             	    <li><span>카 테 고 리</span> : ${prodDto.pd_cate}</li>
+                             	    <li><span>카 테 고 리</span> 
+                             	    : ${prodDto.pd_cate}</li>
                                     <li><span>제 품 코 드</span> : ${prodDto.pd_code}</li>
                                     <li style="float: right; font-size: 25px;"><span>결 제 금 액  : </span><span id="totalPrice" value="">${prodDto.pd_price}</span></li>
                                 </ul>
@@ -336,8 +337,8 @@
                                 <div class="tab-pane fade" id="tab-3" role="tabpanel">
 	                            	<div class="customer-review-option">
 	                                	<h4>고객리뷰</h4>
-	                                 	<div class="comment-option">
-	                                    	<table id="prTable" name="prTable">
+	                                 	<div class="comment-option" id="prTable">
+	                                    	<table name="prTable">
 		                                        <c:forEach var="review" items="${prList}">
 		                                            <div class="co-item">
 		                                                <div class="avatar-pic">
@@ -347,43 +348,48 @@
 		                                                <div class="avatar-text">
 		                                                    <div class="at-rating">
 		                                                    	<c:if test="${review.pr_star eq 1}">
-		                                                        	<i class="fa fa-star"></i>
-		                                                         	<i class="fa fa-star-o"></i>
-		                                                          	<i class="fa fa-star-o"></i>
-		                                                           	<i class="fa fa-star-o"></i>
-		                                                            <i class="fa fa-star-o"></i>
+		                                                        	<i class="fa fa-star" style="font-size: 15px;"></i>
+		                                                         	<i class="fa fa-star-o" style="font-size: 15px;"></i>
+		                                                          	<i class="fa fa-star-o" style="font-size: 15px;"></i>
+		                                                           	<i class="fa fa-star-o" style="font-size: 15px;"></i>
+		                                                            <i class="fa fa-star-o" style="font-size: 15px;"></i>
 		                                                       	</c:if>
 		                                                       	<c:if test="${review.pr_star eq 2}">
-		                                                        	<i class="fa fa-star"></i>
-		                                                         	<i class="fa fa-star"></i>
-		                                                          	<i class="fa fa-star-o"></i>
-		                                                           	<i class="fa fa-star-o"></i>
-		                                                            <i class="fa fa-star-o"></i>
+		                                                        	<i class="fa fa-star" style="font-size: 15px;"></i>
+		                                                         	<i class="fa fa-star" style="font-size: 15px;"></i>
+		                                                          	<i class="fa fa-star-o" style="font-size: 15px;"></i>
+		                                                           	<i class="fa fa-star-o" style="font-size: 15px;"></i>
+		                                                            <i class="fa fa-star-o" style="font-size: 15px;"></i>
 		                                                       	</c:if>
 		                                                       	<c:if test="${review.pr_star eq 3}">
-		                                                        	<i class="fa fa-star"></i>
-		                                                         	<i class="fa fa-star"></i>
-		                                                          	<i class="fa fa-star"></i>
-		                                                           	<i class="fa fa-star-o"></i>
-		                                                            <i class="fa fa-star-o"></i>
+		                                                        	<i class="fa fa-star" style="font-size: 15px;"></i>
+		                                                         	<i class="fa fa-star" style="font-size: 15px;"></i>
+		                                                          	<i class="fa fa-star" style="font-size: 15px;"></i>
+		                                                           	<i class="fa fa-star-o" style="font-size: 15px;"></i>
+		                                                            <i class="fa fa-star-o" style="font-size: 15px;"></i>
 		                                                       	</c:if>
 		                                                       	<c:if test="${review.pr_star eq 4}">
-		                                                        	<i class="fa fa-star"></i>
-		                                                         	<i class="fa fa-star"></i>
-		                                                          	<i class="fa fa-star"></i>
-		                                                           	<i class="fa fa-star"></i>
-		                                                            <i class="fa fa-star-o"></i>
+		                                                        	<i class="fa fa-star" style="font-size: 15px;"></i>
+		                                                         	<i class="fa fa-star" style="font-size: 15px;"></i>
+		                                                          	<i class="fa fa-star" style="font-size: 15px;"></i>
+		                                                           	<i class="fa fa-star" style="font-size: 15px;"></i>
+		                                                            <i class="fa fa-star-o" style="font-size: 15px;"></i>
 		                                                       	</c:if>
 		                                                       	<c:if test="${review.pr_star eq 5}">
-		                                                        	<i class="fa fa-star"></i>
-		                                                         	<i class="fa fa-star"></i>
-		                                                          	<i class="fa fa-star"></i>
-		                                                           	<i class="fa fa-star"></i>
-		                                                           	<i class="fa fa-star"></i>
+		                                                        	<i class="fa fa-star" style="font-size: 15px;"></i>
+		                                                         	<i class="fa fa-star" style="font-size: 15px;"></i>
+		                                                          	<i class="fa fa-star" style="font-size: 15px;"></i>
+		                                                           	<i class="fa fa-star" style="font-size: 15px;"></i>
+		                                                           	<i class="fa fa-star" style="font-size: 15px;"></i>
 		                                                       	</c:if>
 		                                                    </div>
-		                                                    <h5>${review.pr_cm_id}<span>${review.pr_dateSimple}</span></h5>
-		                                                    <div class="at-reply">${review.pr_contents}</div>
+		                                                    <form id="${review.pr_num}">
+			                                                    <input type="hidden" value="${review.pr_num}">
+			                                                    <h5>${review.pr_cm_id}<span>${review.pr_dateSimple}</span></h5>
+			                                                    	<img src="resources/AT_front/images/x.png" onclick="reviewDelete(${review.pr_num});"
+			                                                    		style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">
+			                                                    <div class="at-reply">${review.pr_contents}</div>
+		                                                    </form>
 		                                                </div>
 		                                            </div>
 		                                        </c:forEach>
@@ -511,7 +517,7 @@
 				dataType: "json",
 				success: function(data) {
 			    	console.log(data.prList);
-			        var prList = '';
+			        var prList = '<table name="prTable">';
 			        for(var i = 0; i < data.prList.length; i++) {
 			        	prList += '<div class="co-item">'
 		                + '<div class="avatar-pic">'
@@ -521,64 +527,92 @@
 		                + '<div class="at-rating">'
 			        	switch(data.prList[i].pr_star){
 			         	case 1:
-				          	prList += '<i class="fa fa-star">' + '</i>'
-				            + '<i class="fa fa-star-o">' + '</i>'
-				            + '<i class="fa fa-star-o">' + '</i>'
-				            + '<i class="fa fa-star-o">' + '</i>'
-				            + '<i class="fa fa-star-o">' + '</i>'
+				          	prList += '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+				            + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+				            + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+				            + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+				            + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 				            + '</div>'
-				            + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_dateSimple + '</span>' + '</h5>'
-				            + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+				            + '<form id="${review.pr_num}">'
+                            + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
+                            + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
+                            + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
+                            + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+                        	+ '</form>'
+				            + '</div>'
 				            + '</div>'
 							break; 
 			         	case 2:
-			            	prList += '<i class="fa fa-star">' + '</i>'
-			                + '<i class="fa fa-star">' + '</i>'
-			                + '<i class="fa fa-star-o">' + '</i>'
-			                + '<i class="fa fa-star-o">' + '</i>'
-			                + '<i class="fa fa-star-o">' + '</i>'
+			            	prList += '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 			                + '</div>'
-			                + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_dateSimple + '</span>' + '</h5>'
-			                + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+			                + '<form id="${review.pr_num}">'
+                            + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
+                            + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
+                            + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
+                            + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+                        	+ '</form>'
+			                + '</div>'
 			                + '</div>'
 					        break;
 						case 3:
-							prList += '<i class="fa fa-star">' + '</i>'
-			                + '<i class="fa fa-star">' + '</i>'
-			                + '<i class="fa fa-star">' + '</i>'
-			                + '<i class="fa fa-star-o">' + '</i>'
-			                + '<i class="fa fa-star-o">' + '</i>'
+							prList += '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 			                + '</div>'
-			                + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_dateSimple + '</span>' + '</h5>'
-			                + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+			                + '<form id="${review.pr_num}">'
+                            + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
+                            + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
+                            + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
+                            + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+                        	+ '</form>'
+			                + '</div>'
 			                + '</div>'
 							break;
 						case 4:
-							prList += '<i class="fa fa-star">' + '</i>'
-			                + '<i class="fa fa-star">' + '</i>'
-			                + '<i class="fa fa-star">' + '</i>'
-			                + '<i class="fa fa-star">' + '</i>'
-			                + '<i class="fa fa-star-o">' + '</i>'
+							prList += '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 			                + '</div>'
-			                + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_dateSimple + '</span>' + '</h5>'
-			                + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+			                + '<form id="${review.pr_num}">'
+                            + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
+                            + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
+                            + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
+                            + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+                        	+ '</form>'
+			                + '</div>'
 			                + '</div>'
 							break;
 						case 5:
-							prList += '<i class="fa fa-star">' + '</i>'
-			                + '<i class="fa fa-star">' + '</i>'
-			                + '<i class="fa fa-star">' + '</i>'
-			                + '<i class="fa fa-star">' + '</i>'
-			                + '<i class="fa fa-star">' + '</i>'
+							prList += '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 			                + '</div>'
-			                + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_dateSimple + '</span>' + '</h5>'
-			                + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+			                + '<form id="${review.pr_num}">'
+                            + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
+                            + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
+                            + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
+                            + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+                        	+ '</form>'
+			                + '</div>'
 			                + '</div>'
 							break;
 						}
-			        }	
+			        }
+			        prList += '</table>';
+
 					$("#prTable").html(prList);
 					alert("댓글 등록 완료!");
+					$("#pr_contents").val("");
 				},
 				error: function(error) {
 					alert("리뷰 등록 실패");
@@ -587,11 +621,128 @@
 		}	
 	}
 	
-	
  	$(".starR").click(function() {	
  		var selecedStar = $('.on').length;
  		console.log(selecedStar);
  		$("#pr_star").val(selecedStar);
  	})
+ 	
+ 	function reviewDelete(prNum) {
+ 		console.log(prNum);
+ 		var reviewDeleteFrm = $("#prNum").serializeObject();
+ 		reviewDeleteFrm.pd_code = "${prodDto.pd_code}";
+ 		reviewDeleteFrm.pr_num = prNum;
+ 		console.log(reviewDeleteFrm);
+ 		$.ajax({
+			url: "reviewDelete",
+			type: "get",
+			data: reviewDeleteFrm,
+			dataType: "json",
+			success: function(data) {
+				if(data.prList == null) {
+					alert("리뷰 삭제 실패");
+				} else {
+				var prList = '<table name="prTable">';
+		        for(var i = 0; i < data.prList.length; i++) {
+		        	prList += '<div class="co-item">'
+	                + '<div class="avatar-pic">'
+	                + '<img src="https://t1.daumcdn.net/cfile/tistory/995499415BA82B591F" alt="" style="padding-bottom: 0px;">'
+	                + '</div>'
+	                + '<div class="avatar-text">'
+	                + '<div class="at-rating">'
+		        	switch(data.prList[i].pr_star){
+		         	case 1:
+			          	prList += '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			            + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			            + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			            + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			            + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+			            + '</div>'
+			            + '<form id="${review.pr_num}">'
+                        + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
+                        + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
+                        + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
+                        + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+                    	+ '</form>'
+			            + '</div>'
+			            + '</div>'
+						break; 
+		         	case 2:
+		            	prList += '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '</div>'
+		                + '<form id="${review.pr_num}">'
+                        + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
+                        + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
+                        + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
+                        + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+                    	+ '</form>'
+		                + '</div>'
+		                + '</div>'
+				        break;
+					case 3:
+						prList += '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '</div>'
+		                + '<form id="${review.pr_num}">'
+                        + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
+                        + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
+                        + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
+                        + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+                    	+ '</form>'
+		                + '</div>'
+		                + '</div>'
+						break;
+					case 4:
+						prList += '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '</div>'
+		                + '<form id="${review.pr_num}">'
+                        + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
+                        + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
+                        + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
+                        + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+                    	+ '</form>'
+		                + '</div>'
+		                + '</div>'
+						break;
+					case 5:
+						prList += '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
+		                + '</div>'
+		                + '<form id="${review.pr_num}">'
+                        + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
+                        + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
+                        + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
+                        + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+                    	+ '</form>'
+		                + '</div>'
+		                + '</div>'
+						break;
+					}
+		        }
+		        prList += '</table>';
+
+				$("#prTable").html(prList);
+				alert("리뷰 삭제 완료!");
+				}
+			},
+			error: function(error) {
+				alert("리뷰 삭제 실패");
+			}
+ 		});
+ 	}
 </script>
 </html>

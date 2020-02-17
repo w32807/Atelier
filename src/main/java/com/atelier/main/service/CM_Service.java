@@ -58,7 +58,6 @@ public class CM_Service {
 	
 	@Setter(onMethod_ = @Autowired)
 	AM_Dao amDao;
-	
 	/*----------------------------------------------------------
 	 * 기   능 : 로그인 프로세스, 입력된 아이디와 비밀번호를 DB와 대조 후 일치 시 세션에 저장
 	 * 		   로그인 예외처리 추가 필요 
@@ -244,21 +243,32 @@ public class CM_Service {
 	
 
 	/* ---------------------------------------------------------------------------------------
-	 * 기능: 상품 상세정보 보기
-	 * 작성자: JWJ
-	 * 작성일: 2020.02.11
+	 * 기능: 상품 상세정보 보기 / 상품 리뷰 리스트 출력
+	 * 작성자: JWJ / KYH
+	 * 작성일: 2020.02.11 / 2020.02.14
 	 -----------------------------------------------------------------------------------------*/
-
 	public ModelAndView getprodDetail(int pd_code) {
 		mav = new ModelAndView();
+		
 		PD_productDto prodDto = cm_Dao.getprodDetail(pd_code);
-			String pi_oriName = cm_Dao.getPi_oriName(pd_code);
-			int at_num = cm_Dao.getAt_num(prodDto.getPd_at_name());
-			prodDto.setImgOriName(pi_oriName);
+		String pi_oriName = cm_Dao.getPi_oriName(pd_code);
+		int at_num = cm_Dao.getAt_num(prodDto.getPd_at_name());
+		prodDto.setImgOriName(pi_oriName);
 			
-			mav.addObject("at_num",at_num);
-			mav.addObject("prodDto",prodDto);
-			mav.setViewName("prodDetail");
+		mav.addObject("at_num",at_num);
+		mav.addObject("prodDto",prodDto);
+		
+		List<PR_Dto> prList = prDao.getProdReviewList(pd_code);
+		
+		SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
+		for(int i=0;i<prList.size();i++) {
+			String convertDate = dataFm.format(prList.get(i).getPr_date());
+			prList.get(i).setPr_dateSimple(convertDate);
+		}
+		
+		mav.addObject("prList", prList);
+		
+		mav.setViewName("prodDetail");
 		
 		return mav;
 	}
@@ -406,6 +416,7 @@ public class CM_Service {
 		
 		return mav;
 	}
+	
 	/* ---------------------------------------------------------------------------------------
 	 * 기능: 상품 리뷰 등록
 	 * 작성자: KYH
@@ -422,11 +433,6 @@ public class CM_Service {
 			
 			List<PR_Dto> prList = prDao.getProdReviewList(prDto.getPr_pd_code());
 			
-			SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
-			for(int i=0;i<prList.size();i++) {
-				String convertDate = dataFm.format(prList.get(i).getPr_date());
-				prList.get(i).setPr_dateSimple(convertDate);
-			}
 			prMap = new HashMap<String, List<PR_Dto>>();
 			prMap.put("prList", prList);
 		} catch (Exception e) {
@@ -435,6 +441,39 @@ public class CM_Service {
 		}
 
 		return prMap;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 상품 리뷰 삭제
+	 * 작성자: KYH
+	 * 작성일: 2020.02.17
+	 -----------------------------------------------------------------------------------------*/
+	public Map<String, List<PR_Dto>> prodReviewDelete(int prNum, int pd_code) {
+		Map<String, List<PR_Dto>> reMap = new HashMap<String, List<PR_Dto>>();
+		Map<String, Object> dataMap = new HashMap<String, Object>();
+		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
+		String AT_id = cmDto.getCm_id();
+		dataMap.put("pr_num", prNum);
+		dataMap.put("aT_id", AT_id);
+		
+		boolean a = prDao.prodReviewDelete(dataMap);
+		
+		if(a) {
+			List<PR_Dto> prList = prDao.getProdReviewList(pd_code);
+			
+			SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
+			for(int i=0;i<prList.size();i++) {
+				String convertDate = dataFm.format(prList.get(i).getPr_date());
+				prList.get(i).setPr_dateSimple(convertDate);
+			}
+			
+			reMap.put("prList",prList);
+			
+		} else {
+			reMap = null;
+		}
+
+		return reMap;
 	}
 	
 	/* ---------------------------------------------------------------------------------------
@@ -462,6 +501,8 @@ public class CM_Service {
 
 		return pdList;
  	}
+
+
 	
 	
 	
@@ -473,10 +514,7 @@ public class CM_Service {
 	
 	
 	
-	
-	
-	
-	
+
 	
 	
 	

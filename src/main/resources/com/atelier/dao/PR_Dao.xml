@@ -11,4 +11,8 @@
 		INSERT INTO PR
 		VALUES(PR_NUM_SEQ.NEXTVAL,#{pr_pd_code},#{pr_cm_id},#{pr_cm_nick},#{pr_star},#{pr_contents},DEFAULT)
 	</insert>
+	
+	<delete id="prodReviewDelete" parameterType="map">
+		DELETE FROM PR WHERE PR_NUM = #{pr_num} AND PR_CM_ID = #{aT_id}
+	</delete>
 </mapper>

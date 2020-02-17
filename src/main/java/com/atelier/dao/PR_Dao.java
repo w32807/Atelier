@@ -8,5 +8,7 @@ import com.atelier.dto.PR_Dto;
 public interface PR_Dao {
 	public List<PR_Dto> getProdReviewList(int pd_code);
 
-	public void prodReviewWrite(PR_Dto prDto );
+	public void prodReviewWrite(PR_Dto prDto);
+
+	public boolean prodReviewDelete(Map<String, Object> dataMap);
 }
