@@ -70,7 +70,7 @@
 
 		<div id="colorlib-main">
 			<div class="colorlib-services" style="margin-left: 100px;">
-				<div class="container-fluid" >
+				<div class="container-fluid" style="min-height: 450px;">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3">
 							<h2 class="colorlib-heading animate-box" data-animate-effect="fadeInLeft"
@@ -131,7 +131,7 @@
 				  <div class="colorlib-feature animate-box" style="text-align: right; width: 1100px; height: 200px;" >
 					
 					 <input id="cancleBtn" type="button" name="serch" value="취소하기"
-					 	style="width: 100px; height: 35px; border: none; font-size: 16px; color: white; background-color: #A09182; margin-right: -50px;">
+					 	style="width: 100px; height: 35px; border: none; font-size: 16px; color: white; background-color: #A09182;">
 					</div>
 				  </div>
 

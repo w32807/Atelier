@@ -93,7 +93,7 @@
 
 		<div id="colorlib-main">
 			<div class="colorlib-services" style="margin-left: 100px;">
-				<div class="container-fluid">
+				<div class="container-fluid" style="min-height: 450px;">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3">
 							<h2 class="colorlib-heading animate-box"

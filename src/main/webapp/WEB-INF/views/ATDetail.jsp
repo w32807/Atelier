@@ -151,15 +151,15 @@
 			<div class="colorlib-work">
 				<div class="container-fluid">
 					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3" style="text-align: center; right: 2%;">
+						<div class="col-md-6 col-md-offset-3 col-md-pull-3" style="text-align: center; right: 0%;">
 							<h2 class="colorlib-heading animate-box" data-animate-effect="fadeInLeft"
 								style="font-weight: 400; font-size: 20px; letter-spacing: 0.5px;">판매중인 상품<hr>
 							</h2>
 						</div>
 					</div>
-					<div class="row">
+					<div class="row" style="margin-left: 175px; margin-right: 175px;">
 						<c:forEach var = "pdList" items = "${pdList}">
-						<div class="col-md-3 animate-box" data-animate-effect="fadeInLeft" style="margin-left: 160px;">
+						<div class="col-md-4 animate-box" data-animate-effect="fadeInLeft" style="display: table;">
 							<c:forEach var = "piList" items = "${piList }">
 								<c:if test = "${pdList.pd_code eq  piList.pi_pd_code}">
 									<div class="project" style="background-image: url(resources/main/img/products/${piList.pi_oriname}); width: 350px; height: 280px;">

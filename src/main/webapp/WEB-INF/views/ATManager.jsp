@@ -113,7 +113,7 @@
 				</div>
 			</div>
 
-			<div class="colorlib-services" style="margin-left: 100px;">
+			<div class="colorlib-services" style="margin-left: 100px; min-height: 400px;">
 				<div class="container-fluid">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3">

@@ -100,7 +100,7 @@
 			<!--여기부터 각각 하나의 상품이 됩니다. 실제로 구현시에는 HTML에서 JSTL의 forEach구문과 자바 코딩부에서 페이징 처리를 하면 될 듯 합니다. -->
 			<div id="colorlib-main">
 			<div class="colorlib-blog">
-				<div class="container-fluid">
+				<div class="container-fluid" style="min-height: 500px;">
 					<div class="row" style="margin-left: 80px;">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3">
 							<h2 class="colorlib-heading animate-box" data-animate-effect="fadeInLeft"
@@ -124,8 +124,12 @@
 									<label for="${product.pd_code}">
 										<input type="checkbox" id="${product.pd_code}" name="prodChk" value="${product.pd_code}"
 												style="background-color: transparent; position: relative; top: 6px; left: 12px;">
-										<img src="./resources/main/img/products/${product.imgOriName}" class="img-responsive"
+										<c:forEach var="piList" items="${piList}">
+										<c:if test = "${product.pd_code eq piList.pi_pd_code}">
+										<img src="./resources/main/img/products/${piList.pi_oriname}" class="img-responsive"
 												style="margin-top: -26px; width: 400px;">
+										</c:if>		
+										</c:forEach>		
 										<div class="desc" style="font-size: 15px; font-weight: 500;">
 											<span style="font-size: 16px;">
 												<small>${product.pd_regdate}</small> | 
