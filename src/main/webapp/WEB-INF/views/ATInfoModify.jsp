@@ -96,7 +96,7 @@
 	</head>
 	<body>
 	<!-- 상단바 Include -->
-	<jsp:include page="Main_Upper_RC.jsp" flush="false"/>
+	<jsp:include page="Main_Upper.jsp" flush="false"/>
 
 	<!-- 좌측바 Include -->
 		<div id="colorlib-page">

@@ -65,7 +65,7 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="register-form">
                     <div class="newslatter-item">
-                         <a href="/">
+                         <a href="main">
                                 <img src="./resources/main/img/logo_bottom.png" alt="" style="margin-top: 25px;">
                             </a>
                     </div>
