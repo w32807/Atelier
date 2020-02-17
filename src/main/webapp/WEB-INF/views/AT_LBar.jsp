@@ -133,7 +133,7 @@
 					onclick="window.open(this.href, '_blank', 'width=655px,height=650px,toolbars=no,scrollbars=no');return false;">쪽지</a></li>
 				<li style="font-size: 18px"><a href="ATProduct">판매물품</a></li>
 				<li style="font-size: 18px"><a href="#">체험</a></li>
-				<li style="font-size: 18px"><a style="color: brown;"
+				<li style="font-size: 18px"><a class="ATConfig" style="color: brown;"
 					href="ATManager">공방관리</a></li>
 			</ul>
 		</nav>
@@ -167,4 +167,25 @@
 	<!-- MAIN JS -->
 	<script src="resources/AT_front/js/main.js"></script>
 </body>
+
+<script type="text/javascript">
+	window.onload = function(){
+		$('ATConfig').hide();
+		var mid = '${mb.cm_id}';
+		var atid = '${at.at_id}';
+		console.log(mid);
+		console.log(atid);
+		
+		if(mid == atid){
+			$('ATConfig').show();
+		}
+		
+		$('.ATConfig').show();
+		if(mid != atid){
+			$('ATConfig').hide();
+		}
+		
+		
+	}
+</script>
 </html>

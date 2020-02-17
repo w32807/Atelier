@@ -29,13 +29,7 @@
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
-
-    <!-- 상단바 Include -->
-	<jsp:include page="Main_Upper.jsp" flush="false"/>
+    <jsp:include page="Main_Upper.jsp" flush="false"/>
 
 
     <!-- Breadcrumb Section Begin -->
@@ -85,43 +79,43 @@
                             <div class="group-input">
                                 <label for="AT_CATE1 "><b>카테고리1 *</b></label>
                                 <select id="AT_CATE1 " name="ag_cate1">
-                                	<option value="">선택</option>
-                                	<option value="의류">의류</option>
-                                	<option value="가방">가방</option>
-                                	<option value="신발">신발</option>
-                                	<option value="지갑">지갑</option>
-                                	<option value="벨트">벨트</option>
-                                	<option value="장갑">장갑</option>
-                                	<option value="가구">가구</option>
-                                	<option value="기타">기타</option>
+                                   <option value="">선택</option>
+                                   <option value="의류">의류</option>
+                                   <option value="가방">가방</option>
+                                   <option value="신발">신발</option>
+                                   <option value="지갑">지갑</option>
+                                   <option value="벨트">벨트</option>
+                                   <option value="장갑">장갑</option>
+                                   <option value="가구">가구</option>
+                                   <option value="기타">기타</option>
                                 </select>
                             </div>
                             <div class="group-input">
                                 <label for="AT_CATE2 "><b>카테고리2 *</b></label>
                                 <select id="AT_CATE2 " name="ag_cate2">
-                                	<option value="">선택</option>
-                                	<option value="의류">의류</option>
-                                	<option value="가방">가방</option>
-                                	<option value="신발">신발</option>
-                                	<option value="지갑">지갑</option>
-                                	<option value="벨트">벨트</option>
-                                	<option value="장갑">장갑</option>
-                                	<option value="가구">가구</option>
-                                	<option value="기타">기타</option>
+                                   <option value="">선택</option>
+                                   <option value="의류">의류</option>
+                                   <option value="가방">가방</option>
+                                   <option value="신발">신발</option>
+                                   <option value="지갑">지갑</option>
+                                   <option value="벨트">벨트</option>
+                                   <option value="장갑">장갑</option>
+                                   <option value="가구">가구</option>
+                                   <option value="기타">기타</option>
                                 </select>
                             </div>
                             <div class="group-input">
                                 <label for="AT_CATE3 "><b>카테고리3 *</b></label>
                                 <select id="AT_CATE3 " name="ag_cate3">
-                                	<option value="">선택</option>
-                                	<option value="의류">의류</option>
-                                	<option value="가방">가방</option>
-                                	<option value="신발">신발</option>
-                                	<option value="지갑">지갑</option>
-                                	<option value="벨트">벨트</option>
-                                	<option value="장갑">장갑</option>
-                                	<option value="가구">가구</option>
-                                	<option value="기타">기타</option>
+                                   <option value="">선택</option>
+                                   <option value="의류">의류</option>
+                                   <option value="가방">가방</option>
+                                   <option value="신발">신발</option>
+                                   <option value="지갑">지갑</option>
+                                   <option value="벨트">벨트</option>
+                                   <option value="장갑">장갑</option>
+                                   <option value="가구">가구</option>
+                                   <option value="기타">기타</option>
                                 </select>
                             </div>
                             <div class="payment-check">
@@ -145,8 +139,7 @@
     </div>
     <!-- Register Form Section End -->
    
-    <!-- 하단바 Include -->
-	<jsp:include page="Main_Footer.jsp" flush="false"/>
+    <jsp:include page="Main_Footer.jsp" flush="false"/>
 
     <!-- Js Plugins -->
     <script src="${pageContext.request.contextPath}/resources/main/js/jquery-3.3.1.min.js"></script>
@@ -166,7 +159,7 @@
     }
     </script>
     
-	<!-- 비밀번호 확인 -->
+   <!-- 비밀번호 확인 -->
 <script language='javascript'>
 
 // checkvalue 기능
@@ -211,27 +204,27 @@ if(test.a.value && test.b.value) {
     
    
     /* ---------------------------------------------------------------------------------------
-	 * 기   능: 세션에 계정id가 없으면 로그인 화면으로 보냄.
-	 * 작성일: 2020.02.04
-	 * 작성자: JSG 
-	 -----------------------------------------------------------------------------------------*/
+    * 기   능: 세션에 계정id가 없으면 로그인 화면으로 보냄.
+    * 작성일: 2020.02.04
+    * 작성자: JSG 
+    -----------------------------------------------------------------------------------------*/
     window.onload = function(){
-    	var mid = '${mb.cm_id}';
-    	console.log(mid);
-    	if(mid == ''){
-    		document.location.href = "login";
-    	}
-    	
+       var mid = '${mb.cm_id}';
+       console.log(mid);
+       if(mid == ''){
+          document.location.href = "login";
+       }
+       
     /* ---------------------------------------------------------------------------------------
      * 기   능: 이미 신청한 경우 main으로 이동.
      * 작성일: 2020.02.07
      * 작성자: JSG 
      -----------------------------------------------------------------------------------------*/
-    	var chk = '${check}';
-    	if(chk == 1){
-    		alert("이미 신청을 하였습니다.");
-    		document.location.href = "main";
-    	}
+       var chk = '${check}';
+       if(chk == 1){
+          alert("이미 신청을 하였습니다.");
+          document.location.href = "main";
+       }
     }
     </script>
 
