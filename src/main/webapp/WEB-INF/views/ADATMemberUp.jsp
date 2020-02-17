@@ -179,12 +179,12 @@
                                  <div class="btn-group">
                                     <td style="text-align: center;"><a
                                        class="btn btn-primary" onclick="alert('등록되었습니다.!')" href="ATMemberUpCheck?check=true&&id=${AGList.ag_id}"><i
-                                          class="icon_house_alt"></i></a></td>
+                                          class="icon_check_alt2"></i></a></td>
                                      
 
                                     <td style="text-align: center;"><a
                                        class="btn btn-danger" onclick="alert('취소되었습니다.!')" href="ATMemberUpCheck?check=false&&id=${AGList.ag_id}"><i
-                                          class="icon_check_alt2"></i></a></td>
+                                          class="icon_close_alt2"></i></a></td>
 								
                                  </div>
                               </tr>

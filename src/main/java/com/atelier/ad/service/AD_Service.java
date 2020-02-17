@@ -400,7 +400,7 @@ public class AD_Service {
 	  * 작성자: JSG
 	  * 작성일 : 2019.02.07
 	  -----------------------------------------------------------------------------------*/
-	public ModelAndView getApplicant(AG_Dto agDto) {
+	public ModelAndView getApplicant() {
 		mav = new ModelAndView();
 		List<AG_Dto> AGList = atDao.getATRegistUserData();
 		
@@ -414,9 +414,11 @@ public class AD_Service {
 	  * 작성자: JSG
 	  * 작성일 : 2019.02.07
 	  -----------------------------------------------------------------------------------*/
-	public String ATMemberCheckProc(String check, String id) {
+	public ModelAndView ATMemberCheckProc(String check, String id) {
 		// TODO Auto-generated method stub
 		//String s = null;
+		mav = new ModelAndView();
+		
 		// 수락 버튼을 누르면
 		if(check.equals("true")) {
 			assentATMember(id);
@@ -426,7 +428,11 @@ public class AD_Service {
 			DeleteATMember(id);
 		}
 		
-		return "ADATMemberUp";
+		mav = getApplicant();
+		
+		//getApplicant();
+		
+		return mav;
 	}
 	
 	/* ---------------------------------------------------------------------------------

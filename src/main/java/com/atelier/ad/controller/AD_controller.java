@@ -157,8 +157,8 @@ public class AD_controller {
 	  * 작성일 : 2019.02.07
 	  -----------------------------------------------------------------------------------*/
 	@GetMapping("ADATMemberUp")
-	public ModelAndView goADATMemberUp(AG_Dto agDto) {
-		mav = aServ.getApplicant(agDto);
+	public ModelAndView goADATMemberUp() {
+		mav = aServ.getApplicant();
 		return mav;
 	}
 	
@@ -170,8 +170,8 @@ public class AD_controller {
 	@GetMapping("ATMemberUpCheck")
 	public ModelAndView ATMemberUpCheck(String check, String id) {
 
-		String ADATMemberUp = aServ.ATMemberCheckProc(check, id);
-		mav.setViewName(ADATMemberUp);
+		mav = aServ.ATMemberCheckProc(check, id);
+		
 		return mav;
 	}
 	
