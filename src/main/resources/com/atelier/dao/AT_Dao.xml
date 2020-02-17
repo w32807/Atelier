@@ -176,4 +176,13 @@
 	   WHERE AT_ID = #{cm_id}
 	</select>
    	
+   	<select id="getCateName" parameterType="String" resultType="String">
+   		SELECT CT_NAME FROM CT
+   	</select>
+   	
+   	<select id="getProductByCate" parameterType="String" resultType="com.atelier.dto.PD_productDto">
+		SELECT * FROM PD WHERE PD_REGDATE = (SELECT MAX(PD_REGDATE) FROM PD WHERE PD_CATE = #{cate})
+   	</select>
+   	
+   	
 </mapper>

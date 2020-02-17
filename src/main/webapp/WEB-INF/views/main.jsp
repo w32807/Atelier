@@ -124,96 +124,35 @@
                         </ul>
                     </div>
                     <div class="product-slider owl-carousel">
-                        <div class="product-item">
+                        
+                       <c:forEach var="pdDto" items="${pdList}">
+                         <div class="product-item">
                             <div class="pi-pic">
-                                <img src="./resources/main/img/products/women-1.jpg" alt="">
-                                <div class="sale">Sale</div>
+                                <img src="./resources/main/img/products/${pdDto.imgOriName}" alt="">
                                 <div class="icon">
                                     <i class="icon_heart_alt"></i>
                                 </div>
                                 <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
+									<li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
+									<li class="quick-view"><a href="prodDetail?pd_code=${pdDto.pd_code}">+ Quick View</a></li>
+									<li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
+								</ul>
                             </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Coat</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $14.00
-                                    <span>$35.00</span>
-                                </div>
-                            </div>
+                              <div class="pi-text">
+                                        <div class="catagory-name">${pdDto.pd_cate}</div>
+                                        <a href="prodDetail?pd_code=${pdDto.pd_code}">
+                                            <h5>${pdDto.pd_name}</h5>
+                                        </a>
+                                        <div class="product-price">
+                                           &#8361;${pdDto.pd_price}
+                                            <span>&#8361;${pdDto.pd_price* 1.5}</span>
+                                        </div>
+                               </div>
                         </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="./resources/main/img/products/women-2.jpg" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Shoes</div>
-                                <a href="#">
-                                    <h5>Guangzhou sweater</h5>
-                                </a>
-                                <div class="product-price">
-                                    $13.00
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="./resources/main/img/products/women-3.jpg" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="./resources/main/img/products/women-4.jpg" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Converse Shoes</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
-                                </div>
-                            </div>
-                        </div>
+                        
+                        </c:forEach>
+                        
+                        
                     </div>
                 </div>
             </div>
@@ -385,7 +324,7 @@
                     <div class="section-title">
                         <h2>오늘의 공방</h2>
                     </div>
-                </div>s
+                </div>
             </div>
             <div class="row">
                 <c:forEach var = "main_at_recommend_list" items = "${main_at_recommend_list}">

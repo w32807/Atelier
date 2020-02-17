@@ -22,6 +22,7 @@ import com.atelier.dao.PR_Dao;
 import com.atelier.dto.AT_Dto;
 import com.atelier.dto.BT_Dto;
 import com.atelier.dto.CM_Dto;
+import com.atelier.dto.CT_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PR_Dto;
 import com.atelier.mypage.service.MP_BasketService;
@@ -45,14 +46,14 @@ public class CM_Service {
 	@Setter(onMethod_ = @Autowired)
 	CM_Dao cm_Dao;
 	
-	@Setter(onMethod_ = @Autowired)
-	PR_Dao prDao;
-	
 	@Setter(onMethod_ = {@Autowired}) 
 	private HttpSession session;
 	
 	@Setter(onMethod_ = {@Autowired}) 
 	private MP_BasketService mServ;
+	
+	@Setter(onMethod_ = @Autowired)
+	PR_Dao prDao;
 	
 	/*----------------------------------------------------------
 	 * 기   능 : 로그인 프로세스, 입력된 아이디와 비밀번호를 DB와 대조 후 일치 시 세션에 저장
@@ -236,26 +237,21 @@ public class CM_Service {
 	
 
 	/* ---------------------------------------------------------------------------------------
-	 * 기능: 상품 상세정보 보기 / 상품 리뷰 리스트 출력
-	 * 작성자: JWJ / KYH
-	 * 작성일: 2020.02.11 / 2020.02.14
+	 * 기능: 상품 상세정보 보기
+	 * 작성자: JWJ
+	 * 작성일: 2020.02.11
 	 -----------------------------------------------------------------------------------------*/
+
 	public ModelAndView getprodDetail(int pd_code) {
 		mav = new ModelAndView();
-		
 		PD_productDto prodDto = cm_Dao.getprodDetail(pd_code);
-		String pi_oriName = cm_Dao.getPi_oriName(pd_code);
-		int at_num = cm_Dao.getAt_num(prodDto.getPd_at_name());
-		prodDto.setImgOriName(pi_oriName);
+			String pi_oriName = cm_Dao.getPi_oriName(pd_code);
+			int at_num = cm_Dao.getAt_num(prodDto.getPd_at_name());
+			prodDto.setImgOriName(pi_oriName);
 			
-		mav.addObject("at_num",at_num);
-		mav.addObject("prodDto",prodDto);
-		
-		List<PR_Dto> prList = prDao.getProdReviewList(pd_code);
-		
-		mav.addObject("prList", prList);
-		
-		mav.setViewName("prodDetail");
+			mav.addObject("at_num",at_num);
+			mav.addObject("prodDto",prodDto);
+			mav.setViewName("prodDetail");
 		
 		return mav;
 	}
@@ -368,9 +364,11 @@ public class CM_Service {
 	 * 기능: 메인화면 오늘의 공방 출력
 	 * 작성자: JSG
 	 * 작성일: 2020.02.14
+	 * 수정일: 2020.02.17 (JWJ)
 	 -----------------------------------------------------------------------------------------*/
 	public ModelAndView getTodayAT() {
 		mav = new ModelAndView();
+		List<PD_productDto> pdList = new ArrayList<PD_productDto>();
 		List<AT_Dto> at_list = atDao.getATList(); 
 		
 		int listsize = at_list.size();
@@ -394,12 +392,13 @@ public class CM_Service {
 			}
 		}
 		
+		pdList = getMainProd();
+		mav.addObject("pdList",pdList);
 		mav.addObject("main_at_recommend_list", main_at_recommend_list);
 		mav.setViewName("main");
 		
 		return mav;
 	}
-	
 	/* ---------------------------------------------------------------------------------------
 	 * 기능: 상품 리뷰 등록
 	 * 작성자: KYH
@@ -430,6 +429,34 @@ public class CM_Service {
 
 		return prMap;
 	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 메인화면 상품 출력
+	 * 작성자: JWJ
+	 * 작성일: 2020.02.17
+	 -----------------------------------------------------------------------------------------*/
+	public List<PD_productDto> getMainProd(){
+		List<PD_productDto> pdList = new ArrayList<PD_productDto>(); 
+		List<String> ctList = new ArrayList<String>();
+		
+		ctList = atDao.getCateName();
+		
+		for (int i = 0; i < ctList.size(); i++) {
+			pdList.add(atDao.getProductByCate(ctList.get(i)));
+		}
+		
+		for(int i = 0; i < pdList.size(); i++) {
+			if(pdList.get(i) != null) {
+			int pd_code = pdList.get(i).getPd_code();
+			String pi_oriName = cm_Dao.getPi_oriName(pd_code);
+			pdList.get(i).setImgOriName(pi_oriName);
+			}
+		}
+
+		return pdList;
+ 	}
+	
+	
 	
 	
 	
