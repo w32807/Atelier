@@ -90,6 +90,7 @@ public class AT_Service {
 		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
 		String pd_at_id = cmDto.getCm_id();
 		String at_state = atDao.getAt_state(pd_at_id);
+		PI_productImgDto pi_dto = new PI_productImgDto();
 		
 		if(at_state.equals("활성")) {
 		
@@ -101,14 +102,25 @@ public class AT_Service {
 			pageInt.put("pageNum", num);
 			pageInt.put("maxNum", maxNum);
 			pageInt.put("pd_at_id", pd_at_id);
+			List<PI_productImgDto>piList = new ArrayList<PI_productImgDto>();
 			List<PD_productDto> pd = pdDao.getATProdList(pageInt);
-	
+			
+			//List<PD_productDto> pdList = pdDao.getPDListByAT(at_dto.getAt_id());
+			
+			for(int i = 0; i < pd.size(); i++) {
+				//piList = piDao.getPDImageList(pd_dto.getPd_code());
+				piList.add(piDao.getPDImageList(pd.get(i).getPd_code()));
+				//piList.add(pi_dto);
+			}
+			
+			
+			mav.addObject("piList", piList);
 			mav.addObject("pd", pd);
 			mav.addObject("paging", getATProdPaging(num));
 			session.setAttribute("pageNum", num);
 	
 			mav.setViewName("ATProdManage");
-		}else {
+		} else {
 			mav.setViewName("예외페이지로 넘어갑니다!");
 		}
 		
@@ -780,15 +792,9 @@ public class AT_Service {
 		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
 		String id = cmDto.getCm_id();
 		log.warn(id);
-		
-		AT_Dto at_dto = new AT_Dto();
-		at_dto = atDao.getATSessionData(id);
-		session.setAttribute("at", at_dto);
 
 		List<RO_Dto> atmList = atDao.getATOrderSearchList(id);
-		
-		
-		
+
 		// 날짜를 yyyy-MM-dd 형태로 변환
 		SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
 		for (int i = 0; i < atmList.size(); i++) {
