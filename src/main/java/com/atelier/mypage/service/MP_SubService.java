@@ -1,6 +1,8 @@
 package com.atelier.mypage.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +53,22 @@ public class MP_SubService {
 		mav.setViewName("mySubscript");
 		
 		return mav;
+	}
+
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 상품에서 구독추가 메소드
+	 * 작성자: JWJ
+	 * 작성일: 2020.02.08
+	 -----------------------------------------------------------------------------------------*/
+	public String SubFromProd(SB_Dto sbDto) {
+		try {
+			sbDao.getSubscription(sbDto);
+			log.warn("ok");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 }
