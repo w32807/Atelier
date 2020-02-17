@@ -245,6 +245,19 @@ public class MainController {
 		return prMap;
 	}
 	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 상품 리뷰 삭제
+	 * 작성자: KYH
+	 * 작성일: 2020.02.17
+	 -----------------------------------------------------------------------------------------*/
+	@GetMapping(value = "reviewDelete", produces="application/json; charset=utf-8")
+	@ResponseBody
+	public Map<String, List<PR_Dto>> prodReviewDelete(int pr_num,int pd_code) {
+		Map<String, List<PR_Dto>> reMap = mServ.prodReviewDelete(pr_num,pd_code);
+		
+		return reMap;
+	}
+	
 	//비밀번호변경
 	@GetMapping("myChangePwd")
 	public String myChangePwd() {
