@@ -389,7 +389,7 @@
 		                                        </c:forEach>
 		                                    </table>    
 	                                    </div>
-                                        <form id="prodReviewFrm" name="prodReviewFrm">
+                                        <form id="prodReviewFrm" name="prodReviewFrm" style="height: 300px;">
 		                                	<div class="leave-comment">
 		                                    	<h4 style="margin-top: 55px; margin-bottom: 13px;">리뷰 작성</h4>
 		                                    	<div class="starRev" style="margin-bottom: 10px;">
