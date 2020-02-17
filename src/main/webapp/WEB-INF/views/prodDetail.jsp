@@ -1,5 +1,4 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page session="false" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
@@ -27,6 +26,19 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/style.css" type="text/css">
     
+    <style type="text/css">
+    	.starR {
+			font-size: 20px;
+		    letter-spacing: -5px;
+		    cursor: pointer;
+		    color: #c7c7c7;
+		}
+		.starR.on {
+			background-position:0 0;
+			color: #e7ab3c;
+		}
+    </style>
+    
     <script type="text/javascript">
 	    window.onload = function() {
 	        var chk = "${insertMessage}";
@@ -35,11 +47,8 @@
 	            location.reload(true); 
 	        }
 	    }
-	    
-    
     </script>
 </head>
-
 <body>
     <!-- 상단바 Include -->
 	<jsp:include page="Main_Upper.jsp" flush="false"/>
@@ -325,71 +334,91 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="tab-3" role="tabpanel">
-                                    <div class="customer-review-option">
-                                        <h4>고객후기</h4>
-                                        <div class="comment-option">
-                                            <div class="co-item">
-                                                <div class="avatar-pic">
-                                                    <img src="./resources/main/img/product-single/avatar-1.png" alt="">
-                                                </div>
-                                                <div class="avatar-text">
-                                                    <div class="at-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                    </div>
-                                                    <h5>SSibal Rome <span>27 Aug 2019</span></h5>
-                                                    <div class="at-reply">Fucking !</div>
-                                                </div>
-                                            </div>
-                                            <div class="co-item">
-                                                <div class="avatar-pic">
-                                                    <img src="./resources/main/img/product-single/avatar-2.png" alt="">
-                                                </div>
-                                                <div class="avatar-text">
-                                                    <div class="at-rating">
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                    </div>
-                                                    <h5>Jogga sam <span>27 Aug 2019</span></h5>
-                                                    <div class="at-reply">OMG!</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <!-- 내 점수 
-                                        <div class="personal-rating">
-                                            <h6>Your Ratind</h6>
-                                            <div class="rating">
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star"></i>
-                                                <i class="fa fa-star-o"></i>
-                                            </div>
-                                        </div>
-                                        -->
-                                        <div class="leave-comment">
-                                            <h4>후기 남기기</h4>
-                                            <form action="#" class="comment-form">
-                                                <div class="row">
-                                                    <div class="col-lg-6">
-                                                        <input type="text" placeholder="성명" required>
-                                                    </div>
-                                                    <div class="col-lg-6">
-                                                        <input type="text" placeholder="Email" required>
-                                                    </div>
-                                                    <div class="col-lg-12">
-                                                        <textarea placeholder="내용" required></textarea>
-                                                        <button type="submit" class="site-btn">후기 등록</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+	                            	<div class="customer-review-option">
+	                                	<h4>고객리뷰</h4>
+	                                 	<div class="comment-option">
+	                                    	<table id="prTable" name="prTable">
+		                                        <c:forEach var="review" items="${prList}">
+		                                            <div class="co-item">
+		                                                <div class="avatar-pic">
+		                                                    <img src="https://t1.daumcdn.net/cfile/tistory/995499415BA82B591F" alt=""
+		                                                    	style="padding-bottom: 0px;">
+		                                                </div>
+		                                                <div class="avatar-text">
+		                                                    <div class="at-rating">
+		                                                    	<c:if test="${review.pr_star eq 1}">
+		                                                        	<i class="fa fa-star"></i>
+		                                                         	<i class="fa fa-star-o"></i>
+		                                                          	<i class="fa fa-star-o"></i>
+		                                                           	<i class="fa fa-star-o"></i>
+		                                                            <i class="fa fa-star-o"></i>
+		                                                       	</c:if>
+		                                                       	<c:if test="${review.pr_star eq 2}">
+		                                                        	<i class="fa fa-star"></i>
+		                                                         	<i class="fa fa-star"></i>
+		                                                          	<i class="fa fa-star-o"></i>
+		                                                           	<i class="fa fa-star-o"></i>
+		                                                            <i class="fa fa-star-o"></i>
+		                                                       	</c:if>
+		                                                       	<c:if test="${review.pr_star eq 3}">
+		                                                        	<i class="fa fa-star"></i>
+		                                                         	<i class="fa fa-star"></i>
+		                                                          	<i class="fa fa-star"></i>
+		                                                           	<i class="fa fa-star-o"></i>
+		                                                            <i class="fa fa-star-o"></i>
+		                                                       	</c:if>
+		                                                       	<c:if test="${review.pr_star eq 4}">
+		                                                        	<i class="fa fa-star"></i>
+		                                                         	<i class="fa fa-star"></i>
+		                                                          	<i class="fa fa-star"></i>
+		                                                           	<i class="fa fa-star"></i>
+		                                                            <i class="fa fa-star-o"></i>
+		                                                       	</c:if>
+		                                                       	<c:if test="${review.pr_star eq 5}">
+		                                                        	<i class="fa fa-star"></i>
+		                                                         	<i class="fa fa-star"></i>
+		                                                          	<i class="fa fa-star"></i>
+		                                                           	<i class="fa fa-star"></i>
+		                                                           	<i class="fa fa-star"></i>
+		                                                       	</c:if>
+		                                                    </div>
+		                                                    <h5>${review.pr_cm_id}<span>${review.pr_dateSimple}</span></h5>
+		                                                    <div class="at-reply">${review.pr_contents}</div>
+		                                                </div>
+		                                            </div>
+		                                        </c:forEach>
+		                                    </table>    
+	                                    </div>
+                                        <form id="prodReviewFrm" name="prodReviewFrm">
+		                                	<div class="leave-comment">
+		                                    	<h4 style="margin-top: 55px; margin-bottom: 13px;">리뷰 작성</h4>
+		                                    	<div class="starRev" style="margin-bottom: 10px;">
+		                                        	<span class="starR">★</span>
+													<span class="starR" >★</span>
+													<span class="starR" >★</span>
+													<span class="starR" >★</span>
+													<span class="starR" >★</span>
+													<input id="pr_star" type="hidden" name="pr_star" value=''>
+		                                        </div>
+		                                        <div class="row">
+		                                        	<input type="hidden" value="${mb.cm_pfphoto}">
+		                                            <div class="col-lg-6">
+		                                                <input type="text" value="${mb.cm_nick}" readonly style="width: 32%; height: 35px; padding: 5px; color: grey;">
+		                                            </div>
+		                                            <div class="col-lg-6" style="position: absolute; margin-left: 168px;">
+		                                            	<input type="text" value="${mb.cm_id}" readonly style="width: 42%; height: 35px; padding: 5px; color: grey;">
+		                                            </div>
+			                                        <div class="col-lg-12" style="position: absolute; margin-top: 45px;">
+				                                    	<textarea placeholder="리뷰를 작성해주세요." id="pr_contents" name="pr_contents"
+				                                            	required style="width: 58%; height: 150px;"></textarea>
+				                                        <button type="button" id="#reviewBtn" class="site-btn" onclick="prodReviewAjax();"
+				                                            	style="position: absolute; margin-left: -152px; margin-top: 160px;">
+				                                        리뷰 등록
+				                                        </button>
+			                                        </div>
+		                                        </div>
+		                                    </div>
+	                                	</form>
                                     </div>
                                 </div>
                             </div>
@@ -455,5 +484,114 @@
 
 		});
 	}
+	
+	$('.starRev span').click(function(){
+		$(this).parent().children('span').removeClass('on');
+		$(this).addClass('on').prevAll('span').addClass('on');
+		
+		return false;
+	});
+	
+	function prodReviewAjax() {	
+		var prodReviewFrm = $("#prodReviewFrm").serializeObject();
+		prodReviewFrm.pr_pd_code = "${prodDto.pd_code}";
+		prodReviewFrm.pr_star = $("#pr_star").val();
+
+		console.log(prodReviewFrm);
+		var pr_contents = $("#pr_contents").val();
+		
+		if(pr_contents == "" || pr_contents == null) {
+			alert("리뷰를 작성 해 주세요.");
+		}
+		else {
+			$.ajax({
+				url: "prodReview",
+				type: "get",
+				data: prodReviewFrm,
+				dataType: "json",
+				success: function(data) {
+			    	console.log(data.prList);
+			        var prList = '';
+			        for(var i = 0; i < data.prList.length; i++) {
+			        	prList += '<div class="co-item">'
+		                + '<div class="avatar-pic">'
+		                + '<img src="https://t1.daumcdn.net/cfile/tistory/995499415BA82B591F" alt="" style="padding-bottom: 0px;">'
+		                + '</div>'
+		                + '<div class="avatar-text">'
+		                + '<div class="at-rating">'
+			        	switch(data.prList[i].pr_star){
+			         	case 1:
+				          	prList += '<i class="fa fa-star">' + '</i>'
+				            + '<i class="fa fa-star-o">' + '</i>'
+				            + '<i class="fa fa-star-o">' + '</i>'
+				            + '<i class="fa fa-star-o">' + '</i>'
+				            + '<i class="fa fa-star-o">' + '</i>'
+				            + '</div>'
+				            + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_dateSimple + '</span>' + '</h5>'
+				            + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+				            + '</div>'
+							break; 
+			         	case 2:
+			            	prList += '<i class="fa fa-star">' + '</i>'
+			                + '<i class="fa fa-star">' + '</i>'
+			                + '<i class="fa fa-star-o">' + '</i>'
+			                + '<i class="fa fa-star-o">' + '</i>'
+			                + '<i class="fa fa-star-o">' + '</i>'
+			                + '</div>'
+			                + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_dateSimple + '</span>' + '</h5>'
+			                + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+			                + '</div>'
+					        break;
+						case 3:
+							prList += '<i class="fa fa-star">' + '</i>'
+			                + '<i class="fa fa-star">' + '</i>'
+			                + '<i class="fa fa-star">' + '</i>'
+			                + '<i class="fa fa-star-o">' + '</i>'
+			                + '<i class="fa fa-star-o">' + '</i>'
+			                + '</div>'
+			                + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_dateSimple + '</span>' + '</h5>'
+			                + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+			                + '</div>'
+							break;
+						case 4:
+							prList += '<i class="fa fa-star">' + '</i>'
+			                + '<i class="fa fa-star">' + '</i>'
+			                + '<i class="fa fa-star">' + '</i>'
+			                + '<i class="fa fa-star">' + '</i>'
+			                + '<i class="fa fa-star-o">' + '</i>'
+			                + '</div>'
+			                + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_dateSimple + '</span>' + '</h5>'
+			                + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+			                + '</div>'
+							break;
+						case 5:
+							prList += '<i class="fa fa-star">' + '</i>'
+			                + '<i class="fa fa-star">' + '</i>'
+			                + '<i class="fa fa-star">' + '</i>'
+			                + '<i class="fa fa-star">' + '</i>'
+			                + '<i class="fa fa-star">' + '</i>'
+			                + '</div>'
+			                + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_dateSimple + '</span>' + '</h5>'
+			                + '<div class="at-reply">' + data.prList[i].pr_contents + '</div>'
+			                + '</div>'
+							break;
+						}
+			        }	
+					$("#prTable").html(prList);
+					alert("댓글 등록 완료!");
+				},
+				error: function(error) {
+					alert("리뷰 등록 실패");
+				}
+			});
+		}	
+	}
+	
+	
+ 	$(".starR").click(function() {	
+ 		var selecedStar = $('.on').length;
+ 		console.log(selecedStar);
+ 		$("#pr_star").val(selecedStar);
+ 	})
 </script>
 </html>

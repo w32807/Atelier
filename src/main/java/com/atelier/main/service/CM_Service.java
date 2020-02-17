@@ -1,7 +1,10 @@
 package com.atelier.main.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,10 +18,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.atelier.dao.AT_Dao;
 import com.atelier.dao.BT_Dao;
 import com.atelier.dao.CM_Dao;
+import com.atelier.dao.PR_Dao;
 import com.atelier.dto.AT_Dto;
 import com.atelier.dto.BT_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.PD_productDto;
+import com.atelier.dto.PR_Dto;
 import com.atelier.mypage.service.MP_BasketService;
 import com.atelier.vo.PO_Vo;
 
@@ -39,6 +44,9 @@ public class CM_Service {
 	
 	@Setter(onMethod_ = @Autowired)
 	CM_Dao cm_Dao;
+	
+	@Setter(onMethod_ = @Autowired)
+	PR_Dao prDao;
 	
 	@Setter(onMethod_ = {@Autowired}) 
 	private HttpSession session;
@@ -228,21 +236,26 @@ public class CM_Service {
 	
 
 	/* ---------------------------------------------------------------------------------------
-	 * 기능: 상품 상세정보 보기
-	 * 작성자: JWJ
-	 * 작성일: 2020.02.11
+	 * 기능: 상품 상세정보 보기 / 상품 리뷰 리스트 출력
+	 * 작성자: JWJ / KYH
+	 * 작성일: 2020.02.11 / 2020.02.14
 	 -----------------------------------------------------------------------------------------*/
-
 	public ModelAndView getprodDetail(int pd_code) {
 		mav = new ModelAndView();
+		
 		PD_productDto prodDto = cm_Dao.getprodDetail(pd_code);
-			String pi_oriName = cm_Dao.getPi_oriName(pd_code);
-			int at_num = cm_Dao.getAt_num(prodDto.getPd_at_name());
-			prodDto.setImgOriName(pi_oriName);
+		String pi_oriName = cm_Dao.getPi_oriName(pd_code);
+		int at_num = cm_Dao.getAt_num(prodDto.getPd_at_name());
+		prodDto.setImgOriName(pi_oriName);
 			
-			mav.addObject("at_num",at_num);
-			mav.addObject("prodDto",prodDto);
-			mav.setViewName("prodDetail");
+		mav.addObject("at_num",at_num);
+		mav.addObject("prodDto",prodDto);
+		
+		List<PR_Dto> prList = prDao.getProdReviewList(pd_code);
+		
+		mav.addObject("prList", prList);
+		
+		mav.setViewName("prodDetail");
 		
 		return mav;
 	}
@@ -387,7 +400,36 @@ public class CM_Service {
 		return mav;
 	}
 	
-	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 상품 리뷰 등록
+	 * 작성자: KYH
+	 * 작성일: 2020.02.14
+	 -----------------------------------------------------------------------------------------*/
+	public Map<String, List<PR_Dto>> prodReviewWrite(PR_Dto prDto) {
+		Map<String, List<PR_Dto>> prMap = null;
+		try {
+			CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
+			prDto.setPr_cm_id(cmDto.getCm_id());
+			prDto.setPr_cm_nick(cmDto.getCm_nick());
+			prDto.setPr_star(prDto.getPr_star());
+			prDao.prodReviewWrite(prDto);
+			
+			List<PR_Dto> prList = prDao.getProdReviewList(prDto.getPr_pd_code());
+			
+			SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
+			for(int i=0;i<prList.size();i++) {
+				String convertDate = dataFm.format(prList.get(i).getPr_date());
+				prList.get(i).setPr_dateSimple(convertDate);
+			}
+			prMap = new HashMap<String, List<PR_Dto>>();
+			prMap.put("prList", prList);
+		} catch (Exception e) {
+			e.printStackTrace();
+			prMap = null;
+		}
+
+		return prMap;
+	}
 	
 	
 	

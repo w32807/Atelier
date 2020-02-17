@@ -1,7 +1,9 @@
 package com.atelier.main.controller;
 
 
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,6 +25,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atelier.dto.CM_Dto;
+import com.atelier.dto.PR_Dto;
 import com.atelier.main.service.CM_Service;
 
 import lombok.Setter;
@@ -218,14 +221,28 @@ public class MainController {
 	
 	
 	/* ---------------------------------------------------------------------------------------
-	 * 기능: 상품 상세정보 보기
-	 * 작성자: JWJ
-	 * 작성일: 2020.02.11
+	 * 기능: 상품 상세정보 보기 / 상품 리뷰 리스트 출력
+	 * 작성자: JWJ / KYH
+	 * 작성일: 2020.02.11 / 2020.02.14
 	 -----------------------------------------------------------------------------------------*/
 	@GetMapping("prodDetail")
-	public ModelAndView prodDetail(int pd_code) {
+	public ModelAndView getprodDetail(int pd_code) {
 		mav = mServ.getprodDetail(pd_code);
 		return mav;
+	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 상품 리뷰 등록
+	 * 작성자: KYH
+	 * 작성일: 2020.02.14
+	 -----------------------------------------------------------------------------------------*/
+	@GetMapping(value = "prodReview", produces="application/json; charset=utf-8")
+	@ResponseBody
+	public Map<String, List<PR_Dto>> prodReviewWrite(PR_Dto prDto) {
+	
+		Map<String, List<PR_Dto>> prMap = mServ.prodReviewWrite(prDto);
+		
+		return prMap;
 	}
 	
 	//비밀번호변경
@@ -238,7 +255,7 @@ public class MainController {
 	public String myInfoUpdate() {
 		return "myInfoUpdate";
 	}
-
+	
 	/* ---------------------------------------------------------------------------------------
 	 * 기능: 공방회원 신청 페이지로 이동
 	 * 작성자: JSG
