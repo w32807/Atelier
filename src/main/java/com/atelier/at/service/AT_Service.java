@@ -828,6 +828,11 @@ public class AT_Service {
 		String id = cmDto.getCm_id();
 		log.warn(id);
 		
+		AT_Dto at_dto = new AT_Dto();
+		at_dto = atDao.getATSessionData(id);
+		
+		session.setAttribute("at", at_dto);
+		
 		List<RO_Dto> atmList = atDao.getATOrderSearchList(id);
 		
 		//날짜를 yyyy-MM-dd 형태로 변환

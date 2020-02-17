@@ -179,6 +179,20 @@
     		$('.showandhide').hide();
     	}
     	
+    	$('ATConfig').hide();
+		var atid = '${at.at_id}';
+		console.log(mid);
+		console.log(atid);
+		
+		if(mid == atid){
+			$('.ATConfig').show();
+		}
+		
+		$('.ATConfig').show();
+		if(mid != atid){
+			$('.ATConfig').hide();
+		}
+    	
     }
     </script>
 </html>

@@ -204,36 +204,6 @@
 	<!-- Sticky Kit -->
 	<script src="resources/AT_front/js/sticky-kit.min.js"></script>
 	<script type="text/javascript">
-    
-   
-    /* ---------------------------------------------------------------------------------------
-	 * 기능: 로그인 여부에 따른 버튼 출력여부 결정
-	 * 작성자: JSG
-	 * 작성일: 2020.02.04
-	 -----------------------------------------------------------------------------------------*/
-    window.onload = function(){
-    	$('.hideandshow').hide();
-    	var mid = '${mb.cm_id}';
-    	var mname = '${mb.cm_name}';
-    	console.log('세션값'+'${mb}');
-    	console.log(mid);
-    	console.log(mname);
-    	if(mid != ''){
-    		$('.hideandshow').show();
-    	}
-    	
-    	$('.showandhide').show();
-    	var mid1 = '${mb.cm_id}';
-    	var mname1 = '${mb.cm_name}';
-    	console.log('세션값'+'${mb}');
-    	console.log(mid1);
-    	console.log(mname1);
-    	if(mid1 != ''){
-    		$('.showandhide').hide();
-    	}
-    	
-    }
-    </script>
 	
 	
 	<!-- MAIN JS -->

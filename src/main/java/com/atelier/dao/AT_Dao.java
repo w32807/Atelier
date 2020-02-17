@@ -85,4 +85,6 @@ public interface AT_Dao {
 
 	public List<PD_productDto> getregistSelProd(Map<String, String> dataMap);
 	
+	public AT_Dto getATSessionData(String cm_id);
+	
 }

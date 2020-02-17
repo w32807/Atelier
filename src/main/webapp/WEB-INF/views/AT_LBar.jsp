@@ -168,24 +168,5 @@
 	<script src="resources/AT_front/js/main.js"></script>
 </body>
 
-<script type="text/javascript">
-	window.onload = function(){
-		$('ATConfig').hide();
-		var mid = '${mb.cm_id}';
-		var atid = '${at.at_id}';
-		console.log(mid);
-		console.log(atid);
-		
-		if(mid == atid){
-			$('ATConfig').show();
-		}
-		
-		$('.ATConfig').show();
-		if(mid != atid){
-			$('ATConfig').hide();
-		}
-		
-		
-	}
-</script>
+
 </html>

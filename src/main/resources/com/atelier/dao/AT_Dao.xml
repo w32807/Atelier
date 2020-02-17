@@ -170,4 +170,10 @@
    		SELECT * FROM PD WHERE PD_REGIST = #{pd_regist} AND PD_AT_ID = #{cm_id}
    	</select>
    	
+   	<select id="getATSessionData" resultType="com.atelier.dto.AT_Dto">
+	   SELECT *
+	   FROM AT
+	   WHERE AT_ID = #{cm_id}
+	</select>
+   	
 </mapper>
