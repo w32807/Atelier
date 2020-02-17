@@ -79,7 +79,7 @@
                         <a href="https://www.facebook.com/"><i class="ti-facebook"></i></a>
                         <a href="https://twitter.com/"><i class="ti-twitter-alt"></i></a>
                         <a href="https://www.instagram.com/"><i class="ti-linkedin"></i></a>
-                        <a href="https://www.pinterest.co.kr/"><i class="ti-pinterest"></i></a>
+                        <a  href="https://www.pinterest.co.kr/"><i class="ti-pinterest"></i></a>
                         
                     </div>
                 </div>

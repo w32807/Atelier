@@ -72,7 +72,7 @@
 
     <!-- Product Shop Section Begin -->
     <section class="product-shop spad page-details">
-        <div class="container" style="height: 1500px;">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-3">
                 <!--  필터  -->
@@ -262,8 +262,7 @@
                                 </div>
                                 
                                 <ul class="pd-tags">
-                             	    <li><span>카 테 고 리</span> 
-                             	    : ${prodDto.pd_cate}</li>
+                             	    <li><span>카 테 고 리</span> : ${prodDto.pd_cate}</li>
                                     <li><span>제 품 코 드</span> : ${prodDto.pd_code}</li>
                                     <li style="float: right; font-size: 25px;"><span>결 제 금 액  : </span><span id="totalPrice" value="">${prodDto.pd_price}</span></li>
                                 </ul>
@@ -337,8 +336,8 @@
                                 <div class="tab-pane fade" id="tab-3" role="tabpanel">
 	                            	<div class="customer-review-option">
 	                                	<h4>고객리뷰</h4>
-	                                 	<div class="comment-option" id="prTable">
-	                                    	<table name="prTable">
+	                                 	<div class="comment-option">
+	                                    	<table id="prTable" name="prTable">
 		                                        <c:forEach var="review" items="${prList}">
 		                                            <div class="co-item">
 		                                                <div class="avatar-pic">
@@ -348,48 +347,43 @@
 		                                                <div class="avatar-text">
 		                                                    <div class="at-rating">
 		                                                    	<c:if test="${review.pr_star eq 1}">
-		                                                        	<i class="fa fa-star" style="font-size: 15px;"></i>
-		                                                         	<i class="fa fa-star-o" style="font-size: 15px;"></i>
-		                                                          	<i class="fa fa-star-o" style="font-size: 15px;"></i>
-		                                                           	<i class="fa fa-star-o" style="font-size: 15px;"></i>
-		                                                            <i class="fa fa-star-o" style="font-size: 15px;"></i>
+		                                                        	<i class="fa fa-star"></i>
+		                                                         	<i class="fa fa-star-o"></i>
+		                                                          	<i class="fa fa-star-o"></i>
+		                                                           	<i class="fa fa-star-o"></i>
+		                                                            <i class="fa fa-star-o"></i>
 		                                                       	</c:if>
 		                                                       	<c:if test="${review.pr_star eq 2}">
-		                                                        	<i class="fa fa-star" style="font-size: 15px;"></i>
-		                                                         	<i class="fa fa-star" style="font-size: 15px;"></i>
-		                                                          	<i class="fa fa-star-o" style="font-size: 15px;"></i>
-		                                                           	<i class="fa fa-star-o" style="font-size: 15px;"></i>
-		                                                            <i class="fa fa-star-o" style="font-size: 15px;"></i>
+		                                                        	<i class="fa fa-star"></i>
+		                                                         	<i class="fa fa-star"></i>
+		                                                          	<i class="fa fa-star-o"></i>
+		                                                           	<i class="fa fa-star-o"></i>
+		                                                            <i class="fa fa-star-o"></i>
 		                                                       	</c:if>
 		                                                       	<c:if test="${review.pr_star eq 3}">
-		                                                        	<i class="fa fa-star" style="font-size: 15px;"></i>
-		                                                         	<i class="fa fa-star" style="font-size: 15px;"></i>
-		                                                          	<i class="fa fa-star" style="font-size: 15px;"></i>
-		                                                           	<i class="fa fa-star-o" style="font-size: 15px;"></i>
-		                                                            <i class="fa fa-star-o" style="font-size: 15px;"></i>
+		                                                        	<i class="fa fa-star"></i>
+		                                                         	<i class="fa fa-star"></i>
+		                                                          	<i class="fa fa-star"></i>
+		                                                           	<i class="fa fa-star-o"></i>
+		                                                            <i class="fa fa-star-o"></i>
 		                                                       	</c:if>
 		                                                       	<c:if test="${review.pr_star eq 4}">
-		                                                        	<i class="fa fa-star" style="font-size: 15px;"></i>
-		                                                         	<i class="fa fa-star" style="font-size: 15px;"></i>
-		                                                          	<i class="fa fa-star" style="font-size: 15px;"></i>
-		                                                           	<i class="fa fa-star" style="font-size: 15px;"></i>
-		                                                            <i class="fa fa-star-o" style="font-size: 15px;"></i>
+		                                                        	<i class="fa fa-star"></i>
+		                                                         	<i class="fa fa-star"></i>
+		                                                          	<i class="fa fa-star"></i>
+		                                                           	<i class="fa fa-star"></i>
+		                                                            <i class="fa fa-star-o"></i>
 		                                                       	</c:if>
 		                                                       	<c:if test="${review.pr_star eq 5}">
-		                                                        	<i class="fa fa-star" style="font-size: 15px;"></i>
-		                                                         	<i class="fa fa-star" style="font-size: 15px;"></i>
-		                                                          	<i class="fa fa-star" style="font-size: 15px;"></i>
-		                                                           	<i class="fa fa-star" style="font-size: 15px;"></i>
-		                                                           	<i class="fa fa-star" style="font-size: 15px;"></i>
+		                                                        	<i class="fa fa-star"></i>
+		                                                         	<i class="fa fa-star"></i>
+		                                                          	<i class="fa fa-star"></i>
+		                                                           	<i class="fa fa-star"></i>
+		                                                           	<i class="fa fa-star"></i>
 		                                                       	</c:if>
 		                                                    </div>
-		                                                    <form id="${review.pr_num}">
-			                                                    <input type="hidden" value="${review.pr_num}">
-			                                                    <h5>${review.pr_cm_id}<span>${review.pr_dateSimple}</span></h5>
-			                                                    	<img src="resources/AT_front/images/x.png" onclick="reviewDelete(${review.pr_num});"
-			                                                    		style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">
-			                                                    <div class="at-reply">${review.pr_contents}</div>
-		                                                    </form>
+		                                                    <h5>${review.pr_cm_id}<span>${review.pr_dateSimple}</span></h5>
+		                                                    <div class="at-reply">${review.pr_contents}</div>
 		                                                </div>
 		                                            </div>
 		                                        </c:forEach>
@@ -498,6 +492,7 @@
 		return false;
 	});
 	
+
 	function prodReviewAjax() {	
 		var prodReviewFrm = $("#prodReviewFrm").serializeObject();
 		prodReviewFrm.pr_pd_code = "${prodDto.pd_code}";
