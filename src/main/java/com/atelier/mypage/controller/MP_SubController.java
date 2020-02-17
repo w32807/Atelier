@@ -1,8 +1,12 @@
 package com.atelier.mypage.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.atelier.dto.SB_Dto;
@@ -45,10 +49,23 @@ public class MP_SubController {
 		
 		return mav;
 	}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 상품에서 구독추가 메소드
+	 * 작성자: JWJ
+	 * 작성일: 2020.02.08
+	 -----------------------------------------------------------------------------------------*/
+	@GetMapping(value = "SubFromProd", produces="application/json; charset=utf-8")
+	 @ResponseBody
+	public String SubFromProd(SB_Dto sbDto) {
+		
+		String SubFromProd = sbServ.SubFromProd(sbDto);
+		
+		return null;
+	}
+	
+	
 }
-	
-	
-
 
 
 

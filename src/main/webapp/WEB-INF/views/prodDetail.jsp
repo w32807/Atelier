@@ -195,9 +195,14 @@
                                     <div>
                                     <a href="ATdetail?at_num=${at_num}" ><i class="fa fa-home"></i>
                                     <span> ${prodDto.pd_at_name} Home</span></a>
-                                	 <button style="float: right;">구독</button>
+                                	 <button id="subBtn" style="float: right;">구독</button>
                                 	</div>
                                 </div>
+                                <form id="subFrm" method="get">
+                                	<input type="hidden" name="sc_cm_id" value="${mb.cm_id}">
+                                	<input type="hidden" name="sc_at_id" value="${prodDto.pd_at_id}">
+                                </form>
+                             
                                 <div class="pd-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
@@ -739,5 +744,23 @@
 			}
  		});
  	}
+ 	
+    
+    	$("#subBtn").click(function(){
+    		if(confirm("구독 하시겠습니까?")){
+    			var subFrm = $("#subFrm").serializeObject();
+    			$.ajax({
+    				url: "SubFromProd",
+    				type: "get",
+    				data: subFrm,
+    				dataType: "json",
+    				success: function(data) {
+    				},
+    				error: function(error) {
+    					alert("구독 하였습니다!");
+    				}
+    			})
+    		}
+    	})
 </script>
 </html>
