@@ -80,17 +80,19 @@
 					</div>
                   	<form action="ATOrderSearch" method="get" id="rawCancleFrm">
 						<div class="row">
-							<div class="col-md-6" style="left: 100px; display: grid">
+							<div class="col-md-6">
 								<c:forEach begin="0" step="2" var="atoList" items ="${atoList}">
-								<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft"
-									style="margin-bottom: 30px;">
+									<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft"
+										style="margin-bottom: 30px;">
 										<label>
 											<div class="colorlib-icon" style="width: 130px; height: 130px;">
 												<i class="icon-tag"></i>
 											</div>
 											<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">
-												<h3 style="display: inline-block; font-size: 18px;"><b>${atoList.ro_type}</b></h3>	
-												<input type="checkbox" name="prod" value=${atoList.ro_num}><br>
+												<h3 style="display: inline-block; font-size: 18px;">
+													<b>${atoList.ro_type}</b>
+												</h3>	
+												<input type="checkbox" name="rmProdCancleChk" value="${atoList.ro_num}"><br>
 												<b>날짜</b><span>&nbsp;&nbsp;&nbsp;${atoList.ro_dateSimple}</span><br>
 												<b>수량</b><span>&nbsp;&nbsp;&nbsp;${atoList.ro_count}</span><br>
 												<b>단가</b><span>&nbsp;&nbsp;&nbsp;${atoList.ro_rm_price}원</span><br>											
@@ -99,40 +101,32 @@
 									</div>
 								</c:forEach>
 							</div>
-						
-						
-						
-						<div class="col-md-6" style="left: -70px; display: grid"><!--여기가 물건의 2열 시작-->
-							<c:forEach begin="1" step="2" var="atoList" items ="${atoList}">
-								<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft" style="margin-bottom: 30px;">
-								<label>
-								<div class="colorlib-icon" style="width: 130px; height: 130px;">
-
-									<i class="icon-tag"></i>
-								</div>
-								
-								<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">
-
-									<h3 style="display: inline-block; font-size: 18px;"><b>${atoList.ro_type}</b></h3>	
-									<input type="checkbox" name="prod" value=${atoList.ro_num}><br>
-										<b>날짜</b><span>&nbsp;&nbsp;&nbsp;${atoList.ro_dateSimple}</span><br>
-										<b>수량</b><span>&nbsp;&nbsp;&nbsp;${atoList.ro_count}</span><br>
-										<b>단가</b><span>&nbsp;&nbsp;&nbsp;${atoList.ro_rm_price}원</span><br>
-								</div>
-								</label>	
-							</div>
-							</c:forEach>
-								
 							
+							<div class="col-md-6"><!--여기가 물건의 2열 시작-->
+								<c:forEach begin="1" step="2" var="atoList" items ="${atoList}">
+									<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft" style="margin-bottom: 30px;">
+										<label>
+											<div class="colorlib-icon" style="width: 130px; height: 130px;">
+												<i class="icon-tag"></i>
+											</div>
+											<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">
+												<h3 style="display: inline-block; font-size: 18px;">
+													<b>${atoList.ro_type}</b>
+												</h3>	
+												<input type="checkbox" name="rmProdCancleChk" value="${atoList.ro_num}"><br>
+												<b>날짜</b><span>&nbsp;&nbsp;&nbsp;${atoList.ro_dateSimple}</span><br>
+												<b>수량</b><span>&nbsp;&nbsp;&nbsp;${atoList.ro_count}</span><br>
+												<b>단가</b><span>&nbsp;&nbsp;&nbsp;${atoList.ro_rm_price}원</span><br>
+											</div>
+										</label>	
+									</div>
+								</c:forEach>
+							</div>
 						</div>
-						</div>
-						</form>
-					</div>
+					</form>
 				</div>
-
-			
-			
 			</div>
+		</div>
 
 				  <div class="colorlib-feature animate-box" style="text-align: right; width: 1100px; height: 200px;" >
 					
@@ -178,7 +172,7 @@
 	//2. n개의 상품을 취소하시겠습니까?
 	//3. 체크박스에 해당 상품의 상품코드를 value로 넘김		
 	$("#cancleBtn").click(function() {
-		var chkLength = $("input:checkbox[name=prod]:checked").length;//체크박스에 체크가 되어있는 갯수를 구함
+		var chkLength = $("input:checkbox[name=rmProdCancleChk]:checked").length;//체크박스에 체크가 되어있는 갯수를 구함
 		if(chkLength == 0){
 			alert("취소할 상품을 선택 해주세요.");
 		}else {

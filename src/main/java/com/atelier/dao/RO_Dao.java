@@ -8,7 +8,7 @@ public interface RO_Dao {
 
 	public List<RO_Dto> getATOrderInfoList();
 
-	public void rmOrderListCancle(String ro_num);
+	public void rmOrderListCancle(int roNum);
 
 	public void rmPaymentProd(RO_Dto roDto);
 

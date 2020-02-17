@@ -61,39 +61,37 @@ public class AT_Service {
 
 	@Setter(onMethod_ = @Autowired)
 	PD_Dao pdDao;
-	
+
 	@Setter(onMethod_ = @Autowired)
 	RO_Dao roDao;
-	
+
 	@Setter(onMethod_ = @Autowired)
 	RM_Dao rmDao;
-	
+
 	@Setter(onMethod_ = @Autowired)
 	private HttpSession session;
-	
+
 	@Setter(onMethod_ = @Autowired)
 	NT_Dao ntDao;
-	
+
 	@Setter(onMethod_ = @Autowired)
 	PI_Dao piDao;
 
-	/*
-	 * -----------------------------------------------------------------------------
-	 * 		 기능: 제작한 상품 리스트 전체 출력 
-	 * 		작성자: KYH 
-	 * 		작성일 : 2019.02.05
-	 * ----------------------------------------------------------------------------- */
-	
+	/*--------------------------------------------------------------------------------------- 
+	 * 기능: 제작한 상품 리스트 전체 출력
+	 * 작성자: KYH 
+	 * 작성일: 2020.02.05
+	 ----------------------------------------------------------------------------------------- */
 	public ModelAndView getATProdList(Integer pageNum, Integer maxNum) {
-		//세션에 있는 아이디로, AT의 AT_STATE를 가져와서, 활성이면 진행, 아니면 못들어감.
+		// 세션에 있는 아이디로, AT의 AT_STATE를 가져와서, 활성이면 진행, 아니면 못들어감.
 		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
 		String pd_at_id = cmDto.getCm_id();
 		String at_state = atDao.getAt_state(pd_at_id);
-		
-		if(at_state.equals("활성")) {
-		
+
+		if (at_state.equals("활성")) {
+
 			mav = new ModelAndView();
-	
+
 			int num = (pageNum == null) ? 1 : pageNum;
 			maxNum = pdDao.getATProdListCount();
 			Map<String, Object> pageInt = new HashMap<String, Object>();
@@ -101,26 +99,25 @@ public class AT_Service {
 			pageInt.put("maxNum", maxNum);
 			pageInt.put("pd_at_id", pd_at_id);
 			List<PD_productDto> pd = pdDao.getATProdList(pageInt);
-	
+
 			mav.addObject("pd", pd);
 			mav.addObject("paging", getATProdPaging(num));
 			session.setAttribute("pageNum", num);
-	
+
 			mav.setViewName("ATProdManage");
-		}else {
+		} else {
 			mav.setViewName("예외페이지로 넘어갑니다!");
 		}
-		
+
 		return mav;
 	}
 
-	/*
-	 * -----------------------------------------------------------------------------
-	 * 		기능: 판매 등록한 상품 리스트 출력 
-	 * 		작성자: KYH 
-	 * 		작성일 : 2019.02.06
-	 * ----------------------------------------------------------------------------- */
-	
+
+	/*--------------------------------------------------------------------------------------- 
+	 * 기능: 판매 등록한 상품 리스트 출력
+	 * 작성자: KYH 
+	 * 작성일: 2020.02.06
+	 ----------------------------------------------------------------------------------------- */
 	public ModelAndView getATProdRegistTrueList(Integer pageNum, Integer maxNum) {
 		mav = new ModelAndView();
 
@@ -139,13 +136,11 @@ public class AT_Service {
 		return mav;
 	}
 
-	/*
-	 * -----------------------------------------------------------------------------
-	 *  	기능: 판매등록 Paging 처리 
-	 *  	작성자: KYH 
-	 *  	작성일 : 2019.02.05
-	 * ----------------------------------------------------------------------------- */
-	
+	/*--------------------------------------------------------------------------------------- 
+	 * 기능: 판매등록 Paging 처리
+	 * 작성자: KYH 
+	 * 작성일: 2020.02.05
+	 ----------------------------------------------------------------------------------------- */
 	private Object getATProdPaging(int num) {
 		// 전체 글 개수 구하기(from DB)
 		int maxNum = pdDao.getATProdListCount();
@@ -157,14 +152,12 @@ public class AT_Service {
 
 		return pagingHtml;
 	}
-
-	/*
-	 * -----------------------------------------------------------------------------
-	 *  	기능: 제품 목록 관리에서 판매 등록 해제 처리
-	 *  	작성자: KYH 
-	 *  	작성일 : 2019.02.06
-	 * ----------------------------------------------------------------------------- */
 	
+	/*--------------------------------------------------------------------------------------- 
+	 * 기능: 제품 목록 관리에서 판매 등록 해제 기능
+	 * 작성자: KYH 
+	 * 작성일: 2020.02.06
+	 ----------------------------------------------------------------------------------------- */
 	public ModelAndView prodRegistCancleProc(PD_productDto pdDto, String[] checkedBoxArr, RedirectAttributes rttr) {
 
 		for (String pd_code : checkedBoxArr) {
@@ -178,100 +171,62 @@ public class AT_Service {
 		return mav;
 	}
 	
-	/* ---------------------------------------------------------------------------------
-	 * 기능: 발주 조회 리스트 출력 메소드(발주조회 페이지 만드시는 분 수정하세욤!!!)
-	 * 작성자: KYH
-	 * 작성일 : 2019.02.08
-	 * -----------------------------------------------------------------------------------*/
-	public ModelAndView getATOrderInfoList() {
-		mav = new ModelAndView();
-		   
-		List<RO_Dto> orderInfoList = roDao.getATOrderInfoList();
-		   
-		mav.addObject("orderInfoList",orderInfoList);
-		mav.setViewName("ATOrderSearch");
-		   
-		return mav;
-	}
-	  
-	/* ---------------------------------------------------------------------------------
-	 * 기능: 발주 조회에서 넘어오는 목록을 취소하는 메소드
-	 * 작성자: KYH
-	 * 작성일 : 2019.02.08
-	 * -----------------------------------------------------------------------------------*/
-	public ModelAndView rmOrderListCancleProc(RO_Dto roDto, String[] roCheckedBoxArr, RedirectAttributes rttr) {
-		for(String roCheckedBoxValue : roCheckedBoxArr) {
-			roDao.rmOrderListCancle(roCheckedBoxValue);
-		}
-			
-		mav = new ModelAndView();
-		mav.setViewName("redirect:ATOrderSearch");
-		
-		rttr.addFlashAttribute("check", "발주 목록 삭제 완료!");
-		return mav;
-	}
-	
-	/* ---------------------------------------------------------------------------------
+	/*--------------------------------------------------------------------------------------- 
 	 * 기능: 거래처 조회 리스트 출력 메소드
-	 * 작성자: KYH
-	 * 작성일 : 2019.02.09
-	 * -----------------------------------------------------------------------------------*/
+	 * 작성자: KYH 
+	 * 작성일: 2020.02.09
+	 ----------------------------------------------------------------------------------------- */
 	public ModelAndView getATrmList() {
 		mav = new ModelAndView();
-		
+
 		List<RM_Dto> rmList = rmDao.getRMList();
-	
-	
-		mav.addObject("rmList",rmList);
+
+		mav.addObject("rmList", rmList);
 		mav.setViewName("ATOrderRequest");
-		   
+
 		return mav;
 	}
 	
-	/* ---------------------------------------------------------------------------------
+	/*--------------------------------------------------------------------------------------- 
 	 * 기능: 거래처 조회에서 원재료 주문 기능
-	 * 작성자: KYH
-	 * 작성일 : 2019.02.10
-	 * -----------------------------------------------------------------------------------*/
+	 * 작성자: KYH 
+	 * 작성일: 2020.02.10
+	 ----------------------------------------------------------------------------------------- */
 	public String rmOrderProc(RedirectAttributes rttr, MultipartHttpServletRequest multi) {
 		String view = null;
-		
+
 		RM_Dto rmDto = new RM_Dto();
 		RO_Dto roDto = new RO_Dto();
 		String[] rmCheckedBoxArr = multi.getParameterValues("rmProdOrderChk");
-		for(String rm_num : rmCheckedBoxArr) {
-			int numOfProd = Integer.parseInt(multi.getParameter(rm_num));//넘어온 수량은 String이지만 계산을 위해 int로 변환
+		for (String rm_num : rmCheckedBoxArr) {
+			int numOfProd = Integer.parseInt(multi.getParameter(rm_num));// 넘어온 수량은 String이지만 계산을 위해 int로 변환
 
 			log.warn("수량 : " + numOfProd);
-		
-			rmDto = rmDao.getRMPaymentList(rm_num);	//원재료 코드(rm_num), 원재료명(rm_type), 단가(rm_price)
+
+			rmDto = rmDao.getRMPaymentList(rm_num); // 원재료 코드(rm_num), 원재료명(rm_type), 단가(rm_price)
 			roDto.setRo_type(rmDto.getRm_type());
 			roDto.setRo_rm_price(rmDto.getRm_price());
 			roDto.setRo_rm_num(rmDto.getRm_num());
 			roDto.setRo_count(numOfProd);
-			
-			//임시 아이디 지정
-			roDto.setRo_buyer("atelier");
-			//로그인하면 아래 주석 해제 후 실행
-			//CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");		
-			//roDto.setRo_buyer(cmDto.getCm_id());
-			
-			//dao 에서 roDto를 넣는 메소드 작성
-			roDao.rmPaymentProd(roDto);	
-		}				
-		
+
+			CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
+			roDto.setRo_buyer(cmDto.getCm_id());
+
+			// dao 에서 roDto를 넣는 메소드 작성
+			roDao.rmPaymentProd(roDto);
+		}
+
 		view = "redirect:ATOrderRequest";
-		rttr.addFlashAttribute("check","결제가 완료되었습니다.");
-		
+		rttr.addFlashAttribute("check", "결제가 완료되었습니다.");
+
 		return view;
 	}
 	
-	/*-------------------------------------------------------------------
-	 * 기   능 : 공방 신청 요청 서비스. AtRegist.jsp 입력폼에서 받은 데이터를 DB에 저장
-	 * 작성일 : 20.02.05
-	 * 수정일 :
-	 * 작업자 : 정성규
-	 -------------------------------------------------------------------*/
+	/*--------------------------------------------------------------------------------------- 
+	 * 기능: 공방 신청 요청 서비스. AtRegist.jsp 입력폼에서 받은 데이터를 DB에 저장
+	 * 작성자: 정성규
+	 * 작성일: 2020.02.05
+	 ----------------------------------------------------------------------------------------- */
 	public void ATRegistProc(AG_Dto ag_Dto, RedirectAttributes rttr) {
 
 		// boolean b;
@@ -280,20 +235,18 @@ public class AT_Service {
 		// return "main";
 	}
 
-	/*
-	 * -----------------------------------------------------------------------------
-	 * 		 기능: 제품 관리의 상품 등록하기 
-	 *		 작성자: JWJ 
-	 * 		 작성일 : 2019.02.05
-	 * -----------------------------------------------------------------------------*/
-	
+	/*--------------------------------------------------------------------------------------- 
+	 * 기능: 제품 관리의 상품 등록하기
+	 * 작성자: JWJ 
+	 * 작성일: 2020.02.05
+	 ----------------------------------------------------------------------------------------- */
 	@Transactional
 	public String ATProdInsert(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
 		String view = null;
 		PD_productDto prodDto = new PD_productDto();
 		PI_productImgDto prodImgDto = new PI_productImgDto();
 		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
-		
+
 		String pd_at_id = cmDto.getCm_id();
 		String pd_name = multi.getParameter("pd_name");
 		String pd_at_name = multi.getParameter("pd_at_name");
@@ -338,14 +291,12 @@ public class AT_Service {
 		}
 		return view;
 	}
-
-	/*
-	 * -----------------------------------------------------------------------------
-	 *  	기능: 제품 관리의 상품 등록 시 이미지를 등록하기 위한 기능 
-	 * 		작성자: JWJ 
-	 * 		작성일 : 2019.02.05
-	 * -----------------------------------------------------------------------------
-	 */
+	
+	/*--------------------------------------------------------------------------------------- 
+	 * 기능: 제품 관리의 상품 등록 시 이미지를 등록하기 위한 기능
+	 * 작성자: JWJ 
+	 * 작성일: 2020.02.05
+	 ----------------------------------------------------------------------------------------- */
 	public PI_productImgDto prodImgup(MultipartHttpServletRequest multi, int currentPd_code) {
 
 		// 먼저 경로를 구하고 폴더를 만듦
@@ -372,11 +323,12 @@ public class AT_Service {
 		return prodImgDto;
 
 	}
-	 /* ---------------------------------------------------------------------------------
-	  * 기능: 이미지를 저장할 폴더 및 경로 생성
-	  * 작성자: JWJ
-	  * 작성일 : 2019.02.06
-	  -----------------------------------------------------------------------------------*/
+	
+	/*--------------------------------------------------------------------------------------- 
+	 * 기능: 이미지를 저장할 폴더 및 경로 생성
+	 * 작성자: JWJ 
+	 * 작성일: 2020.02.06
+	 ----------------------------------------------------------------------------------------- */
 	public String getRealPath(MultipartHttpServletRequest multi) {
 		String path = multi.getSession().getServletContext().getRealPath("/");
 		path += "resources/prodImg/";
@@ -389,13 +341,12 @@ public class AT_Service {
 		}
 		return path;
 	}
-
-
-	 /* ---------------------------------------------------------------------------------
-	  * 기능: 상품 정보 수정하기위해 해당 상품의 정보를 가져옴
-	  * 작성자: JWJ
-	  * 작성일 : 2019.02.06
-	  -----------------------------------------------------------------------------------*/
+	
+	/*--------------------------------------------------------------------------------------- 
+	 * 기능: 상품 정보 수정하기 위해 해당 상품의 정보를 가져옴
+	 * 작성자: JWJ 
+	 * 작성일: 2020.02.06
+	 ----------------------------------------------------------------------------------------- */
 	public ModelAndView goModifyProd(MultipartHttpServletRequest multi) {
 		mav = new ModelAndView();
 		String modifyProd = multi.getParameter("prod");// 1개의 선택된 체크박스를 가져옴- 상품코드가 1개 넘어옴
@@ -416,30 +367,30 @@ public class AT_Service {
 
 		return mav;
 	}
-	/* ---------------------------------------------------------------------------------
-	  * 기능: 상품 정보 수정
-	  * 작성자: JWJ
-	  * 작성일 : 2019.02.06
-	  -----------------------------------------------------------------------------------*/
-
+	
+	/*--------------------------------------------------------------------------------------- 
+	 * 기능: 상품 정보 수정
+	 * 작성자: JWJ 
+	 * 작성일: 2020.02.06
+	 ----------------------------------------------------------------------------------------- */
 	public String updateProd(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
-		//String view = atDao.ATProdUpdate(multi,rttr);
+		// String view = atDao.ATProdUpdate(multi,rttr);
 		String view = null;
 		PD_productDto prodDto = new PD_productDto();
 		PI_productImgDto prodImgDto = new PI_productImgDto();
-		
-		int pd_code = 	Integer.parseInt(multi.getParameter("pd_code"));
-		String pd_name =  multi.getParameter("pd_name");
-		String pd_at_name =  multi.getParameter("pd_at_name");
-		int pd_numofstock =  Integer.parseInt(multi.getParameter("pd_numofstock"));
-		int pd_price =  Integer.parseInt(multi.getParameter("pd_price"));
-		String pd_option =  multi.getParameter("pd_option");
-		String pd_sex =  multi.getParameter("pd_sex");
-		String pd_type =  multi.getParameter("pd_type");
-		String pd_cate =  multi.getParameter("pd_cate");
-		String pd_datail =  multi.getParameter("pd_detail");
-		String pi_oriname =  multi.getParameter("pi_oriname");
-			
+
+		int pd_code = Integer.parseInt(multi.getParameter("pd_code"));
+		String pd_name = multi.getParameter("pd_name");
+		String pd_at_name = multi.getParameter("pd_at_name");
+		int pd_numofstock = Integer.parseInt(multi.getParameter("pd_numofstock"));
+		int pd_price = Integer.parseInt(multi.getParameter("pd_price"));
+		String pd_option = multi.getParameter("pd_option");
+		String pd_sex = multi.getParameter("pd_sex");
+		String pd_type = multi.getParameter("pd_type");
+		String pd_cate = multi.getParameter("pd_cate");
+		String pd_datail = multi.getParameter("pd_detail");
+		String pi_oriname = multi.getParameter("pi_oriname");
+
 		prodDto.setPd_code(pd_code);
 		prodDto.setPd_at_name(pd_at_name);
 		prodDto.setPd_cate(pd_cate);
@@ -451,35 +402,35 @@ public class AT_Service {
 		prodDto.setPd_sex(pd_sex);
 		prodDto.setPd_type(pd_type);
 		prodImgDto.setPi_oriname(pi_oriname);
-		
+
 		boolean b = atDao.ATProdUpdate(prodDto);
-		
-		 
-		//2. Insert한 상품의 상품코드를 가져와 이미지 업로드
+
+		// 2. Insert한 상품의 상품코드를 가져와 이미지 업로드
 		int currentPd_code = prodDto.getPd_code();
-			//상품 이미지를 먼저 지움
-			atDao.deleteImg(currentPd_code);
-		prodImgDto = prodImgup(multi,currentPd_code);
-		if(b) {
-			//상품 insert 성공하면 해당 상품의 image도 DB에 insert
-				atDao.ATProdImgInsert(prodImgDto);
-				view = "redirect:ATProdManage";
-				rttr.addFlashAttribute("check", "등록 완료");
-			
-		}else {
-			//상품 insert 실패
+		// 상품 이미지를 먼저 지움
+		atDao.deleteImg(currentPd_code);
+		prodImgDto = prodImgup(multi, currentPd_code);
+		if (b) {
+			// 상품 insert 성공하면 해당 상품의 image도 DB에 insert
+			atDao.ATProdImgInsert(prodImgDto);
+			view = "redirect:ATProdManage";
+			rttr.addFlashAttribute("check", "등록 완료");
+
+		} else {
+			// 상품 insert 실패
 			view = "redirect:ATProdRegist";
 			rttr.addFlashAttribute("check", "등록 실패");
-			
+
 		}
 		return view;
-		
+
 	}
-	 /* ---------------------------------------------------------------------------------
-     * 기능: 선택한 상품의 판매여부를 판매 (T)로 전환
-     * 작성자: JWJ
-     * 작성일 : 2019.02.07
-     -----------------------------------------------------------------------------------*/
+	
+	/*--------------------------------------------------------------------------------------- 
+	 * 기능: 선택한 상품의 판매여부를 판매 (T)로 전환
+	 * 작성자: JWJ 
+	 * 작성일: 2020.02.07
+	 ----------------------------------------------------------------------------------------- */
 	public String changeProdRegist(String[] chkedBoxArr, RedirectAttributes rttr) {
 		String view = null;
 
@@ -492,12 +443,12 @@ public class AT_Service {
 		return view;
 	}
 
-	/*-------------------------------------------------------------------
+	/*---------------------------------------------------------------------------------------
 	 * 기능 : 응원의 한마디
 	 * 책임자 : 김병현, 김종현
-	 * 작성일 : 2020.02.06		최종수정일 : 2020.02.06
-	 ------------------------------------------------------------------- */
-
+	 * 작성일 : 2020.02.06
+	 * 최종수정일 : 2020.02.06
+	 ----------------------------------------------------------------------------------------- */
 	public Map<String, List<SM_Dto>> replyInsert(SM_Dto reply) {
 
 		Map<String, List<SM_Dto>> rmap = null;
@@ -528,15 +479,11 @@ public class AT_Service {
 		return mav;
 	}
 	
-
-	
-
-	
-	/* ---------------------------------------------------------------------------------------
+	/*--------------------------------------------------------------------------------------- 
 	 * 기능: 선택한 상품을 삭제
-	 * 작성자: JWJ
-	 * 작성일: 2019.02.07
-	 -----------------------------------------------------------------------------------------*/
+	 * 작성자: JWJ 
+	 * 작성일: 2020.02.07
+	 ----------------------------------------------------------------------------------------- */
 	public String deleteProd(String[] chkedBoxArr, RedirectAttributes rttr) {
 		String view = null;
 
@@ -548,13 +495,12 @@ public class AT_Service {
 		rttr.addFlashAttribute("check", "삭제 완료");
 		return view;
 	}
-
 	
-	/* ---------------------------------------------------------------------------------------
+	/*--------------------------------------------------------------------------------------- 
 	 * 기능: 선택한 주문 내역의 배송상태를 변경
-	 * 작성자: JWJ
-	 * 작성일: 2019.02.07
-	 -----------------------------------------------------------------------------------------*/
+	 * 작성자: JWJ 
+	 * 작성일: 2020.02.07
+	 ----------------------------------------------------------------------------------------- */
 	public String chgDeliveryState(String[] chkedBoxArr, RedirectAttributes rttr) {
 		String view = null;
 
@@ -566,14 +512,13 @@ public class AT_Service {
 		rttr.addFlashAttribute("check", "상태변경 완료!");
 		return view;
 	}
-
-		
-	/* ---------------------------------------------------------------------------------------
-	 * 기능: 주문 조회 페이지에서 주문 상태별로 출력하기 위한 기능
-	 * 작성자: JWJ
+	
+	/*--------------------------------------------------------------------------------------- 
+	 * 기능: 주문 조회 페이지에서 주문 상태별로 출력하기 위한 기능 
+	 * 작성자: JWJ 
 	 * 작성일: 2020.02.09
-	 * 수정일: 2020.02.11
-	 -----------------------------------------------------------------------------------------*/
+	 * 수정일: 2020.02.10
+	 ----------------------------------------------------------------------------------------- */
 	public ModelAndView getATOrderList(String orderState) {
 		// 1. 세션에서 id를 가져와 주문테이블에서 그 아이디에 해당하는 주문을 모두 가져옴.
 		mav = new ModelAndView();
@@ -587,7 +532,7 @@ public class AT_Service {
 
 		if (orderState == null) {
 			po_Vo.setPo_state("before");
-		}else {
+		} else {
 			switch (orderState) {
 			case "before":
 				po_Vo.setPo_state("before");
@@ -600,9 +545,6 @@ public class AT_Service {
 				break;
 			}
 		}
-		
-		
-		
 
 		List<PO_Vo> poDtoList = atDao.getATOrderList(po_Vo);
 
@@ -615,9 +557,8 @@ public class AT_Service {
 		// 원하는건 PO_VOList
 
 		mav.addObject("poDtoList", poDtoList);
-		mav.addObject("check",po_Vo.getPo_state());
+		mav.addObject("check", po_Vo.getPo_state());
 		mav.setViewName("ATOrderState");
-		
 
 		return mav;
 	}
@@ -642,221 +583,222 @@ public class AT_Service {
 	 * 
 	 * return poDtomap; }
 	 */
-	/* ---------------------------------------------------------------------------------
-	  * 기능: 공지사항 작성
-	  * 작성자: KJH
-	  * 작성일 : 2020.02.10		최종수정일 : 2020.02.11
-	  -----------------------------------------------------------------------------------*/
+	/*
+	 * -----------------------------------------------------------------------------
+	 * 기능: 공지사항 작성 
+	 * 작성자: KJH
+	 * 작성일 : 2020.02.10
+	 * 최종수정일 : 2020.02.11
+	 * ------------------------------------------------------------------------------ */
 	public ModelAndView noticeWrite(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
 		log.warn("noticeserv");
-		
+
 		mav = new ModelAndView();
-		
+
 		String title = multi.getParameter("at_nt_title");
 		String contents = multi.getParameter("at_nt_contents");
 		String id = multi.getParameter("at_nt_id");
-		log.info(title+","+contents+","+id);
-		
+		log.info(title + "," + contents + "," + id);
+
 		AT_NT_Dto notice = new AT_NT_Dto();
 		notice.setAt_nt_title(title);
 		notice.setAt_nt_contents(contents);
 		notice.setAt_nt_id(id);
-		
+
 		String view = null;
-		
+
 		try {
 			ntDao.noticeWrite(notice);
 			view = "redirect:ATNotice";
-			rttr.addFlashAttribute("check",2);
+			rttr.addFlashAttribute("check", 2);
 		} catch (Exception e) {
-			view = "redirect:ATNoticeWrite";//redirect로, writeFrm에 가라
-			rttr.addFlashAttribute("check",1);
+			view = "redirect:ATNoticeWrite";// redirect로, writeFrm에 가라
+			rttr.addFlashAttribute("check", 1);
 		}
 		mav.setViewName(view);
-		//mav에 데이터를 담지 않아도 되나..?? - Insert를 하니까 상관 없음
+		// mav에 데이터를 담지 않아도 되나..?? - Insert를 하니까 상관 없음
 		return mav;
 	}
 
-	/* ---------------------------------------------------------------------------------
-	  * 기능: 공지사항 출력
-	  * 작성자: KJH
-	  * 작성일 : 2020.02.10		최종수정일 : 2020.02.13
-	  -----------------------------------------------------------------------------------*/
+	/*
+	 * -----------------------------------------------------------------------------
+	 * 기능: 공지사항 출력
+	 * 작성자: KJH 
+	 * 작성일 : 2020.02.10 
+	 * 최종수정일 : 2020.02.13
+	 * ----------------------------------------------------------------------------- */
 	public ModelAndView getATNoticeList(Integer pageNum) {
 		log.info("getATNoticeList() - pageNum : " + pageNum);
 		mav = new ModelAndView();
-		
-		int num = (pageNum == null)? 1 : pageNum;//맨 처음에는 넘어오는 페이지 넘버가 없기 때문에 1페이지부터 시작함
 
-		List<AT_NT_Dto> nList = ntDao.getList(num);//페이지 번호를 가져오고, 그 번호에 해당하는 List를 가져온다.
-		mav.addObject("bList", nList);//bList라는 이름으로 bList 데이터를 넣겠다.
-		//------추가분-----------------------------------------------------------------------------------------
-		mav.addObject("paging",getPaging(num));//여기서 num은 페이지 번호
-		//-----------------------------------------------------------------------------------------------------
-		mav.setViewName("ATNotice");//mav를 보낼 jsp파일의 이름
+		int num = (pageNum == null) ? 1 : pageNum;// 맨 처음에는 넘어오는 페이지 넘버가 없기 때문에 1페이지부터 시작함
+
+		List<AT_NT_Dto> nList = ntDao.getList(num);// 페이지 번호를 가져오고, 그 번호에 해당하는 List를 가져온다.
+		mav.addObject("bList", nList);// bList라는 이름으로 bList 데이터를 넣겠다.
+		// ------추가분-----------------------------------------------------------------------------------------
+		mav.addObject("paging", getPaging(num));// 여기서 num은 페이지 번호
+		// -----------------------------------------------------------------------------------------------------
+		mav.setViewName("ATNotice");// mav를 보낼 jsp파일의 이름
 		session.setAttribute("pageNum", num);
 		return mav;//
-		
+
 	}
-	
+
 	private Object getPaging(int num) {
-		//전체 글 개수 구하기(from DB)
+		// 전체 글 개수 구하기(from DB)
 		int maxNum = ntDao.getBoardCount();
-		int listCount = 10;//페이지 당 글 갯수
-		int pageCount = 2; //한 그룹당 페이지 갯수
-		String listName = "ATNotice";//BoardController의 RequestMapping 과 똑같아야 함.
+		int listCount = 10;// 페이지 당 글 갯수
+		int pageCount = 2; // 한 그룹당 페이지 갯수
+		String listName = "ATNotice";// BoardController의 RequestMapping 과 똑같아야 함.
 		Paging paging = new Paging(maxNum, num, listCount, pageCount, listName);
-		String pagingHtml = paging.makeHtmlPaging();		
+		String pagingHtml = paging.makeHtmlPaging();
 
 		return pagingHtml;
 	}
 
-	/* ---------------------------------------------------------------------------------
-	  * 기능: 공지사항 세부내용 출력
-	  * 작성자: KJH
-	  * 작성일 : 2020.02.10		최종수정일 : 2020.02.13
-	  -----------------------------------------------------------------------------------*/
+	/*
+	 * -----------------------------------------------------------------------------
+	 * 기능: 공지사항 세부내용 출력 
+	 * 작성자: KJH 
+	 * 작성일 : 2020.02.10 
+	 * 최종수정일 : 2020.02.13
+	 * ----------------------------------------------------------------------------- */
 	public ModelAndView getNoticeContents(Integer at_nt_num) {
 		mav = new ModelAndView();
 		ntDao.upView(at_nt_num);
 		AT_NT_Dto anDto = ntDao.getContents(at_nt_num);
-		
+
 		AT_NT_Dto getNoticeContents = ntDao.getContents(at_nt_num);
-		CM_Dto sessionMember = (CM_Dto)session.getAttribute("mb");
+		CM_Dto sessionMember = (CM_Dto) session.getAttribute("mb");
 		String getSessionId = sessionMember.getCm_id();
 		String getId = getNoticeContents.getAt_nt_id();
-		
-		if(getId.equals(getSessionId)) {
-			
-			mav.addObject("deleteCheck",1);
+
+		if (getId.equals(getSessionId)) {
+
+			mav.addObject("deleteCheck", 1);
+		} else {
+			mav.addObject("deleteCheck", 0);
 		}
-		else {
-			mav.addObject("deleteCheck",0);
-		}
-		mav.addObject("board", anDto);//board는 공지사항 내용출력 ${board.at_nt_contents}
-		
+		mav.addObject("board", anDto);// board는 공지사항 내용출력 ${board.at_nt_contents}
+
 		mav.setViewName("ATNoticeDetail");
-	
-		
+
 		return mav;
 	}
-	/* ---------------------------------------------------------------------------------
-	  * 기능: 공지사항 삭제
-	  * 작성자: KJH
-	  * 작성일 : 2020.02.10		최종수정일 : 2020.02.13
-	  -----------------------------------------------------------------------------------*/
+
+	/*
+	 * -----------------------------------------------------------------------------
+	 * 기능: 공지사항 삭제 
+	 * 작성자: KJH 
+	 * 작성일 : 2020.02.10 
+	 * 최종수정일 : 2020.02.13
+	 * ----------------------------------------------------------------------------- */
 	public String delNotice(int at_nt_num, RedirectAttributes rttr) {
-		
+
 		AT_NT_Dto getBoardContents = ntDao.getContents(at_nt_num);
-		CM_Dto sessionMember =(CM_Dto)session.getAttribute("mb");
+		CM_Dto sessionMember = (CM_Dto) session.getAttribute("mb");
 		String getSessionId = sessionMember.getCm_id();
 		String getId = getBoardContents.getAt_nt_id();
-		if(getId.equals(getSessionId)) {
+		if (getId.equals(getSessionId)) {
 
 			ntDao.delNoticeContents(at_nt_num);
-			
-			String view = "redirect:ATNotice?pageNum="+session.getAttribute("pageNum");//redirect로, writeFrm에 가라
-			rttr.addFlashAttribute("check","삭제 완료!");
+
+			String view = "redirect:ATNotice?pageNum=" + session.getAttribute("pageNum");// redirect로, writeFrm에 가라
+			rttr.addFlashAttribute("check", "삭제 완료!");
 			return view;
-		}
-		else {
-			String view = "redirect:ATNoticeDetail?at_nt_num="+at_nt_num;
-			rttr.addFlashAttribute("check","다른 사람의 글은 삭제 할 수 없습니다. ");
+		} else {
+			String view = "redirect:ATNoticeDetail?at_nt_num=" + at_nt_num;
+			rttr.addFlashAttribute("check", "다른 사람의 글은 삭제 할 수 없습니다. ");
 			return view;
 		}
 	}
+
 	/*-------------------------------------------------------------------
-	 * 기능 : 발주 리스트 조회 서비스
-	 * 작성자: JSH
-	 * 작성일 : 2020.02.11
+	 * 기능 : 발주 리스트 조회 서비스 / 발주 조회 리스트 취소 서비스
+	 * 작성자: JSH / KYH
+	 * 작성일 : 2020.02.11 / 2020.02.08
 	 ------------------------------------------------------------------- */
-	public ModelAndView getATOrderSearchList(HttpServletRequest request) {
+	public ModelAndView getATOrderSearchList(HttpServletRequest request, RedirectAttributes rttr) {
 		mav = new ModelAndView();
-		
+
 		log.warn("발주 리스트 조회 서비스 시작");
-		
-		CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
+
+		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
 		String id = cmDto.getCm_id();
 		log.warn(id);
 		
-		
-		
-		
-		
-		//취소를 위한 처리
-		String[] chkedBoxArr = request.getParameterValues("prod");//체크박스의 값들이 넘어옴
-		if (chkedBoxArr == null) {
-			//취소신청한 품목이 없음..
-			//사실 jsp의 자바스크립트에서 체크를 안 했을시의 처리를 했음.
-		} else {
-			//취소를 신청한 품목이 있다면
-			for(String chkedBoxValue : chkedBoxArr) {
-				log.warn(chkedBoxValue + "발주 삭제");
-				orderCancel(chkedBoxValue);
-				//주문번호를 이용한 취소처리...
-				//취소를 하고 다시 ATCheckOrder로 가면 될 것 같습니다.
-			}
-		}
-		
-		List<RO_Dto> atoList = atDao.getATOrderSearchList(id);;
-		
-		//날짜를 yyyy-MM-dd 형태로 변환
+		List<RO_Dto> atoList = atDao.getATOrderSearchList(id);
+
+		// 날짜를 yyyy-MM-dd 형태로 변환
 		SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
-		for(int i=0;i<atoList.size();i++) {
+		for (int i = 0; i < atoList.size(); i++) {
 			String convertDate = dataFm.format(atoList.get(i).getRo_date());
 			atoList.get(i).setRo_dateSimple(convertDate);
 		}
 		
+		// 취소를 위한 처리
+		String[] roCheckedBoxArr = request.getParameterValues("rmProdCancleChk");// 체크박스의 값들이 넘어옴
+		if (roCheckedBoxArr == null) {
+			// 취소신청한 품목이 없음..
+			// 사실 jsp의 자바스크립트에서 체크를 안 했을시의 처리를 했음.
+		} else {
+			// 취소를 신청한 품목이 있다면
+			for (String ro_num : roCheckedBoxArr) {
+				int roNum = Integer.parseInt(ro_num);
+				roDao.rmOrderListCancle(roNum);
+			}
+			mav = new ModelAndView();
+			mav.setViewName("redirect:ATOrderSearch");
+
+			rttr.addFlashAttribute("check", "발주 목록 삭제 완료!");
+			return mav;
+		}
+
 		mav.addObject("atoList", atoList);
 		mav.setViewName("ATOrderSearch");
-		
+
 		return mav;
 	}
-	
+
 	/*-------------------------------------------------------------------
 	 * 기능 : 공방 관리 홈 리스트 출력 서비스
 	 * 작성자: JSH
 	 * 작성일 : 2020.02.11
 	 ------------------------------------------------------------------- */
 	public ModelAndView getATManagerList() {
-		
+
 		mav = new ModelAndView();
-		
+
 		log.warn("발주 리스트 조회 서비스 시작");
-		
-		CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
+
+		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
 		String id = cmDto.getCm_id();
 		log.warn(id);
-		
-		AT_Dto at_dto = new AT_Dto();
-		at_dto = atDao.getATSessionData(id);
-		
-		session.setAttribute("at", at_dto);
-		
+
 		List<RO_Dto> atmList = atDao.getATOrderSearchList(id);
-		
-		//날짜를 yyyy-MM-dd 형태로 변환
+
+		// 날짜를 yyyy-MM-dd 형태로 변환
 		SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
-		for(int i=0;i<atmList.size();i++) {
+		for (int i = 0; i < atmList.size(); i++) {
 			String convertDate = dataFm.format(atmList.get(i).getRo_date());
 			atmList.get(i).setRo_dateSimple(convertDate);
 		}
-		
-		//	구독자 수 출력
+
+		// 구독자 수 출력
 		int subNum = SubscribeNum(id);
-		
-		//	제품 오더 수 출력
+
+		// 제품 오더 수 출력
 		int orderNum = prodOrderNum(id);
-		
-		//	등록된 상품 수 출력
+
+		// 등록된 상품 수 출력
 		int prodNum = prodNum(id);
-		
+
 		mav.addObject("prodNum", prodNum);
 		mav.addObject("orderNum", orderNum);
 		mav.addObject("subNum", subNum);
 		mav.addObject("atmList", atmList);
 		mav.setViewName("ATManager");
-		
+
 		return mav;
 	}
 
@@ -869,19 +811,19 @@ public class AT_Service {
 		int parCancel = Integer.parseInt(chkedBoxValue);
 		atDao.delATOrder(parCancel);
 	}
-	
+
 	/*-------------------------------------------------------------------
 	 * 기능 : 공방 관리 홈 리스트 출력 서비스 / 구독자 수 출력
 	 * 작성자: JSH
 	 * 작성일 : 2020.02.12
 	 ------------------------------------------------------------------- */
-	
+
 	public int SubscribeNum(String id) {
 		int Subscribe = atDao.getSubscribeNum(id);
-		
+
 		return Subscribe;
 	}
-	
+
 	/*-------------------------------------------------------------------
 	 * 기능 : 공방 관리 홈 리스트 출력 서비스 / 제품 오더 수
 	 * 작성자: JSH
@@ -889,7 +831,7 @@ public class AT_Service {
 	 ------------------------------------------------------------------- */
 	public int prodOrderNum(String id) {
 		int prodOrder = atDao.getProdOrderNum(id);
-		
+
 		return prodOrder;
 	}
 
@@ -900,92 +842,95 @@ public class AT_Service {
 	 ------------------------------------------------------------------- */
 	public int prodNum(String id) {
 		int prodNum = atDao.getprodNum(id);
-		
+
 		return prodNum;
 	}
-	
-	/* ---------------------------------------------------------------------------------------
-	 * 기능: 공방의 리스트를 출력
-	 * 작성자: 정성규
+
+	/*
+	 * -----------------------------------------------------------------------------
+	 * 기능: 공방의 리스트를 출력 
+	 * 작성자: 정성규 
 	 * 작성일: 2020.02.10
-	 -----------------------------------------------------------------------------------------*/
+	 * ----------------------------------------------------------------------------- */
 	public ModelAndView printATList() {
 		mav = new ModelAndView();
-		List<AT_Dto> at_list = atDao.getATList(); 
-		
+		List<AT_Dto> at_list = atDao.getATList();
+
 		int listsize = at_list.size();
-		
+
 		System.out.println(listsize);
 		List<AT_Dto> at_recommend_list = new ArrayList<AT_Dto>();
-		
+
 		// 추천공방 5개를 추첨
-		for(int i = 0; i < 5; i++) {
-			int ran = (int)(Math.random() * listsize + 1);
-			
+		for (int i = 0; i < 5; i++) {
+			int ran = (int) (Math.random() * listsize + 1);
+
 			at_recommend_list.add(atDao.getRecommendAT(ran));
-			
+
 			// 추천공방 중복 방지
-			for(int j=0; j<i-1; j++) {
-				if(at_recommend_list.get(i).getAt_seq() == at_recommend_list.get(j).getAt_seq()) {
+			for (int j = 0; j < i - 1; j++) {
+				if (at_recommend_list.get(i).getAt_seq() == at_recommend_list.get(j).getAt_seq()) {
 					at_recommend_list.remove(i);
 					i--;
 					System.out.println("중복이다");
 				}
 			}
 		}
-		
+
 		mav.addObject("at_list", at_list);
 		mav.addObject("at_recommend_list", at_recommend_list);
 		mav.setViewName("ATMain");
 		return mav;
 	}
-	
-	/* ---------------------------------------------------------------------------------------
-	 * 기능: 공방에서 만든 상품의 리스트를 출력
-	 * 작성자: 정성규
+
+	/*
+	 * -----------------------------------------------------------------------------
+	 * 기능: 공방에서 만든 상품의 리스트를 출력 
+	 * 작성자: 정성규 
 	 * 작성일: 2020.02.10
-	 -----------------------------------------------------------------------------------------*/
+	 * ----------------------------------------------------------------------------- */
 	public ModelAndView getATDetail(int at_num) {
 		// TODO Auto-generated method stub
 		mav = new ModelAndView();
 		AT_Dto at_dto = new AT_Dto();
 		PD_productDto pd_dto = new PD_productDto();
 		PI_productImgDto pi_dto = new PI_productImgDto();
-		
+
 		at_dto = atDao.getATDetailData(at_num);
-		
+
 		session.setAttribute("at", at_dto);
-		
-		List<PI_productImgDto>piList = new ArrayList<PI_productImgDto>();
+
+		List<PI_productImgDto> piList = new ArrayList<PI_productImgDto>();
 
 		List<PD_productDto> pdList = pdDao.getPDListByAT(at_dto.getAt_id());
-		
-		for(int i = 0; i < pdList.size(); i++) {
-			//piList = piDao.getPDImageList(pd_dto.getPd_code());
+
+		for (int i = 0; i < pdList.size(); i++) {
+			// piList = piDao.getPDImageList(pd_dto.getPd_code());
 			piList.add(piDao.getPDImageList(pdList.get(i).getPd_code()));
-			//piList.add(pi_dto);
+			// piList.add(pi_dto);
 		}
-		
+
 		mav.addObject("at_dto", at_dto);
 		mav.addObject("pdList", pdList);
 		mav.addObject("piList", piList);
 		mav.setViewName("ATDetail");
 		return mav;
 	}
-	
-	/* ---------------------------------------------------------------------------------------
+
+	/*
+	 * -----------------------------------------------------------------------------
 	 * 기능: 공방 정보 수정 
-	 * 작성자: 정성규
+	 * 작성자: 정성규 
 	 * 작성일: 2020.02.10
-	 -----------------------------------------------------------------------------------------*/
+	 * ----------------------------------------------------------------------------- */
 	public ModelAndView updateATData(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
 		AT_Dto at_dto = new AT_Dto();
 		AT_Dto at_dto_temp = new AT_Dto();
 
 		int check = Integer.parseInt(multi.getParameter("fileCheck"));
-		
-		at_dto_temp = (AT_Dto)session.getAttribute("at");
-		
+
+		at_dto_temp = (AT_Dto) session.getAttribute("at");
+
 		at_dto.setAt_id(at_dto_temp.getAt_id());
 		at_dto.setAt_addr(multi.getParameter("at_addr"));
 		at_dto.setAt_snsaddr(multi.getParameter("at_snsaddr"));
@@ -998,66 +943,66 @@ public class AT_Service {
 		try {
 			atDao.updateATData(at_dto);
 			view = "ATDetail";
-			rttr.addFlashAttribute("check",2);
-		} catch(Exception e) {
+			rttr.addFlashAttribute("check", 2);
+		} catch (Exception e) {
 			view = "redirect:ATInfoModify";
-			rttr.addFlashAttribute("check",1);
+			rttr.addFlashAttribute("check", 1);
 		}
-		
-		if(check == 1) {//파일이 들어왔을 때...
-			//파일 처리 메소드 호출
-			fileup(multi,at_dto.getAt_id(), at_dto);
+
+		if (check == 1) {// 파일이 들어왔을 때...
+			// 파일 처리 메소드 호출
+			fileup(multi, at_dto.getAt_id(), at_dto);
 		}
-		
+
 		mav.setViewName(view);
-		
-		//session.setAttribute(name, value);
+
+		// session.setAttribute(name, value);
 		session.removeAttribute("at");
-		
+
 		return mav;
 	}
-	
-	/* ---------------------------------------------------------------------------------------
-	 * 기능: 마이페이지 수정 서비스 / 프로필 이미지 업로드
-	 * 수정자 : JSG
-	 * 작성자: JSH
+
+	/*
+	 * -----------------------------------------------------------------------------
+	 * 기능: 마이페이지 수정 서비스 / 프로필 이미지 업로드 
+	 * 수정자 : JSG 
+	 * 작성자: JSH 
 	 * 작성일: 2020.02.05
-	 -----------------------------------------------------------------------------------------*/
+	 * ---------------------------------------------------------------------------- */
 	public boolean fileup(MultipartHttpServletRequest multi, String AT_ID, AT_Dto at_dto) {
-		
+
 		log.warn("이미지 업로드 시작");
 		String milsec = String.valueOf(System.currentTimeMillis());
-		String AT_ID_milsec = milsec+AT_ID;
-		
+		String AT_ID_milsec = milsec + AT_ID;
+
 		AT_ID_milsec = AT_ID_milsec.replace(".com", ".jpg");
-		
+
 		System.out.println("예상 파일명 :: " + AT_ID_milsec);
-		
+
 		at_dto.setAt_logo(AT_ID_milsec);
-		
+
 		System.out.println("시간 :: " + AT_ID_milsec);
-		
+
 		MultipartFile mf = multi.getFile("input_img");
 		String path = multi.getSession().getServletContext().getRealPath("/");
 		path += "resources/upload/logo/";
 		log.warn(path);
 
-		
-		File dir = new File(path);//path 경로에 있는 파일에 관한 객체
-		if(dir.isDirectory() == false) {//경로(저장할 upload폴더가 없으면 만들어주자.
-			dir.mkdir();//directory를 만들자(upload폴더 생성), 위의 path에 경로를 저장했기때문에 없으면 upload를 만든다
-							 //servlet-context에서 resources경로를 가지고 있는 애들은 다 resources로 보내주는 태그가 있다.
+		File dir = new File(path);// path 경로에 있는 파일에 관한 객체
+		if (dir.isDirectory() == false) {// 경로(저장할 upload폴더가 없으면 만들어주자.
+			dir.mkdir();// directory를 만들자(upload폴더 생성), 위의 path에 경로를 저장했기때문에 없으면 upload를 만든다
+						// servlet-context에서 resources경로를 가지고 있는 애들은 다 resources로 보내주는 태그가 있다.
 		}
-		
+
 		boolean fResult = false;
 
 		String profileName = AT_ID;
 		String fileName = AT_ID_milsec.replace("com", "jpg");
-		//String nameFile = fileName.replace(".jpg", "");
-		
+		// String nameFile = fileName.replace(".jpg", "");
+
 		try {
 			log.warn("파일업로드 try 문 시작");
-			mf.transferTo(new File(path+fileName));
+			mf.transferTo(new File(path + fileName));
 			fResult = atDao.pfPhoto(at_dto);
 		} catch (IOException e) {
 			fResult = false;
@@ -1065,56 +1010,58 @@ public class AT_Service {
 
 		return fResult;
 	}
-	
-	/* ---------------------------------------------------------------------------------------
-	 * 기능: 회원 정보 / 프로필 사진 출력
-	 * 수정자 : JSG
-	 * 작성자: JSH
+
+	/*
+	 * -----------------------------------------------------------------------------
+	 * 기능: 회원 정보 / 프로필 사진 출력 
+	 * 수정자 : JSG 
+	 * 작성자: JSH 
 	 * 작성일: 2020.02.06
-	 -----------------------------------------------------------------------------------------*/
+	 * ----------------------------------------------------------------------------- */
 	public void profileIMG(String name, HttpServletRequest req, HttpServletResponse resp) {
-		//서버의 파일 위치를 얻자.
+		// 서버의 파일 위치를 얻자.
 		log.warn("이미지 출력 시작");
 		String path = req.getSession().getServletContext().getRealPath("/") + "resources/upload/logo/";
 		log.warn(path);
-		
+
 		String profileName = name;
 		String fileName = profileName.replace("com", "jpg");
-		
+
 		log.warn(path);
 		log.warn(fileName);
 
 		InputStream is = null;// 서버 컴퓨터 안에 저장된 파일을 읽어오는 것
 		OutputStream os = null;// 파일을 사용자 컴퓨터로 전송하기 위한 것
-		
-		String realPath = path+fileName;
+
+		String realPath = path + fileName;
 		log.warn(realPath);
-		
+
 		try {
 			// 파일 객체 생성
 			File file = new File(realPath);
 			is = new FileInputStream(file);
-			
-			//응답 객체 (resp)의 헤더 설정
-			//파일 전송용 contentType 설정
+
+			// 응답 객체 (resp)의 헤더 설정
+			// 파일 전송용 contentType 설정
 			resp.setContentType("application/octet-stream");
-			//resp.setHeader("content-Disposition", "attachment; filename=\"" + fileName +"\"");
+			// resp.setHeader("content-Disposition", "attachment; filename=\"" + fileName
+			// +"\"");
 			resp.setHeader("content-Disposition", "attachment; filename=" + fileName);
-			//attachment; filename=\파일명.txt"\가 됨
-			
-			//응답 객체(resp)를 통해서 파일 전송
+			// attachment; filename=\파일명.txt"\가 됨
+
+			// 응답 객체(resp)를 통해서 파일 전송
 			os = resp.getOutputStream();
-			
-			//전송하기
-			byte[] buffer = new byte[1024];//파일의 데이터를 buffer에 넣음
+
+			// 전송하기
+			byte[] buffer = new byte[1024];// 파일의 데이터를 buffer에 넣음
 			int length;
-			while((length = is.read(buffer)) != -1) {
-				os.write(buffer,0,length);
+			while ((length = is.read(buffer)) != -1) {
+				os.write(buffer, 0, length);
 			}
-		
+
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			try {
 				os.flush();
 				os.close();
@@ -1123,9 +1070,9 @@ public class AT_Service {
 				e.printStackTrace();
 			}
 		}
-		
+
 	}
-	
+
 	/*-------------------------------------------------------------------
 	 * 기능 : 거래처 조회 검색
 	 * 작성자: JWJ
@@ -1136,7 +1083,7 @@ public class AT_Service {
 		List<RM_Dto> searchList = atDao.prodSearch(keyword);
 		mav.addObject("rmList", searchList);
 		mav.setViewName("ATOrderRequest");
-		
+
 		return mav;
 	}
 
@@ -1147,19 +1094,19 @@ public class AT_Service {
 	 ------------------------------------------------------------------- */
 	public ModelAndView getregistSelProd(String registSelect) {
 		mav = new ModelAndView();
-		CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
+		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
 		String id = cmDto.getCm_id();
-		
-		Map<String , String> dataMap = new HashMap<String, String>();
+
+		Map<String, String> dataMap = new HashMap<String, String>();
 		dataMap.put("cm_id", id);
 		dataMap.put("pd_regist", registSelect);
 		List<PD_productDto> pdList = atDao.getregistSelProd(dataMap);
-		
-		mav.addObject("check",registSelect);
-		mav.addObject("pd",pdList);
+
+		mav.addObject("check", registSelect);
+		mav.addObject("pd", pdList);
 		mav.setViewName("ATProdManage");
-		
+
 		return mav;
 	}
 
-}//AT_Service 클래스의 끝
+}// AT_Service 클래스의 끝
