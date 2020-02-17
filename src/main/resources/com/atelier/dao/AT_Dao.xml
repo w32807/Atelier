@@ -184,5 +184,9 @@
 		SELECT * FROM PD WHERE PD_REGDATE = (SELECT MAX(PD_REGDATE) FROM PD WHERE PD_CATE = #{cate})
    	</select>
    	
+   	<select id="getATProdList" parameterType="String" resultType="com.atelier.dto.AT_ProdDto">
+   		SELECT PD_AT_ID,PI_PD_CODE,PI_ORINAME,PD_NAME,PD_PRICE,PD_SEX FROM  PRODUCT INNER JOIN
+   		 PRODUCT_IMAGE ON PRODUCT.PD_CODE = PRODUCT_IMAGE.PI_PD_CODE WHERE PRODUCT.PD_AT_ID =#{at_id}
+   	</select>
    	
 </mapper>

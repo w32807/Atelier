@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.atelier.dto.AG_Dto;
 import com.atelier.dto.AT_Dto;
+import com.atelier.dto.AT_ProdDto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
 import com.atelier.dto.PO_Dto;
@@ -91,6 +92,6 @@ public interface AT_Dao {
 
 	public PD_productDto getProductByCate(String cate);
 	
-	
+	public List<AT_ProdDto> getATProdList(String at_id);
 	
 }

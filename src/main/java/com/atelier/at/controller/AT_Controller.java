@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.atelier.at.service.AT_Service;
 import com.atelier.dto.AG_Dto;
+import com.atelier.dto.AT_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
 import com.atelier.dto.RO_Dto;
@@ -87,16 +88,6 @@ public class AT_Controller {
 	public ModelAndView goATMain() {
 		mav = mServ.printATList();
 		return mav;
-	}
-	
-	/*
-	 * @GetMapping("ATSupportMg")//응원의 메세지로 이동하는 메소드 public String goATSupportMg() {
-	 * return "ATSupportMg"; }
-	 */
-	
-	@GetMapping("ATProduct")//판매물품으로 이동하는 메소드
-	public String goATProduct() {
-		return "ATProduct";
 	}
 	
 	@GetMapping("ATInfoModify")//공방 수정으로 이동하는 메소드
@@ -460,5 +451,20 @@ public class AT_Controller {
 			return mav;
 		}
 		
-		
+		/*-------------------------------------------------------------------
+		 * 기능 : 판매물품 관리 메소드
+		 * 작성자: KBH
+		 * 작성일 : 2020.02.17
+		 ------------------------------------------------------------------- */
+		@GetMapping("ATProduct")
+		public ModelAndView ATProductList() {
+			
+			AT_Dto atDto = (AT_Dto)session.getAttribute("at");			
+			
+			String at_id = atDto.getAt_id();
+			
+			mav = atServ.getATProdList(at_id);
+			
+			return mav;
+		}
 }

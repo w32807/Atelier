@@ -374,7 +374,7 @@ public class MyPageService {
 	 -----------------------------------------------------------------------------------------*/
 	public ModelAndView actMyPageGoAtelier(String sc_at_id) {
 		int at_seq = mpDao.getAtSeq(sc_at_id);
-		//mav = atServ.getATDetail(at_seq);
+		mav = atServ.getATDetail(at_seq);
 		
 		return mav;
 	}
