@@ -36,7 +36,7 @@ public interface AT_Dao {
 
 	public List<SM_Dto> getReplyList1(String sm_receiver);
 
-	public List<SM_Dto> getReplyList2(SM_Dto reply);
+	/* public List<SM_Dto> getReplyList2(SM_Dto reply); */
 
 	public void deleteImg(int currentPd_code);
 

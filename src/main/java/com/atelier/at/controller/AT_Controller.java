@@ -291,13 +291,19 @@ public class AT_Controller {
 	/*-------------------------------------------------------------------
 	 * 기능 : 응원의 한마디
 	 * 책임자 : 김병현, 김종현
-	 * 작성일 : 2020.02.06		최종수정일 : 2020.02.06
+	 * 작성일 : 2020.02.06		최종수정일 : 2020.02.18
 	 ------------------------------------------------------------------- */
 
+
 	   @GetMapping("ATSupportMg")//응원의 메세지로 이동하는 메소드 public String goATSupportMg() {
-	   public ModelAndView getSupportMg(SM_Dto reply) {
+	   public ModelAndView getSupportMg() {
+		   
+		   AT_Dto atDto = (AT_Dto)session.getAttribute("at");
+		   
+		   String sm_receiver = atDto.getAt_id();
+		   
 		   log.warn("ATSupportMg()");
-		   mav = mServ.getSupportMg(reply);
+		   mav = mServ.getSupportMg(sm_receiver);
 		   
 		   return mav;
 	   }
@@ -314,6 +320,7 @@ public class AT_Controller {
 	
 			return rmap;
 		}
+		
 	
 		@GetMapping("chgOrderList")
 		public ModelAndView chgOrderList(HttpServletRequest request) {

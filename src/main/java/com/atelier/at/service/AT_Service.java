@@ -465,8 +465,22 @@ public class AT_Service {
 	 * 기능 : 응원의 한마디
 	 * 책임자 : 김병현, 김종현
 	 * 작성일 : 2020.02.06
-	 * 최종수정일 : 2020.02.06
+	 * 최종수정일 : 2020.02.18
 	 ----------------------------------------------------------------------------------------- */
+	
+	// 1. 응원의 한마디 출력
+	public ModelAndView getSupportMg(String sm_receiver) {
+
+		mav = new ModelAndView();
+
+		List<SM_Dto> rList = atDao.getReplyList1(sm_receiver);
+
+		mav.addObject("rList", rList);
+		mav.setViewName("ATSupportMg");
+
+		return mav;
+	}
+	
 	public Map<String, List<SM_Dto>> replyInsert(SM_Dto reply) {
 
 		Map<String, List<SM_Dto>> rmap = null;
@@ -484,19 +498,6 @@ public class AT_Service {
 		}
 		return rmap;
 	}
-
-	public ModelAndView getSupportMg(SM_Dto reply) {
-
-		mav = new ModelAndView();
-
-		List<SM_Dto> rList = atDao.getReplyList2(reply);
-
-		mav.addObject("rList", rList);
-		mav.setViewName("ATSupportMg");
-
-		return mav;
-	}
-	
 	/*--------------------------------------------------------------------------------------- 
 	 * 기능: 선택한 상품을 삭제
 	 * 작성자: JWJ 
