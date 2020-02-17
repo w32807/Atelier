@@ -427,7 +427,7 @@ public class AD_Service {
 		else {
 			DeleteATMember(id);
 		}
-		
+		System.out.println("fuck");
 		mav = getApplicant();
 		
 		//getApplicant();
