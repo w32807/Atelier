@@ -6,7 +6,8 @@
 		SELECT * FROM RO
 		WHERE RO_BUYER=#{id}
 	</select>
-	<delete id="rmOrderListCancle" parameterType="String">
+	
+	<delete id="rmOrderListCancle" parameterType="Integer">
 		DELETE RO WHERE RO_NUM=#{ro_num}
 	</delete>
 	

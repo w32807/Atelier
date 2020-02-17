@@ -166,15 +166,16 @@ public class AT_Controller {
 	  * 작성자: KYH
 	  * 작성일 : 2019.02.08
 	  -----------------------------------------------------------------------------------*/	
-	@GetMapping("rmOrderListCancle")
-	public ModelAndView rmOrderListCancleProc(RO_Dto roDto, HttpServletRequest request, RedirectAttributes rttr) {
-		//log.warn("발주 조회 취소 컨트롤러");
-
-		String[] roCheckedBoxArr = request.getParameterValues("rmProdCancleChk");
-		mav = atServ.rmOrderListCancleProc(roDto, roCheckedBoxArr, rttr);
-		
-		return mav;
-	}
+	/*
+	 * @GetMapping("rmOrderListCancle") public ModelAndView
+	 * rmOrderListCancleProc(HttpServletRequest request, RedirectAttributes rttr) {
+	 * //log.warn("발주 조회 취소 컨트롤러");
+	 * 
+	 * String[] roCheckedBoxArr = request.getParameterValues("rmProdCancleChk"); mav
+	 * = atServ.rmOrderListCancleProc(roCheckedBoxArr, rttr);
+	 * 
+	 * return mav; }
+	 */
 	
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 거래처 조회 리스트 출력 메소드
@@ -406,15 +407,15 @@ public class AT_Controller {
 
 		
 		/*-------------------------------------------------------------------
-		 * 기능 : 발주 리스트 조회 컨트롤러
-		 * 작성자: JSH
-		 * 작성일 : 2020.02.11
+		 * 기능 : 발주 리스트 조회 컨트롤러 / 발주 조회 리스트 삭제 컨트롤러
+		 * 작성자: JSH / KYH
+		 * 작성일 : 2020.02.11 / 2020.02.08
 		 ------------------------------------------------------------------- */
 		@GetMapping("ATOrderSearch")
-		public ModelAndView ATOrderSearchList(HttpServletRequest request) {
+		public ModelAndView ATOrderSearchList(HttpServletRequest request, RedirectAttributes rttr) {
 			log.warn("발주 리스트 조회 컨트롤러 시작");
 			
-			mav = mServ.getATOrderSearchList(request);
+			mav = mServ.getATOrderSearchList(request, rttr);
 			return mav;
 		}
 		
