@@ -244,6 +244,31 @@
 	          alert("이미 신청을 하였습니다.");
 	          document.location.href = "main";
 	       }
+	       
+	       var chk = "${payment}";
+			console.log(chk);
+			if(chk != ""){
+				alert(chk);
+				location.reload(true); 
+			}
+			
+			 var chk = "${ATOrderCheck}";
+		     if(chk!=''){
+		     removeSelected();
+		     switch (chk) {
+			 	case "before":
+			 		$('select[name="orderState"]').find('option[value="before"]').attr("selected",true);
+			 	break;
+			 	case "being":
+			 		$('select[name="orderState"]').find('option[value="being"]').attr("selected",true);
+			 	break;
+			 	case "after":
+			 		$('select[name="orderState"]').find('option[value="after"]').attr("selected",true);
+			 	break;
+
+		 		}
+		     
+		    }
     	
     }
     </script>

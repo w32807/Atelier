@@ -262,26 +262,6 @@
 		 $("#orderStateFrm").submit();
 		 
 	 });
-	
-	 window.onload = function(){
-	     var chk = "${check}";
-	     if(chk!=''){
-	     removeSelected();
-	     switch (chk) {
-		 	case "before":
-		 		$('select[name="orderState"]').find('option[value="before"]').attr("selected",true);
-		 	break;
-		 	case "being":
-		 		$('select[name="orderState"]').find('option[value="being"]').attr("selected",true);
-		 	break;
-		 	case "after":
-		 		$('select[name="orderState"]').find('option[value="after"]').attr("selected",true);
-		 	break;
-
-	 		}
-	     
-	    }
-	 };
 	 
 	 function removeSelected(){
 		$('select[name="orderState"]').find('option[value="before"]').attr("selected",false);

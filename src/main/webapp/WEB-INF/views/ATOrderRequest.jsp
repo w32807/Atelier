@@ -204,14 +204,6 @@
 	
 	
 	<script type="text/javascript">
-		window.onload = function() {
-			var chk = "${check}";
-			console.log(chk);
-			if(chk != ""){
-				alert(chk);
-				location.reload(true); 
-			}
-		}
 	
 		function cal_price() {//총 가격을 바로바로 계산하기 위한 함수
 			var $items = $(".colorlib-feature").find("input:checkbox:checked");//체크된 녀석들 찾기.

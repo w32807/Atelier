@@ -223,7 +223,7 @@ public class AT_Service {
 		}
 
 		view = "redirect:ATOrderRequest";
-		rttr.addFlashAttribute("check", "결제가 완료되었습니다.");
+		rttr.addFlashAttribute("payment", "결제가 완료되었습니다.");
 
 		return view;
 	}
@@ -606,7 +606,7 @@ public class AT_Service {
 		// 원하는건 PO_VOList
 
 		mav.addObject("poDtoList", poDtoList);
-		mav.addObject("check", po_Vo.getPo_state());
+		mav.addObject("ATOrderCheck", po_Vo.getPo_state());
 		mav.setViewName("ATOrderState");
 
 		return mav;
