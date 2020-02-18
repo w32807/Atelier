@@ -116,23 +116,23 @@
 										<h4 style="text-align:center;">탈퇴 전에 꼭 읽어주세요!</h4>
 										<br>
 										<p style="text-align:center;">
-											사요나라 ㅃㅇㅃㅇ 잘가 안녕 그동안 즐거웠어
-											 <br><br>비번 입력하면 끗!
+											지금 탈퇴를 하시면 회원님께서 활동하신 모든 기록이 삭제됩니다.<br>
+											 <br>신중히 고민 후 결정해 주세요. <br> <br>
 										</p>
 										<form action="DropoutProc" method="post">
 											<div class="group-input">
-												<label for="username">탈퇴할 ID </label> <input
+												<label for="username">ID </label> <input
 													type="text" id="username" name="cm_id"
 													value=${mb.cm_id} readonly>
 												
 											</div>
 											<div class="group-input">
 												<label for="pass">Password를 입력해주세요. *</label> <input
-													type="text" id="pass" name="cm_pwd" required>
+													type="password" id="pass" name="cm_pwd" required>
 											</div>
 										
 											<button type="submit" class="site-btn login-btn">
-												ㄲㅈ
+												탈퇴하기
 											</button>
 										</form>
 									</div>

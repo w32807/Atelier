@@ -425,7 +425,7 @@ public class MyPageService {
 				cm_Dao.userStateChange(cm_dto);
 				session.invalidate();	// 회원 세션 초기화
 				view = "redirect:main";
-				rttr.addFlashAttribute("check","이용해주셔서 ㄳㅇ. ㅃㅇ!");
+				rttr.addFlashAttribute("check","탈퇴되었습니다. 이용해주셔서 감사합니다!");
 			}
 			else {
 				view = "redirect:/";
