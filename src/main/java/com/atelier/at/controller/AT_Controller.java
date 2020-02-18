@@ -188,7 +188,6 @@ public class AT_Controller {
 	
 	@GetMapping("ATProdRegist")//제품 목록 관리에서(ATProdManage)에서 제품 메뉴 제작 페이지로 넘어가는 메소드
 	public String prodMake() {
-		
 		return "ATProdRegist";
 	}
 	
@@ -210,11 +209,11 @@ public class AT_Controller {
 	  * 작성일 : 2019.02.07
 	  -----------------------------------------------------------------------------------*/
 	@PostMapping("prodRegist")
-	public String prodSellRegist(HttpServletRequest request, RedirectAttributes rttr) {
+	public ModelAndView prodSellRegist(HttpServletRequest request, RedirectAttributes rttr) {
 		
 		String[] chkedBoxArr = request.getParameterValues("prodChk");//체크박스의 값들이 넘어옴(상품의 상품코드를 가져옴)
-		String view = atServ.changeProdRegist(chkedBoxArr,rttr);
-		return "ATProdManage";//상품의 판매등록을 하고 난 뒤 다시 제품관리 페이지로 넘어감
+		mav = atServ.changeProdRegist(chkedBoxArr,rttr);
+		return mav;//상품의 판매등록을 하고 난 뒤 다시 제품관리 페이지로 넘어감
 	}
 	
 	 /* ---------------------------------------------------------------------------------
@@ -249,7 +248,7 @@ public class AT_Controller {
 	  -----------------------------------------------------------------------------------*/
 	@PostMapping("prodDelete")//제품 목록 관리에서 여러 상품을 선택하여 삭제를 하기 위한 메소드
 	public String prodDelete(HttpServletRequest request,RedirectAttributes rttr) {
-		String[] chkedBoxArr = request.getParameterValues("prod");//체크박스의 값들이 넘어옴
+		String[] chkedBoxArr = request.getParameterValues("prodChk");//체크박스의 값들이 넘어옴
 		String view = atServ.deleteProd(chkedBoxArr,rttr);
 		
 		return view;

@@ -88,5 +88,9 @@
 		WHERE CM_ID=#{cm_id}
 	</update>
   	
+  	<select id="getAt" parameterType="String" resultType="com.atelier.dto.AT_Dto">
+		SELECT * FROM AT WHERE AT_ID = #{at_id}
+	</select>   	
+   	
   	
 </mapper>

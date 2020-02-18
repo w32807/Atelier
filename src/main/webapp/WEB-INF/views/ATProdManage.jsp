@@ -107,13 +107,13 @@
 								style="font-weight: bolder; font-size: 23px; letter-spacing: 0.5px;">제품 목록 관리<hr>
 							</h2>
 						</div>
-						<select id="registSelectBox" onclick="changeProdRegist();"
+						<select name="registSelect" id="registSelectBox" onclick="changeProdRegist();"
 							style="margin-left: 1185px; border-radius: 10px; width: 120px; height: 35px;
 							padding-left: 8px; font-size: 14px; border: 1px solid #A09182; color: white;
 							background-color: #A09182;">
-							<option value="">선택</option>
-							<option value="registTrue">판매 등록</option>
-							<option value="registFalse">판매 미등록</option>
+							<option value="all">선택</option>
+							<option value="T">판매 등록</option>
+							<option value="F">판매 미등록</option>
 						</select>
 					</div>
 					
@@ -137,7 +137,7 @@
 												<small> <i class="icon-bubble3"></i></small>
 											</span>
 											<h3 style="margin-bottom: 40px; font-size: 22px; font-weight: bolder;">
-												<a href="blog.html">${product.pd_name}</a>
+												<a href="ATDetail?at_num=${product.pd_code}">${product.pd_name}</a>
 											</h3>			
 											&nbsp;제품명 : <input type="hidden" name="prodName"
 																	value="${product.pd_name}">${product.pd_name}<br>
@@ -240,14 +240,7 @@
 	<script src="resources/AT_front/js/main.js"></script>
 
 	<script type="text/javascript">
-		window.onload = function() {
-			var chk = "${check}";
-			console.log(chk);
-			if(chk != ""){
-				alert(chk);
-				location.reload(true); 
-			}
-		}
+	
 			
 			
 			//체크박스로 다중 선택을 하여 판매 등록을 누르면 해당 상품의 상품코드와 체크박스의 데이터가 넘어감

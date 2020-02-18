@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb-text">
-                        <a href="main"><i class="fa fa-home"></i> Home</a>
+                        <a href="/"><i class="fa fa-home"></i> Home</a>
                         <span>Shop</span>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
                         <div class="row">
                         
                         
-                        <c:forEach var="pdDto" items="${pdList}" varStatus="status">
+                       <c:forEach var="pdDto" items="${pdList}" varStatus="status">
                         	<c:set var="imgOriName" value="${pdDto.imgOriName}" />
                             <div class="col-lg-4 col-sm-6">
                                 <div class="product-item">
@@ -161,14 +161,14 @@
                                         </div>
                                         <ul>
                                             <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                            <li class="quick-view"><a href="#">+ Quick View</a></li>
+                                            <li class="quick-view"> <a href="prodDetail?pd_code=${pdDto.pd_code}">+ Quick View</a></li>
                                             <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
                                         </ul>
                                         <!--  상품리스트 -->
                                     </div>
                                     <div class="pi-text">
                                         <div class="catagory-name">${pdDto.pd_cate}</div>
-                                        <a href="prodDetail">
+                                        <a href="prodDetail?pd_code=${pdDto.pd_code}">
                                             <h5>${pdDto.pd_name}</h5>
                                         </a>
                                         <div class="product-price">
@@ -179,7 +179,6 @@
                                 </div>
                             </div>
                             </c:forEach>
-
                         </div>
                     </div>
                     <!-- 더보기 -->

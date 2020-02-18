@@ -2,6 +2,7 @@ package com.atelier.dao;
 
 import java.util.List;
 
+import com.atelier.dto.AT_Dto;
 import com.atelier.dto.BT_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.PD_productDto;
@@ -46,4 +47,7 @@ public interface CM_Dao {
 	public void orderInsert(PO_Vo poVo);
 	
 	public void userStateChange(CM_Dto cm_dto);
+	
+	public AT_Dto getAt(String at_id);
+	
 }

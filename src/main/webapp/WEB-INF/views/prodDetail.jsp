@@ -434,8 +434,77 @@
             </div>
         </div>
     </section>
-    <!-- 하단바 Include -->
-	<jsp:include page="Main_Footer.jsp" flush="false"/>
+        <!-- 하단바 -->
+	<!-- Footer Section Begin -->
+    <footer class="footer-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="footer-left">
+                        <ul>
+                            <li>Address: 인천 미추홀구 학익동 663-1 태승빌딩 5층</li>
+                            <li>Phone: 032-876-3332</li>
+                            <li>Email: whdgus5841@gmail.com</li>
+                        </ul>
+                        <div class="footer-social">
+                            <a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.instagram.com/"><i class="fa fa-instagram"></i></a>
+                            <a href="https://twitter.com/"><i class="fa fa-twitter"></i></a>
+                            <a href="https://www.pinterest.co.kr/"><i class="fa fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 offset-lg-1">
+                    <div class="footer-widget">
+                        <h5>Information</h5>
+                        <ul>
+                        	<li><a href="CONotice">고객 센터</a></li>
+                            <li><a href="CONotice">약관</a></li>
+                            <li><a href="CONotice">개인 정보 처리 방침</a></li>
+                            <li><a href="CONotice">QNA</a></li>
+                            <li><a href="CONotice">Contact US</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="footer-widget">
+                        <h5>My Account</h5>
+                        <ul>
+                            <li><a href="myPage">myPage</a></li>
+                            <li><a href="basket">Basket</a></li>
+                            <li><a href="ATRegist?id=${mb.cm_id}">공방 회원 신청</a></li>
+                            <li class="ADhideandshow"><a href="ADNoticeList">Admin</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="newslatter-item">
+                         <a href="main">
+                                <img src="./resources/main/img/logo_bottom.png" alt="" style="margin-top: 25px;">
+                            </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-reserved">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="copyright-text">
+                            <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        </div>
+                        <div class="payment-pic">
+                            <img src="./resources/main/img/payment-method.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer Section End -->
+<!-- 하단바 End -->
 
     <!-- Js Plugins -->
     <script src="${pageContext.request.contextPath}/resources/main/js/jquery-3.3.1.min.js"></script>
@@ -457,19 +526,16 @@
         	insertbasket();
         } 		
    	});
-
 	$("#bt_countDiv").on("click", function() {
    		var totalPrice = $("#bt_count").val() * ${prodDto.pd_price};
    		console.log(totalPrice);
    		$("#totalPrice").html(totalPrice);
 	});
-
 	
 	  
 	function insertbasket() {
 		var basketFrm = $("#basketFrm").serializeObject();
 		console.log(basketFrm);
-
 		$.ajax({
 			url : "insertbasket",
 			type : "get",
@@ -486,7 +552,6 @@
 				console.log(status);
 				alert("장바구니에 담기지 않았습니다.");
 			}
-
 		});
 	}
 	
@@ -497,12 +562,10 @@
 		return false;
 	});
 	
-
 	function prodReviewAjax() {	
 		var prodReviewFrm = $("#prodReviewFrm").serializeObject();
 		prodReviewFrm.pr_pd_code = "${prodDto.pd_code}";
 		prodReviewFrm.pr_star = $("#pr_star").val();
-
 		console.log(prodReviewFrm);
 		var pr_contents = $("#pr_contents").val();
 		
@@ -609,7 +672,6 @@
 						}
 			        }
 			        prList += '</table>';
-
 					$("#prTable").html(prList);
 					alert("댓글 등록 완료!");
 					$("#pr_contents").val("");
@@ -734,7 +796,6 @@
 					}
 		        }
 		        prList += '</table>';
-
 				$("#prTable").html(prList);
 				alert("리뷰 삭제 완료!");
 				}
@@ -763,5 +824,15 @@
     			})
     		}
     	})
+    	
+    	
+    	$(document).ready(function (){
+		$('.ADhideandshow').hide();
+		 var ad_state = '${mb.cm_state}';
+	       console.log(ad_state);
+	       if(ad_state == '관리자'){
+	    	   $('.ADhideandshow').show();
+	       }
+	});
 </script>
 </html>

@@ -147,7 +147,7 @@
 					<div class="row">
 						<div class="col-md-6">
 							<div id="preview" class="about-img animate-box" data-animate-effect="fadeInLeft"
-								style="margin-left: 90px; background-image: url(resources/AT_front/images/img_bg_2.jpg);">
+								style="margin-left: 90px; background-image: url(resources/main/img/products/null.jpg);">
 							</div>
 						</div>
 						<div class="col-md-6 animate-box" data-animate-effect="fadeInLeft" style="margin-top: 20px;">
@@ -161,7 +161,7 @@
 									</tr>
 									<tr>
                                         <td class="title"><b>공 방 명</b></td>
-                                        <td><input type="text" name="pd_at_name" class="content" placeholder="공방명" title="제품명" value='${modifyProdDto.pd_at_name}'></td>
+                                        <td><input type="text" name="pd_at_name" class="content" title="제품명" value='${myAt.at_name}' readonly="readonly"></td>
                                     </tr>
 									<tr>
 										<td class="title"><b>수 &nbsp;&nbsp;량</b></td>
@@ -377,7 +377,7 @@
 		   			  
 			    if('${oriName}'!=''){
 			    	//$('#preview').attr('background-image','url(resources/prodImg/${oriName})');
-			    	$("#preview").css({"background-image":"url(resources/prodImg/${oriName})"}); 
+			    	$("#preview").css({"background-image":"url(resources/main/img/products/${oriName})"}); 
 			    }
 			    
 			    

@@ -86,10 +86,10 @@
 					</div>
 
 	<!---------------------------------------------여기서 검색처리를 합니다. (검색어의 name은 search로 잡았습니다.-------------------------------------------->
-					<form id="searchFrm" class="colorlib-heading animate-box" style="margin-left: 700px;">
+					<form action="prodSearch" id="searchFrm" class="colorlib-heading animate-box" style="margin-left: 700px;">
 						<div class="advanced-search">
                         	<div class="input-group"style="margin: 0px auto; margin-bottom: 100px; margin-right: 400px;">
-                           		<input id="keyword" type="text" name="search" placeholder="검색어를 입력 해 주세요."
+                           		<input id="keyword" type="text" name="keyword" placeholder="검색어를 입력 해 주세요."
                            			value="" style="width: 280px; padding-left: 8px; font-size: 14px; border: 1px solid #A09182;">
                            		<input id="searchBtn" type="button" value="검색"
                               		style="width: 60px; border: none; font-size: 16px; color: white; background-color: #A09182;">

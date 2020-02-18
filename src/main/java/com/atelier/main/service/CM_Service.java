@@ -62,12 +62,13 @@ public class CM_Service {
 	 * 기   능 : 로그인 프로세스, 입력된 아이디와 비밀번호를 DB와 대조 후 일치 시 세션에 저장
 	 * 		   로그인 예외처리 추가 필요 
 	 * 작성일 : 20.02.03
-	 * 수정일 : -
+	 * 수정일 : 20.02.18(공방정보 세션에 저장하기 추가)
 	 * 작성자 : JSG
 	 ----------------------------------------------------------*/
 	public ModelAndView loginProc(CM_Dto customer, RedirectAttributes rttr) {
 		mav = new ModelAndView();
 		String view = null;
+		AT_Dto atDto = new AT_Dto();
 		BCryptPasswordEncoder pwdEncode = new BCryptPasswordEncoder();
 
 	
@@ -76,8 +77,10 @@ public class CM_Service {
 		if(encPwd != null) {
 			if(pwdEncode.matches(customer.getCm_pwd(), encPwd)) {			
 				customer = cm_Dao.getMemberInfo(customer.getCm_id());
+				atDto = cm_Dao.getAt(customer.getCm_id());
 				// 사용자 정보를 세션에 저장
 				session.setAttribute("mb", customer);
+				session.setAttribute("myAt", atDto);
 				rttr.addFlashAttribute("check","로그인 성공!");
 				view = "redirect:main";
 				

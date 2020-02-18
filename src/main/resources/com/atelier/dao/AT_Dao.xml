@@ -35,7 +35,7 @@
 		WHERE PD_CODE = #{pd_code}
     </update>
     
-    <update id="changeProdRegist" parameterType="String">
+    <update id="changeProdRegist" parameterType="Integer">
     	UPDATE PD SET PD_REGIST = 'T' WHERE PD_CODE = #{pd_code}
     </update>
     
@@ -189,10 +189,9 @@
    		 PRODUCT_IMAGE ON PRODUCT.PD_CODE = PRODUCT_IMAGE.PI_PD_CODE WHERE PRODUCT.PD_AT_ID =#{at_id}
    	</select>
    	
-   	
    	<select id="deleteMessage" parameterType="Integer">
    		DELETE FROM SUPPORT_MG WHERE SM_NUM = #{sm_num}
    	</select>
-   	
-   	
+	
+	
 </mapper>
