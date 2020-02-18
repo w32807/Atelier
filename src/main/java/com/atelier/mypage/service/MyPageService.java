@@ -70,6 +70,7 @@ public class MyPageService {
 	
 	/* ---------------------------------------------------------------------------------------
 	 * 기능: 마이페이지 수정 서비스
+	 * 수정자: JSG   수정내용 : 1. 수정 후 myPage 경로로 이동   2. 변경된 정보로 세션(mb)에 저장
 	 * 작성자: JSH
 	 * 작성일: 2020.02.05
 	 -----------------------------------------------------------------------------------------*/
@@ -92,7 +93,7 @@ public class MyPageService {
 		String view = null;
 		try {
 			cm_Dao.memberUpdate(cm_Dto);
-			view = "redirect:main";
+			view = "redirect:myPage";
 			rttr.addFlashAttribute("check",2);
 		} catch (Exception e) {
 			view = "redirect:myInfoUpdate";
@@ -105,6 +106,8 @@ public class MyPageService {
 		}
 
 		mav.setViewName(view);
+		cm_Dto = cm_Dao.getMemberInfo(cm_Dto.getCm_id());
+		session.setAttribute("mb", cm_Dto);
 		
 		return mav;
 		
