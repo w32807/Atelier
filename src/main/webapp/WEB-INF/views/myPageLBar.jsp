@@ -37,7 +37,7 @@
 				<ul>
 					<li><a href="myOrder">주문 내역</a></li>
 					<li><a href="basket">장바구니</a></li>
-					<li><a href="mySubscript">구독 리스트</a></li>
+					<li><a href="mySubscript?sc_cm_id=${mb.cm_id}">구독 리스트</a></li>
 					<li><a href="messager">메세지</a></li>
 					<li><a href="myInfoUpdate">내 정보 수정</a></li>
 					<li><a href="myChangePwd">비밀번호 변경</a></li>
