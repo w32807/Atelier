@@ -329,7 +329,7 @@ public class CM_Service {
 		}
 		
 		//모든 가격의 총 합 구하기
-		
+		mav.addObject("cmDto",cmDto);
 		mav.addObject("orderBtNum",orderBtNum);
 		mav.addObject("totalPrice",totalPrice);
 		mav.addObject("orderedProdList",orderedProdList);

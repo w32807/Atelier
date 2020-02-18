@@ -101,10 +101,10 @@
                             </div>
                             -->
 							<div class="col-lg-12">
-								<label for="zip"></label>주문자 성명 <input  type="text" id="senderName" required value="${mb.cm_name}" readonly="readonly">
+								<label for="zip"></label>주문자 성명 <input  type="text" id="senderName" required value="${cmDto.cm_name}" readonly="readonly">
 							</div>
 							<div class="col-lg-12">
-								<label for="zip"></label>주문자 전화번호 <input type="text" id="senderPhone" required value="${mb.cm_phone}">
+								<label for="zip"></label>주문자 전화번호 <input type="text" id="senderPhone" required value="${cmDto.cm_phone}">
 							</div>
 
 							<h4>받는 사람</h4> 
@@ -144,7 +144,7 @@
 														</h5>
 														<hr>
 														<label for="street"></label> <input type="text"
-															id="addr1" class="street-first" value="${mb.cm_addr}"> 
+															id="addr1" class="street-first" value="${cmDto.cm_addr}"> 
 													</div>
 												</div>
 											</div>
@@ -158,7 +158,7 @@
 														</h5>
 														<hr>
 														<label for="street"></label> <input type="text"
-															id="addr2" class="street-first" value="${mb.cm_addr2}"> 
+															id="addr2" class="street-first" value="${cmDto.cm_addr2}"> 
 													</div>
 												</div>
 											</div>
@@ -216,7 +216,7 @@
 									<c:forEach var="btNum" items="${orderBtNum}">
 										<input type="hidden" name="orderBtNum" value="${btNum}">
 									</c:forEach>
-										<input type="hidden" id="orderAddr" name="orderAddr" value="${mb.cm_addr}"/>			
+										<input type="hidden" id="orderAddr" name="orderAddr" value="${cmDto.cm_addr}"/>			
 									
 									<li class="total-price">Total<span class="prodInfo">${totalPrice}</span></li>
 								</ul>

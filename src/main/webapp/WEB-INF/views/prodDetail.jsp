@@ -346,7 +346,7 @@
 		                                        <c:forEach var="review" items="${prList}">
 		                                            <div class="co-item">
 		                                                <div class="avatar-pic">
-		                                                    <img src="https://t1.daumcdn.net/cfile/tistory/995499415BA82B591F" alt=""
+		                                                    <img src="https://t1.daumcdn.net/cfile/tistory/995499415BA82B591F" alt="" style="padding-bottom: 0px;">
 		                                                    	style="padding-bottom: 0px;">
 		                                                </div>
 		                                                <div class="avatar-text">
@@ -388,6 +388,7 @@
 		                                                       	</c:if>
 		                                                    </div>
 		                                                    <h5>${review.pr_cm_id}<span>${review.pr_dateSimple}</span></h5>
+		                                                    <img src="resources/AT_front/images/x.png" onclick="reviewDelete(${review.pr_num});" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">
 		                                                    <div class="at-reply">${review.pr_contents}</div>
 		                                                </div>
 		                                            </div>
@@ -816,8 +817,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     				data: subFrm,
     				dataType: "json",
     				success: function(data) {
-    					console.log("ajax 실행 결과 : " + data.sumMassage);
-    					alert(data.sumMassage);
+    					console.log("ajax 실행 결과 : " + data.subMassage);
+    					alert(data.subMassage);
     				},
     				error: function(error) {
     				}

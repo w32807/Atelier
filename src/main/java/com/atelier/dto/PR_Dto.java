@@ -28,4 +28,8 @@ public class PR_Dto {
 	@JsonFormat(pattern = "yyyy-MM-dd")
     private Timestamp pr_date;
     private String pr_dateSimple;
+    
+    //댓글의 프로필 사진을 가져오기 위한 변수
+    private String pr_cm_pfphoto;
+    
 }

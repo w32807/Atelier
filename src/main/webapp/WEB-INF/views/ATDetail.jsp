@@ -79,7 +79,7 @@
 				   		<div class="overlay"></div>
 				   		<div class="container-fluid">
 				   			<div class="row">
-				   			<form id="addSubscription" action="Subscription" method="get">
+				   			<form id="subFrm" method="get">
 					   			<div class="col-md-12 col-md-offset-1 col-md-pull-1 slider-text">
 					   				<div class="slider-text-inner">
 					   					<div class="desc" style="background: none; top: 100px;">
@@ -87,7 +87,7 @@
 					   					<input type="hidden" name="sc_at_id" id="SC_AT_ID" value="${at.at_id}">
 					   					<h1 style="font-size: 18px; font-weight: 600; width:300px;">${at_dto.at_name} 공방에 오신 것을 환영합니다.</h1>
 						   					<h2><a href="https://colorlib.com/" target="_blank" style="font-size: 18px; font-weight: 600; color: #A09182; border-bottom: 1px solid #A09182;">공방 주소</a></h2>
-											<button id="subcancle" type="submit" class="btn btn-primary btn-learn" style="font-weight: 600;" value="구독">&nbsp;&nbsp;&nbsp;구독&nbsp;&nbsp;&nbsp;   </button>
+											<button id="subBtn" type="button" class="btn btn-primary btn-learn" style="font-weight: 600;" value="구독">&nbsp;&nbsp;&nbsp;구독&nbsp;&nbsp;&nbsp;   </button>
 											
 										</div>
 					   				</div>
@@ -194,7 +194,33 @@
 	
 	<!-- MAIN JS -->
 	<script src="resources/AT_front/js/main.js"></script>
+	<!-- ajax -->
+	<script src="resources/js/jquery.serializeObject.js"></script>
 
 	</body>
+	
+<script type="text/javascript">
+
+	$("#subBtn").click(function(){
+		if(confirm("구독 하시겠습니까?")){
+			var subFrm = $("#subFrm").serializeObject();
+			$.ajax({
+				url: "SubFromProd",
+				type: "get",
+				data: subFrm,
+				dataType: "json",
+				success: function(data) {
+					console.log("ajax 실행 결과 : " + data.subMassage);
+					alert(data.subMassage);
+					$("subBtn").html("&nbsp;&nbsp;&nbsp;구독 취소&nbsp;&nbsp;&nbsp");
+				},
+				error: function(error) {
+					alert("로그인을 먼저 해 주세요.");
+				}
+			})
+		}
+	})
+
+</script>
 </html>
 

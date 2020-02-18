@@ -30,7 +30,7 @@ public class MP_SubController {
 	 * 작성일: 2020.02.08
 	 -----------------------------------------------------------------------------------------*/
 	@GetMapping("Subscription")
-	public ModelAndView getSubscription(SB_Dto sbDto ){
+	public ModelAndView getSubscription(SB_Dto sbDto){
 		log.warn("sub");
 		mav = sbServ.getSubscription(sbDto);
 		
@@ -61,8 +61,8 @@ public class MP_SubController {
 	public Map<String, String> SubFromProd(SB_Dto sbDto) {
 		log.warn("구독 컨트롤러!!!");
 		Map<String, String> SubFromProdMap = new HashMap<String, String>();
-		String sumMassage = sbServ.SubFromProd(sbDto);
-		SubFromProdMap.put("sumMassage", sumMassage);
+		String subMassage = sbServ.SubFromProd(sbDto);
+		SubFromProdMap.put("subMassage", subMassage);
 		
 		return SubFromProdMap;
 	}

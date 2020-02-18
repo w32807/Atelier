@@ -62,19 +62,19 @@ public class MP_SubService {
 	 * 작성일: 2020.02.08
 	 -----------------------------------------------------------------------------------------*/
 	public String SubFromProd(SB_Dto sbDto) {
-		String sumMassage = null;
+		String subMassage = null;
 		//구독한지 비교 
 		int a = sbDao.compareSub(sbDto);
 		if(a == 0) {//a==0 이면 구독 중이 아님
 			sbDao.getSubscription(sbDto);
 			log.warn("ok");
-			sumMassage = "구독 하였습니다!";
+			subMassage = "구독 하였습니다!";
 		}else if(a==1) {//a==1 이면 구독중
-			sumMassage = "이미 구독 중인 공방입니다.";
+			subMassage = "이미 구독 중인 공방입니다.";
 		}
 			
 			
-		return sumMassage;
+		return subMassage;
 	}
 	
 
