@@ -55,6 +55,17 @@
     
 	<!-- Modernizr JS -->
 	<script src="resources/AT_front/js/modernizr-2.6.2.min.js"></script>
+	<script type="text/javascript">
+	function confirmDelete(at_nt_num) {
+		theForm=document.delNotice;
+		//document.객체의 이름으로 저장 하나의 태그를 변수로 저장
+		var chk = confirm("정말 삭제하시겠습니까?");
+		if (chk) {
+			return theForm.submit();
+		}
+	}	
+</script>
+	</script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
