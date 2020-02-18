@@ -296,7 +296,7 @@ public class AT_Controller {
 	}
 	
 	/*-------------------------------------------------------------------
-	 * 기능 : 응원의 한마디
+	 * 기능 : 응원의 한마디 출력 / 입력ajax / 삭제 
 	 * 책임자 : 김병현, 김종현
 	 * 작성일 : 2020.02.06		최종수정일 : 2020.02.06
 	 ------------------------------------------------------------------- */
@@ -334,6 +334,16 @@ public class AT_Controller {
 		    mav = atServ.getATOrderList(orderState);
 			return mav;
 		}
+		
+		
+		@GetMapping("deleteMessage")
+		public ModelAndView deleteMessage(int sm_num,RedirectAttributes rttr) {
+			
+			mav = atServ.deleteMessage(sm_num,rttr);
+			
+			return mav;
+		}
+		
 		
 		/*-------------------------------------------------------------------
 		 * 기   능 : 공지사항 리스트 출력

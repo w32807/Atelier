@@ -111,7 +111,15 @@ table, tr, td {
 }
 </style>
 </head>
-
+    <script type="text/javascript">
+      		window.onload = function() {//이 페이지가 실행 되면, 이 함수를 실행해라
+				var chk = "${check}";
+				if(chk == "fail"){
+					alert("회원 가입 실패");
+					location.reload(true);//화면을 다시 한번 불러오면서 check를 리셋함 
+				}
+			}
+	</script>
 <body>
 	<!-- 상단바 Include -->
 	<jsp:include page="Main_Upper.jsp" flush="false" />
@@ -144,8 +152,8 @@ table, tr, td {
 						<table>
 							<tr>
 								<td><textarea rows="2" cols="100" id="sm_contents"
-										name="sm_contents" style="margin-left: -100px; width: 700px;">
-                           </textarea></td>
+										name="sm_contents" style="margin-left: -100px; width: 700px;"></textarea>
+								</td>
 								<td>
 								<input type="hidden" name="sm_sender" value="${mb.cm_id}"> 
 								<input type="hidden" name="sm_receiver" value="${at.at_id}"> 
@@ -157,9 +165,7 @@ table, tr, td {
 					</form>
 					<table>
 						<tr style="background-color: #A09182;">
-							<th style="width: 50px; text-align: center; color: white;">No</th>
-							<th
-								style="width: 550px; text-align: left; padding-left: 15px; color: white;">Content</th>
+							<th style="width: 550px; text-align: left; padding-left: 15px; color: white;">Content</th>
 							<th style="width: 200px; text-align: center; color: white;">Date</th>
 							<th style="width: 150px; text-align: center; color: white;">Writer</th>
 							<th
@@ -173,16 +179,16 @@ table, tr, td {
 						<c:forEach var="r" items="${rList}">
 							<form id="deleteMessage${r.sm_num}" name="deleteMessage">
 							<tr style="background-color: white; border: 2px solid #A09182; height: 40px;">
-								<td style="width: 50px; text-align: center;">${r.sm_num}</td>
+								<input type="hidden" value="${r.sm_num}">
 								<td style="width: 550px; text-align: left; padding-left: 15px;">
 									${r.sm_contents}</td>
-								<td style="width: 200px;">${r.sm_date}</td>
+								<td style="width: 200px;">${r.sm_regdate}</td>
 								<td style="width: 150px;">${r.sm_sender}</td>
 								<td style="padding-right: 15px; width: 80px;">
-									<button type="button" id="btnDelete"
+									<a href=deleteMessage?sm_num=${r.sm_num}><button type="button" id="btnDelete"
 										style="border: 0; background-color: white;">
 										삭제
-									</button>
+									</button></a>
 								</td>
 							</tr>
 							</form>
@@ -223,7 +229,9 @@ table, tr, td {
 	<script src="./resources/js/jquery.serializeObject.js"></script>
 
 	<script type="text/javascript">
-   
+	
+	
+   //글 등록 후 ajax
    $("#supportProc").click(function(){
       var support = $("#supportFrm").serializeObject();
       console.log(support);
@@ -239,12 +247,12 @@ table, tr, td {
             
             for(var i=0; i<dlist.length; i++){
                rlist +=
-            '<form class="deleteMessage'+dlist[i].sm_num+'">'
+            '<form id="deleteMessage'+dlist[i].sm_num+'">'
             +        
             '<tr style="background-color: white; border: 2px solid #A09182; height:40px;">'+
-            '<td style="width: 50px; text-align: center;">'+
+            /* '<td style="width: 50px; text-align: center;">'+
             dlist[i].sm_num+
-            '</td>'+
+            '</td>'+ */
             '<td style="width: 550px; text-align: left; padding-left: 15px;">'+
             dlist[i].sm_contents+
             '</td>'+
@@ -255,46 +263,24 @@ table, tr, td {
             dlist[i].sm_sender+
             '</td>'+
             '<td style="padding-right: 15px; width: 80px;">'+
+            '<a href=deleteMessage?sm_num=${r.sm_num}>'+
             '<button type="button" id="btnDelete" style="border: 0; background-color: white;">'+
             '삭제'+
+            '</a>'+
             '</button>'+
             '</td>'+
             '</tr>'+
             '</form>'
             }
             $('#rTable').html(rlist);
-         
+            document.getElementById("sm_contents").value='';
          },
          error: function(error){
             alert("댓글 입력 실패");
          }
       });
    });
-      /* 
-         
-         //객체에 데이터 추가! r_bnum은 무엇?
-         console.log(replyFrm);
-         $.ajax({
-            url: "supportMGInsert",
-            type: "post",
-            data: replyFrm,
-            dataType: "json",
-            success: function(data) {
-               console.log(data.rList);//map에 들어있는 key값으로 받아온 value값 확인!
-               var rList = "";
-               for(var i =0; i <data.rList.length;i++){
-                  rList += 
-                           //form의 댓글에서 for문의 내용을 다 지우고 가져온 rList의 데이터를 사용해서 새로 작성!
-                  }
-               $('#rTable').html(rList);//얘의 역할은...?//
-            },
-         error: function (error) {
-            alert(error);
-            }
-         })
-         
-         
-      } */
+    
 
       function confirmDelete(bnum) {
             theForm=document.delBoard;

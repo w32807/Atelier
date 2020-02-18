@@ -93,5 +93,7 @@ public interface AT_Dao {
 	public PD_productDto getProductByCate(String cate);
 	
 	public List<AT_ProdDto> getATProdList(String at_id);
+
+	public boolean deleteMessage(int sm_num);
 	
 }

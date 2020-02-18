@@ -465,6 +465,8 @@ public class AT_Service {
 			List<SM_Dto> rList = atDao.getReplyList1(reply.getSm_receiver());
 			rmap = new HashMap<String, List<SM_Dto>>();
 			rmap.put("rList", rList);
+			
+			
 		} catch (Exception e) {
 			rmap = null;
 			// 먼저 try문이 실행 되므로 map은 생성 되어있고 에러를 발생시켜
@@ -479,12 +481,52 @@ public class AT_Service {
 			mav = new ModelAndView();
 
 			List<SM_Dto> rList = atDao.getReplyList1(sm_receiver);
+			
+			SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
+			
+			for(int i=0; i<rList.size(); i++) {
+				
+				String convertDate = dataFm.format(rList.get(i).getSm_date());
+				
+				rList.get(i).setSm_regdate(convertDate);
+				
+			}
+			
 
 			mav.addObject("rList", rList);
 			mav.setViewName("ATSupportMg");
 
 			return mav;
 		}
+		
+		
+		public ModelAndView deleteMessage(int sm_num,RedirectAttributes rttr) {
+
+			mav = new ModelAndView();
+			
+			String view = null;
+			
+			try {
+				
+				atDao.deleteMessage(sm_num);
+				
+				view = "redirect:ATSupportMg";
+				
+				rttr.addFlashAttribute("check","글 삭제에 성공하셨습니다");
+				
+			}catch(Exception e) {
+				
+				view = "redirect:ATSupportMg";
+				
+				rttr.addFlashAttribute("check","글 삭제에 실패하셨습니다");
+				
+			}
+			
+			mav.setViewName(view);
+			
+			return mav;
+		}
+
 
 	/*--------------------------------------------------------------------------------------- 
 	 * 기능: 선택한 상품을 삭제
@@ -1179,6 +1221,7 @@ public class AT_Service {
 		return mav;
 	}
 
+	
 }//AT_Service 클래스의 끝
 
 

@@ -189,4 +189,10 @@
    		 PRODUCT_IMAGE ON PRODUCT.PD_CODE = PRODUCT_IMAGE.PI_PD_CODE WHERE PRODUCT.PD_AT_ID =#{at_id}
    	</select>
    	
+   	
+   	<select id="deleteMessage" parameterType="Integer">
+   		DELETE FROM SUPPORT_MG WHERE SM_NUM = #{sm_num}
+   	</select>
+   	
+   	
 </mapper>
