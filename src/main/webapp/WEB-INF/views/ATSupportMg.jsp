@@ -140,16 +140,16 @@ table, tr, td {
 						바랍니다.
 					</div>
 					<!-- 메세지 전송 -->
-					<form id="supportFrm" name="supportFrm" action="supportMGInsert">
+					<form id="supportFrm" name="supportFrm">
 						<table>
 							<tr>
 								<td><textarea rows="2" cols="100" id="sm_contents"
 										name="sm_contents" style="margin-left: -100px; width: 700px;">
                            </textarea></td>
-								<td><input type="hidden" name="sm_sender"
-									value="${mb.cm_id}"> <input type="hidden"
-									name="sm_receiver" value="${at.at_id}"> <input
-									type="button" id="supportProc" value="메세지전송"
+								<td>
+								<input type="hidden" name="sm_sender" value="${mb.cm_id}"> 
+								<input type="hidden" name="sm_receiver" value="${at.at_id}"> 
+								<input type="button" id="supportProc" value="메세지전송"
 									style="width: 100px; height: 50px; padding: 0; margin: -5px 0 0 -215px;">
 								</td>
 							</tr>
@@ -171,11 +171,8 @@ table, tr, td {
 					<!-- SUPPORT_MG에 메세지 리스트 Ajax로 처리 -->
 					<table id="rTable">
 						<c:forEach var="r" items="${rList}">
-
 							<form id="deleteMessage${r.sm_num}" name="deleteMessage">
-								<input type="hidden" name="sm_receiver" value="수신자">
-							<tr
-								style="background-color: white; border: 2px solid #A09182; height: 40px;">
+							<tr style="background-color: white; border: 2px solid #A09182; height: 40px;">
 								<td style="width: 50px; text-align: center;">${r.sm_num}</td>
 								<td style="width: 550px; text-align: left; padding-left: 15px;">
 									${r.sm_contents}</td>
@@ -185,12 +182,10 @@ table, tr, td {
 									<button type="button" id="btnDelete"
 										style="border: 0; background-color: white;">
 										삭제
-										<!-- <img src="resources/AT_front/images/x.png" style="width: 15px;"> -->
 									</button>
 								</td>
 							</tr>
 							</form>
-
 						</c:forEach>
 					</table>
 				</div>
@@ -244,21 +239,20 @@ table, tr, td {
             
             for(var i=0; i<dlist.length; i++){
                rlist +=
-            '<form class="deleteMessage+'${dlist.sm_num}+'">'
+            '<form class="deleteMessage'+dlist[i].sm_num+'">'
             +        
-            '<input type="hidden" name="sm_receiver" value="수신자">'+
             '<tr style="background-color: white; border: 2px solid #A09182; height:40px;">'+
             '<td style="width: 50px; text-align: center;">'+
-            ${dlist.sm_num}+
+            dlist[i].sm_num+
             '</td>'+
             '<td style="width: 550px; text-align: left; padding-left: 15px;">'+
-            ${dlist.sm_contents}+
+            dlist[i].sm_contents+
             '</td>'+
             '<td style="width: 200px;">'+
-            ${dlist.sm_date}+
+            dlist[i].sm_date+
             '</td>'+
             '<td style="width: 150px;">'+
-            ${dlist.sm_sender}+
+            dlist[i].sm_sender+
             '</td>'+
             '<td style="padding-right: 15px; width: 80px;">'+
             '<button type="button" id="btnDelete" style="border: 0; background-color: white;">'+

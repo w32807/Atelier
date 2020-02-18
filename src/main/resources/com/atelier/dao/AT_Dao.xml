@@ -45,7 +45,7 @@
          SELECT SM_NUM_SEQ.NEXTVAL FROM DUAL
          </selectKey>         
          INSERT INTO SUPPORT_MG 
-         VALUES(${sm_num}, #{sm_contents},SYSDATE, #{sm_sender},#{sm_receiver})
+         VALUES(${sm_num}, #{sm_contents},DEFAULT, #{sm_sender},#{sm_receiver})
    </insert>
    
    <select id="getReplyList1" parameterType="String" resultType="com.atelier.dto.SM_Dto">
