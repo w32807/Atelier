@@ -94,7 +94,8 @@ public class AT_Service {
 		if(at_state.equals("활성")) {
 
 			mav = new ModelAndView();
-
+			List<PI_productImgDto> piList = new ArrayList<PI_productImgDto>();
+			
 			int num = (pageNum == null) ? 1 : pageNum;
 			maxNum = pdDao.getATProdListCount();
 			Map<String, Object> pageInt = new HashMap<String, Object>();
@@ -102,8 +103,17 @@ public class AT_Service {
 			pageInt.put("maxNum", maxNum);
 			pageInt.put("pd_at_id", pd_at_id);
 			List<PD_productDto> pd = pdDao.getATProdList(pageInt);
+			
+			for(int i = 0 ; i < pd.size(); i++ ) {
+				PI_productImgDto piDto = new PI_productImgDto();
+				piDto = atDao.getProdImg(pd.get(i).getPd_code());
+				piList.add(piDto);
+				
+			}
+			
 
 			mav.addObject("pd", pd);
+			mav.addObject("piList",piList);
 			mav.addObject("paging", getATProdPaging(num));
 			session.setAttribute("pageNum", num);
 
@@ -172,7 +182,7 @@ public class AT_Service {
 
 		mav = new ModelAndView();
 		mav.setViewName("redirect:ATProdManage");
-		rttr.addFlashAttribute("check", "판매등록 해제 완료!");
+		rttr.addFlashAttribute("ATProdcheck", "판매등록 해제 완료!");
 
 		return mav;
 	}
@@ -287,12 +297,12 @@ public class AT_Service {
 			// 상품 insert 성공하면 해당 상품의 image도 DB에 insert
 			atDao.ATProdImgInsert(prodImgDto);
 			view = "redirect:ATProdManage";
-			rttr.addFlashAttribute("check", "판매 등록 완료");
+			rttr.addFlashAttribute("ATProdcheck", "판매 등록 완료");
 
 		} else {
 			// 상품 insert 실패
 			view = "redirect:ATProdRegist";
-			rttr.addFlashAttribute("check", "판매 등록 실패");
+			rttr.addFlashAttribute("ATProdcheck", "판매 등록 실패");
 
 		}
 		return view;
@@ -355,7 +365,7 @@ public class AT_Service {
 	 ----------------------------------------------------------------------------------------- */
 	public ModelAndView goModifyProd(MultipartHttpServletRequest multi) {
 		mav = new ModelAndView();
-		String modifyProd = multi.getParameter("prod");// 1개의 선택된 체크박스를 가져옴- 상품코드가 1개 넘어옴
+		String modifyProd = multi.getParameter("prodChk");// 1개의 선택된 체크박스를 가져옴- 상품코드가 1개 넘어옴
 		int pd_code = Integer.parseInt(modifyProd);
 		PD_productDto modifyProdDto = atDao.getModifyProd(pd_code);// 상품을 가져옴
 		String path = getRealPath(multi);
@@ -420,12 +430,12 @@ public class AT_Service {
 			// 상품 insert 성공하면 해당 상품의 image도 DB에 insert
 			atDao.ATProdImgInsert(prodImgDto);
 			view = "redirect:ATProdManage";
-			rttr.addFlashAttribute("check", "등록 완료");
+			rttr.addFlashAttribute("ATProdcheck", "등록 완료");
 
 		} else {
 			// 상품 insert 실패
 			view = "redirect:ATProdRegist";
-			rttr.addFlashAttribute("check", "등록 실패");
+			rttr.addFlashAttribute("ATProdcheck", "등록 실패");
 
 		}
 		return view;
@@ -437,16 +447,16 @@ public class AT_Service {
 	 * 작성자: JWJ 
 	 * 작성일: 2020.02.07
 	 ----------------------------------------------------------------------------------------- */
-	public String changeProdRegist(String[] chkedBoxArr, RedirectAttributes rttr) {
-		String view = null;
-
+	public ModelAndView changeProdRegist(String[] chkedBoxArr, RedirectAttributes rttr) {
+		mav = new ModelAndView();
 		for (String pd_code : chkedBoxArr) {
 			int pdCode = Integer.parseInt(pd_code);
 			atDao.changeProdRegist(pdCode);
 		}
-		view = "redirect:ATProdManage";
-		rttr.addFlashAttribute("check", "등록 완료");
-		return view;
+		mav = getATProdList(null,null);
+		//view = "redirect:ATProdManage";
+		//rttr.addFlashAttribute("check", "등록 완료");
+		return mav;
 	}
 
 	/*---------------------------------------------------------------------------------------
@@ -541,7 +551,7 @@ public class AT_Service {
 			atDao.deleteProd(pdCode);
 		}
 		view = "redirect:ATProdManage";
-		rttr.addFlashAttribute("check", "삭제 완료");
+		rttr.addFlashAttribute("ATProdcheck", "삭제 완료");
 		return view;
 	}
 
@@ -1169,15 +1179,27 @@ public class AT_Service {
 		CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
 		String id = cmDto.getCm_id();
 
-		Map<String , String> dataMap = new HashMap<String, String>();
-		dataMap.put("cm_id", id);
-		dataMap.put("pd_regist", registSelect);
-		List<PD_productDto> pdList = atDao.getregistSelProd(dataMap);
-
-		mav.addObject("check",registSelect);
-		mav.addObject("pd",pdList);
-		mav.setViewName("ATProdManage");
-
+		//registSelect null이면 모두 가져와야 함.
+		if(registSelect.equals("all")) {
+			return getATProdList(null,null);
+		}else {
+			Map<String , String> dataMap = new HashMap<String, String>();
+			List<PI_productImgDto> piList = new ArrayList<PI_productImgDto>();
+			dataMap.put("cm_id", id);
+			dataMap.put("pd_regist", registSelect);
+			List<PD_productDto> pdList = atDao.getregistSelProd(dataMap);
+	
+			for(int i = 0 ; i < pdList.size(); i++ ) {
+				PI_productImgDto piDto = new PI_productImgDto();
+				piDto = atDao.getProdImg(pdList.get(i).getPd_code());
+				piList.add(piDto);
+				
+			}
+			mav.addObject("piList",piList);
+			mav.addObject("registcheck",registSelect);
+			mav.addObject("pd",pdList);
+			mav.setViewName("ATProdManage");
+		}
 		return mav;
 	}
 
@@ -1226,7 +1248,7 @@ public class AT_Service {
 		return mav;
 	}
 
-	
+
 }//AT_Service 클래스의 끝
 
 
