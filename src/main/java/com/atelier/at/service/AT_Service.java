@@ -788,8 +788,6 @@ public class AT_Service {
 
 		List<RO_Dto> atmList = atDao.getATOrderSearchList(id);
 		
-		
-		
 		// 날짜를 yyyy-MM-dd 형태로 변환
 		SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
 		for (int i = 0; i < atmList.size(); i++) {
