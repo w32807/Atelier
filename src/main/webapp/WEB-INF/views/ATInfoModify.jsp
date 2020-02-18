@@ -120,7 +120,7 @@
 											<td style="font-weight: bold;">카테고리</td>
 			                                <td><label for="AT_CATE1 "><b>카테고리1 *&nbsp&nbsp&nbsp</b></label>
                                 <select id="AT_CATE1 " name="at_cate1">
-                                	<option value="">선택</option>
+                                	<option value="없음">없음</option>
                                 	<option value="의류">의류</option>
                                 	<option value="가방">가방</option>
                                 	<option value="신발">신발</option>
@@ -128,12 +128,12 @@
                                 	<option value="벨트">벨트</option>
                                 	<option value="장갑">장갑</option>
                                 	<option value="가구">가구</option>
-                                	<option value="기타">기타</option>
+                                	<option value="기타 악세서리">기타 악세서리</option>
                                 </select>
                            
                                 <label for="AT_CATE2 "><b>&nbsp&nbsp&nbsp카테고리2 *&nbsp&nbsp&nbsp</b></label>
                                 <select id="AT_CATE2 " name="at_cate2">
-                                	<option value="">선택</option>
+                                	<option value="없음">없음</option>
                                 	<option value="의류">의류</option>
                                 	<option value="가방">가방</option>
                                 	<option value="신발">신발</option>
@@ -141,12 +141,12 @@
                                 	<option value="벨트">벨트</option>
                                 	<option value="장갑">장갑</option>
                                 	<option value="가구">가구</option>
-                                	<option value="기타">기타</option>
+                                	<option value="기타 악세서리">기타 악세서리</option>
                                 </select>
                            
                                 <label for="AT_CATE3 "><b>&nbsp&nbsp&nbsp카테고리3 *&nbsp&nbsp&nbsp</b></label>
                                 <select id="AT_CATE3 " name="at_cate3">
-                                	<option value="">선택</option>
+                                	<option value="없음">없음</option>
                                 	<option value="의류">의류</option>
                                 	<option value="가방">가방</option>
                                 	<option value="신발">신발</option>
@@ -154,7 +154,7 @@
                                 	<option value="벨트">벨트</option>
                                 	<option value="장갑">장갑</option>
                                 	<option value="가구">가구</option>
-                                	<option value="기타">기타</option>
+                                	<option value="기타 악세서리">기타 악세서리</option>
                                 </select>
                            </td>
 										</tr>
@@ -210,7 +210,7 @@
 									</table>
 									<input type="submit" class="btn info_btn btn-send-message" value="submit"
 											onsubmit="modifyChk();" style="margin-bottom: 100px;">
-									<a href="./ATDetail" class="btn info_btn btn-send-message" style="margin-left: 10px; margin-bottom: 100px;">CANCLE</a>
+									<a href="ATDetail?at_num=${at.at_seq}" class="btn info_btn btn-send-message" style="margin-left: 10px; margin-bottom: 100px;">CANCLE</a>
 								</form>
 							</div>
 						</div>

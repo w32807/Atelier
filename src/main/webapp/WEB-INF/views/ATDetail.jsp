@@ -59,23 +59,7 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
-	 <script type="text/javascript">
-      		window.onload = function() {//이 페이지가 실행 되면, 이 함수를 실행해라
-				var chk = "${check}";
-				if(chk != ""){
-					alert(chk);
-					location.reload(true);//화면을 다시 한번 불러오면서 check를 리셋함 
-				}
-			}
-      		window.onload = function() {//이 페이지가 실행 되면, 이 함수를 실행해라
-      			var delChk=${deleteCheck};
-      			if(delChk !=1){
-      				//input속성 중 type바꾸기
-      				console.log(delChk);
-      				document.getElementById("deleteButton").setAttribute("type","hidden");
-      			}
-      		}	
-</script>
+
 	</head>
 	
 	<body>

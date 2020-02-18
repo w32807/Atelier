@@ -1011,7 +1011,12 @@ public class AT_Service {
 		String view = null;
 		try {
 			atDao.updateATData(at_dto);
-			view = "ATDetail";
+			//String at_seq = null;
+			//at_seq = String.valueOf(at_dto_temp.getAt_seq());
+			//view = "ATDetail?at_num="+at_seq;
+			mav = getATDetail(at_dto_temp.getAt_seq());
+			//System.out.println("공방번호 : "+at_seq);
+			
 			rttr.addFlashAttribute("check",2);
 		} catch(Exception e) {
 			view = "redirect:ATInfoModify";
@@ -1023,10 +1028,10 @@ public class AT_Service {
 			fileup(multi,at_dto.getAt_id(), at_dto);
 		}
 
-		mav.setViewName(view);
+		//mav.setViewName(view);
 
 		//session.setAttribute(name, value);
-		session.removeAttribute("at");
+		//session.removeAttribute("at");
 
 		return mav;
 	}
