@@ -244,7 +244,6 @@
 	          alert("이미 신청을 하였습니다.");
 	          document.location.href = "main";
 	       }
-		
     	
     }
     </script>

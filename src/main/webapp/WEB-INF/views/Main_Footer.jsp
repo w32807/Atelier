@@ -65,7 +65,7 @@
                             <li><a href="myPage">myPage</a></li>
                             <li><a href="basket">Basket</a></li>
                             <li><a href="ATRegist?id=${mb.cm_id}">공방 회원 신청</a></li>
-                            <li><a href="ADNoticeList">Admin</a></li>
+                            <li class="ADhideandshow"><a href="ADNoticeList">Admin</a></li>
                         </ul>
                     </div>
                 </div>
@@ -109,4 +109,25 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="<c:url value="/resources/main/js/owl.carousel.min.js"/>"></script>
     <script src="<c:url value="/resources/main/js/main.js"/>"></script>
 </body>
+
+<script type="text/javascript">
+
+	/*
+		ATRegist가 준비가 되면 함수 실행 후 페이지 출력
+
+	*/
+	$(document).ready(function (){
+		$('.ADhideandshow').hide();
+		 var ad_state = '${mb.cm_state}';
+	       console.log(ad_state);
+	       if(ad_state == '관리자'){
+	    	   $('.ADhideandshow').show();
+	       }
+	});
+		
+		
+	
+
+</script>
+
 </html>
