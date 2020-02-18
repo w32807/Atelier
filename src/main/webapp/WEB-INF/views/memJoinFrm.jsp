@@ -144,7 +144,11 @@
 
 <!-- 비밀번호 확인 -->
 <script language='javascript'>
-
+/*---------------------------------------------------------------------------------
+ * 기능 : 비밀번호 변경시 일치여부
+ * 작성인 : KJH
+ * 작성날짜 : 2020.02.04     최종수정일 :2020.02.18
+ ----------------------------------------------------------------------------------*/
 // checkvalue 기능
 function checkvalue() {
 
@@ -155,7 +159,7 @@ if(memberJoinFrm.cm_pwd.value && memberJoinFrm.CON_CM_PWD.value) {
   if(memberJoinFrm.cm_pwd.value!=memberJoinFrm.CON_CM_PWD.value){
 
    // status 필드에 일치하지 않는다는 문장 출력
-   memberJoinFrm.status.value = "[ 일치하지 않습니다 ]";
+   memberJoinFrm.status.value = "일치하지 않습니다";
 
    // 그에 맞게 길이 수정
    memberJoinFrm.status.style.width = 120;
@@ -164,7 +168,7 @@ if(memberJoinFrm.cm_pwd.value && memberJoinFrm.CON_CM_PWD.value) {
   } else {
 
    // status 필드에 일치한다는 문장 출력
-   memberJoinFrm.status.value = "[ 일치합니다 ]";
+   memberJoinFrm.status.value = "일치합니다";
 
    // 역시 그에 맞게 길이 수정
    memberJoinFrm.status.style.width = 83;
@@ -174,7 +178,7 @@ if(memberJoinFrm.cm_pwd.value && memberJoinFrm.CON_CM_PWD.value) {
 } else {
 
   // 아무것도 입력이 안 되어 있으므로 비밀번호를 입력해 달라는 메세지를 status 필드에 출력 함
-  memberJoinFrm.status.value = "[ 비밀번호를 입력해 주세요 ]";
+  memberJoinFrm.status.value = "비밀번호를 입력해 주세요";
 
   // 그에 맞게 길이 수정
   memberJoinFrm.status.style.width = 160;

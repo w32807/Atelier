@@ -110,34 +110,51 @@
 
 		<div id="colorlib-main">
 			<div class="colorlib-about">
-				<div class="container-fluid" style="height: auto; min-height: 800px;">
+				<div class="container-fluid"
+					style="height: auto; min-height: 800px;">
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3">
-							<h2 class="colorlib-heading animate-box" data-animate-effect="fadeInLeft"
-								style="margin-left: 100px; font-weight: bolder; font-size: 23px; letter-spacing: 0.5px;">공지사항<hr></h2>
+							<h2 class="colorlib-heading animate-box"
+								data-animate-effect="fadeInLeft"
+								style="margin-left: 100px; font-weight: bolder; font-size: 23px; letter-spacing: 0.5px;">
+								공지사항
+								<hr>
+							</h2>
 						</div>
 					</div>
-					<div class="support-notice">
-						공지사항 게시판입니다. 공지사항을 제대로 읽지 않아 발생되는 모든 문제에 대해서는 책임지지 않습니다. 꼭 숙지 부탁드립니다.
-					</div>
-					
+					<div class="support-notice">공지사항 게시판입니다. 공지사항을 제대로 읽지 않아 발생되는
+						모든 문제에 대해서는 책임지지 않습니다. 꼭 숙지 부탁드립니다.</div>
+
 					<table>
 						<tr>
 							<th style="width: 50px; text-align: center; color: #353535;">제목</th>
-							<th style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">${board.nt_title}</th>
+							<th
+								style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">${board.at_nt_title}</th>
 						</tr>
 						<tr style="border-bottom: 1px solid #A09182;">
 							<th style="width: 50px; text-align: center; color: #353535;">작성자</th>
-							<th style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">${board.nt_id}</th>
+							<th
+								style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">${board.at_nt_id}</th>
 							<th style="width: 235px; text-align: right; color: #353535;">조회수</th>
-							<th style="text-align: right; color: grey; padding-right: 30px;">${board.nt_count}</th>
+							<th style="text-align: right; color: grey; padding-right: 30px;">${board.at_nt_count}</th>
 						</tr>
-						<tr colspan="4">
-							<th style="height: 350px; display: block;">${board.nt_contents}</th>
-							
+						<tr>
+							<th style="height: 350px; display: block;">내용</th>
+							<th
+								style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">${board.at_nt_contents}</th>
+
 						</tr>
 					</table>
-					<a href="ATNotice" class="btn info_btn btn-send-message" style="margin-left: 700px; margin-bottom: 100px;">목록</a>
+					<a href="ATNotice" class="btn info_btn btn-send-message"
+						style="margin-left: 700px; margin-bottom: 100px;">목록</a>
+					<center>
+						<form action="delNotice" name="delNotice" method="get">
+							<input type="hidden" value="${board.at_nt_num}" name="at_nt_num">
+							<input id="deleteButton" type="button" value="글삭제"
+								onclick="confirmDelete(${board.at_nt_num})">
+						</form>
+					</center>
+
 				</div>
 			</div>
 		</div>

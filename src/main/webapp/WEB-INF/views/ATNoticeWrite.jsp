@@ -154,14 +154,14 @@ table, tr, td {
 					</div>
 					<div class="support-notice">공지사항 작성 게시판</div>
 					<form action="noticeWrite" method="post" enctype="multipart/form-data">
-						<input type="hidden" name="nt_id" value="${mb.cm_id}"><!-- 여기에 원래 mb.at_id 넣어야함-->
+						<input type="hidden" name="at_nt_id" value="${mb.cm_id}"><!-- 여기에 원래 mb.at_id 넣어야함-->
 						<table>
 							<tr>
 								<th style="width: 50px; text-align: center; color: #353535;">제목</th>
 								<th
 									style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">
 									<center>
-										<input style="width: 550px" type="text" name="nt_title"></input>
+										<input style="width: 550px" type="text" name="at_nt_title"></input>
 									</center>
 								</th>
 							</tr>
@@ -172,7 +172,7 @@ table, tr, td {
 							</tr>
 							<tr colspan="4">
 								<th style="height: 350px; display: block;">내용</th>
-								<td><textarea style="width: 550px" name="nt_contents"
+								<td><textarea style="width: 550px" name="at_nt_contents"
 										rows="10"></textarea></td>
 							</tr>
 							<tr>
