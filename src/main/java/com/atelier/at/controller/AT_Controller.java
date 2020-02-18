@@ -62,10 +62,10 @@ public class AT_Controller {
 	 -------------------------------------------------------------------*/
 	@PostMapping("ATRegistProc")
 	public String ATRegistProc(AG_Dto agDto, RedirectAttributes rttr) {
-		//String goMain;
-		mServ.ATRegistProc(agDto, rttr);
+		String view = null;
+		view = mServ.ATRegistProc(agDto, rttr);
 		
-		return "main";
+		return view;
 	}
 	
 	/* ---------------------------------------------------------------------------------

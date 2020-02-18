@@ -243,12 +243,15 @@ public class AT_Service {
 	 * 작성자: 정성규
 	 * 작성일: 2020.02.05
 	 ----------------------------------------------------------------------------------------- */
-	public void ATRegistProc(AG_Dto ag_Dto, RedirectAttributes rttr) {
+	public String ATRegistProc(AG_Dto ag_Dto, RedirectAttributes rttr) {
 
 		// boolean b;
+		String view = null;
 		atDao.setATRegistUserData(ag_Dto);
-
-		// return "main";
+		
+		view = "redirect:main";
+		rttr.addFlashAttribute("ATRegistCheck", 1);
+		 return view;
 	}
 
 	/*--------------------------------------------------------------------------------------- 

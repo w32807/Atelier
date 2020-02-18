@@ -153,12 +153,7 @@
     <script src="${pageContext.request.contextPath}/resources/main/js/owl.carousel.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/main/js/main.js"></script>
     <!-- 공방신청 알림 -->
-    <script type="text/javascript">
-    function btn(){
-        alert('공방신청이 완료되었습니다!');
-    }
-    </script>
-    
+
    <!-- 비밀번호 확인 -->
 <script language='javascript'>
 
