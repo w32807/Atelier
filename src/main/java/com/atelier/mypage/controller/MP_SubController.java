@@ -1,5 +1,6 @@
 package com.atelier.mypage.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,12 +57,14 @@ public class MP_SubController {
 	 * 작성일: 2020.02.08
 	 -----------------------------------------------------------------------------------------*/
 	@GetMapping(value = "SubFromProd", produces="application/json; charset=utf-8")
-	 @ResponseBody
-	public String SubFromProd(SB_Dto sbDto) {
+	@ResponseBody
+	public Map<String, String> SubFromProd(SB_Dto sbDto) {
+		log.warn("구독 컨트롤러!!!");
+		Map<String, String> SubFromProdMap = new HashMap<String, String>();
+		String sumMassage = sbServ.SubFromProd(sbDto);
+		SubFromProdMap.put("sumMassage", sumMassage);
 		
-		String SubFromProd = sbServ.SubFromProd(sbDto);
-		
-		return null;
+		return SubFromProdMap;
 	}
 	
 	
