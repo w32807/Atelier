@@ -341,8 +341,8 @@
                                 <div class="tab-pane fade" id="tab-3" role="tabpanel">
 	                            	<div class="customer-review-option">
 	                                	<h4>고객리뷰</h4>
-	                                 	<div class="comment-option">
-	                                    	<table id="prTable" name="prTable">
+	                                 	<div id="prTable"  class="comment-option">
+	                                    	<table name="prTable">
 		                                        <c:forEach var="review" items="${prList}">
 		                                            <div class="co-item">
 		                                                <div class="avatar-pic">
