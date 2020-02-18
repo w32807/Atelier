@@ -53,21 +53,22 @@
                     <div class="blog-sidebar">
                         <div class="blog-catagory" style="margin-bottom: 80px;">
                         	<h4 style="margin-bottom: 30px;">카테고리</h4>
-                        		<form action="선택한 카테고리 전송 시 실행할 메소드" method="get">
+                        		<form action="ATMain" method="get">
 	                            	<ul>
-		                                <li><input type="checkbox" name="category" value="clothing" checked>의류</li>
-		                                <li><input type="checkbox" name="category" value="bag">가방</li>
-		                               	<li><input type="checkbox" name="category" value="shoes">신발</li>
-		                                <li><input type="checkbox" name="category" value="wallet">지갑</li>
+		                                <li><input type="checkbox" name="category" value="의류" checked>의류</li>
+		                                <li><input type="checkbox" name="category" value="가방">가방</li>
+		                               	<li><input type="checkbox" name="category" value="신발">신발</li>
+		                                <li><input type="checkbox" name="category" value="지갑">지갑</li>
 		                            </ul>
 		                            <ul style="margin: -135px 0 0 120px;">
-		                                <li><input type="checkbox" name="category" value="belt">벨트</li>
-		                                <li><input type="checkbox" name="category" value="gloves">장갑</li>
-		                               	<li><input type="checkbox" name="category" value="furniture">가구</li>
-		                                <li><input type="checkbox" name="category" value="other">기타</li>
+		                                <li><input type="checkbox" name="category" value="벨트">벨트</li>
+		                                <li><input type="checkbox" name="category" value="장갑">장갑</li>
+		                               	<li><input type="checkbox" name="category" value="가구">가구</li>
+		                                <li><input type="checkbox" name="category" value="기타 악세서리">기타 악세서리</li>
 		                            </ul>
-		                            <input type="submit" value="select"
+		                            <input type="submit" value="적용하기"
 		                            		style="cursor: pointer; border-style: solid; border-color: #e7ab3c; background-color: #e7ab3c; color: white; margin: 25px 0 0 175px;">
+                    
                             	</form>
                         </div>
                         <div class="recent-post">
@@ -91,16 +92,16 @@
                 <div class="col-lg-9 order-1 order-lg-2">
                     <div class="row">
                     <!-- 여기서부터 for문으로 돌림 -->
-                        <c:forEach var="at_list" items="${at_list}">
+                        <c:forEach var="at_filter_list" items="${at_filter_list}">
                         <div class="col-lg-6 col-sm-6">
                             <div class="blog-item">
                                 <div class="bi-pic">
-                                    <a href="ATDetail?at_num=${at_list.at_seq}"><img src="resources\upload\logo/${at_list.at_logo}" alt="" style="width: 300px;"></a>
+                                    <a href="ATDetail?at_num=${at_filter_list.at_seq}"><img src="resources\upload\logo/${at_filter_list.at_logo}" alt="" style="width: 300px;"></a>
                                 </div>
                                 <div class="bi-text">
-                                 <a href="ATDetail?at_num=${at_list.at_seq}">
-                                	<h4>${at_list.at_name}</h4><br>
-                                	<p><span>#${at_list.at_cate1} #${at_list.at_cate2} #${at_list.at_cate3}</span></p>
+                                 <a href="ATDetail?at_num=${at_filter_list.at_seq}">
+                                	<h4>${at_filter_list.at_name}</h4><br>
+                                	<p><span>#${at_filter_list.at_cate1} #${at_filter_list.at_cate2} #${at_filter_list.at_cate3}</span></p>
                                    
                                         
                                         <br>

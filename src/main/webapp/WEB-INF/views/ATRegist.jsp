@@ -79,7 +79,7 @@
                             <div class="group-input">
                                 <label for="AT_CATE1 "><b>카테고리1 *</b></label>
                                 <select id="AT_CATE1 " name="ag_cate1">
-                                   <option value="">선택</option>
+                                   <option value="없음">없음</option>
                                    <option value="의류">의류</option>
                                    <option value="가방">가방</option>
                                    <option value="신발">신발</option>
@@ -87,13 +87,13 @@
                                    <option value="벨트">벨트</option>
                                    <option value="장갑">장갑</option>
                                    <option value="가구">가구</option>
-                                   <option value="기타">기타</option>
+                                   <option value="기타 악세서리">기타 악세서리</option>
                                 </select>
                             </div>
                             <div class="group-input">
                                 <label for="AT_CATE2 "><b>카테고리2 *</b></label>
                                 <select id="AT_CATE2 " name="ag_cate2">
-                                   <option value="">선택</option>
+                                   <option value="없음">없음</option>
                                    <option value="의류">의류</option>
                                    <option value="가방">가방</option>
                                    <option value="신발">신발</option>
@@ -101,13 +101,13 @@
                                    <option value="벨트">벨트</option>
                                    <option value="장갑">장갑</option>
                                    <option value="가구">가구</option>
-                                   <option value="기타">기타</option>
+                                   <option value="기타 악세서리">기타 악세서리</option>
                                 </select>
                             </div>
                             <div class="group-input">
                                 <label for="AT_CATE3 "><b>카테고리3 *</b></label>
                                 <select id="AT_CATE3 " name="ag_cate3">
-                                   <option value="">선택</option>
+                                   <option value="없음">없음</option>
                                    <option value="의류">의류</option>
                                    <option value="가방">가방</option>
                                    <option value="신발">신발</option>
@@ -115,7 +115,7 @@
                                    <option value="벨트">벨트</option>
                                    <option value="장갑">장갑</option>
                                    <option value="가구">가구</option>
-                                   <option value="기타">기타</option>
+                                   <option value="기타 악세서리">기타 악세서리</option>
                                 </select>
                             </div>
                             <div class="payment-check">

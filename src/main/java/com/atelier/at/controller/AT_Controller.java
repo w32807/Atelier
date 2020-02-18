@@ -85,8 +85,15 @@ public class AT_Controller {
 	  * 작성일 : 2019.02.10
 	  -----------------------------------------------------------------------------------*/
 	@GetMapping("ATMain")
-	public ModelAndView goATMain() {
-		mav = mServ.printATList();
+	public ModelAndView goATMain(HttpServletRequest request) {
+		String[] checkedBoxArr = request.getParameterValues("category");
+		int size = 0;
+		if(checkedBoxArr != null) {
+			for(int i = 0 ; i < checkedBoxArr.length; i++) {
+				System.out.println(checkedBoxArr[i]);
+			}
+		}
+		mav = mServ.printATList(checkedBoxArr);
 		return mav;
 	}
 
@@ -291,11 +298,10 @@ public class AT_Controller {
 	/*-------------------------------------------------------------------
 	 * 기능 : 응원의 한마디
 	 * 책임자 : 김병현, 김종현
-	 * 작성일 : 2020.02.06		최종수정일 : 2020.02.18
+	 * 작성일 : 2020.02.06		최종수정일 : 2020.02.06
 	 ------------------------------------------------------------------- */
 
-
-	   @GetMapping("ATSupportMg")//응원의 메세지로 이동하는 메소드 public String goATSupportMg() {
+	@GetMapping("ATSupportMg")//응원의 메세지로 이동하는 메소드 public String goATSupportMg() {
 	   public ModelAndView getSupportMg() {
 		   
 		   AT_Dto atDto = (AT_Dto)session.getAttribute("at");
@@ -320,7 +326,6 @@ public class AT_Controller {
 	
 			return rmap;
 		}
-		
 	
 		@GetMapping("chgOrderList")
 		public ModelAndView chgOrderList(HttpServletRequest request) {
