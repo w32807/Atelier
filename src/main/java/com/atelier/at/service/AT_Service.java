@@ -674,10 +674,10 @@ public class AT_Service {
 		try {
 			ntDao.noticeWrite(notice);
 			view = "redirect:ATNotice";
-			rttr.addFlashAttribute("check", 2);
+			rttr.addFlashAttribute("writecheck", 2);
 		} catch (Exception e) {
 			view = "redirect:ATNoticeWrite";// redirect로, writeFrm에 가라
-			rttr.addFlashAttribute("check", 1);
+			rttr.addFlashAttribute("writecheck", 1);
 		}
 		mav.setViewName(view);
 		// mav에 데이터를 담지 않아도 되나..?? - Insert를 하니까 상관 없음
