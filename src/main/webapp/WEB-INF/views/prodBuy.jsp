@@ -77,7 +77,7 @@
 	<!-- Shopping Cart Section Begin -->
 	<section class="checkout-section spad">
 		<div class="container">
-			<form action="orderInsert" class="checkout-form" method="post">
+			<form id="orderInsert" action="orderInsert" class="checkout-form" method="post">
 				<div class="row">
 					<div class="col-lg-6">
 						<!-- 로그인 화면으로 가기 -->
@@ -204,12 +204,20 @@
 							<!-- Breadcrumb Section Begin -->
 							<div class="order-total">
 								<ul class="order-table">
-									<li>Product <span style="margin-right: -5px;">Total</span><span class="count prodInfo">수량</span>
-																							<span class="count prodInfo" style="margin-right: 22px;">단가</span></li>
+									<li>Product <span style="margin-right: -5px;">Total</span><span class="count prodInfo" style="margin-right: 50px;">수량</span>
+																							<span class="count prodInfo" style="margin-right: 60px;">단가</span></li>
 									<li class="fw-normal">배송비 무료 <span class="prodInfo">Free</span></li>
 									 <c:forEach var="pdDto" items="${orderedProdList}">
-									<li class="fw-normal">${pdDto.pd_name} <span class="prodInfo">${pdDto.pd_price*pdDto.pd_numofstock}
-										</span><span class="count prodInfo">${pdDto.pd_numofstock}</span><span class="count prodInfo">${pdDto.pd_price}</span></li>
+										 <table>
+										 	<tr>
+												<li class="fw-normal">
+													<td style="width: 210px;">${pdDto.pd_name}</td>
+													<td style="float: right; width: 100px;"><span class="" style="float: right; margin: 0px;">&#8361;${pdDto.pd_price*pdDto.pd_numofstock}</span></td>
+													<td style="float: right; width: 54px;"><span class="count" style="float: right; margin: 0px;">${pdDto.pd_numofstock}</span></td>
+													<td style="float: right; width: 120px;"><span class="count" style="float: right; margin: 0px;">&#8361;${pdDto.pd_price}</span></td>
+												</li>
+											</tr>
+										</table>	
 										<input type="hidden" name="orderProdList" value="${pdDto.pd_code}"/>
 										<input type="hidden" name="orderProdCount" value="${pdDto.pd_numofstock}"/>
 										<input type="hidden" name="orderProdPrice" value="${pdDto.pd_price}"/>
@@ -219,7 +227,7 @@
 									</c:forEach>
 										<input type="hidden" id="orderAddr" name="orderAddr" value="${cmDto.cm_addr}"/>			
 									
-									<li class="total-price">Total<span class="prodInfo">${totalPrice}</span></li>
+									<li class="total-price">Total<span class="prodInfo">&#8361;${totalPrice}</span></li>
 								</ul>
 								<div class="payment-check">
 									<div class="pc-item">
@@ -234,7 +242,7 @@
 									</div>
 								</div>
 								<div class="order-btn">
-									<button id="orderInsertBtn" type="submit" class="site-btn place-btn">주문하기</button>
+									<button id="orderInsertBtn" type="button" class="site-btn place-btn">주문하기</button>
 								</div>
 							</div>
 						</div>
@@ -342,18 +350,5 @@ function btn(){
 		})
 	</script>
 </body>
-<!-- 
-<div class="tab-pane fade-in active" id="tab-1"
-											role="tabpanel">
-											<div class="product-content">
-												<div class="row">
-													<div class="col-lg-12">
-														<label for="street">주소<span>*</span></label> <input
-															type="text" id="street" class="street-first"> <input
-															type="text">
-													</div>
-												</div>
-											</div>
-										</div>
- -->
+
 </html>

@@ -54,7 +54,7 @@
     <section class="shopping-cart spad">
         <div class="container">
                     <div class="cart-table">
-                    <form id="prodBuy" action="prodBuy" method="post">
+                    <form id="prodBuy" action="prodBuy" name="prodBuyFrm" method="post">
                         <table>
                             <thead>
                                 <tr>
@@ -62,7 +62,7 @@
                                     <th class="p-name">제품명</th>
                                     <th>가격</th>
                                     <th>수량</th>
-                                    <th>총가격</th>
+                                    <th>총 가격</th>
                                     <th><i class="ti-close"></i></th>
                                 </tr>
                             </thead>
@@ -72,15 +72,15 @@
                                     <td class="cart-pic first-row"><a href="prodDetail?pd_code=${b.bt_pd_code}"><img src="./resources/main/img/products/${b.pi_oriname}" alt=""></a></td>                                    <td class="cart-title first-row">
                                         <h5><a href="prodDetail?pd_code=${b.bt_pd_code}">${b.bt_at_name}</a></h5>
                                     </td>
-                                    <td class="p-price first-row" title="${b.bt_num}">${b.bt_price}</td>
+                                    <td class="p-price first-row" title="${b.bt_num}">&#8361;${b.bt_price}</td>
                                     <td class="qua-col first-row">
                                         <div  class="quantity">
                                             <div id="${b.bt_num}" class="pro-qty">
-                                                <input name="${b.bt_num}" type="text" value="${b.bt_count}"> <!-- 수량조정 -->
+                                                <input class="orderCount" name="${b.bt_num}" type="text" value="${b.bt_count}" min="1"> <!-- 수량조정 -->
                                             </div>
                                         </div>
                                     </td>
-                                    <td name="${b.bt_num}" class="total-price first-row">${b.bt_price*b.bt_count}</td> <!-- 총가격 -->
+                                    <td name="${b.bt_num}" class="total-price first-row">&#8361;${b.bt_price*b.bt_count}</td> <!-- 총가격 -->
                                     <td class="close-td first-row"><i class="ti-close" onclick="deleteBasket(${b.bt_num})"></i></td> <!-- 취소버튼 -->
                                 	<input type="hidden" name="orderBtNum" value="${b.bt_num}">
                                 </tr>
@@ -89,8 +89,8 @@
                             </tbody>
                         </table>
                        </form>
-                       <form id="deleteFrm">
-                            <input id="deleteInput" type="hidden" name="bt_num" value="">
+                       <form id="deleteFrm" action="deleteBasket">
+                            <input id="deleteInput"  type="hidden" name="bt_num" value="">
                        </form>
                     </div>
                     <div class="row">
@@ -115,7 +115,7 @@
                                 <ul>
                                 <!-- 서브토탈 -->
                                     <!--  <li class="subtotal">Subtotal <span>$240.00</span></li>-->
-                                    <li class="cart-total">총가격 <span id="orderTotalPrice"></span></li>
+                                    <li class="cart-total">총 가격 <span id="orderTotalPrice"></span></li>
                                 </ul>
                                 <a id="order" class="proceed-btn">구매하기</a>
                             </div>
@@ -222,12 +222,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			var totalPrice = 0;
 		
 			var price = $("td[title="+bt_num+"]").html();//가격
+			var price = price.replace("₩", "");
 			var count = $("input[name="+bt_num +"]").val();//수량
 			totalPrice = price * count;
 			console.log("가격 : " +price);
 			console.log("수량 : " +count);
 			console.log("해당 상품 총 가격 : " +totalPrice);
-			$("td[name="+bt_num+"]").html(totalPrice);//총가격
+			$("td[name="+bt_num+"]").html("₩"+totalPrice);//총가격
 			totalPriceCal();
 			
 		});
@@ -237,69 +238,43 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	        var total = 0;
 	        $('.total-price').each( function() {
 	          priceStr = $( this ).html();
-	          var priceInt = parseInt(priceStr);
+	          var price = priceStr.replace("₩", "");
+	          var priceInt = parseInt(price);
 			  total += priceInt;	       	
 	        });
 	        console.log( typeof(total));
 	       
 	        console.log("전체 총 합계 : " + total);
-	    	$("#orderTotalPrice").html(total);
+	    	$("#orderTotalPrice").html("₩"+total);
 		}
-		
-		function deleteBasket(bt_num){
-			console.log(bt_num);
-			$('#deleteInput').val(bt_num);
-			//ajax로 처리
-			if(confirm("정말 장바구니에서 삭제하시겠습니까?")){
-			
-					var bt_numObj = $("#deleteFrm").serializeObject();
-					console.log(bt_numObj);
-					$.ajax({
-						url: "deleteBasket",
-						type: "get",
-						data: bt_numObj,
-						dataType: "json",
-						success: function(data){
-							alert("장바구니에서 삭제 되었습니다.");
-							console.log(data); 
-							var basketList = '';	
-							var dbList = data.bList;
-							  for(var i = 0; i < dbList.length; i++){
-								  basketList += '<tr>'
-						                            +'<td class="cart-pic first-row"><img src="./resources/main/img/products/'+ dbList[i].pi_oriname +'" alt=""></td>'
-						                            +'<td class="cart-title first-row">'
-					                                	+'<h5>'+ dbList[i].bt_at_name +'</h5>'
-					                            	+'</td>'
-					                           	    +'<td class="p-price first-row" title="' + dbList[i].bt_num +'">b.bt_price</td>'
-					                                +'<td class="qua-col first-row">'
-						                                +'<div  class="quantity">'
-						                                    +'<div id="' + dbList[i].bt_num+'" class="pro-qty">'
-						                                        +'<input name="' + dbList[i].bt_num +'" type="text" value="' + dbList[i].bt_count +'"> <!-- 수량조정 -->'
-						                                    +'</div>'
-						                                +'</div>'
-						                            +'</td>'
-						                            +'<td name="' + dbList[i].bt_num +'" class="total-price first-row">'+ dbList[i].bt_price * dbList[i].bt_count +'</td> <!-- 총가격 -->'
-						                            +'<td class="close-td first-row"><i class="ti-close" onclick="deleteBasket('+ dbList[i].bt_num +')"></i></td> <!-- 취소버튼 -->'
-					                    	    +'</tr>'
-							
-							  }
-							$("#listBody").html(basketList);
-							
-						},
-						error: function(error){
-							alert("장바구니에서 삭제 되지 않았습니다.");
-						}
-					});
-			}
-		
-		}
-		
 		
 		
 		$("#order").click(function(){
 			if(confirm("장바구니의 상품을 구매 하시겠습니까?")){
-				$("#prodBuy").submit();
+				var numOfProd = $(".orderCount").length;//상품의 갯수
+				var numOfCount = 0;
+				$(".orderCount").each(function(){
+					  var count = $(this).val();
+					  console.log("각각 상품의 수량 "+count);
+					  if(count == '0'){
+						  
+					  }else {
+						  numOfCount++;
+					}
+				});
 				
+				if(numOfProd === numOfCount){
+					var totalPrice = $("#orderTotalPrice").html();
+					console.log("총 가격은...!! : "+totalPrice + "원입니다.");
+					if(totalPrice != '0'){
+						$("#prodBuy").attr("action","prodBuy");
+						$("#prodBuy").submit();
+					}else {
+						alert("장바구니가 비어있습니다.");
+					} 
+				}else {
+					alert("수량이 입력 되지 않은 상품이 있습니다.");
+				}
 			}
 		})
 		
@@ -313,6 +288,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	});
 		
 		
+		function deleteBasket(bt_num){
+			$("#deleteInput").val(bt_num);
+			if(confirm("정말 장바구니에서 삭제하시겠습니까?")){
+			$("#deleteFrm").submit();
+			}
 		
+		}
 </script>
 </html>

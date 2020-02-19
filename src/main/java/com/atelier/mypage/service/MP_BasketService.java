@@ -59,19 +59,19 @@ public class MP_BasketService {
 	 * 기능: 장바구니에서 내역 삭제
 	 * 작성자: JWJ
 	 * 작성일 : 2019.02.13
+	 * 수정일 : 2019.02.19(장바구니 삭제를 ajax처리로 하지 않도록 수정)
 	  -----------------------------------------------------------------------------------*/
-	public Map<String, List<PO_Dto>> deleteBasket(String bt_num, String bt_cm_id) {
-		
+	public ModelAndView deleteBasket(String bt_num, String bt_cm_id) {
+		mav = new ModelAndView();
 		Map<String, List<PO_Dto>> basketMap = new HashMap<String, List<PO_Dto>>();
 		int btNum = Integer.parseInt(bt_num);
 		boolean a = btDao.deleteBasket(btNum);
 		
 		if(a){
-			List<PO_Dto> bList = btDao.getBasketList(bt_cm_id);
-			basketMap.put("bList", bList);
+			mav = getBasketList(bt_cm_id);
 		}
 		
-		return basketMap;
+		return mav;
 	}
 
 	

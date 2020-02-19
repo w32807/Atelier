@@ -214,7 +214,7 @@
                                 </div> -->
                                 <div class="pd-desc">
                                    <!--  <p>간략한 제품 소개는 여기다가</p> -->
-                                    <h4>&#8361; ${prodDto.pd_price} <span>&#8361; ${prodDto.pd_price*1.5} </span></h4>
+                                    <h4>${prodDto.pd_price} <span>${prodDto.pd_price*1.5} </span></h4>
                                 </div>
                                 
                                 <hr>
@@ -270,7 +270,7 @@
                                 <ul class="pd-tags">
                              	    <li><span>카 테 고 리</span> : ${prodDto.pd_cate}</li>
                                     <li><span>제 품 코 드</span> : ${prodDto.pd_code}</li>
-                                    <li style="float: right; font-size: 25px;"><span>결 제 금 액  : </span><span id="totalPrice" value="">&#8361; ${prodDto.pd_price}</span></li>
+                                    <li style="float: right; font-size: 25px;"><span>결 제 금 액  : </span><span id="totalPrice" value="">${prodDto.pd_price}</span></li>
                                 </ul>
                            <!--      <div class="pd-share">
                                     <div class="p-code">제품코드 : 00012</div>
@@ -313,7 +313,7 @@
                                             <tr>
                                                 <td class="p-catagory">상품가격</td>
                                                 <td>
-                                                    <div class="p-price">&#8361; ${prodDto.pd_price}</div>
+                                                    <div class="p-price">${prodDto.pd_price}</div>
                                                 </td>
                                             </tr>
                                           
@@ -529,7 +529,13 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 <script type="text/javascript">
    	$('#basketBtn').click(function(){
         if(confirm("이 상품을 장바구니에 담으시겠습니까?")){
-        	insertbasket();
+        	var count = $("#bt_count").val();
+        	if(count == '0'){
+        		alert("수량을 입력 해 주세요");
+        	}else{
+        		insertbasket();	
+        	}
+        	
         } 		
    	});
 	$("#bt_countDiv").on("click", function() {

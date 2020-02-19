@@ -65,14 +65,14 @@ public class MP_BascketController {
 	 * 기능: 장바구니에서 내역 삭제
 	 * 작성자: JWJ
 	 * 작성일 : 2019.02.13
+	 * 수정일 : 2019.02.19(장바구니 삭제를 ajax처리로 하지 않도록 수정)
 	  -----------------------------------------------------------------------------------*/
-	@GetMapping(value = "deleteBasket", produces = "application/json; charset=utf-8")
-	@ResponseBody
-	public Map<String, List<PO_Dto>> deleteBasket(String bt_num) {
+	@GetMapping("deleteBasket")
+	public ModelAndView deleteBasket(String bt_num) {
 		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
 		String bt_cm_id = cmDto.getCm_id();
-		Map<String, List<PO_Dto>> basketMap = mpServ.deleteBasket(bt_num, bt_cm_id);
+		mav = mpServ.deleteBasket(bt_num, bt_cm_id);
 		
-		return basketMap;
+		return mav;
 	}
 }
