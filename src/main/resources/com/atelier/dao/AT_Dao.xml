@@ -197,5 +197,10 @@
    		INSERT INTO MESSAGE VALUES(MG_NUM_SEQ.NEXTVAL,#{mg_sender},#{mg_receiver},DEFAULT,#{mg_contents},DEFAULT)
    	</insert>
    	
+   	 <insert id="insertATData" parameterType="com.atelier.dto.AG_Dto">
+		INSERT INTO AT VALUES
+		(#{at_id}, #{at_logo}, '활성', AT_SEQ_SEQ.NEXTVAL, #{at_addr}, #{at_snsaddr}, #{at_name},
+		#{at_phone},#{at_cate1},#{at_cate2},#{at_cate3})
+	</insert>
 	
 </mapper>

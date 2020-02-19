@@ -99,4 +99,6 @@ public interface AT_Dao {
 
 	public boolean setMessage(MG_Dto mgDto);
 
+	public void insertATData(AT_Dto at_dto);
+
 }
