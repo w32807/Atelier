@@ -556,7 +556,12 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			error : function(error, status) {
 				console.log(error);
 				console.log(status);
-				alert("장바구니에 담기지 않았습니다.");
+				var result = confirm("로그인 후 이용 가능합니다. 로그인으로 이동 하시겠습니까?");
+				if(result){
+					location.href = "login";
+				}
+				
+				//alert("로그인 후 이용 가능합니다.");
 			}
 		});
 	}
