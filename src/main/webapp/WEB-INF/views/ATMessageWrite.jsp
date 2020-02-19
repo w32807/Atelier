@@ -61,6 +61,20 @@
 		    font-weight: bolder;
 		}
 	</style> 
+	<!-- 
+	    <script type="text/javascript">
+      		window.onload = function() {//이 페이지가 실행 되면, 이 함수를 실행해라
+				var chk = "${check}";
+				if(chk == "fail"){
+					alert("전송실패");
+					location.reload(true);//화면을 다시 한번 불러오면서 check를 리셋함 
+				}
+				else{
+					alert("전송성공");
+					location.reload(true);
+				}
+			}
+	</script> -->
 </head>
 
 <body>
@@ -80,20 +94,22 @@
 								<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true" style="margin: 60px;">
 									<!-- 각각의 heading숫자 ,  collapse숫자는 모두 for문으로 숫자들을 1개씩 증가시켜주세요. -->
 									<div class="panel panel-default">
-										<p style="font-size: 14px; margin-top: -30px;">받는 사람 : 공방</p>
-										<div class="panel-heading" role="tab" id="heading1">
+									<div class="panel-heading"  id="heading1">
+										<a class="collapsed"  aria-expanded="false" aria-controls="collapse1" style="font-weight: bold;">
+										<i class="icon_mail_alt"></i>받는 사람 : ${pd}</a>
+									</div>
+										
+										<div class="panel-heading"  id="heading1">
 											<h4 class="panel-title">
-										    	<a class="collapsed"  href="#collapse1" aria-expanded="false" aria-controls="collapse1"
+										    	<a class="collapsed"  aria-expanded="false" aria-controls="collapse1"
 										    			style="font-weight: bold;">
-										        	<i class="icon_mail_alt"></i> 보내는 사람 : 장원준
-										        </a>
+										        	<i class="icon_mail_alt"></i>보내는 사람 : ${mb.cm_id}</a>
 										    </h4>
 										</div>
-										<form id="messageFrm" action="쪽지를 저장할 컨트롤러 메소드" method="get">
-											<textarea id="messageContents" rows="10" cols="45" name="MG_CONTENTS"
-													style="margin-top: 5px; font-size: 15px; resize: none; width: 375px;" placeholder="여기에 내용을 작성 해주세요." >
-											</textarea>
-											<input type="hidden" name="MG_RECEIVER" value="받는 사람 ID"><!-- 송신자의 아이디는 session에 담겨있을테니 여기서 안 보내도 됨. -->
+										<form id="messageFrm" method="get">
+											<textarea id="messageContents" rows="10" cols="45" name="mg_contents"
+													style="margin-top: 5px; font-size: 15px; resize: none; width: 375px;" placeholder="여기에 내용을 작성 해주세요." ></textarea>
+											<input type="hidden" name="mg_receiver" value="${pd}">
 										</form>								
 									</div>
 									<div class="panel panel-default">
@@ -101,7 +117,7 @@
 									
 									<div style="margin-top: 10px;">
 										<input id="messageSendBtn" type="button" class="btn info_btn btn-send-message" 
-											value="전송" onclick="self.close();">
+											value="전송" >
 									</div>
 								</div>
 							</div>
@@ -145,18 +161,27 @@
 	
 	
 	<script type="text/javascript">
-				$("#messageSendBtn").click(function() {
-					var content = $("#messageContents").val();
-					console.log(content);
-					if(content==''){
-						alert("보낼 내용을 작성해주세요!");
-						console.log(content);
-					} else {
-						$("#messageFrm").submit();
-					}
-								
-				});
-						
+				
+	$("#messageSendBtn").click(function() {
+		
+		var content = $("#messageContents").val();
+		
+		console.log(content);
+		
+		if(content==''){
+		
+			alert("보낼 내용을 작성해주세요!");
+			
+			console.log(content);
+		
+		} else {
+		
+			$("#messageFrm").submit();
+		
+		}
+					
+	});
+		
 						
 	</script>
 </body>

@@ -37,6 +37,7 @@ import com.atelier.dto.AT_Dto;
 import com.atelier.dto.AT_NT_Dto;
 import com.atelier.dto.AT_ProdDto;
 import com.atelier.dto.CM_Dto;
+import com.atelier.dto.MG_Dto;
 import com.atelier.dto.NT_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
@@ -1250,6 +1251,48 @@ public class AT_Service {
 		//printATList();
 		return mav;
 	}
+	
+	
+	public ModelAndView getATMessage(String receiver) {
+		
+		mav = new ModelAndView();
+		
+		mav.addObject("pd",receiver);
+		
+		mav.setViewName("ATMessageWrite");
+		
+		return mav;
+	}
+
+	public ModelAndView setMessage(MG_Dto mgDto, RedirectAttributes rttr) {
+		
+		mav = new ModelAndView();
+		
+		String view = null;
+		
+		AT_Dto atDto = (AT_Dto)session.getAttribute("at");
+		
+		int seq = atDto.getAt_seq();
+		
+		try {
+			
+			atDao.setMessage(mgDto);
+			
+			rttr.addFlashAttribute("check","성공");
+			
+			mav = getATDetail(seq);
+			
+		}catch(Exception e) {
+			
+			mav = getATDetail(seq);
+			
+			rttr.addFlashAttribute("check","fail");
+		}
+		
+		
+		return mav;
+	}
+
 
 
 }//AT_Service 클래스의 끝

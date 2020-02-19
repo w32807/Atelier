@@ -110,16 +110,19 @@ table, tr, td {
 	text-align: center;
 }
 </style>
-</head>
-    <script type="text/javascript">
+
+   <script type="text/javascript">
       		window.onload = function() {//이 페이지가 실행 되면, 이 함수를 실행해라
 				var chk = "${check}";
 				if(chk == "fail"){
-					alert("회원 가입 실패");
+					alert("글 삭제에 실패하셨습니다");
 					location.reload(true);//화면을 다시 한번 불러오면서 check를 리셋함 
 				}
 			}
 	</script>
+
+</head>
+ 
 <body>
 	<!-- 상단바 Include -->
 	<jsp:include page="Main_Upper.jsp" flush="false" />

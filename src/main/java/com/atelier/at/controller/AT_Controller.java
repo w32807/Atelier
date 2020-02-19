@@ -27,6 +27,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.atelier.at.service.AT_Service;
 import com.atelier.dto.AG_Dto;
 import com.atelier.dto.AT_Dto;
+import com.atelier.dto.CM_Dto;
+import com.atelier.dto.MG_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
 import com.atelier.dto.RO_Dto;
@@ -453,6 +455,43 @@ public class AT_Controller {
 		public ModelAndView getregistSelProd(String registSelect) {
 			
 			mav = atServ.getregistSelProd(registSelect);
+			
+			return mav;
+		}
+		
+		/*-------------------------------------------------------------------
+		 * 기능 : 공방에 쪽지 보내기 화면 출력 메소드
+		 * 작성자: KBH
+		 * 작성일 : 2020.02.18
+		 ------------------------------------------------------------------- */
+		@GetMapping("ATMessageWrite")
+		public ModelAndView ATMessage() {
+			
+			AT_Dto atDto = (AT_Dto)session.getAttribute("at");
+			
+			String receiver = atDto.getAt_id();
+			
+			mav = atServ.getATMessage(receiver);
+			
+			return mav;
+		}
+		
+		/*-------------------------------------------------------------------
+		 * 기능 : 공방에 쪽지 보내기 메소드
+		 * 작성자: KBH
+		 * 작성일 : 2020.02.18
+		 ------------------------------------------------------------------- */
+		@GetMapping("messageFrm")
+		public ModelAndView messageFrm(MG_Dto mgDto, RedirectAttributes rttr) {
+			
+			CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
+			
+			String sender = cmDto.getCm_id();
+			
+			mgDto.setMg_sender(sender);
+			
+			mav = atServ.setMessage(mgDto,rttr);
+			
 			
 			return mav;
 		}
