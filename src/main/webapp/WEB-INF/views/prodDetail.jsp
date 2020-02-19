@@ -214,7 +214,7 @@
                                 </div> -->
                                 <div class="pd-desc">
                                    <!--  <p>간략한 제품 소개는 여기다가</p> -->
-                                    <h4>${prodDto.pd_price} <span>${prodDto.pd_price*1.5} </span></h4>
+                                    <h4>&#8361; ${prodDto.pd_price} <span>&#8361; ${prodDto.pd_price*1.5} </span></h4>
                                 </div>
                                 
                                 <hr>
@@ -270,7 +270,7 @@
                                 <ul class="pd-tags">
                              	    <li><span>카 테 고 리</span> : ${prodDto.pd_cate}</li>
                                     <li><span>제 품 코 드</span> : ${prodDto.pd_code}</li>
-                                    <li style="float: right; font-size: 25px;"><span>결 제 금 액  : </span><span id="totalPrice" value="">${prodDto.pd_price}</span></li>
+                                    <li style="float: right; font-size: 25px;"><span>결 제 금 액  : </span><span id="totalPrice" value="">&#8361; ${prodDto.pd_price}</span></li>
                                 </ul>
                            <!--      <div class="pd-share">
                                     <div class="p-code">제품코드 : 00012</div>
@@ -313,7 +313,7 @@
                                             <tr>
                                                 <td class="p-catagory">상품가격</td>
                                                 <td>
-                                                    <div class="p-price">${prodDto.pd_price}</div>
+                                                    <div class="p-price">&#8361; ${prodDto.pd_price}</div>
                                                 </td>
                                             </tr>
                                           
