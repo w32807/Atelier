@@ -286,10 +286,10 @@ public class AT_Controller {
 		return view;
 	}
 	
-	@GetMapping("ATMessageWrite")
-	public String ATMessageWrite() {
-		return "ATMessageWrite";
-	}
+//	@GetMapping("ATMessageWrite")
+//	public String ATMessageWrite() {
+//		return "ATMessageWrite";
+//	}
 	
 	@GetMapping("ATMessageRQ")
 	public String ATMessageRQ() {
