@@ -79,12 +79,12 @@
 					<div class="row">
 						<div class="col-md-6 col-md-offset-3 col-md-pull-3">					
 							<h2 class="colorlib-heading animate-box" data-animate-effect="fadeInLeft"
-								style="font-weight: bolder; font-size: 23px; letter-spacing: 0.5px; margin-left: 30px;">주문 상태 조회<hr>
+								style="font-weight: bolder; font-size: 23px; letter-spacing: 0.5px; margin: 0 0 30px 30px;">주문 상태 조회<hr>
 							</h2>							
 						</div>
 						<form id="seletor">
 							<select id="selectBox" 
-							style="margin-left: 1100px; border-radius: 10px; width: 100px; height: 35px;  padding-left: 8px; font-size: 14px; border: 1px solid #A09182; color: white; background-color: #A09182;">
+							style="margin-left: 900px; border-radius: 10px; width: 100px; height: 35px;  padding-left: 8px; font-size: 14px; border: 1px solid #A09182; color: white; background-color: #A09182;">
 								<option value="before">배송전</option>
 								<option value="being">배송중</option>
 								<option value="after">배송 완료</option>
@@ -93,42 +93,40 @@
 					</div>
 					
                   	<form action="orderCancle" method="get" id="cancleStateFrm">
-						<div class="row" style="margin-top: 60px;">
+						<div class="row" style="margin-top: 50px;">
 							<div class="col-md-8">
-								<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft"
-									style="margin-bottom: 70px;">
+								<div class="colorlib-feature animate-box" data-animate-effect="fadeInLeft">
 									<div id="orderAjax">
 									<br>
-									<c:forEach var="pl" items="${poList}">
-									
-									<div class="${pl.po_state}">
-									<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; float:left; margin-bottom: 20px;">
-											<span><img src="./resources/main/img/products/${pl.pi_oriname}" style="width:300px; heigt:300px;" ></span>
-											<div style="float:right;">
-												<input type="hidden" value="${pl.po_num}">
-												<input type="checkbox" name="prod" value="${pl.po_num}">
-												<h3 style="display: inline-block; font-size: 18px;"><b>${pl.po_at_name}</b></h3>
-												<br><!-- 체크박스의 상품코드로 주문취소 처리 할 것임! -->
-												<b>배송상태</b><span>&nbsp;&nbsp;&nbsp;${pl.po_state}</span><br>
-												<b>가격</b><span>&nbsp;&nbsp;&nbsp;${pl.po_price}</span><br>
-												<b>수량</b><span>&nbsp;&nbsp;&nbsp;${pl.po_count}</span><br>
-												<b>배송지</b><span>&nbsp;&nbsp;&nbsp;${pl.po_addr}</span><br>
-												<br>
+										<c:forEach var="pl" items="${poList}">
+											<div class="${pl.po_state}" style="margin-left: 80px;">
+												<img src="./resources/main/img/products/${pl.pi_oriname}" style="width:330px;" >
+												<div class="colorlib-text" style="position: absolute; display: inline-block; padding: 50px 0 0 80px; font-size: 18px; font-weight: 400;">
+													<div style="display: inline-block; line-height: 35px;">
+														<input type="hidden" value="${pl.po_num}">
+														<input type="checkbox" name="prod" value="${pl.po_num}">
+														<h3 style="display: inline-block; font-size: 25px; letter-spacing: 1px; margin-bottom: 35px;"><b>${pl.po_at_name}</b></h3>
+														<br><!-- 체크박스의 상품코드로 주문취소 처리 할 것임! -->
+														<b style="margin-right: 40px;">배송상태</b><span>${pl.po_state}</span><br>
+														<b style="margin-right: 80px;">가격</b><span>${pl.po_price}&#8361;</span><br>
+														<b style="margin-right: 80px;">수량</b><span>${pl.po_count}</span><br>
+														<b style="margin-right: 60px;">배송지</b><span>${pl.po_addr}</span><br>
+														<br>
+													</div>
+												</div>
 											</div>
-										</div>
-										</div>
-									</c:forEach>
-									</div>
+										</c:forEach>
 									</div>
 								</div>
 							</div>
+						</div>
 							
 					
-					<div class="colorlib-feature animate-box" style="text-align: right; width: 1100px; height: 200px;" >
-						<input id="cancleBtn" type="button" name="search"  value="주문취소"
-								style="width: 100px; height: 35px; border: none; font-size: 16px; color: white; background-color: #A09182; margin: 80px -85px 0 0;">
-					</div>
-				</form>
+						<div class="colorlib-feature animate-box" style="text-align: right; width: 900px; height: 200px;" >
+							<input id="cancleBtn" type="button" name="search"  value="주문취소"
+									style="width: 100px; height: 35px; border: none; font-size: 16px; color: white; background-color: #A09182; margin: 80px -85px 0 0;">
+						</div>
+					</form>
    <!-- 여기까지 컨텐츠입니다. -->                        
                             </div>
                    
@@ -224,23 +222,20 @@
 					
 					for(var i=0; i<dlist.length; i++){
 						
-						poList +=
-
+						poList +=				
 						 '<br>'+
-						 '<div class="'+dlist[i].po_state+'">'+
-						 '<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; float:left; margin-bottom: 20px;">'+
-						 '<span>'+
-						 '<img src="'+'./resources/main/img/products/'+dlist[i].pi_oriname+'"'+ 'style="width:300px; heigt:300px;" >'+
-						 '</span>'+
-						 '<div style="float:right;">'+
+						 '<div class="'+ dlist[i].po_state + '"style="margin-left: 80px;">'+
+						 '<img src="'+'./resources/main/img/products/'+dlist[i].pi_oriname+'"'+ 'style="width:330px;">'+
+						 '<div class="colorlib-text" style="position: absolute; display: inline-block; padding: 50px 0 0 80px; font-size: 18px; font-weight: 400;">'+
+						 '<div style="display: inline-block; line-height: 35px;">'+
 						 '<input type="hidden" value="'+dlist[i].po_num+'">'+
 						 '<input type="checkbox" name="prod"' + 'value='+'"'+dlist[i].po_num+'">'+
-						 '<h3 style="display: inline-block; font-size: 18px;"><b>상품명</b></h3>'+
+						 '<h3 style="display: inline-block; font-size: 25px; letter-spacing: 1px; margin-bottom: 35px;"><b>상품명</b></h3>'+
 						 '<br>'+
-						 '<b>배송상태</b><span>&nbsp;&nbsp;&nbsp;'+dlist[i].po_state+'</span><br>'+
-						 '<b>가격</b><span>&nbsp;&nbsp;&nbsp;'+dlist[i].po_price+'</span><br>'+
-						 '<b>수량</b><span>&nbsp;&nbsp;&nbsp;'+dlist[i].po_count+'</span><br>'+
-						 '<b>배송지</b><span>&nbsp;&nbsp;&nbsp;'+dlist[i].po_addr+'</span><br>'+
+						 '<b style="margin-right: 40px;">배송상태</b><span>'+dlist[i].po_state+'</span><br>'+
+						 '<b style="margin-right: 40px;">가격</b><span>'+dlist[i].po_price+'&#8361;</span><br>'+
+						 '<b style="margin-right: 40px;">수량</b><span>'+dlist[i].po_count+'</span><br>'+
+						 '<b style="margin-right: 40px;">배송지</b><span>'+dlist[i].po_addr+'</span><br>'+
 						 '<br>'+
 						 '</div>'+
 						 '</div>'+

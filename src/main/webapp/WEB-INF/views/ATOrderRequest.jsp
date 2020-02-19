@@ -111,7 +111,7 @@
 												<div class="colorlib-icon" style="width: 130px; height: 130px;">
 													<i class="icon-tag"></i>
 												</div>
-												<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">
+												<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400; width: 350px;">
 													<h3 style="display: inline-block; font-size: 18px; margin-bottom: 16px;">
 														<b>${rmProd.rm_type}</b>
 													</h3>
@@ -137,7 +137,7 @@
 												<div class="colorlib-icon" style="width: 130px; height: 130px;">
 													<i class="icon-tag"></i>
 												</div>
-												<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400;">
+												<div class="colorlib-text" style="padding: 13px 0 0 150px; font-size: 15px; font-weight: 400; width: 350px;">
 													<h3 style="display: inline-block; font-size: 18px; margin-bottom: 16px;">
 														<b>${rmProd.rm_type}</b>
 													</h3>
