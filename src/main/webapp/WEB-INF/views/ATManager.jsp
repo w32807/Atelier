@@ -201,5 +201,14 @@
 	<script src="resources/AT_front/js/main.js"></script>
 
 	</body>
+	<script type="text/javascript">
+	 $( document ).ready(function() {
+		 var responseMessage = "${message}";
+	        if(responseMessage != ""){
+	            alert(responseMessage)
+	        }
+		});
+
+	</script>
 </html>
 

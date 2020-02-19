@@ -328,7 +328,6 @@
 					$('select[name="registSelect"]').find('option[value="F"]').attr("selected",false);
 				 }
 
-
 		</script>
 
 </body>

@@ -120,7 +120,8 @@ public class AT_Service {
 
 			mav.setViewName("ATProdManage");
 		}else {
-			mav.setViewName("예외페이지로 넘어갑니다!");
+			mav.addObject("message","비활성 상태이므로 접근 불가.");
+			mav.setViewName("ATManager");
 		}
 
 		return mav;
@@ -1270,7 +1271,9 @@ public class AT_Service {
 		
 		String view = null;
 		
-	
+		AT_Dto atDto = (AT_Dto)session.getAttribute("at");
+		
+		int seq = atDto.getAt_seq();
 		
 		try {
 			
@@ -1278,14 +1281,15 @@ public class AT_Service {
 			
 			rttr.addFlashAttribute("check","성공");
 			
+			mav = getATDetail(seq);
 			
 		}catch(Exception e) {
 			
+			mav = getATDetail(seq);
 			
 			rttr.addFlashAttribute("check","fail");
 		}
 		
-		mav.setViewName("ATMessageWrite");
 		
 		return mav;
 	}

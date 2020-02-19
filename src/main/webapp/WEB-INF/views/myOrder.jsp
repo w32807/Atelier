@@ -102,8 +102,8 @@
 									<c:forEach var="pl" items="${poList}">
 									
 									<div class="${pl.po_state}">
-									<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; float:left;">
-											<span><img src="./resources/image/${pl.pi_oriname}" style="width:300px; heigt:300px;" ></span>
+									<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; float:left; margin-bottom: 20px;">
+											<span><img src="./resources/main/img/products/${pl.pi_oriname}" style="width:300px; heigt:300px;" ></span>
 											<div style="float:right;">
 												<input type="hidden" value="${pl.po_num}">
 												<input type="checkbox" name="prod" value="${pl.po_num}">
@@ -228,9 +228,9 @@
 
 						 '<br>'+
 						 '<div class="'+dlist[i].po_state+'">'+
-						 '<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; float:left;">'+
+						 '<div class="colorlib-text" style="padding: 0 0 0 150px; font-size: 15px; font-weight: 400; float:left; margin-bottom: 20px;">'+
 						 '<span>'+
-						 '<img src="'+'./resources/image/'+dlist[i].pi_oriname+'"'+ 'style="width:300px; heigt:300px;" >'+
+						 '<img src="'+'./resources/main/img/products/'+dlist[i].pi_oriname+'"'+ 'style="width:300px; heigt:300px;" >'+
 						 '</span>'+
 						 '<div style="float:right;">'+
 						 '<input type="hidden" value="'+dlist[i].po_num+'">'+
