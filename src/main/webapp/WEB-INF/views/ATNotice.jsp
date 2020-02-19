@@ -169,7 +169,7 @@
 						</div>
 						<hr>
 					<center>
-					<button onclick="location.href='./ATNoticeWrite'">글쓰기</button>
+					<button class="NTConfig" onclick="location.href='./ATNoticeWrite'">글쓰기</button>
 					</center>
 				</div>
 			</div>
