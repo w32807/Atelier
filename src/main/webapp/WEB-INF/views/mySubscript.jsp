@@ -63,10 +63,10 @@
                             <c:forEach var="b" items="${sList}">
 				                <div class="col-lg-9 order-1 order-lg-2" style="left:50px;">
 				                    <div class="single-latest-blog" style="width: 280px;">
-				                        <a href="ATDetail?am_id=${mb.cm_id}"><img src="resources/main/img/blog/${b.at_logo}.png" alt=""></a>
+				                        <a href="ATDetail?at_num=${b.at_seq}"><img src="resources\upload\logo/${b.at_logo}" alt=""></a>
 				                        <div class="latest-text" style="text-align: center;">
 				                            <div class="blog-detail-title">
-				                            	<a href="ATDetail?am_id=${mb.cm_id}">
+				                            	<a href="ATDetail?at_num=${b.at_seq}">
 				                                	<h4 style="margin-top: -47px; font-size: 24px; color: #F0AD46;">${b.at_name}</h4>
 				                                </a>
 					                        	</div>	   

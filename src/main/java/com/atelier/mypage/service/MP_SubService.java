@@ -48,6 +48,7 @@ public class MP_SubService {
 		
 		List<SBS_Dto> sList = sbDao.getSubList(sc_cm_id); 
 		System.out.println(sc_cm_id);
+		System.out.println(sList.get(0).getAt_seq());
 		//System.out.println(sList.get(0));
 		mav.addObject("sList",sList); 
 		mav.setViewName("mySubscript");

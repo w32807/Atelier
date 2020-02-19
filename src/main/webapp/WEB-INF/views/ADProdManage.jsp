@@ -250,6 +250,7 @@ Theme style
 
 				<div>
 					<div class="row"     style="padding-left: 430px;">
+					<!--  리스트 
 						<div class="container">
 							<ul class="pagination">
 
@@ -263,6 +264,7 @@ Theme style
 
 							</ul>
 						</div>
+						-->
 					</div>
 					<div style="position: fixed; right: 60px; bottom: 10px">
 						<button id="delete" class="btn btn-info btn-sm">삭제</button>
