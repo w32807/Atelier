@@ -114,9 +114,8 @@
                         <a href="#">Discover More</a>
                     </div>
                 </div>
-                <form id="selector" action="prodAJax">
                 <div class="col-lg-8 offset-lg-1">
-                    <div class="filter-control">
+                    <!-- <div class="filter-control">
                         <ul>
                             <li class="active">All Products</li>
                             <li>Clothing</li>
@@ -128,8 +127,7 @@
                             <li>furniture</li>
                             <li>accesary</li>
                         </ul>
-                    </div>
-                </form>
+                    </div> -->
                 
                     <div class="product-slider owl-carousel" id="prodAJax">
                        <c:forEach var="pdDto" items="${pdList}">

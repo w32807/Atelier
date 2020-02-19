@@ -81,10 +81,11 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<!-- 로그인 화면으로 가기 -->
-						<div class="checkout-content">
+					<!-- 	<div class="checkout-content">
 							<a href="login" class="content-btn">로그인 화면으로 가기</a>
-						</div>
+						</div> -->
 						<!--  로그인 화면으로 가기 끝 -->
+						<hr>
 						<h4>결제하기</h4>
 						<hr>
 						<h4>주문자 정보</h4>

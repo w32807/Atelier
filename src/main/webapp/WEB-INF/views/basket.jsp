@@ -69,8 +69,8 @@
                             <tbody id="listBody">
                             	<c:forEach var="b" items="${bList}">
                                 <tr>
-                                    <td class="cart-pic first-row"><img src="./resources/main/img/products/${b.pi_oriname}" alt=""></td>                                    <td class="cart-title first-row">
-                                        <h5>${b.bt_at_name}</h5>
+                                    <td class="cart-pic first-row"><a href="prodDetail?pd_code=${b.bt_pd_code}"><img src="./resources/main/img/products/${b.pi_oriname}" alt=""></a></td>                                    <td class="cart-title first-row">
+                                        <h5><a href="prodDetail?pd_code=${b.bt_pd_code}">${b.bt_at_name}</a></h5>
                                     </td>
                                     <td class="p-price first-row" title="${b.bt_num}">${b.bt_price}</td>
                                     <td class="qua-col first-row">

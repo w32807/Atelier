@@ -112,6 +112,13 @@
 		PD_CATE=#{pd_cate},PD_NAME=#{pd_name},PD_DETAIL=#{pd_detail} WHERE PD_CODE=#{pd_code}
 	</update>
 	
+	
+	<select id="SearchProc" parameterType="String" resultType="com.atelier.dto.PD_productDto">
+		SELECT * FROM PRODUCT WHERE PD_NAME LIKE '%'||#{search}||'%' OR PD_NAME LIKE '%'||#{search}||'%' OR PD_NAME LIKE '%'||#{search}||'%'
+	</select>
+	
+	
+	
 	<!-- <Select id="ProductUpdate1" parameterType="Integer" returnType="com.atelier.dto.PD_productDto"> 
 		UPDATE PD SET PD_REGIST='F' WHERE PD_CODE=#{pd_code}
 	</Select> -->
@@ -119,6 +126,11 @@
 	<select id="getRMCount" resultType="Integer">
 		SELECT COUNT(*) FROM RM
 	</select>
+	
+	<select id="setADMessage">
+		INSERT INTO MESSAGE VALUES(MG_NUM_SEQ.NEXTVAL,#{mg_sender},#{mg_receiver},DEFAULT,#{mg_contents},DEFAULT)
+	</select>
+	
 </mapper>
 
 

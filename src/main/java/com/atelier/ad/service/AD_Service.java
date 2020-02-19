@@ -853,4 +853,45 @@ public class AD_Service {
 		return mav;
 	}
 
+	/* ---------------------------------------------------------------------------------------
+	 * 기능:  상품 검색 메소드
+	 * 작성자: KBH
+	 * 작성일: 2020.02.13
+ 	-----------------------------------------------------------------------------------------*/
+		public ModelAndView SearchProc(String search) {
+
+		mav = new ModelAndView();
+		
+		List<PD_productDto> pd = aDao.SearchProc(search);
+		
+		mav.addObject("pd",pd);
+		
+		mav.setViewName("ADProdManage");
+		
+		
+		return mav;
+	}
+	
+	public ModelAndView AdminMessage(MG_Dto mgDto) {
+		
+		mav = new ModelAndView();
+		
+		String view = null;
+		
+		try {
+		
+			aDao.setADMessage();
+			
+		}catch(Exception e) {
+			
+		}
+		
+		return mav;
+	}
+
 }
+
+
+
+
+

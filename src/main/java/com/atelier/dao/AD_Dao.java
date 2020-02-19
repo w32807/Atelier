@@ -56,7 +56,9 @@ public interface AD_Dao {
 
 	public Integer getRMCount();
 
+	public List<PD_productDto> SearchProc(String search);
 
+	public boolean setADMessage();
 	
 	
 }
