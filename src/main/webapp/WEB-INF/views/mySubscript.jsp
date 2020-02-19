@@ -81,7 +81,7 @@
         </div>
     </section>
     <!-- Latest Blog Section End -->
-
+<!-- 주석만 넣기 -->
     <!-- 하단바 Include -->
 	<jsp:include page="Main_Footer.jsp" flush="false"/>
 
