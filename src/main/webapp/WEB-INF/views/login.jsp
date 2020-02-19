@@ -182,11 +182,7 @@
                             <div class="group-input gi-check">
                                 <div class="gi-more">
                                 	
-                                    <label for="save-pass">
-                                  		     아이디 저장.
-                                        <input type="checkbox" id="save-pass">
-                                        <span class="checkmark"></span>
-                                    </label>
+                                  
                                     
                                 </div>
                             </div>
