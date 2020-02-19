@@ -106,7 +106,7 @@
 										        	<i class="icon_mail_alt"></i>보내는 사람 : ${mb.cm_id}</a>
 										    </h4>
 										</div>
-										<form id="messageFrm" method="get">
+										<form id="messageFrm" method="get" action="messageFrm">
 											<textarea id="messageContents" rows="10" cols="45" name="mg_contents"
 													style="margin-top: 5px; font-size: 15px; resize: none; width: 375px;" placeholder="여기에 내용을 작성 해주세요." ></textarea>
 											<input type="hidden" name="mg_receiver" value="${pd}">
@@ -177,6 +177,8 @@
 		} else {
 		
 			$("#messageFrm").submit();
+			
+            window.close();
 		
 		}
 					

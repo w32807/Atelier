@@ -114,6 +114,7 @@
                         <a href="#">Discover More</a>
                     </div>
                 </div>
+                <form id="selector" action="prodAJax">
                 <div class="col-lg-8 offset-lg-1">
                     <div class="filter-control">
                         <ul>
@@ -121,10 +122,16 @@
                             <li>Clothing</li>
                             <li>Bags</li>
                             <li>Shoes</li>
+                            <li>wallet</li>
+                            <li>belt</li>
+                            <li>globe</li>
+                            <li>furniture</li>
+                            <li>accesary</li>
                         </ul>
                     </div>
-                    <div class="product-slider owl-carousel">
-                        
+                </form>
+                
+                    <div class="product-slider owl-carousel" id="prodAJax">
                        <c:forEach var="pdDto" items="${pdList}">
                          <div class="product-item">
                             <div class="pi-pic">
@@ -149,11 +156,9 @@
                                         </div>
                                </div>
                         </div>
-                        
-                        </c:forEach>
-                        
-                        
+                      </c:forEach>
                     </div>
+                    
                 </div>
             </div>
         </div>

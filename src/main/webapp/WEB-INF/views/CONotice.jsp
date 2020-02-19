@@ -493,9 +493,9 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 													<label class="col-md-6 control-label" for="message"
 														align="left">Your message</label>
 													
-													<input type="hidden" value="관리자">
-													<input type="hidden" value="${mb.cm_id}">													<div class="col-md-6">
-														<textarea class="form-control" id="message" name="message"
+													<input type="hidden" name="mg_receiver" value="TokyoHotpinkJH@admin.com">
+													<input type="hidden" name="mg_sender" value="${mb.cm_id}">													<div class="col-md-6">
+														<textarea class="form-control" id="message" name="mg_contents"
 															placeholder="Please enter your message here..." rows="7"></textarea>
 													</div>
 												</div>

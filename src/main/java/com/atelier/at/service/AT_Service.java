@@ -1270,9 +1270,7 @@ public class AT_Service {
 		
 		String view = null;
 		
-		AT_Dto atDto = (AT_Dto)session.getAttribute("at");
-		
-		int seq = atDto.getAt_seq();
+	
 		
 		try {
 			
@@ -1280,15 +1278,14 @@ public class AT_Service {
 			
 			rttr.addFlashAttribute("check","성공");
 			
-			mav = getATDetail(seq);
 			
 		}catch(Exception e) {
 			
-			mav = getATDetail(seq);
 			
 			rttr.addFlashAttribute("check","fail");
 		}
 		
+		mav.setViewName("ATMessageWrite");
 		
 		return mav;
 	}
