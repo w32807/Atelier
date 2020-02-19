@@ -112,12 +112,7 @@
                         </div>
                        </c:forEach>
                         <!-- 여기서까지 for문으로 돌림 -->
-                        <div class="col-lg-12">
-                            <div class="loading-more">
-                                <i class="icon_loading"></i>
-                                <a href="#" id="load">Loading More</a>
-                            </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>

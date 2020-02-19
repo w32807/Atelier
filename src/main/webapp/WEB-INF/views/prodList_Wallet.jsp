@@ -182,12 +182,7 @@
                         </div>
                     </div>
                     <!-- 더보기 -->
-                    <div class="loading-more" id="loading">
-                        <i class="icon_loading"></i>
-                        <a href="#">
-                            Loading More
-                        </a>
-                    </div>
+                 
                 </div>
             </div>
         </div>
