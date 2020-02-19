@@ -190,12 +190,13 @@
                         <div class="col-lg-6">
                             <div class="product-details">
                                 <div class="breadcrumb-text product-more">
-                                    <span>Atelier</span>
+                                   
+                                     <span>Atelier</span>
                                     <h3>${prodDto.pd_name}</h3>
                                     <div>
-                                    <a href="ATdetail?at_num=${at_num}" ><i class="fa fa-home"></i>
+                                    <a href="ATDetail?at_num=${at_num}" style="margin-top: 30px" ><i class="fa fa-home"></i>
                                     <span> ${prodDto.pd_at_name} Home</span></a>
-                                	 <button id="subBtn" style="float: right;">구독</button>
+                                	 <button id="subBtn" style="float: right; margin-top: 30px;">구독</button>
                                 	</div>
                                 </div>
                                 <form id="subFrm" method="get">
@@ -203,14 +204,14 @@
                                 	<input type="hidden" name="sc_at_id" value="${prodDto.pd_at_id}">
                                 </form>
                              
-                                <div class="pd-rating">
+                                <!-- <div class="pd-rating">
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star-o"></i>
                                     <span>(5)</span>
-                                </div>
+                                </div> -->
                                 <div class="pd-desc">
                                    <!--  <p>간략한 제품 소개는 여기다가</p> -->
                                     <h4>${prodDto.pd_price} <span>${prodDto.pd_price*1.5} </span></h4>
@@ -346,8 +347,12 @@
 		                                        <c:forEach var="review" items="${prList}">
 		                                            <div class="co-item">
 		                                                <div class="avatar-pic">
-		                                                    <img src="https://t1.daumcdn.net/cfile/tistory/995499415BA82B591F" alt="" style="padding-bottom: 0px;">
-		                                                    	style="padding-bottom: 0px;">
+			                                                <c:if test='${review.pr_cm_pfphoto eq null}'>
+				                                        		<img src="resources/upload/profile/Profile_default.png" alt="" style="padding-bottom: 0px;">
+				                                            </c:if>
+				                                            <c:if test='${review.pr_cm_pfphoto ne null}'>
+				                                            	<img src="resources/upload/profile/${review.pr_cm_pfphoto}" alt="" style="padding-bottom: 0px;">
+				                                            </c:if>
 		                                                </div>
 		                                                <div class="avatar-text">
 		                                                    <div class="at-rating">
@@ -419,7 +424,7 @@
 				                                            	required style="width: 58%; height: 150px;"></textarea>
 				                                        <button type="button" id="#reviewBtn" class="site-btn" onclick="prodReviewAjax();"
 				                                            	style="position: absolute; margin-left: -152px; margin-top: 160px;">
-				                                        리뷰 등록
+				                                     			   리뷰 등록
 				                                        </button>
 			                                        </div>
 		                                        </div>

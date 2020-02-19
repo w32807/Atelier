@@ -224,6 +224,7 @@ public class MainController {
 	 * 기능: 상품 상세정보 보기 / 상품 리뷰 리스트 출력
 	 * 작성자: JWJ / KYH
 	 * 작성일: 2020.02.11 / 2020.02.14
+	 * 수정일: 2020.02.19(댓글의 프로필 사진 출력 기능 추가)
 	 -----------------------------------------------------------------------------------------*/
 	@GetMapping("prodDetail")
 	public ModelAndView getprodDetail(int pd_code) {

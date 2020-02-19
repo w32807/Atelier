@@ -249,6 +249,7 @@ public class CM_Service {
 	 * 기능: 상품 상세정보 보기 / 상품 리뷰 리스트 출력
 	 * 작성자: JWJ / KYH
 	 * 작성일: 2020.02.11 / 2020.02.14
+	 * 수정일: 2020.02.19(댓글의 프로필 사진 출력 기능 추가)
 	 -----------------------------------------------------------------------------------------*/
 	public ModelAndView getprodDetail(int pd_code) {
 		mav = new ModelAndView();
@@ -265,6 +266,14 @@ public class CM_Service {
 		
 		SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
 		for(int i=0;i<prList.size();i++) {
+			//댓글에 프로필 이미지를 출력하기 위한 기능
+			String cm_id = prList.get(i).getPr_cm_id();
+			CM_Dto cmDto = cm_Dao.getMemberInfo(cm_id);
+			String cm_pfphoto = cmDto.getCm_pfphoto();
+			if(cm_pfphoto!=null) {
+				cm_pfphoto = cm_pfphoto.replace("com", "jpg");
+				prList.get(i).setPr_cm_pfphoto(cm_pfphoto);
+			}
 			String convertDate = dataFm.format(prList.get(i).getPr_date());
 			prList.get(i).setPr_dateSimple(convertDate);
 		}
