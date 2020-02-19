@@ -26,7 +26,7 @@ public interface AD_Dao {
 	
 	public boolean materialInsert (AD_MaterialDto material);
 	
-	public List<AD_MaterialDto> getADCompanyList(int adcPageNum);
+	public List<AD_MaterialDto> getADCompanyList(Map<String, Integer> pageInt);
 
 	public int getADCompanyCount();
 
@@ -53,6 +53,8 @@ public interface AD_Dao {
 	public PD_productDto ProductUpdate1(Integer pd_code);
 
 	public boolean ProductUpdate2(PD_productDto pdDto);
+
+	public Integer getRMCount();
 
 
 	

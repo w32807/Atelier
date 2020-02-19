@@ -241,9 +241,9 @@ public class AD_controller {
 	  * 작성일 : 2019.02.07
 	  -----------------------------------------------------------------------------------*/
 	@GetMapping("ADCompany")
-	public ModelAndView ADCompany(Integer adcPageNum) {
+	public ModelAndView ADCompany(Integer adcPageNum,Integer maxNum) {
 		log.warn("원자재 리스트 출력 컨트롤러 시작");
-		mav = aServ.getADCompanyList(adcPageNum);
+		mav = aServ.getADCompanyList(adcPageNum,maxNum);
 		return mav;
 	}
 	

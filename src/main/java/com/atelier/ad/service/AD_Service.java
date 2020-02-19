@@ -360,15 +360,20 @@ public class AD_Service {
 	  * 기능: 원자재 리스트 출력
 	  * 작성자: JSH
 	  * 작성일 : 2019.02.07
+	  * 수정일 : 2019.02.19(리스트 삭제시에도 10개의 리스트씩 나오도록 설정)
 	  -----------------------------------------------------------------------------------*/
-	public ModelAndView getADCompanyList(Integer adcPageNum) {
+	public ModelAndView getADCompanyList(Integer adcPageNum,Integer maxNum) {
 		log.warn("원자재 리스트 서비스 시작");
 		
 		mav = new ModelAndView();
 		
 		int num = (adcPageNum == null)? 1 : adcPageNum;
+		maxNum = aDao.getRMCount();
 		
-		List<AD_MaterialDto> adcList = aDao.getADCompanyList(num);
+		Map<String, Integer> pageInt = new HashMap<String, Integer>();
+		pageInt.put("adcPageNum", num);
+		pageInt.put("maxNum", maxNum);
+		List<AD_MaterialDto> adcList = aDao.getADCompanyList(pageInt);
 		mav.addObject("adcList", adcList);
 		mav.addObject("ADCPaging", getADCPaging(num));
 		
