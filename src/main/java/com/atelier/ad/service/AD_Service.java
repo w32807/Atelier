@@ -444,7 +444,13 @@ public class AD_Service {
 		CM_Dto cm_Member = cmDao.getMemberInfo(id);
 		AG_Dto ag_Member = atDao.getATRegistMember(id);
 		AM_Dto am_Member = new AM_Dto();
+		AT_Dto at_dto = new AT_Dto();
 		
+		cm_Member.setCm_state("공방회원");
+		
+		cmDao.userStateChange(cm_Member);
+		
+		// AM 테이블에 데이터 삽입
 		am_Member.setAm_id(ag_Member.getAg_id());
 		am_Member.setAm_name(ag_Member.getAg_at_name());
 		am_Member.setAm_phone(ag_Member.getAg_phone());
@@ -455,7 +461,22 @@ public class AD_Service {
 		am_Member.setAm_cate3(ag_Member.getAg_cate3());
 		
 		amDao.insertNewATMember(am_Member);
+		
+		// AT 테이블에 데이터 삽입
+		at_dto.setAt_id(ag_Member.getAg_id());
+		//at_dto.setAt_logo();
+		//at_dto.setAt_seq();
+		at_dto.setAt_name(ag_Member.getAg_at_name());
+		at_dto.setAt_phone(ag_Member.getAg_phone());
+		at_dto.setAt_addr(cm_Member.getCm_addr());
+		at_dto.setAt_snsaddr(ag_Member.getAg_snsaddr());
+		at_dto.setAt_cate1(ag_Member.getAg_cate1());
+		at_dto.setAt_cate2(ag_Member.getAg_cate2());
+		at_dto.setAt_cate3(ag_Member.getAg_cate3());
+		at_dto.setAt_logo("default.png");
+		atDao.insertATData(at_dto);
 		DeleteATMember(id);
+
 		//return "ADATMemberUp";
 	}
 	
