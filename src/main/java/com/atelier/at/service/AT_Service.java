@@ -1293,6 +1293,22 @@ public class AT_Service {
 		
 		return mav;
 	}
+	
+	/*-------------------------------------------------------------------
+	 * 기능 : 공방 관리자가 메인 관리자에게 쪽지 보내는 서비스
+	 * 작성자: JSH
+	 * 작성일 : 2020.02.19
+	 ------------------------------------------------------------------- */
+	public ModelAndView setATMessageRQSend(MG_Dto mgDto) {
+		CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
+		String cmid = cmDto.getCm_id(); 
+		
+		mgDto.setMg_sender(cmid);
+		
+		atDao.sendATMessageRQ(mgDto);
+		
+		return mav;
+	}
 
 
 

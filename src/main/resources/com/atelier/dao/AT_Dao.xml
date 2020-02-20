@@ -203,4 +203,12 @@
 		#{at_phone},#{at_cate1},#{at_cate2},#{at_cate3})
 	</insert>
 	
+	<insert id="sendATMessageRQ" parameterType="com.atelier.dto.MG_Dto">
+		INSERT INTO MESSAGE VALUES(MG_NUM_SEQ.NEXTVAL,#{mg_sender},#{mg_receiver},DEFAULT,#{mg_contents},DEFAULT)
+	</insert>
+	
+	<select id="getAtData" parameterType="String" resultType="com.atelier.dto.AT_Dto">
+		SELECT * FROM ATELIER WHERE AT_ID=#{id}
+	</select>
+	
 </mapper>

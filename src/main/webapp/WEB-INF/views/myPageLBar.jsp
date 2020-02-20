@@ -50,7 +50,7 @@
 			<div class="atelier_go">
 				<h4>Atelier Menu</h4>
 				<ul>
-					<li><a href="ATManager">공방 관리</a></li>
+					<li><a class="atelierCon" href="ATManager">공방 관리</a></li>
 				</ul>
 			</div>
 			<div class="blog-tags">
@@ -79,5 +79,27 @@
 		console.log(sessionImgView);
 		
 		document.getElementById('profile_img').setAttribute('src',sessionImgView);
+	</script>
+	<script type="text/javascript">
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 공방 관리 페이지 가리기
+	 * 작성자: JSH
+	 * 작성일: 2020.02.20
+	 -----------------------------------------------------------------------------------------*/
+		$(document).ready(function (){
+			$('.atelier_go').hide();
+			var atDataId = '${atData}';
+			console.log("공방관리 숨기기 위한 체크");
+			console.log("공방 관리를 숨기기 위한 아이디체크" + atDataId);
+			
+			if(atDataId != '' || atDataId != null || atDataId != "undefined"){
+				$('.atelier_go').show();
+			}
+			
+			$('.atelier_go').show();
+			if(atDataId == '' || atDataId == null || atDataId == "undefined"){
+				$('.atelier_go').hide();
+			}
+		});
 	</script>
 </html>

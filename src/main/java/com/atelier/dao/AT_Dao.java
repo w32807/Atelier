@@ -101,4 +101,8 @@ public interface AT_Dao {
 
 	public void insertATData(AT_Dto at_dto);
 
+	public void sendATMessageRQ(MG_Dto mgDto);
+
+	public AT_Dto getAtData(String id);
+
 }

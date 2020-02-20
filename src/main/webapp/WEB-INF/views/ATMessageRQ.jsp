@@ -85,15 +85,13 @@
 											<h4 class="panel-title">
 										    	<a class="collapsed"  href="#collapse1" aria-expanded="false" aria-controls="collapse1"
 										    			style="font-weight: bold;">
-										        	<i class="icon_mail_alt"></i> 보내는 사람 : 장원준
+										        	<i class="icon_mail_alt"></i> 보내는 사람 : ${mb.cm_id}
 										        </a>
 										    </h4>
 										</div>
-										<form id="messageFrm" action="쪽지를 저장할 컨트롤러 메소드" method="get">
-											<textarea id="messageContents" rows="10" cols="45" name="MG_CONTENTS"
-													style="margin-top: 5px; font-size: 15px; resize: none; width: 375px;" placeholder="여기에 내용을 작성 해주세요." >
-											</textarea>
-											<input type="hidden" name="MG_RECEIVER" value="받는 사람 ID"><!-- 송신자의 아이디는 session에 담겨있을테니 여기서 안 보내도 됨. -->
+										<form id="messageFrm" action="ATMessageRQSend" method="get">
+											<textarea id="messageContents" rows="10" cols="45" name="mg_contents" style="margin-top: 5px; font-size: 15px; resize: none; width: 375px;" placeholder="여기에 내용을 작성 해주세요." ></textarea>
+											<input type="hidden" name="mg_receiver" value="TokyoHotpinkJH@admin.com"><!-- 송신자의 아이디는 session에 담겨있을테니 여기서 안 보내도 됨. -->
 										</form>								
 									</div>
 									<div class="panel panel-default">
@@ -153,6 +151,8 @@
 						console.log(content);
 					} else {
 						$("#messageFrm").submit();
+						alert("관리자에게 메세지를 전송하였습니다.")
+						window.close();
 					}			
 				});	
 	</script>

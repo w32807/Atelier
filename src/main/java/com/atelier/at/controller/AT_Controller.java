@@ -496,5 +496,17 @@ public class AT_Controller {
 			return mav;
 		}
 		
+		/*-------------------------------------------------------------------
+		 * 기능 : 공방 관리자가 메인 관리자에게 쪽지 보내기 메소드
+		 * 작성자: JSH
+		 * 작성일 : 2020.02.19
+		 ------------------------------------------------------------------- */
+		@GetMapping("ATMessageRQSend")
+		public ModelAndView ATMessageRQSend(MG_Dto mgDto) {
+
+			mav = atServ.setATMessageRQSend(mgDto);
+			
+			return mav;
+		}
 		
 }

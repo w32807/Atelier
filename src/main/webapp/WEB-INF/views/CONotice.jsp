@@ -488,22 +488,21 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 												</div>
  -->
 												<!-- Message body -->
-										<form class="form-horizontal" action="ADsendMessage" method="post">
+										<form class="form-horizontal" action="ADsendMessage" method="post" name="sendingForm">
 												<div class="form-group">
-													<label class="col-md-6 control-label" for="message"
-														align="left">Your message</label>
+													<label class="col-md-6 control-label" for="message" align="left">Your message</label>
 													
 													<input type="hidden" name="mg_receiver" value="TokyoHotpinkJH@admin.com">
-													<input type="hidden" name="mg_sender" value="${mb.cm_id}">													<div class="col-md-6">
-														<textarea class="form-control" id="message" name="mg_contents"
-															placeholder="Please enter your message here..." rows="7"></textarea>
+													<input type="hidden" name="mg_sender" id="sender" value="${mb.cm_id}">													
+													<div class="col-md-6">
+														<textarea class="form-control" id="message" name="mg_contents" placeholder="Please enter your message here..." rows="7"></textarea>
 													</div>
 												</div>
 
 												<!-- Form actions -->
 												<div class="form-group">
 													<div class="col-md-12 text-right">
-														<button type="submit" class="btn btn-primary btn-lg">Submit</button>
+														<input type="button" class="btn btn-primary btn-lg" onclick="adSendMessage()" value="Submit">
 													</div>
 												</div>
 										</form>
@@ -617,6 +616,36 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 		}) 
 
 	</script>
+	<script type="text/javascript">
+	/* ---------------------------------------------------------------------------------
+	 * 기능: 관리자 문의 유효성 검사
+	 * 작성자: JSH
+	 * 작성일 : 2019.02.19
+	  -----------------------------------------------------------------------------------*/
+		function adSendMessage(){
+			/* var sendingForm = document.sendingForm;
+			var mgContents = sendingForm.mgContents.value;
+			var mgSender = sendingForm.mgSender.value; */
+			
+			var mgContents = document.getElementById("message").value;
+			var mgSender = document.getElementById("sender").value;
+			/* console.log(mgContents);
+			console.log(mgSender); */
+			console.log("입력한 문장은 : " + mgContents);
+			console.log("작성자의 아이디: "+ mgSender);
+			
+		
+			if(mgSender == '' || mgSender == null){
+				alert("로그인 후, 메세지를 전송해주세요.")
+				} else if(mgContents == '' || mgContents == null){
+					alert("메세지 내용을 입력해주세요.")
+				} else{
+					sendingForm.submit();
+				} 
+			
+			}
+			
+		</script>
 </body>
 
 

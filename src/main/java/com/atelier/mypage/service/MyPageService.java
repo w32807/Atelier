@@ -27,6 +27,7 @@ import com.atelier.dao.CM_Dao;
 import com.atelier.dao.MP_Dao;
 import com.atelier.dao.PD_Dao;
 import com.atelier.dao.SB_Dao;
+import com.atelier.dto.AT_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.MG_Dto;
 import com.atelier.dto.MP_SubscribeDto;
@@ -267,6 +268,11 @@ public class MyPageService {
 			mpsList.get(i).setSc_at_name(atName);
 		}
 		
+		//	mb세션 id로 at세션 담기
+		AT_Dto atData = new AT_Dto();
+		atData = at_Dao.getAtData(id);
+		
+		mav.addObject("atData", atData);
 		mav.addObject("mpsList", mpsList);
 		mav.addObject("sendingProd", sendingProd);
 		mav.addObject("subscribedNum", subscribedNum);
