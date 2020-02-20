@@ -180,6 +180,8 @@
 						console.log(content);
 					} else {
 						$("#messageFrm").submit();
+						alert("메세지 전송 완료.")
+						window.close();
 					}
 								
 				});

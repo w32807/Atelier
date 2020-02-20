@@ -137,7 +137,7 @@
 												<small> <i class="icon-bubble3"></i></small>
 											</span>
 											<h3 style="margin-bottom: 40px; font-size: 22px; font-weight: bolder;">
-												<a href="ATDetail?at_num=${product.pd_code}">${product.pd_name}</a>
+												<a href="prodDetail?pd_code=${product.pd_code}">${product.pd_name}</a>
 											</h3>			
 											&nbsp;제품명 : <input type="hidden" name="prodName"
 																	value="${product.pd_name}">${product.pd_name}<br>
@@ -147,8 +147,6 @@
 																	value="${product.pd_price}">${product.pd_price}<br>
 											<input type="hidden" id="pd_regist" name="pd_regist" value="${product.pd_regist}">
 											<div style="text-align: right; margin-bottom: 0px;">
-												<input type="submit" value="상세보기"
-														style="border: none; color: #A09182; background-color: white; font-weight: 700; margin: 10px;">
 											</div>
 										</div>
 									</label>	

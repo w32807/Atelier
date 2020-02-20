@@ -328,7 +328,7 @@
 				alert("로드 실패");
 			}
 		});
-		location.reload();
+		//location.reload();
 	}
 	
 	

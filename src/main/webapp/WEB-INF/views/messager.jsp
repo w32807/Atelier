@@ -142,7 +142,7 @@
 																value="${bitem.mg_sender}">  --%>
 																<input type="hidden"
 																name="mg_num" value="${bitem.mg_num}"> 
-																<input type="submit" value="답장"
+																<input type="submit" value="답장" id="submit"
 																style="border: thick; float: right;">
 														</form>
 													</div>
@@ -200,7 +200,14 @@
 	<!-- MAIN JS -->
 	<script src="resources/AT_front/js/main.js"></script>
 
-
+	<script src="text/javascript">
+		
+	$("#submit").click(function(){
+		
+		
+	})
+		
+	</script>
 
 </body>
 

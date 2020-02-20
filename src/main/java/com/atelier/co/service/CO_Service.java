@@ -158,7 +158,7 @@ public class CO_Service {
 			
 			coDao.ADSendMessage(mgDto);
 		
-			mav.setViewName("CONotice");
+			mav.setViewName("redirect:CONotice");
 			
 		}catch(Exception e) {
 			e.printStackTrace();

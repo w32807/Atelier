@@ -178,7 +178,9 @@
 		
 			$("#messageFrm").submit();
 			
-            window.close();
+			alert("공방에 메세지 전달 완료.")
+			
+			window.close();
 		
 		}
 					

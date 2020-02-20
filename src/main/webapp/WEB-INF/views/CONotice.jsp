@@ -664,6 +664,8 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 					alert("메세지 내용을 입력해주세요.")
 				} else{
 					sendingForm.submit();
+					alert("관리자에게 메세지를 전송하였습니다.")
+					window.close();
 				} 
 			
 			}
