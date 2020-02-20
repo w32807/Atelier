@@ -334,7 +334,7 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="single-latest-blog">
                     <a href="ATDetail?at_num=${main_at_recommend_list.at_seq}">
-                        <img src="resources\upload\logo/${main_at_recommend_list.at_logo}" alt="">
+                        <img src="resources\upload\logo/${main_at_recommend_list.at_logo}" style="width:300px; height:450px;" alt="">
                         <div class="latest-text">
                             
                                 <h4>이 집 가죽 잘하네 - ${main_at_recommend_list.at_name}</h4>
