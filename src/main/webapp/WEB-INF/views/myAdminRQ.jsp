@@ -91,7 +91,7 @@
 										<form id="messageFrm" action="AdminMessage" method="post">
 											<textarea id="messageContents" rows="10" cols="45" name="mg_contents"
 													style="margin-top: 5px; font-size: 15px; resize: none; width: 375px;" placeholder="여기에 내용을 작성 해주세요." ></textarea>
-											<input type="hidden" name="mg_receiver" value="TokyoHotpinkJH@admin.com">
+											<input type="hidden" name="mg_receiver" value="admin@gmail.com">
 											<input type="hidden" name="mg_sender" value="${mb.cm_id}">	
 										</form>								
 									</div>

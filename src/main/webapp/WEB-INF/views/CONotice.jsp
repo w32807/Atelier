@@ -492,7 +492,7 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 												<div class="form-group">
 													<label class="col-md-6 control-label" for="message" align="left">Your message</label>
 													
-													<input type="hidden" name="mg_receiver" value="TokyoHotpinkJH@admin.com">
+													<input type="hidden" name="mg_receiver" value="admin@gmail.com">
 													<input type="hidden" name="mg_sender" id="sender" value="${mb.cm_id}">													
 													<div class="col-md-6">
 														<textarea class="form-control" id="message" name="mg_contents" placeholder="Please enter your message here..." rows="7"></textarea>

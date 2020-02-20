@@ -1,13 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>Atelier | Admin</title>
 </head>
 <link href="./resources/ADATList/css/main.css" rel="stylesheet">
+<script>
 
+function abc(){
+	self.close();
+}
+</script>
 <body style="background-color:white;">
 <!-- Modal HTML embedded directly into document -->
 		<div class="container" style="text-align:center;">
@@ -37,7 +44,7 @@
 							<div class="d-block text-center card-footer"
 								style="margin-left: -33px; width: 750px; border: none;">
 							
-								<button type="hidden" onclick="self.close()" class="btn-wide btn btn-warning"
+								<button type="hidden" onclick="abc()" class="btn-wide btn btn-warning"
 									style="background-color: #e74c3c; border-color: #e74c3c; color: white;">확인</button>
 							</div>
 						</div>
