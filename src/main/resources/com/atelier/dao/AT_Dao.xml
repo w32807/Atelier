@@ -215,4 +215,12 @@
 	
 	</select>
 	 -->
+	 
+	 <select id="getctList" resultType="com.atelier.dto.CT_Dto">
+	 	SELECT * FROM CT
+	 </select>
+	 
+	  <select id="getRmList" resultType="com.atelier.dto.RM_Dto">
+	 	SELECT * FROM RM
+	 </select>
 </mapper>

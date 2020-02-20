@@ -37,6 +37,7 @@ import com.atelier.dto.AT_Dto;
 import com.atelier.dto.AT_NT_Dto;
 import com.atelier.dto.AT_ProdDto;
 import com.atelier.dto.CM_Dto;
+import com.atelier.dto.CT_Dto;
 import com.atelier.dto.MG_Dto;
 import com.atelier.dto.NT_Dto;
 import com.atelier.dto.PD_productDto;
@@ -370,6 +371,8 @@ public class AT_Service {
 	 ----------------------------------------------------------------------------------------- */
 	public ModelAndView goModifyProd(MultipartHttpServletRequest multi) {
 		mav = new ModelAndView();
+		List<CT_Dto> ctList = atDao.getctList();
+		List<RM_Dto> rmList = atDao.getRmList();
 		String modifyProd = multi.getParameter("prodChk");// 1개의 선택된 체크박스를 가져옴- 상품코드가 1개 넘어옴
 		int pd_code = Integer.parseInt(modifyProd);
 		PD_productDto modifyProdDto = atDao.getModifyProd(pd_code);// 상품을 가져옴
@@ -381,6 +384,11 @@ public class AT_Service {
 		// String sysName = prodImg.getPi_sysname();
 		String oriName = prodImg.getPi_oriname();
 		// mav.addObject("sysName",sysName);
+		
+	
+		
+		mav.addObject("ctList",ctList);
+		mav.addObject("rmList",rmList);
 		mav.addObject("oriName", oriName);
 		mav.addObject("modifyProdDto", modifyProdDto);
 		mav.addObject("check", "수정하기");
@@ -1284,6 +1292,22 @@ public class AT_Service {
 		
 		atDao.sendATMessageRQ(mgDto);
 		
+		return mav;
+	}
+
+	/*-------------------------------------------------------------------
+	 * 기능 : 제품 등록으로 이동
+	 * 작성자: JWJ
+	 * 작성일 : 2020.02.20
+	 ------------------------------------------------------------------- */
+	public ModelAndView prodMake() {
+		mav = new ModelAndView();
+		List<CT_Dto> ctList = atDao.getctList();
+		List<RM_Dto> rmList = atDao.getRmList();
+		
+		mav.addObject("ctList",ctList);
+		mav.addObject("rmList",rmList);
+		mav.setViewName("ATProdRegist");
 		return mav;
 	}
 

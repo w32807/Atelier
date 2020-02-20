@@ -141,23 +141,17 @@
 									<tr>
 										<td class="title"><b>가죽 종류</b></td>
 										<td><select id="type_select" class="content" name="pd_type" placeholder="가죽 종류" title="가죽 종류" value='${modifyProdDto.pd_sex}'>
-													<option>레자</option>
-													<option>소가죽</option>
-													<option>말가죽</option>
+												<c:forEach var="rmDto" items="${rmList}">
+													<option>${rmDto.rm_type}</option>
+												</c:forEach>
 										</select>
 									</tr>
 									<tr>
 										<td class="title"><b>카테고리</b></td>
 										<td><select id="cate_select" class="content" name="pd_cate"title="카테고리" value='${modifyProdDto.pd_cate}'>
-												<!-- foreach문으로 카테고리를 출력해 주세요. -->
-												<option>의류</option>
-												<option>가방</option>
-												<option>신발</option>
-												<option>지갑</option>
-												<option>벨트</option>
-												<option>장갑</option>
-												<option>가구</option>
-												<option>기타 악세사리</option>
+												<c:forEach var="ctDto" items="${ctList}">
+													<option>${ctDto.ct_name}</option>
+												</c:forEach>
 											</select></td>
 									</tr>
 									

@@ -189,10 +189,10 @@ public class AT_Controller {
 	}
 	
 	
-	@GetMapping("ATProdRegist")//제품 목록 관리에서(ATProdManage)에서 제품 메뉴 제작 페이지로 넘어가는 메소드
-	public String prodMake() {
-		return "ATProdRegist";
-	}
+	/*
+	 * @GetMapping("ATProdRegist")//제품 목록 관리에서(ATProdManage)에서 제품 메뉴 제작 페이지로 넘어가는
+	 * 메소드 public String prodMake() { return "ATProdRegist"; }
+	 */
 	
 	 /* ---------------------------------------------------------------------------------
 	  * 기능: 제품 관리의 상품 등록하기
@@ -350,10 +350,10 @@ public class AT_Controller {
 		/*-------------------------------------------------------------------
 		 * 기   능 : 공지사항 리스트 출력
 		 * 작업자 : KJH
-		 * 작성일 : 2020.02.11		최종수정일 : 2020.02.11KBH
+		 * 작성일 : 2020.02.11		최종수정일 : 2020.02.11
 		-------------------------------------------------------------------*/
 		@GetMapping("ATNotice")
-		public ModelAndView ATNoticeList() {
+		public ModelAndView ATNoticeList(Integer pageNum) {
 			log.info("ATNoticeList()");
 			
 			AT_Dto atDto = (AT_Dto) session.getAttribute("at");
@@ -515,4 +515,14 @@ public class AT_Controller {
 			return mav;
 		}
 		
+		/*-------------------------------------------------------------------
+		 * 기능 : 제품 등록으로 이동
+		 * 작성자: JWJ
+		 * 작성일 : 2020.02.20
+		 ------------------------------------------------------------------- */
+		@GetMapping("ATProdRegist")//제품 목록 관리에서(ATProdManage)에서 제품 메뉴 제작 페이지로 넘어가는 메소드
+		public ModelAndView prodMake() {
+			mav = atServ.prodMake();
+		return mav;
+		}
 }

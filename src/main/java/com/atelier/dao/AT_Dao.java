@@ -6,6 +6,7 @@ import java.util.Map;
 import com.atelier.dto.AG_Dto;
 import com.atelier.dto.AT_Dto;
 import com.atelier.dto.AT_ProdDto;
+import com.atelier.dto.CT_Dto;
 import com.atelier.dto.MG_Dto;
 import com.atelier.dto.PD_productDto;
 import com.atelier.dto.PI_productImgDto;
@@ -107,4 +108,8 @@ public interface AT_Dao {
 	/*
 	 * public AT_Dto getAtInfo(String id);
 	 */
+
+	public List<CT_Dto> getctList();
+
+	public List<RM_Dto> getRmList();
 }
