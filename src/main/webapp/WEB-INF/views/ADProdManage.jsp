@@ -305,7 +305,7 @@ $("#search").keydown(function(key){
 	if(key.keyCode == 13){
 		$("#Searching").submit
 	}
-}
+});
 
 
 
@@ -313,7 +313,7 @@ $("#search").keydown(function(key){
 $("#delete").click(function(){
 	
 	var chkLength = $("input:checkbox[name=prod]:checked").length;
-
+	console.log("선택된상품의 갯수 : " + chkLength);
 	if(chkLength == 0){
 		alert("취소 할 상품을 선택 해주세요.");
 	}else {
