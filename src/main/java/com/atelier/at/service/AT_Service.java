@@ -931,6 +931,8 @@ public class AT_Service {
 		List<AT_Dto> at_recommend_list = new ArrayList<AT_Dto>();
 		List<AT_Dto> at_filter_list = new ArrayList<AT_Dto>();
 		
+		List<String> at_filter_check_list = new ArrayList<String>();
+		
 		// 필터링 
 		if(checkedBoxArr != null) {
 			for(int i = 0; i < checkedBoxArr.length; i++) {
@@ -943,6 +945,9 @@ public class AT_Service {
 						at_list.remove(j);
 					}
 				}
+			
+				at_filter_check_list.add(checkedBoxArr[i]);
+				System.out.println(at_filter_check_list.get(i));
 			}
 		}
 		else {
@@ -966,6 +971,8 @@ public class AT_Service {
 		}
 
 		mav.addObject("at_filter_list", at_filter_list);
+		mav.addObject("checkedBoxArr", checkedBoxArr);
+		mav.addObject("at_filter_check_list", at_filter_check_list);
 		mav.addObject("at_recommend_list", at_recommend_list);
 		mav.setViewName("ATMain");
 		return mav;

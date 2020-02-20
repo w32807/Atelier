@@ -53,8 +53,10 @@
                     <div class="blog-sidebar">
                         <div class="blog-catagory" style="margin-bottom: 80px;">
                         	<h4 style="margin-bottom: 30px;">카테고리</h4>
+                        	<input type="checkbox" id = "allCheck" value="전체" style="margin-bottom:20px;">전체
                         		<form action="ATMain" method="get">
 	                            	<ul>
+	                            		
 		                                <li><input type="checkbox" name="category" value="의류">의류</li>
 		                                <li><input type="checkbox" name="category" value="가방">가방</li>
 		                               	<li><input type="checkbox" name="category" value="신발">신발</li>
@@ -135,5 +137,32 @@
     <script src="resources/main/js/owl.carousel.min.js"></script>
     <script src="resources/main/js/main.js"></script>
 </body>
+	<script>
+	$(document).ready(function(){
+			if('${checkedBoxArr[0]}' == "의류"||'${checkedBoxArr[0]}' =="가방"||'${checkedBoxArr[0]}' =="신발"||'${checkedBoxArr[0]}' =="지갑"||'${checkedBoxArr[0]}' =="벨트"||'${checkedBoxArr[0]}' =="장갑"||'${checkedBoxArr[0]}' =="가구"||'${checkedBoxArr[0]}' =="기타 악세서리") $("input:checkbox[value='${checkedBoxArr[0]}']").prop("checked", true);
+			if('${checkedBoxArr[1]}' == "의류"||'${checkedBoxArr[1]}' =="가방"||'${checkedBoxArr[1]}' =="신발"||'${checkedBoxArr[1]}' =="지갑"||'${checkedBoxArr[1]}' =="벨트"||'${checkedBoxArr[1]}' =="장갑"||'${checkedBoxArr[1]}' =="가구"||'${checkedBoxArr[1]}' =="기타 악세서리") $("input:checkbox[value='${checkedBoxArr[1]}']").prop("checked", true);
+			if('${checkedBoxArr[2]}' == "의류"||'${checkedBoxArr[2]}' =="가방"||'${checkedBoxArr[2]}' =="신발"||'${checkedBoxArr[2]}' =="지갑"||'${checkedBoxArr[2]}' =="벨트"||'${checkedBoxArr[2]}' =="장갑"||'${checkedBoxArr[2]}' =="가구"||'${checkedBoxArr[2]}' =="기타 악세서리") $("input:checkbox[value='${checkedBoxArr[2]}']").prop("checked", true);
+			if('${checkedBoxArr[3]}' == "의류"||'${checkedBoxArr[3]}' =="가방"||'${checkedBoxArr[3]}' =="신발"||'${checkedBoxArr[3]}' =="지갑"||'${checkedBoxArr[3]}' =="벨트"||'${checkedBoxArr[3]}' =="장갑"||'${checkedBoxArr[3]}' =="가구"||'${checkedBoxArr[3]}' =="기타 악세서리") $("input:checkbox[value='${checkedBoxArr[3]}']").prop("checked", true);
+			if('${checkedBoxArr[4]}' == "의류"||'${checkedBoxArr[4]}' =="가방"||'${checkedBoxArr[4]}' =="신발"||'${checkedBoxArr[4]}' =="지갑"||'${checkedBoxArr[4]}' =="벨트"||'${checkedBoxArr[4]}' =="장갑"||'${checkedBoxArr[4]}' =="가구"||'${checkedBoxArr[4]}' =="기타 악세서리") $("input:checkbox[value='${checkedBoxArr[4]}']").prop("checked", true);
+			if('${checkedBoxArr[5]}' == "의류"||'${checkedBoxArr[5]}' =="가방"||'${checkedBoxArr[5]}' =="신발"||'${checkedBoxArr[5]}' =="지갑"||'${checkedBoxArr[5]}' =="벨트"||'${checkedBoxArr[5]}' =="장갑"||'${checkedBoxArr[5]}' =="가구"||'${checkedBoxArr[5]}' =="기타 악세서리") $("input:checkbox[value='${checkedBoxArr[5]}']").prop("checked", true);
+			if('${checkedBoxArr[6]}' == "의류"||'${checkedBoxArr[6]}' =="가방"||'${checkedBoxArr[6]}' =="신발"||'${checkedBoxArr[6]}' =="지갑"||'${checkedBoxArr[6]}' =="벨트"||'${checkedBoxArr[6]}' =="장갑"||'${checkedBoxArr[6]}' =="가구"||'${checkedBoxArr[6]}' =="기타 악세서리") $("input:checkbox[value='${checkedBoxArr[6]}']").prop("checked", true);
+			if('${checkedBoxArr[7]}' == "의류"||'${checkedBoxArr[7]}' =="가방"||'${checkedBoxArr[7]}' =="신발"||'${checkedBoxArr[7]}' =="지갑"||'${checkedBoxArr[7]}' =="벨트"||'${checkedBoxArr[7]}' =="장갑"||'${checkedBoxArr[7]}' =="가구"||'${checkedBoxArr[7]}' =="기타 악세서리") $("input:checkbox[value='${checkedBoxArr[7]}']").prop("checked", true);
+	});
 
+	</script>
+	
+	<script type="text/javascript">
+      $(function() { //전체선택 체크박스 클릭 
+         $("#allCheck").click(function() { //만약 전체 선택 체크박스가 체크된상태일경우 
+            if ($("#allCheck").prop("checked")) { //해당화면에 전체 checkbox들을 체크해준다
+               $("input[type=checkbox]").prop("checked", true);
+            }
+            // 전체선택 체크박스가 해제된 경우 
+            else { //해당화면에 모든 checkbox들의 체크를해제시킨다. 
+               $("input[type=checkbox]").prop("checked", false);
+            }
+         })
+      })
+   </script>
+	
 </html>

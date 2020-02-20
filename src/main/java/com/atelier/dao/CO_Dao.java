@@ -22,5 +22,7 @@ public interface CO_Dao {
 	
 	public boolean ADSendMessage(MG_Dto mgDto);
 
+	public void setIncreaseNoticeCount(CO_NoticeDto noticeContents);
+
 
 }

@@ -39,4 +39,8 @@
 		INSERT INTO MESSAGE VALUES(MG_NUM_SEQ.NEXTVAL,#{mg_sender},#{mg_receiver},'F',#{mg_contents},DEFAULT)
 	</insert>
 
+	<update id = "setIncreaseNoticeCount">
+		UPDATE NT SET NT_COUNT = #{nt_count}+1
+		WHERE NT_NUM = #{nt_num}
+	</update>
 </mapper>
