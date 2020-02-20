@@ -141,9 +141,9 @@
 						</tr>
 					</table>
 			
-					
+					<div style="height:250px; overflow:auto; ">
 						<table>
-						<c:forEach var="nitem" items ="${bList}">
+						<c:forEach var="nitem" items ="${ntList}">
 								<tr style="background-color: white; border-bottom: 2px solid #A09182; height:40px;">
 									<td style="width: 60px; text-align: center;">
 										${nitem.at_nt_num}
@@ -161,11 +161,8 @@
 								</tr>
 								</c:forEach>
 						</table>
-						
+					</div>
 						<div>
-						<center>
-						${paging}
-						</center>
 						</div>
 						<hr>
 					<center>

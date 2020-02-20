@@ -23,9 +23,9 @@ public interface NT_Dao {
 	public void viewCountUpdate(Integer nt_num);
 	
 	//공방 공지사항 인터페이스
-		public boolean noticeWrite(AT_NT_Dto anDto);
+		public boolean noticeWrite(AT_NT_Dto ntDto);
 
-		public List<AT_NT_Dto> getList(int pageNum);
+		public List<AT_NT_Dto> getList(List<AT_NT_Dto> ntList);
 
 		public int getBoardCount();
 
@@ -34,4 +34,7 @@ public interface NT_Dao {
 		public AT_NT_Dto getContents(Integer at_nt_num);
 
 		public boolean delNoticeContents(Integer at_nt_num);
+
+		public List<AT_NT_Dto> getNtList(String at_nt_id);
+
 	}

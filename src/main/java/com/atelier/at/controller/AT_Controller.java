@@ -27,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.atelier.at.service.AT_Service;
 import com.atelier.dto.AG_Dto;
 import com.atelier.dto.AT_Dto;
+import com.atelier.dto.AT_NT_Dto;
 import com.atelier.dto.CM_Dto;
 import com.atelier.dto.MG_Dto;
 import com.atelier.dto.PD_productDto;
@@ -349,12 +350,17 @@ public class AT_Controller {
 		/*-------------------------------------------------------------------
 		 * 기   능 : 공지사항 리스트 출력
 		 * 작업자 : KJH
-		 * 작성일 : 2020.02.11		최종수정일 : 2020.02.11
+		 * 작성일 : 2020.02.11		최종수정일 : 2020.02.11KBH
 		-------------------------------------------------------------------*/
 		@GetMapping("ATNotice")
-		public ModelAndView ATNoticeList(Integer pageNum) {
+		public ModelAndView ATNoticeList() {
 			log.info("ATNoticeList()");
-			mav = atServ.getATNoticeList(pageNum);
+			
+			AT_Dto atDto = (AT_Dto) session.getAttribute("at");
+			
+			String at_nt_id = atDto.getAt_id();
+					
+			mav = atServ.getATNoticeList(at_nt_id);
 
 			return mav;
 		}
@@ -391,12 +397,12 @@ public class AT_Controller {
 		//2. 글쓰기 화면에서 들어 온 데이터를 처리
 		//공지사항 작성
 		@PostMapping("noticeWrite")
-		public ModelAndView noticeWrite(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
+		public ModelAndView noticeWrite(AT_NT_Dto ntDto,RedirectAttributes rttr) {
 			log.warn("notice");
-			mav = atServ.noticeWrite(multi, rttr);
+			mav = atServ.noticeWrite(ntDto,rttr);
 			return mav;
-
 		}
+		
 		@GetMapping("delNotice")//글 삭제를 위한 controller 메소드
 		public String delNotice (@RequestParam("at_nt_num")int at_nt_num, RedirectAttributes rttr) {
 			String view = atServ.delNotice(at_nt_num,rttr);

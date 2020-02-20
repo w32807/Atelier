@@ -155,7 +155,7 @@ table, tr, td {
 					<div class="support-notice">공지사항 작성 게시판</div>
 					<form action="noticeWrite" method="post" enctype="multipart/form-data">
 						<input type="hidden" name="at_nt_id" value="${mb.cm_id}"><!-- 여기에 원래 mb.at_id 넣어야함-->
-						<table>
+						<table >
 							<tr>
 								<th style="width: 50px; text-align: center; color: #353535;">제목</th>
 								<th

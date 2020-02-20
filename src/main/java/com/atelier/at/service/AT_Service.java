@@ -654,25 +654,16 @@ public class AT_Service {
 	 * 작성일 : 2020.02.10
 	 * 최종수정일 : 2020.02.11
 	 * ------------------------------------------------------------------------------ */
-	public ModelAndView noticeWrite(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
+	public ModelAndView noticeWrite(AT_NT_Dto ntDto,RedirectAttributes rttr) {
 		log.warn("noticeserv");
 
 		mav = new ModelAndView();
 
-		String title = multi.getParameter("at_nt_title");
-		String contents = multi.getParameter("at_nt_contents");
-		String id = multi.getParameter("at_nt_id");
-		log.info(title + "," + contents + "," + id);
-
-		AT_NT_Dto notice = new AT_NT_Dto();
-		notice.setAt_nt_title(title);
-		notice.setAt_nt_contents(contents);
-		notice.setAt_nt_id(id);
-
+		
 		String view = null;
 
 		try {
-			ntDao.noticeWrite(notice);
+			ntDao.noticeWrite(ntDto);
 			view = "redirect:ATNotice";
 			rttr.addFlashAttribute("writecheck", 2);
 		} catch (Exception e) {
@@ -691,35 +682,19 @@ public class AT_Service {
 	 * 작성일 : 2020.02.10 
 	 * 최종수정일 : 2020.02.13
 	 * ----------------------------------------------------------------------------- */
-	public ModelAndView getATNoticeList(Integer pageNum) {
-		log.info("getATNoticeList() - pageNum : " + pageNum);
-		mav = new ModelAndView();
-
-		int num = (pageNum == null) ? 1 : pageNum;// 맨 처음에는 넘어오는 페이지 넘버가 없기 때문에 1페이지부터 시작함
-
-		List<AT_NT_Dto> nList = ntDao.getList(num);// 페이지 번호를 가져오고, 그 번호에 해당하는 List를 가져온다.
-		mav.addObject("bList", nList);// bList라는 이름으로 bList 데이터를 넣겠다.
-		// ------추가분-----------------------------------------------------------------------------------------
-		mav.addObject("paging", getPaging(num));// 여기서 num은 페이지 번호
-		// -----------------------------------------------------------------------------------------------------
-		mav.setViewName("ATNotice");// mav를 보낼 jsp파일의 이름
-		session.setAttribute("pageNum", num);
-		return mav;//
+	public ModelAndView getATNoticeList(String at_nt_id) {
+	
+		List<AT_NT_Dto> ntList = ntDao.getNtList(at_nt_id);
+		
+		mav.addObject("ntList",ntList);
+		
+		mav.setViewName("ATNotice");
+		
+		return mav;
 
 	}
 
-	private Object getPaging(int num) {
-		// 전체 글 개수 구하기(from DB)
-		int maxNum = ntDao.getBoardCount();
-		int listCount = 10;// 페이지 당 글 갯수
-		int pageCount = 2; // 한 그룹당 페이지 갯수
-		String listName = "ATNotice";// BoardController의 RequestMapping 과 똑같아야 함.
-		Paging paging = new Paging(maxNum, num, listCount, pageCount, listName);
-		String pagingHtml = paging.makeHtmlPaging();
-
-		return pagingHtml;
-	}
-
+	
 	/*
 	 * -----------------------------------------------------------------------------
 	 * 기능: 공지사항 세부내용 출력 
@@ -931,8 +906,6 @@ public class AT_Service {
 		List<AT_Dto> at_recommend_list = new ArrayList<AT_Dto>();
 		List<AT_Dto> at_filter_list = new ArrayList<AT_Dto>();
 		
-		List<String> at_filter_check_list = new ArrayList<String>();
-		
 		// 필터링 
 		if(checkedBoxArr != null) {
 			for(int i = 0; i < checkedBoxArr.length; i++) {
@@ -945,9 +918,6 @@ public class AT_Service {
 						at_list.remove(j);
 					}
 				}
-			
-				at_filter_check_list.add(checkedBoxArr[i]);
-				System.out.println(at_filter_check_list.get(i));
 			}
 		}
 		else {
@@ -971,8 +941,6 @@ public class AT_Service {
 		}
 
 		mav.addObject("at_filter_list", at_filter_list);
-		mav.addObject("checkedBoxArr", checkedBoxArr);
-		mav.addObject("at_filter_check_list", at_filter_check_list);
 		mav.addObject("at_recommend_list", at_recommend_list);
 		mav.setViewName("ATMain");
 		return mav;
