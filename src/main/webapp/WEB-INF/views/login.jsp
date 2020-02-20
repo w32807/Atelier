@@ -177,7 +177,7 @@
                             </div>
                             <div class="group-input">
                                 <label for="pass">Password를 입력해주세요. *</label>
-                                <input type="text" id="pass" name="cm_pwd" required>
+                                <input type="password" id="pass" name="cm_pwd" required>
                             </div>
                             <div class="group-input gi-check">
                                 <div class="gi-more">
