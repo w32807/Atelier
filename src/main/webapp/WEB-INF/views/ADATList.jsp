@@ -153,7 +153,7 @@
 										</ul>
 										<!--  search form end -->
 									</div>
-
+									<!-- 
 									<div style="text-align: right; margin-top: 1.5%">
 										<i class="icon_mail_alt"></i> 모두 활동
 										<div class="btn-group" style="margin-left: 0.5%;">
@@ -169,12 +169,12 @@
 													class="icon_close_alt2"></i></a>
 										</div>
 									</div>
-
+									 -->
 
 									<table class="table table-striped table-advance table-hover">
 										<tbody>
 											<tr>
-												<th><input type="checkbox" id="allCheck"></th>
+												
 												<th><i class="icon_mail_alt"></i> 번호</th>
 												<th><i class="icon_profile"></i> 공방명</th>
 												<th><i class="icon_calendar"></i> 관리자</th>
@@ -187,7 +187,7 @@
 											</tr>
 											<c:forEach var="at_list" items="${at_list}">
 												<tr>
-													<th><input type="checkbox"></th>
+													
 													<td>${at_list.at_seq}</td>
 													<td>${at_list.at_name}</td>
 													<td>${at_list.at_id}</td>
