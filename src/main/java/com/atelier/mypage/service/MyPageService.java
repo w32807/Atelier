@@ -271,6 +271,14 @@ public class MyPageService {
 		//	mb세션 id로 at세션 담기
 		AT_Dto atData = new AT_Dto();
 		atData = at_Dao.getAtData(id);
+
+		
+		/*
+		 * AT_Dto atInfo = new AT_Dto();
+		 * 
+		 * atInfo = at_Dao.getAtInfo(id);
+		 */	
+		
 		
 		mav.addObject("atData", atData);
 		mav.addObject("mpsList", mpsList);

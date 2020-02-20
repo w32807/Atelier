@@ -211,4 +211,8 @@
 		SELECT * FROM ATELIER WHERE AT_ID=#{id}
 	</select>
 	
+	<!-- <select id="getAtInfo" parameterType="String" resultType="com.atelier.dto.">
+	
+	</select>
+	 -->
 </mapper>

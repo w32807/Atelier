@@ -50,6 +50,7 @@
 			<div class="atelier_go">
 				<h4>Atelier Menu</h4>
 				<ul>
+					<li><a href="ATDetail?at_num=${atData.at_seq}">내 공방으로</a></li>
 					<li><a class="atelierCon" href="ATManager">공방 관리</a></li>
 				</ul>
 			</div>
