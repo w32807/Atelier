@@ -734,15 +734,17 @@ public class AT_Service {
 
 		AT_NT_Dto getNoticeContents = ntDao.getContents(at_nt_num);
 		CM_Dto sessionMember = (CM_Dto) session.getAttribute("mb");
-		String getSessionId = sessionMember.getCm_id();
-		String getId = getNoticeContents.getAt_nt_id();
+		if(sessionMember != null) {
+			String getSessionId = sessionMember.getCm_id();
+			String getId = getNoticeContents.getAt_nt_id();
 
-		if (getId.equals(getSessionId)) {
-
-			mav.addObject("deleteCheck", 1);
-		} else {
-			mav.addObject("deleteCheck", 0);
+			if (getId.equals(getSessionId)) {
+				mav.addObject("deleteCheck", 1);
+			} else {
+				mav.addObject("deleteCheck", 0);
+			}
 		}
+		
 		mav.addObject("board", anDto);// board는 공지사항 내용출력 ${board.at_nt_contents}
 
 		mav.setViewName("ATNoticeDetail");
@@ -1293,7 +1295,7 @@ public class AT_Service {
 		
 		return mav;
 	}
-	
+
 	/*-------------------------------------------------------------------
 	 * 기능 : 공방 관리자가 메인 관리자에게 쪽지 보내는 서비스
 	 * 작성자: JSH

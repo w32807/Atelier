@@ -40,11 +40,12 @@ public class CO_Service {
 		//공지사항 리스트(작성자:JSG)
 		mav = new ModelAndView();
 		String chk = null;
-		if(noticePageNum == null) {
-			chk = "FAQ보는중";
-		}else if(FAQPageNum == null) {
+		if(FAQPageNum == null) {
 			chk = "공지사항보는중";
+		}else if(noticePageNum == null) {
+			chk = "FAQ보는중";
 		}
+			
 		
 		int num1 = (noticePageNum == null)? 1 : noticePageNum;
 		List<CO_NoticeDto> noticeList = coDao.getNoticeList(num1);		

@@ -825,20 +825,28 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
  	
     
     	$("#subBtn").click(function(){
+    		var sessionId = "${mb.cm_id}";
     		if(confirm("구독 하시겠습니까?")){
-    			var subFrm = $("#subFrm").serializeObject();
-    			$.ajax({
-    				url: "SubFromProd",
-    				type: "get",
-    				data: subFrm,
-    				dataType: "json",
-    				success: function(data) {
-    					console.log("ajax 실행 결과 : " + data.subMassage);
-    					alert(data.subMassage);
-    				},
-    				error: function(error) {
+    			if(sessionId == ''){
+    				if(confirm("로그인이 필요합니다. 로그인 하시겠습니까?")){
+    					location.href = "login";
     				}
-    			})
+    			}else{
+    				var subFrm = $("#subFrm").serializeObject();
+        			$.ajax({
+        				url: "SubFromProd",
+        				type: "get",
+        				data: subFrm,
+        				dataType: "json",
+        				success: function(data) {
+        					console.log("ajax 실행 결과 : " + data.subMassage);
+        					alert(data.subMassage);
+        				},
+        				error: function(error) {
+        				}
+        			})
+				}
+    			
     		}
     	})
     	
