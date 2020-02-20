@@ -99,7 +99,7 @@
 									<div id="orderAjax">
 									<br>
 										<c:forEach var="pl" items="${poList}">
-											<div class="${pl.po_state}" style="margin-left: 80px;">
+											<div class="${pl.po_state}" style="margin-left: 80px;margin-bottom: 30px;">
 												<img src="./resources/main/img/products/${pl.pi_oriname}" style="width:330px;" >
 												<div class="colorlib-text" style="position: absolute; display: inline-block; padding: 50px 0 0 80px; font-size: 18px; font-weight: 400;">
 													<div style="display: inline-block; line-height: 35px;">
