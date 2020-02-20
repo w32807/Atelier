@@ -108,7 +108,7 @@
 														<h3 style="display: inline-block; font-size: 25px; letter-spacing: 1px; margin-bottom: 35px;"><b>${pl.po_at_name}</b></h3>
 														<br><!-- 체크박스의 상품코드로 주문취소 처리 할 것임! -->
 														<b style="margin-right: 40px;">배송상태</b><span>${pl.po_state}</span><br>
-														<b style="margin-right: 80px;">가격</b><span>${pl.po_price}&#8361;</span><br>
+														<b style="margin-right: 80px;">가격</b><span>&#8361;${pl.po_price}</span><br>
 														<b style="margin-right: 80px;">수량</b><span>${pl.po_count}</span><br>
 														<b style="margin-right: 60px;">배송지</b><span>${pl.po_addr}</span><br>
 														<br>
@@ -167,7 +167,7 @@
 
 	<!-- MAIN JS -->
 	<script src="resources/AT_front/js/main.js"></script>
-	<script src="/resources/js/jquery.serializeObject.js"></script>
+	<script src="./resources/js/jquery.serializeObject.js"></script>
 	<script type="text/javascript">
 	//1. 아무것도 체크하지 않고 상태변경를 눌렀을 때.
 	//2. n개의 상품을 취소하시겠습니까?
