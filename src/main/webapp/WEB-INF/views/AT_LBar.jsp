@@ -98,7 +98,7 @@
 			<ul style="margin-top: 10px">
 				<li class="colorlib-active"
 					style="font-size: 20px; text-align: center; margin-bottom: 120px;">
-					<a href="ATDetail" style="font-weight: bolder;">공방들의 이름ㅋㅋ</a>
+					<a href="ATDetail" style="font-weight: bolder;">${at.at_name}</a>
 				</li>
 			</ul>
 		</nav>
