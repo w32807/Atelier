@@ -171,8 +171,10 @@ table, tr, td {
 							<th style="width: 550px; text-align: left; padding-left: 15px; color: white;">Content</th>
 							<th style="width: 200px; text-align: center; color: white;">Date</th>
 							<th style="width: 150px; text-align: center; color: white;">Writer</th>
-							<th
-								style="width: 80px; text-align: center; padding-right: 15px; color: white;">Delete</th>
+							<c:if test="${mb.cm_id eq r.sm_receiver}">
+							<th style="width: 80px; text-align: center; padding-right: 15px; color: white;">Delete</th>
+							</c:if>
+							
 						</tr>
 
 					</table>
@@ -187,12 +189,15 @@ table, tr, td {
 									${r.sm_contents}</td>
 								<td style="width: 200px;">${r.sm_regdate}</td>
 								<td style="width: 150px;">${r.sm_sender}</td>
-								<td style="padding-right: 15px; width: 80px;">
+								<c:if test="${mb.cm_id eq r.sm_receiver}">
+								<td style="padding-right: 15px; width: 80px;">	
 									<a href=deleteMessage?sm_num=${r.sm_num}><button type="button" id="btnDelete"
 										style="border: 0; background-color: white;">
 										삭제
 									</button></a>
 								</td>
+								</c:if>
+								
 							</tr>
 							</form>
 						</c:forEach>
