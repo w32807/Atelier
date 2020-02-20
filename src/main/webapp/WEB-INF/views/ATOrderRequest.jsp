@@ -116,7 +116,7 @@
 														<b>${rmProd.rm_type}</b>
 													</h3>
 													<input id="${rmProd.rm_num}" type="checkbox" name="rmProdOrderChk" value="${rmProd.rm_num}" ><br>
-													<b>단가</b><span name="prodPrice" id="${rmProd.rm_num}">&nbsp;&nbsp;&nbsp;${rmProd.rm_price}&#8361;</span><br>
+													<b>단가</b><span name="prodPrice" id="${rmProd.rm_num}">&nbsp;&nbsp;&nbsp;&#8361;${rmProd.rm_price}</span><br>
 													<b>수량</b>&nbsp;&nbsp;&nbsp;<input type="number" name="${rmProd.rm_num}" value="0"
 																						class="numOfprod" min="0"
 																						style="border: none; width: 70px;" placeholder="입력 ">
