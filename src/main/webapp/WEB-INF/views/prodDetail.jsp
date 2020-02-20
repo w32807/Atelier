@@ -599,9 +599,14 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			    	console.log(data.prList);
 			        var prList = '<table name="prTable">';
 			        for(var i = 0; i < data.prList.length; i++) {
+			        	
+			        	var img = data.prList[i].pr_cm_pfphoto;
+			        	if(img == null){
+			        		img = "Profile_default.png";
+			        	}
 			        	prList += '<div class="co-item">'
 		                + '<div class="avatar-pic">'
-		                + '<img src="https://t1.daumcdn.net/cfile/tistory/995499415BA82B591F" alt="" style="padding-bottom: 0px;">'
+		                + '<img src="resources/upload/profile/'+img+'" alt="" style="padding-bottom: 0px;">'
 		                + '</div>'
 		                + '<div class="avatar-text">'
 		                + '<div class="at-rating">'
@@ -613,7 +618,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				            + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 				            + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 				            + '</div>'
-				            + '<form id="${review.pr_num}">'
+				            + '<form id="'+ data.prList[i].pr_num +'">'
                             + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
                             + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
                             + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
@@ -629,7 +634,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 			                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 			                + '</div>'
-			                + '<form id="${review.pr_num}">'
+			                + '<form id="'+ data.prList[i].pr_num +'">'
                             + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
                             + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
                             + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
@@ -645,7 +650,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 			                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 			                + '</div>'
-			                + '<form id="${review.pr_num}">'
+			                + '<form id="'+ data.prList[i].pr_num +'">'
                             + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
                             + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
                             + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
@@ -661,7 +666,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 			                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 			                + '</div>'
-			                + '<form id="${review.pr_num}">'
+			                + '<form id="'+ data.prList[i].pr_num +'">'
                             + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
                             + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
                             + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
@@ -677,7 +682,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 			                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 			                + '</div>'
-			                + '<form id="${review.pr_num}">'
+			                + '<form id="'+ data.prList[i].pr_num +'">'
                             + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
                             + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
                             + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
@@ -706,6 +711,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
  		$("#pr_star").val(selecedStar);
  	})
  	
+ 	
  	function reviewDelete(prNum) {
  		console.log(prNum);
  		var reviewDeleteFrm = $("#prNum").serializeObject();
@@ -721,11 +727,17 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				if(data.prList == null) {
 					alert("리뷰 삭제 실패");
 				} else {
-				var prList = '<table name="prTable">';
+				
+		        var prList = '<table name="prTable">';
 		        for(var i = 0; i < data.prList.length; i++) {
+		        	
+		        	  var img = data.prList[i].pr_cm_pfphoto;
+				        if(img == null){
+				        	img = "Profile_default.png";
+				        }
 		        	prList += '<div class="co-item">'
 	                + '<div class="avatar-pic">'
-	                + '<img src="https://t1.daumcdn.net/cfile/tistory/995499415BA82B591F" alt="" style="padding-bottom: 0px;">'
+	                + '<img src="resources/upload/profile/'+img+'" alt="" style="padding-bottom: 0px;">'
 	                + '</div>'
 	                + '<div class="avatar-text">'
 	                + '<div class="at-rating">'
@@ -737,7 +749,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			            + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 			            + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 			            + '</div>'
-			            + '<form id="${review.pr_num}">'
+			            + '<form id="'+ data.prList[i].pr_num +'">'
                         + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
                         + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
                         + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
@@ -753,7 +765,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 		                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 		                + '</div>'
-		                + '<form id="${review.pr_num}">'
+		                + '<form id="'+ data.prList[i].pr_num +'">'
                         + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
                         + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
                         + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
@@ -769,7 +781,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 		                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 		                + '</div>'
-		                + '<form id="${review.pr_num}">'
+		                + '<form id="'+ data.prList[i].pr_num +'">'
                         + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
                         + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
                         + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
@@ -785,7 +797,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 		                + '<i class="fa fa-star-o" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 		                + '</div>'
-		                + '<form id="${review.pr_num}">'
+		                + '<form id="'+ data.prList[i].pr_num +'">'
                         + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
                         + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
                         + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'
@@ -801,7 +813,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 		                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 		                + '<i class="fa fa-star" style="font-size: 15px; letter-spacing: 3.5px;">' + '</i>'
 		                + '</div>'
-		                + '<form id="${review.pr_num}">'
+		                + '<form id="'+ data.prList[i].pr_num +'">'
                         + '<input type="hidden" value="' + data.prList[i].pr_num + '">'
                         + '<h5>' + data.prList[i].pr_cm_id + '<span>' + data.prList[i].pr_date + '</span>' + '</h5>'
                         + '<img src="resources/AT_front/images/x.png" onclick="reviewDelete(' + data.prList[i].pr_num + ');" style="position: absolute; width: 13px; margin: -26px 0 0 360px; cursor: pointer;">'

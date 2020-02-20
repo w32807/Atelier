@@ -432,6 +432,7 @@ public class CM_Service {
 	 * 기능: 상품 리뷰 등록
 	 * 작성자: KYH
 	 * 작성일: 2020.02.14
+	 * 
 	 -----------------------------------------------------------------------------------------*/
 	public Map<String, List<PR_Dto>> prodReviewWrite(PR_Dto prDto) {
 		Map<String, List<PR_Dto>> prMap = null;
@@ -443,6 +444,17 @@ public class CM_Service {
 			prDao.prodReviewWrite(prDto);
 			
 			List<PR_Dto> prList = prDao.getProdReviewList(prDto.getPr_pd_code());
+			
+			for(int i=0;i<prList.size();i++) {
+				//댓글에 프로필 이미지를 출력하기 위한 기능
+				String cm_id = prList.get(i).getPr_cm_id();
+				cmDto = cm_Dao.getMemberInfo(cm_id);
+				String cm_pfphoto = cmDto.getCm_pfphoto();
+				if(cm_pfphoto!=null) {
+					cm_pfphoto = cm_pfphoto.replace("com", "jpg");
+					prList.get(i).setPr_cm_pfphoto(cm_pfphoto);
+				}
+			}
 			
 			prMap = new HashMap<String, List<PR_Dto>>();
 			prMap.put("prList", prList);
@@ -474,6 +486,13 @@ public class CM_Service {
 			
 			SimpleDateFormat dataFm = new SimpleDateFormat("yyyy-MM-dd");
 			for(int i=0;i<prList.size();i++) {
+				String cm_id = prList.get(i).getPr_cm_id();
+				cmDto = cm_Dao.getMemberInfo(cm_id);
+				String cm_pfphoto = cmDto.getCm_pfphoto();
+				if(cm_pfphoto!=null) {
+					cm_pfphoto = cm_pfphoto.replace("com", "jpg");
+					prList.get(i).setPr_cm_pfphoto(cm_pfphoto);
+				}
 				String convertDate = dataFm.format(prList.get(i).getPr_date());
 				prList.get(i).setPr_dateSimple(convertDate);
 			}
