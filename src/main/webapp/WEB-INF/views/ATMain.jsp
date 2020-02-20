@@ -55,7 +55,7 @@
                         	<h4 style="margin-bottom: 30px;">카테고리</h4>
                         		<form action="ATMain" method="get">
 	                            	<ul>
-		                                <li><input type="checkbox" name="category" value="의류" checked>의류</li>
+		                                <li><input type="checkbox" name="category" value="의류">의류</li>
 		                                <li><input type="checkbox" name="category" value="가방">가방</li>
 		                               	<li><input type="checkbox" name="category" value="신발">신발</li>
 		                                <li><input type="checkbox" name="category" value="지갑">지갑</li>
