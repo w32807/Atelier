@@ -61,15 +61,11 @@
 		//document.객체의 이름으로 저장 하나의 태그를 변수로 저장
 		var chk = confirm("정말 삭제하시겠습니까?");
 		if (chk) {
-			return theForm.submit();
+			$("#delNotice").submit();
 		}
 	}	
 </script>
 	</script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
 	<style type="text/css">
 		.support-notice {
 			letter-spacing: 1px;
@@ -133,44 +129,44 @@
 							</h2>
 						</div>
 					</div>
-					<div class="support-notice">공지사항 게시판입니다. 공지사항을 제대로 읽지 않아 발생되는
-						모든 문제에 대해서는 책임지지 않습니다. 꼭 숙지 부탁드립니다.</div>
+					<div class="support-notice" style="border: 2px solid; padding: 10px 0px;; margin-left: 200px; margin-right: 200px;">공지사항 게시판입니다. 공지사항을 제대로 읽지 않아 발생되는
+                  모든 문제에 대해서는 책임지지 않습니다. 꼭 숙지 부탁드립니다.</div>
+                  <div style="border: 2px solid; padding: 50px; margin: 10px 200px;">
+               
+                  <table style="margin-left: 50px;">
+                     <tr>
+                        <th style="width: 50px; text-align: center; color: #353535;">제목</th>
+                        <th
+                           style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">${board.at_nt_title}</th>
+                     </tr>
+                     <tr style="border-bottom: 1px solid #A09182;">
+                        <th style="width: 50px; text-align: center; color: #353535;">작성자</th>
+                        <th
+                           style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">${board.at_nt_id}</th>
+                        <th style="width: 235px; text-align: right; color: #353535;">조회수</th>
+                        <th style="text-align: right; color: grey; padding-right: 30px;">${board.at_nt_count}</th>
+                     </tr>
+                     <tr>
+                        <th style="height: 350px; display: block;">내용</th>
+                        <th style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">${board.at_nt_contents}</th>
+                     </tr>
+                  </table>
+                  <hr style="border-color: #353535; margin-bottom: 15px;">
+                  <center>
+                     <input type="button" value="목록" onclick="location.href='ATNotice'" style="font-size:15px;" >
+               </center>
+                  <form action="delNotice" name="delNotice" method="get">
+                     <input type="hidden" value="${board.at_nt_num}" name="at_nt_num">
+                     <input id="deleteButton" type="button" value="글삭제" onclick="confirmDelete(${board.at_nt_num})" style="font-size:15px; float: right; margin-right: 20px;">
+                  </form>
+                  </div>
+               
+               </div>
 
-					<table>
-						<tr>
-							<th style="width: 50px; text-align: center; color: #353535;">제목</th>
-							<th
-								style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">${board.at_nt_title}</th>
-						</tr>
-						<tr style="border-bottom: 1px solid #A09182;">
-							<th style="width: 50px; text-align: center; color: #353535;">작성자</th>
-							<th
-								style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">${board.at_nt_id}</th>
-							<th style="width: 235px; text-align: right; color: #353535;">조회수</th>
-							<th style="text-align: right; color: grey; padding-right: 30px;">${board.at_nt_count}</th>
-						</tr>
-						<tr>
-							<th style="height: 350px; display: block;">내용</th>
-							<th
-								style="width: 550px; text-align: left; padding-left: 15px; color: #353535;">${board.at_nt_contents}</th>
-
-						</tr>
-					</table>
-					<a href="ATNotice" class="btn info_btn btn-send-message"
-						style="margin-left: 700px; margin-bottom: 100px;">목록</a>
-					<center>
-						<form action="delNotice" name="delNotice" method="get">
-							<input type="hidden" value="${board.at_nt_num}" name="at_nt_num">
-							<input id="deleteButton" type="button" value="글삭제"
-								onclick="confirmDelete(${board.at_nt_num})">
-						</form>
-					</center>
-
-				</div>
-			</div>
-		</div>
-	</div>
-	
+            </div>
+         </div>
+      </div>
+   </div>
 	<!-- 하단바 Include -->
 	<jsp:include page="Main_Footer.jsp" flush="false"/>
 

@@ -16,7 +16,6 @@ public class PO_Vo {
 
 	//주문 테이블의 VO
 	private int po_num; //주문번호
-	//private String po_pd_code; //상품코드
 	private int po_pd_code; //상품코드
 	private String po_state; // 배송상태
 	private int po_count; // 주문수량
@@ -28,7 +27,6 @@ public class PO_Vo {
 	private String po_cm_id; // 이메일
 	private String pi_oriname;
 	private String pi_num; 
-	//private String pi_pd_code;
 	private String converedPo_date;
 	 
 	

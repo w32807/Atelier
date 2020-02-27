@@ -27,20 +27,16 @@ public class MP_SubService {
 	SB_Dao sbDao;
 	
 	public ModelAndView getSubscription(SB_Dto sbDto) {
-		log.warn("abc");
-		
 		mav = new ModelAndView();
-		
+
 		try {
 			sbDao.getSubscription(sbDto);
 			log.warn("ok");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 		return mav;
 	}
-
 	
 	public ModelAndView getSubList(String sc_cm_id) {
 		log.warn("sub");
@@ -55,7 +51,6 @@ public class MP_SubService {
 		
 		return mav;
 	}
-
 	
 	/* ---------------------------------------------------------------------------------------
 	 * 기능: 상품에서 구독추가 메소드
@@ -63,20 +58,17 @@ public class MP_SubService {
 	 * 작성일: 2020.02.08
 	 -----------------------------------------------------------------------------------------*/
 	public String SubFromProd(SB_Dto sbDto) {
-		String subMassage = null;
+		String subMessage = null;
 		//구독한지 비교 
 		int a = sbDao.compareSub(sbDto);
 		if(a == 0) {//a==0 이면 구독 중이 아님
 			sbDao.getSubscription(sbDto);
 			log.warn("ok");
-			subMassage = "구독 하였습니다!";
+			subMessage = "구독 하였습니다!";
 		}else if(a==1) {//a==1 이면 구독중
-			subMassage = "이미 구독 중인 공방입니다.";
+			subMessage = "이미 구독 중인 공방입니다.";
 		}
 			
-			
-		return subMassage;
+		return subMessage;
 	}
-	
-
-}
+}//MP_SubService Class end

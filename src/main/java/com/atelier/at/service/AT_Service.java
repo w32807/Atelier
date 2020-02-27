@@ -80,13 +80,12 @@ public class AT_Service {
 	@Setter(onMethod_ = @Autowired)
 	PI_Dao piDao;
 
-	/*
-	 * -----------------------------------------------------------------------------
+	
+	/* -----------------------------------------------------------------------------
 	 * 		 기능: 제작한 상품 리스트 전체 출력 
 	 * 		작성자: KYH 
 	 * 		작성일 : 2019.02.05
 	 * ----------------------------------------------------------------------------- */
-
 	public ModelAndView getATProdList(Integer pageNum, Integer maxNum) {
 		//세션에 있는 아이디로, AT의 AT_STATE를 가져와서, 활성이면 진행, 아니면 못들어감.
 		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
@@ -112,29 +111,27 @@ public class AT_Service {
 				piList.add(piDto);
 				
 			}
-			
 
 			mav.addObject("pd", pd);
 			mav.addObject("piList",piList);
 			mav.addObject("paging", getATProdPaging(num));
 			session.setAttribute("pageNum", num);
-
 			mav.setViewName("ATProdManage");
 		}else {
+
+			AT_Dto atDto = (AT_Dto) session.getAttribute("myAt");
+			mav = getATDetail(atDto.getAt_seq());
 			mav.addObject("message","비활성 상태이므로 접근 불가.");
-			mav.setViewName("ATManager");
 		}
 
 		return mav;
 	}
 
-	/*
-	 * -----------------------------------------------------------------------------
+	/*-----------------------------------------------------------------------------
 	 * 		기능: 판매 등록한 상품 리스트 출력 
 	 * 		작성자: KYH 
 	 * 		작성일 : 2019.02.06
 	 * ----------------------------------------------------------------------------- */
-
 	public ModelAndView getATProdRegistTrueList(Integer pageNum, Integer maxNum) {
 		mav = new ModelAndView();
 
@@ -153,13 +150,11 @@ public class AT_Service {
 		return mav;
 	}
 
-	/*
-	 * -----------------------------------------------------------------------------
+	/*-----------------------------------------------------------------------------
 	 *  	기능: 판매등록 Paging 처리 
 	 *  	작성자: KYH 
 	 *  	작성일 : 2019.02.05
 	 * ----------------------------------------------------------------------------- */
-
 	private Object getATProdPaging(int num) {
 		// 전체 글 개수 구하기(from DB)
 		int maxNum = pdDao.getATProdListCount();
@@ -247,8 +242,6 @@ public class AT_Service {
 	 * 작성일: 2020.02.05
 	 ----------------------------------------------------------------------------------------- */
 	public String ATRegistProc(AG_Dto ag_Dto, RedirectAttributes rttr) {
-
-		// boolean b;
 		String view = null;
 		atDao.setATRegistUserData(ag_Dto);
 		
@@ -320,22 +313,15 @@ public class AT_Service {
 	 * 작성일: 2020.02.05
 	 ----------------------------------------------------------------------------------------- */
 	public PI_productImgDto prodImgup(MultipartHttpServletRequest multi, int currentPd_code) {
-
-		// 먼저 경로를 구하고 폴더를 만듦
 		String path = getRealPath(multi);
-
-		// 이미지 고유번호, 상품코드 이미지 이름 (sys name) 오리지날 이름
 		PI_productImgDto prodImgDto = new PI_productImgDto();
 		MultipartFile imgFile = multi.getFile("pi_oriname");
 		String oriName = imgFile.getOriginalFilename();
 
 		String sysName = System.currentTimeMillis() + "." + oriName.substring(oriName.lastIndexOf(".") + 1);
-		// "."+ oriName.substring(oriName.lastIndexOf(".")+1)는 확장자를 나타내기 위함
 		try {
-			// 지정한 폴더에 해당 이미지 파일 생성
 			imgFile.transferTo(new File(path + sysName));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		prodImgDto.setPi_oriname(oriName);
@@ -378,14 +364,8 @@ public class AT_Service {
 		PD_productDto modifyProdDto = atDao.getModifyProd(pd_code);// 상품을 가져옴
 		String path = getRealPath(multi);
 		log.warn("제품의 이미지를 불러올 경로 : " + path);
-		// modifyProdDto의 상품코드를 가지고, 이미지를 불러온다
-		// 필요한 것 - 이미지가 저장된 절대 경로 및 sysName.
 		PI_productImgDto prodImg = atDao.getProdImg(modifyProdDto.getPd_code());
-		// String sysName = prodImg.getPi_sysname();
 		String oriName = prodImg.getPi_oriname();
-		// mav.addObject("sysName",sysName);
-		
-	
 		
 		mav.addObject("ctList",ctList);
 		mav.addObject("rmList",rmList);
@@ -467,8 +447,7 @@ public class AT_Service {
 			atDao.changeProdRegist(pdCode);
 		}
 		mav = getATProdList(null,null);
-		//view = "redirect:ATProdManage";
-		//rttr.addFlashAttribute("check", "등록 완료");
+		
 		return mav;
 	}
 
@@ -524,27 +503,16 @@ public class AT_Service {
 		
 		
 		public ModelAndView deleteMessage(int sm_num,RedirectAttributes rttr) {
-
 			mav = new ModelAndView();
-			
 			String view = null;
-			
 			try {
-				
 				atDao.deleteMessage(sm_num);
-				
 				view = "redirect:ATSupportMg";
-				
 				rttr.addFlashAttribute("check","글 삭제에 성공하셨습니다");
-				
 			}catch(Exception e) {
-				
 				view = "redirect:ATSupportMg";
-				
 				rttr.addFlashAttribute("check","글 삭제에 실패하셨습니다");
-				
 			}
-			
 			mav.setViewName(view);
 			
 			return mav;
@@ -626,7 +594,6 @@ public class AT_Service {
 			String convertDate = dataFm.format(poDtoList.get(i).getPo_date());
 			poDtoList.get(i).setConveredPo_date(convertDate);
 		}
-		// 원하는건 PO_VOList
 
 		mav.addObject("poDtoList", poDtoList);
 		mav.addObject("ATOrderCheck", po_Vo.getPo_state());
@@ -635,28 +602,8 @@ public class AT_Service {
 		return mav;
 	}
 
-	/*--------------------------------------------------------------------------------------- 
-	 * 기능: 주문 조회 페이지에서 주문 상태별로 출력하기 위한 기능 
-	 * 작성자: JWJ 
-	 * 작성일: 2020.02.09
-	 ----------------------------------------------------------------------------------------- */
-	/*
-	 * public Map<String, List<PO_Vo>> chgOrderList(String orderState){
-	 * 
-	 * CM_Dto cmDto = (CM_Dto) session.getAttribute("mb"); String AT_id =
-	 * cmDto.getCm_id(); String AM_Name = atDao.getAM_Name(AT_id);
-	 * 
-	 * PO_Vo po_Vo = new PO_Vo(); po_Vo.setPo_state(orderState);
-	 * po_Vo.setPo_at_name(AM_Name);
-	 * 
-	 * Map<String, List<PO_Vo>> poDtomap = new HashMap<String, List<PO_Vo>>();
-	 * List<PO_Vo> poDtoList = atDao.getATOrderList(po_Vo);
-	 * poDtomap.put("poDtoList", poDtoList);
-	 * 
-	 * return poDtomap; }
-	 */
-	/*
-	 * -----------------------------------------------------------------------------
+	
+	/* -----------------------------------------------------------------------------
 	 * 기능: 공지사항 작성 
 	 * 작성자: KJH
 	 * 작성일 : 2020.02.10
@@ -684,83 +631,76 @@ public class AT_Service {
 	}
 
 	/*
-	 * -----------------------------------------------------------------------------
-	 * 기능: 공지사항 출력
-	 * 작성자: KJH 
-	 * 작성일 : 2020.02.10 
-	 * 최종수정일 : 2020.02.13
-	 * ----------------------------------------------------------------------------- */
-	public ModelAndView getATNoticeList(String at_nt_id) {
+	    * -----------------------------------------------------------------------------
+	    * 기능: 공지사항 출력
+	    * 작성자: KJH 
+	    * 작성일 : 2020.02.10 
+	    * 최종수정일 : 2020.02.13
+	    * ----------------------------------------------------------------------------- */
+	   public ModelAndView getATNoticeList(String at_nt_id) {
+	      List<AT_NT_Dto> ntList = ntDao.getNtList(at_nt_id);
+	      mav.addObject("ntList",ntList);
+	      mav.setViewName("ATNotice");
+	      
+	      return mav;
+	   }
+	   
+	   /*
+	    * -----------------------------------------------------------------------------
+	    * 기능: 공지사항 세부내용 출력 
+	    * 작성자: KJH 
+	    * 작성일 : 2020.02.10 
+	    * 최종수정일 : 2020.02.13
+	    * ----------------------------------------------------------------------------- */
+	   public ModelAndView getNoticeContents(Integer at_nt_num) {
+	      mav = new ModelAndView();
+	      ntDao.upView(at_nt_num);
+	      AT_NT_Dto anDto = ntDao.getContents(at_nt_num);
+
+	      AT_NT_Dto getNoticeContents = ntDao.getContents(at_nt_num);
+	      CM_Dto sessionMember = (CM_Dto) session.getAttribute("mb");
+	      if(sessionMember != null) {
+	         String getSessionId = sessionMember.getCm_id();
+	         String getId = getNoticeContents.getAt_nt_id();
+
+	         if (getId.equals(getSessionId)) {
+	            mav.addObject("deleteCheck", 1);
+	         } else {
+	            mav.addObject("deleteCheck", 0);
+	         }
+	      }
+	      mav.addObject("board", anDto);// board는 공지사항 내용출력 ${board.at_nt_contents}
+	      mav.setViewName("ATNoticeDetail");
+
+	      return mav;
+	   }
+
 	
-		List<AT_NT_Dto> ntList = ntDao.getNtList(at_nt_id);
-		
-		mav.addObject("ntList",ntList);
-		
-		mav.setViewName("ATNotice");
-		
-		return mav;
+	   /*-----------------------------------------------------------------------------
+	    * 기능: 공지사항 삭제 
+	    * 작성자: KJH 
+	    * 작성일 : 2020.02.10 
+	    * 최종수정일 : 2020.02.13
+	    * ----------------------------------------------------------------------------- */
+	   public String delNotice(int at_nt_num, RedirectAttributes rttr) {
 
-	}
+	      AT_NT_Dto getBoardContents = ntDao.getContents(at_nt_num);
+	      CM_Dto sessionMember = (CM_Dto) session.getAttribute("mb");
+	      String getSessionId = sessionMember.getCm_id();
+	      String getId = getBoardContents.getAt_nt_id();
+	      if (getId.equals(getSessionId)) {
 
-	
-	/*
-	 * -----------------------------------------------------------------------------
-	 * 기능: 공지사항 세부내용 출력 
-	 * 작성자: KJH 
-	 * 작성일 : 2020.02.10 
-	 * 최종수정일 : 2020.02.13
-	 * ----------------------------------------------------------------------------- */
-	public ModelAndView getNoticeContents(Integer at_nt_num) {
-		mav = new ModelAndView();
-		ntDao.upView(at_nt_num);
-		AT_NT_Dto anDto = ntDao.getContents(at_nt_num);
+	         ntDao.delNoticeContents(at_nt_num);
 
-		AT_NT_Dto getNoticeContents = ntDao.getContents(at_nt_num);
-		CM_Dto sessionMember = (CM_Dto) session.getAttribute("mb");
-		if(sessionMember != null) {
-			String getSessionId = sessionMember.getCm_id();
-			String getId = getNoticeContents.getAt_nt_id();
-
-			if (getId.equals(getSessionId)) {
-				mav.addObject("deleteCheck", 1);
-			} else {
-				mav.addObject("deleteCheck", 0);
-			}
-		}
-		
-		mav.addObject("board", anDto);// board는 공지사항 내용출력 ${board.at_nt_contents}
-
-		mav.setViewName("ATNoticeDetail");
-
-		return mav;
-	}
-
-	/*
-	 * -----------------------------------------------------------------------------
-	 * 기능: 공지사항 삭제 
-	 * 작성자: KJH 
-	 * 작성일 : 2020.02.10 
-	 * 최종수정일 : 2020.02.13
-	 * ----------------------------------------------------------------------------- */
-	public String delNotice(int at_nt_num, RedirectAttributes rttr) {
-
-		AT_NT_Dto getBoardContents = ntDao.getContents(at_nt_num);
-		CM_Dto sessionMember = (CM_Dto) session.getAttribute("mb");
-		String getSessionId = sessionMember.getCm_id();
-		String getId = getBoardContents.getAt_nt_id();
-		if (getId.equals(getSessionId)) {
-
-			ntDao.delNoticeContents(at_nt_num);
-
-			String view = "redirect:ATNotice?pageNum=" + session.getAttribute("pageNum");// redirect로, writeFrm에 가라
-			rttr.addFlashAttribute("check", "삭제 완료!");
-			return view;
-		} else {
-			String view = "redirect:ATNoticeDetail?at_nt_num=" + at_nt_num;
-			rttr.addFlashAttribute("check", "다른 사람의 글은 삭제 할 수 없습니다. ");
-			return view;
-		}
-	}
+	         String view = "redirect:ATNotice?pageNum=" + session.getAttribute("pageNum");// redirect로, writeFrm에 가라
+	         rttr.addFlashAttribute("check", "삭제 완료!");
+	         return view;
+	      } else {
+	         String view = "redirect:ATNoticeDetail?at_nt_num=" + at_nt_num;
+	         rttr.addFlashAttribute("check", "다른 사람의 글은 삭제 할 수 없습니다. ");
+	         return view;
+	      }
+	   }
 
 	/*-------------------------------------------------------------------
 	 * 기능 : 발주 리스트 조회 서비스 / 발주 조회 리스트 취소 서비스
@@ -817,8 +757,6 @@ public class AT_Service {
 	public ModelAndView getATManagerList() {
 
 		mav = new ModelAndView();
-
-		log.warn("발주 리스트 조회 서비스 시작");
 
 		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
 		String id = cmDto.getCm_id();
@@ -960,7 +898,6 @@ public class AT_Service {
 	 * 작성일: 2020.02.10
 	 -----------------------------------------------------------------------------------------*/
 	public ModelAndView getATDetail(int at_num) {
-		// TODO Auto-generated method stub
 		mav = new ModelAndView();
 		AT_Dto at_dto = new AT_Dto();
 		PD_productDto pd_dto = new PD_productDto();
@@ -975,15 +912,14 @@ public class AT_Service {
 		List<PD_productDto> pdList = pdDao.getPDListByAT(at_dto.getAt_id());
 
 		for(int i = 0; i < pdList.size(); i++) {
-			//piList = piDao.getPDImageList(pd_dto.getPd_code());
 			piList.add(piDao.getPDImageList(pdList.get(i).getPd_code()));
-			//piList.add(pi_dto);
 		}
 
 		mav.addObject("at_dto", at_dto);
 		mav.addObject("pdList", pdList);
 		mav.addObject("piList", piList);
 		mav.setViewName("ATDetail");
+		
 		return mav;
 	}
 
@@ -1011,11 +947,7 @@ public class AT_Service {
 		String view = null;
 		try {
 			atDao.updateATData(at_dto);
-			//String at_seq = null;
-			//at_seq = String.valueOf(at_dto_temp.getAt_seq());
-			//view = "ATDetail?at_num="+at_seq;
 			mav = getATDetail(at_dto_temp.getAt_seq());
-			//System.out.println("공방번호 : "+at_seq);
 			
 			rttr.addFlashAttribute("check",2);
 		} catch(Exception e) {
@@ -1027,11 +959,6 @@ public class AT_Service {
 			//파일 처리 메소드 호출
 			fileup(multi,at_dto.getAt_id(), at_dto);
 		}
-
-		//mav.setViewName(view);
-
-		//session.setAttribute(name, value);
-		//session.removeAttribute("at");
 
 		return mav;
 	}
@@ -1062,17 +989,15 @@ public class AT_Service {
 		log.warn(path);
 
 
-		File dir = new File(path);//path 경로에 있는 파일에 관한 객체
-		if(dir.isDirectory() == false) {//경로(저장할 upload폴더가 없으면 만들어주자.
-			dir.mkdir();//directory를 만들자(upload폴더 생성), 위의 path에 경로를 저장했기때문에 없으면 upload를 만든다
-			//servlet-context에서 resources경로를 가지고 있는 애들은 다 resources로 보내주는 태그가 있다.
+		File dir = new File(path);
+		if(dir.isDirectory() == false) {
+			dir.mkdir();
 		}
 
 		boolean fResult = false;
 
 		String profileName = AT_ID;
 		String fileName = AT_ID_milsec.replace("com", "jpg");
-		//String nameFile = fileName.replace(".jpg", "");
 
 		try {
 			log.warn("파일업로드 try 문 시작");
@@ -1199,13 +1124,9 @@ public class AT_Service {
 	 * 작성일 : 2020.02.17
 	 ------------------------------------------------------------------- */
 	public ModelAndView getATProdList(String at_id) {
-
 		mav = new ModelAndView();
-
 		List<AT_ProdDto> pdList = atDao.getATProdList(at_id);
-
 		mav.addObject("pdList",pdList);
-
 		mav.setViewName("ATProduct");
 
 		return mav;
@@ -1240,41 +1161,27 @@ public class AT_Service {
 	
 	
 	public ModelAndView getATMessage(String receiver) {
-		
 		mav = new ModelAndView();
-		
 		mav.addObject("pd",receiver);
-		
 		mav.setViewName("ATMessageWrite");
 		
 		return mav;
 	}
 
 	public ModelAndView setMessage(MG_Dto mgDto, RedirectAttributes rttr) {
-		
 		mav = new ModelAndView();
-		
 		String view = null;
-		
 		AT_Dto atDto = (AT_Dto)session.getAttribute("at");
-		
 		int seq = atDto.getAt_seq();
 		
 		try {
-			
 			atDao.setMessage(mgDto);
-			
 			rttr.addFlashAttribute("check","성공");
-			
 			mav = getATDetail(seq);
-			
 		}catch(Exception e) {
-			
 			mav = getATDetail(seq);
-			
 			rttr.addFlashAttribute("check","fail");
 		}
-		
 		
 		return mav;
 	}
@@ -1310,10 +1217,7 @@ public class AT_Service {
 		mav.setViewName("ATProdRegist");
 		return mav;
 	}
-
-
-
-}//AT_Service 클래스의 끝
+}//AT_Service Class end
 
 
 

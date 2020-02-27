@@ -37,22 +37,9 @@
         <div class="header-top">
             <div class="container">
                 <div class="ht-left">
-                <!-- 헤더 이메일
-                    <div class="mail-service">
-                        <i class=" fa fa-envelope"></i>
-                    </div>
-                     -->
-                     <!-- 헤더 전화번호 
-                    <div class="phone-service">
-                        <i class=" fa fa-phone"></i>
-                    </div>
-                     -->
                 </div>
                 <!-- 로그인, 회원가입 -->
                 <div class="ht-right">
-                	<!-- 
-					<a href="main" class="hideandshow login-panel" action="logout"><i class="fa fa-user"></i>로그아웃</a>
-					 -->
 					<script>
 						function goPage(){
 							var f = document.gologout;
@@ -110,7 +97,7 @@
 	                            <li class="heart-icon">
 	                                <a href="myPage">
 	                                    <i class="icon_heart_alt"></i>
-	                                    <span>6</span>
+	                                    <!-- <span>6</span> -->
 	                            </li>
 	                            <li class="cart-price">MyPage</li>
 	                            </a>
@@ -118,7 +105,7 @@
 	                            <li class="cart-icon">
 	                                <a href="basket">
 	                                    <i class="icon_bag_alt"></i>
-	                                <span>9</span>
+	                                <!-- <span>9</span> -->
 	                            </li>
                             <li class="cart-price">basket</li>
                             </a>
@@ -333,7 +320,6 @@
 				alert(chk);
 				location.reload(true); 
 			}
-    	
     }
     </script>
 </html>

@@ -15,31 +15,7 @@
 <meta name="description"
 	content="This is an example dashboard created using build-in elements and components.">
 <meta name="msapplication-tap-highlight" content="no">
-<!--
-    =========================================================
-    * ArchitectUI HTML Theme Dashboard - v1.0.0
-    =========================================================
-    * Product Page: https://dashboardpack.com
-    * Copyright 2019 DashboardPack (https://dashboardpack.com)
-    * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
-    =========================================================
-    * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-    -->
 
-
-
-<!-- Animate.css -->
-<!-- 
-<link rel="stylesheet" href="./resources/AT_front/css/animate.css"> -->
-<!-- Icomoon Icon Fonts-->
-<!-- <link rel="stylesheet" href="./resources/AT_front/css/icomoon.css"> -->
-<!-- Bootstrap  -->
-<!-- <link rel="stylesheet" href="./resources/AT_front/css/bootstrap.css"> -->
-<!-- Flexslider 
-<link rel="stylesheet" href="./resources/AT_front/css/flexslider.css">
-Theme style 
-<link rel="stylesheet" href="./resources/AT_front/css/style.css">
- -->
 <!-- Modernizr JS -->
 <script src="./resources/AT_front/js/modernizr-2.6.2.min.js"></script>
 <!-- FOR IE9 below -->
@@ -72,47 +48,12 @@ Theme style
 				
 				<!--로고 이름바꾸기. -->
 				<div class="header__pane ml-auto">
-					<!-- <div>
-						<button type="button"
-							class="hamburger close-sidebar-btn hamburger--elastic"
-							data-class="closed-sidebar">
-							<span class="hamburger-box"> <span class="hamburger-inner"></span>
-							</span>
-						</button>
-					</div> -->
 				</div>
 			</div>
-			<!-- <div class="app-header__mobile-menu">
-				<div>
-					<button type="button"
-						class="hamburger hamburger--elastic mobile-toggle-nav">
-						<span class="hamburger-box"> <span class="hamburger-inner"></span>
-						</span>
-					</button>
-				</div>
-			</div> -->
 			<div class="app-header__menu">
-				<!-- 	<span>
-					<button type="button"
-						class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
-						<span class="btn-icon-wrapper"> <i
-							class="fa fa-ellipsis-v fa-w-6"></i>
-						</span>
-					</button>
-				</span> -->
 			</div>
 			<div class="app-header__content">
 				<div class="app-header-left">
-					<!-- <!-- 	<div class="search-wrapper">
-						<div class="input-holder">
-							<input type="text" class="search-input"
-								placeholder="Type to search">
-							<button class="search-icon">
-								<span></span>
-							</button>
-						</div>
-						<button class="close"></button>
-					</div> -->
 
 				</div>
 
@@ -123,13 +64,6 @@ Theme style
 				<div class="app-header__logo">
 					<div class="logo-src"></div>
 					<div class="header__pane ml-auto">
-						<!-- <div>
-                                <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
-                                    <span class="hamburger-box">
-                                        <span class="hamburger-inner"></span>
-                                    </span>
-                                </button>
-                            </div> -->
 					</div>
 				</div>
 				<div class="app-header__mobile-menu">
@@ -165,18 +99,15 @@ Theme style
 							<li>
 							<li class="app-sidebar__heading">회원관리</li>
 							<ul>
-								<li><a href="ADMessage"> <!--여기에 메--> 메세지답변
-								</a></li>
+								<li><a href="ADMessage"> 메세지답변</a></li>
 							</ul>
 							</li>
 							<li>
 							<li class="app-sidebar__heading">공방관리</li>
-							<ul>
-								<li><a href="ADATMemberUp"> 공방회원 승인 / 거부 </a></li>
-								<li><a href="ADATList"> <i class="metismenu-icon">
-									</i>공방리스트
-								</a></li>
-							</ul>
+								<ul>
+									<li><a href="ADATMemberUp"> 공방회원 승인 / 거부 </a></li>
+									<li><a href="ADATList"> <i class="metismenu-icon"></i>공방리스트</a></li>
+								</ul>
 							</li>
 
 							<li class="app-sidebar__heading">업체관리</li>
@@ -222,18 +153,18 @@ Theme style
 								<c:forEach var="pdDto" items="${pd}" varStatus="status">
 									<div class="grid-item" style="float: left; padding: 20px;">
 										<figure class="effect-bubba">
-											<c:if test='${imgOriName eq null}'>
+											<c:if test='${pdDto.pi_oriname eq null}'>
                                         		<img src="./resources/main/img/products/null.jpg" alt="" style="width: 200px; height: 200px;">
                                             </c:if>
-                                            <c:if test='${imgOriName ne null}'>
-                                            	<img src="./resources/main/img/products/${pdDto.imgOriName}" alt="" style="width: 200px; height: 200px;">
+                                            <c:if test='${pdDto.pi_oriname ne null}'>
+                                            	<img src="./resources/main/img/products/${pdDto.pi_oriname}" alt="" style="width: 200px; height: 200px;">
                                             </c:if>
 											<figcaption>
 												<input type="checkbox" name="prod" value="${pdDto.pd_code}">
 												
 												<div class="pi-text">
 			                                        <div class="catagory-name">${pdDto.pd_cate}</div>
-			                                        <a href="ADProdDetail?pd_code=${pdDto.pd_code}">
+			                                        <a href="prodDetail?pd_code=${pdDto.pd_code}">
 			                                            <h5>${pdDto.pd_name}</h5>
 			                                        </a>
 		                                        </div>
@@ -249,33 +180,13 @@ Theme style
 					</div>
 
 				<div>
-					<div class="row"     style="padding-left: 430px;">
-					<!--  리스트 
-						<div class="container">
-							<ul class="pagination">
-
-								<li class="disabled"><a href="#">«</a></li>
-								<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">»</a></li>
-
-							</ul>
-						</div>
-						-->
+					<div class="row"     style="padding-left: 430px;">W
 					</div>
 					<div style="position: fixed; right: 60px; bottom: 10px">
 						<button id="delete" class="btn btn-info btn-sm">삭제</button>
 					</div>
 				</div>
 			</div>
-
-
-			<!--여기까지의 한 div 덩어리를 for문으로 돌리면 됩니당.-->
-
-
 		</div>
 	</div>
 
@@ -299,81 +210,28 @@ Theme style
 	<script type="text/javascript" src="resources/assets/scripts/main.js"></script>
 </body>
 <script type="text/javascript">
-
-$("#search").keydown(function(key){
 	
-	if(key.keyCode == 13){
-		$("#Searching").submit
-	}
-});
-
-
-
-
-$("#delete").click(function(){
-	
-	var chkLength = $("input:checkbox[name=prod]:checked").length;
-	console.log("선택된상품의 갯수 : " + chkLength);
-	if(chkLength == 0){
-		alert("취소 할 상품을 선택 해주세요.");
-	}else {
+	$("#search").keydown(function(key){
 		
-		if(confirm(+chkLength+"개의 상품을 취소하시겠습니까?")){
-			$("#cancleStateFrm").submit();
-			//location.reload(true);
+		if(key.keyCode == 13){
+			$("#Searching").submit
+		}
+	});
+	
+	$("#delete").click(function(){
+		
+		var chkLength = $("input:checkbox[name=prod]:checked").length;
+		console.log("선택된상품의 갯수 : " + chkLength);
+		if(chkLength == 0){
+			alert("취소 할 상품을 선택 해주세요.");
 		}else {
-			//location.reload(true);
-		}
-	}
-});
-
-
-
-
-/* 	
-function pick(index){
-	
-	var chkLength = $("input:checkbox[name=prod]:checked").length;//체크박스에 체크가 되어있는 갯수를 구함
-		$("#index").val(index);
-		if(index == 0){
-			if(chkLength == 0){
-				alert("취소 할 상품을 선택 해주세요.");
+			
+			if(confirm(+chkLength+"개의 상품을 취소하시겠습니까?")){
+				$("#cancleStateFrm").submit();
 			}else {
-				
-				if(confirm(+chkLength+"개의 상품을 취소하시겠습니까?")){
-					$("#cancleStateFrm").submit();
-					//location.reload(true);
-				}else {
-					//location.reload(true);
-				}
 			}
 		}
-	
-		if(index == 1){
-			if(chkLength == 0){
-				alert("수정 할 상품을 선택 해주세요.");
-			}else if(chkLength != 1){
-				
-			}else{
-				
-				if(confirm(+chkLength+"개의 상품을 수정하시겠습니까?")){
-					$("#cancleStateFrm").submit();
-					//location.reload(true);
-				}else {
-					//location.reload(true);
-				}
-			}
-		}
-	 */
-
-
-/* 
-
-//상품 삭제
-$("#delete").click(pick(0));
-//수정
-$("#update").click(pick(1));
- */
+	});
 
 </script>
 </html>

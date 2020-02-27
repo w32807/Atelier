@@ -61,20 +61,6 @@
 		    font-weight: bolder;
 		}
 	</style> 
-	<!-- 
-	    <script type="text/javascript">
-      		window.onload = function() {//이 페이지가 실행 되면, 이 함수를 실행해라
-				var chk = "${check}";
-				if(chk == "fail"){
-					alert("전송실패");
-					location.reload(true);//화면을 다시 한번 불러오면서 check를 리셋함 
-				}
-				else{
-					alert("전송성공");
-					location.reload(true);
-				}
-			}
-	</script> -->
 </head>
 
 <body>
@@ -161,32 +147,19 @@
 	
 	
 	<script type="text/javascript">
-				
-	$("#messageSendBtn").click(function() {
-		
-		var content = $("#messageContents").val();
-		
-		console.log(content);
-		
-		if(content==''){
-		
-			alert("보낼 내용을 작성해주세요!");
-			
+		$("#messageSendBtn").click(function() {
+			var content = $("#messageContents").val();
 			console.log(content);
-		
-		} else {
-		
-			$("#messageFrm").submit();
 			
-			alert("공방에 메세지 전달 완료.")
-			
-			window.close();
-		
-		}
-					
-	});
-		
-						
+			if(content==''){
+				alert("보낼 내용을 작성해주세요!");
+				console.log(content);
+			} else {
+				$("#messageFrm").submit();
+				alert("공방에 메세지 전달 완료.")
+				window.close();
+			}
+		});
 	</script>
 </body>
 

@@ -84,14 +84,9 @@
 		DELETE FROM MESSAGE WHERE MG_NUM=#{hs}
 	</delete>
 	
-	
-	<select id="getADProdList" parameterType="map" resultType="com.atelier.dto.PD_productDto">
-		<![CDATA[
-		SELECT * FROM (SELECT ROWNUM RONUM, PD.* FROM (SELECT * FROM PD ORDER BY PD_CODE)PD)
-        WHERE RONUM <=#{maxNum}-(#{pageNum}-1)*9 AND RONUM>=#{maxNum}-(#{pageNum}-1)*9-8
-		ORDER BY PD_CODE DESC
-		]]>
-	</select>
+	<select id="getADProdList" resultType="com.atelier.dto.PD_productDto">
+      SELECT * FROM PRODUCT INNER JOIN PRODUCT_IMAGE ON PRODUCT.PD_CODE = PRODUCT_IMAGE.PI_PD_CODE
+   </select>
 	
 	<select id="getADProdListCount" resultType="Integer">
 		SELECT COUNT(*) FROM PD
@@ -105,23 +100,14 @@
 		SELECT * FROM PRODUCT WHERE PD_CODE=#{pd_code}
 	</select> 
 	
-	
-	
 	<update id="ProductUpdate2" parameterType="com.atelier.dto.PD_productDto">
 		UPDATE PRODUCT SET PD_PRICE=#{pd_price},PD_NUMOFSTOCK=#{pd_numofstock},PD_OPTION=#{pd_option},
 		PD_CATE=#{pd_cate},PD_NAME=#{pd_name},PD_DETAIL=#{pd_detail} WHERE PD_CODE=#{pd_code}
 	</update>
 	
-	
-	<select id="SearchProc" parameterType="String" resultType="com.atelier.dto.PD_productDto">
-		SELECT * FROM PRODUCT WHERE PD_NAME LIKE '%'||#{search}||'%' OR PD_NAME LIKE '%'||#{search}||'%' OR PD_NAME LIKE '%'||#{search}||'%'
-	</select>
-	
-	
-	
-	<!-- <Select id="ProductUpdate1" parameterType="Integer" returnType="com.atelier.dto.PD_productDto"> 
-		UPDATE PD SET PD_REGIST='F' WHERE PD_CODE=#{pd_code}
-	</Select> -->
+	 <select id="SearchProc" parameterType="String" resultType="com.atelier.dto.PD_productDto">
+      SELECT * FROM PRODUCT INNER JOIN PRODUCT_IMAGE ON PRODUCT.PD_CODE = PRODUCT_IMAGE.PI_PD_CODE WHERE PD_NAME LIKE '%'||#{search}||'%' OR PD_NAME LIKE '%'||#{search}||'%' OR PD_NAME LIKE '%'||#{search}||'%'
+   </select>
 	
 	<select id="getRMCount" resultType="Integer">
 		SELECT COUNT(*) FROM RM
@@ -132,9 +118,3 @@
 	</select>
 	
 </mapper>
-
-
-
-
-
-

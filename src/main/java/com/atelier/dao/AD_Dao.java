@@ -46,7 +46,7 @@ public interface AD_Dao {
 	
 	public Integer getADProdListCount();
 
-	List<PD_productDto> getADProdList(Map<String, Integer> pageInt);
+	List<PD_productDto> getADProdList();
 
 	public boolean productDelete(String check);
 
@@ -59,6 +59,5 @@ public interface AD_Dao {
 	public List<PD_productDto> SearchProc(String search);
 
 	public boolean setADMessage();
-	
 	
 }

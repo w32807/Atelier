@@ -185,30 +185,6 @@
 					}
 								
 				});
-						
-			/* 			
-				
-				$("#messageSendBtn").click(function(){
-					
-					var click = $("#messageSendBtn").serializeObject();
-					
-					console.log(click);
-					
-					$.ajax({
-						
-						url:"messageSendBtn",
-						type:"post",
-						data:click,
-						dataType:"json",
-						success: function(data){
-							console.log(data);
-							var mList = "";
-						}
-					});
-					
-				}); */
-				
-				
 				
 	</script>
 				

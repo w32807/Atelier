@@ -4,7 +4,6 @@
 
 <mapper namespace="com.atelier.dao.PI_Dao">
 
-
 	<select id="getPDImageList" resultType="com.atelier.dto.PI_productImgDto">
 		SELECT * FROM PI
 		WHERE PI_PD_CODE = #{pd_code}

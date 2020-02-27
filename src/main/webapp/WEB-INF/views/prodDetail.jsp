@@ -174,18 +174,6 @@
                                     <i class="fa fa-search-plus"></i>
                                 </div>
                             </div>
-                            <!-- <div class="product-thumbs">
-                                <div class="product-thumbs-track ps-slider owl-carousel">
-                                    <div class="pt active" data-imgbigurl="./resources/main/img/product-single/product-1.jpg"><img
-                                            src="./resources/main/img/product-single/product-1.jpg" alt=""></div>
-                                    <div class="pt" data-imgbigurl="./resources/main/img/product-single/product-2.jpg"><img
-                                            src="./resources/main/img/product-single/product-2.jpg" alt=""></div>
-                                    <div class="pt" data-imgbigurl="./resources/main/img/product-single/product-3.jpg"><img
-                                            src="./resources/main/img/product-single/product-3.jpg" alt=""></div>
-                                    <div class="pt" data-imgbigurl="./resources/main/img/product-single/product-3.jpg"><img
-                                            src="./resources/main/img/product-single/product-3.jpg" alt=""></div>
-                                </div>
-                            </div> -->
                         </div>
                         <div class="col-lg-6">
                             <div class="product-details">
@@ -203,59 +191,12 @@
                                 	<input type="hidden" name="sc_cm_id" value="${mb.cm_id}">
                                 	<input type="hidden" name="sc_at_id" value="${prodDto.pd_at_id}">
                                 </form>
-                             
-                                <!-- <div class="pd-rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star-o"></i>
-                                    <span>(5)</span>
-                                </div> -->
                                 <div class="pd-desc">
                                    <!--  <p>간략한 제품 소개는 여기다가</p> -->
                                     <h4>${prodDto.pd_price} <span>${prodDto.pd_price*1.5} </span></h4>
                                 </div>
                                 
                                 <hr>
-                                <!-- <div class="pd-color">
-                                    <h6>색상</h6>
-                                    <div class="pd-color-choose">
-                                        <div class="cc-item">
-                                            <input type="radio" id="cc-black">
-                                            <label for="cc-black"></label>
-                                        </div>
-                                        <div class="cc-item">
-                                            <input type="radio" id="cc-yellow">
-                       
-                                            <label for="cc-yellow" class="cc-yellow"></label>
-                                        </div>
-                                        <div class="cc-item">
-                                            <input type="radio" id="cc-violet">
-                                            <label for="cc-violet" class="cc-violet"></label>
-                                        </div>
-                                    </div>
-                                </div> -->
-                                <!--  크기 
-                                <div class="pd-size-choose">
-                                    <div class="sc-item">
-                                        <input type="radio" id="sm-size">
-                                        <label for="sm-size">s</label>
-                                    </div>
-                                    <div class="sc-item">
-                                        <input type="radio" id="md-size">
-                                        <label for="md-size">m</label>
-                                    </div>
-                                    <div class="sc-item">
-                                        <input type="radio" id="lg-size">
-                                        <label for="lg-size">l</label>
-                                    </div>
-                                    <div class="sc-item">
-                                        <input type="radio" id="xl-size">
-                                        <label for="xl-size">xs</label>
-                                    </div>
-                                </div>
-                                크기 -->
                                 <div class="quantity">
 	                                <form id="basketFrm" method="get">
 	                                    <div id="bt_countDiv" class="pro-qty">
@@ -272,14 +213,6 @@
                                     <li><span>제 품 코 드</span> : ${prodDto.pd_code}</li>
                                     <li style="float: right; font-size: 25px;"><span>결 제 금 액  : </span><span id="totalPrice" value="">${prodDto.pd_price}</span></li>
                                 </ul>
-                           <!--      <div class="pd-share">
-                                    <div class="p-code">제품코드 : 00012</div>
-                                    <div class="pd-social">
-                                        <a href="https://www.facebook.com/"><i class="ti-facebook"></i></a>
-                                        <a href="https://twitter.com/"><i class="ti-twitter-alt"></i></a>
-                                        <a href="https://www.instagram.com/"><i class="ti-linkedin"></i></a>
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                     </div>
@@ -435,7 +368,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- 탭시마이 -->
                 </div>
             </div>
         </div>
@@ -566,8 +498,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 				if(result){
 					location.href = "login";
 				}
-				
-				//alert("로그인 후 이용 가능합니다.");
 			}
 		});
 	}
@@ -861,7 +791,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     			
     		}
     	})
-    	
     	
     	$(document).ready(function (){
 		$('.ADhideandshow').hide();

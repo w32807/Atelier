@@ -105,13 +105,11 @@ public class MyPageService {
 			//파일 처리 메소드 호출
 			fileup(multi,cm_Dto.getCm_id());
 		}
-
 		mav.setViewName(view);
 		cm_Dto = cm_Dao.getMemberInfo(cm_Dto.getCm_id());
 		session.setAttribute("mb", cm_Dto);
 		
 		return mav;
-		
 	}
 	
 	/* ---------------------------------------------------------------------------------------
@@ -120,7 +118,6 @@ public class MyPageService {
 	 * 작성일: 2020.02.05
 	 -----------------------------------------------------------------------------------------*/
 	public boolean fileup(MultipartHttpServletRequest multi, String CM_ID) {
-		
 		log.warn("이미지 업로드 시작");
 		
 		MultipartFile mf = multi.getFile("input_img");
@@ -129,10 +126,9 @@ public class MyPageService {
 		log.warn(path);
 
 		
-		File dir = new File(path);//path 경로에 있는 파일에 관한 객체
-		if(dir.isDirectory() == false) {//경로(저장할 upload폴더가 없으면 만들어주자.
-			dir.mkdir();//directory를 만들자(upload폴더 생성), 위의 path에 경로를 저장했기때문에 없으면 upload를 만든다
-							 //servlet-context에서 resources경로를 가지고 있는 애들은 다 resources로 보내주는 태그가 있다.
+		File dir = new File(path);
+		if(dir.isDirectory() == false) {
+			dir.mkdir();
 		}
 		
 		boolean fResult = false;
@@ -176,22 +172,16 @@ public class MyPageService {
 		log.warn(realPath);
 		
 		try {
-			// 파일 객체 생성
 			File file = new File(realPath);
 			is = new FileInputStream(file);
-			
-			//응답 객체 (resp)의 헤더 설정
-			//파일 전송용 contentType 설정
+		
 			resp.setContentType("application/octet-stream");
-			//resp.setHeader("content-Disposition", "attachment; filename=\"" + fileName +"\"");
 			resp.setHeader("content-Disposition", "attachment; filename=" + fileName);
-			//attachment; filename=\파일명.txt"\가 됨
 			
-			//응답 객체(resp)를 통해서 파일 전송
 			os = resp.getOutputStream();
 			
 			//전송하기
-			byte[] buffer = new byte[1024];//파일의 데이터를 buffer에 넣음
+			byte[] buffer = new byte[1024];
 			int length;
 			while((length = is.read(buffer)) != -1) {
 				os.write(buffer,0,length);
@@ -271,14 +261,6 @@ public class MyPageService {
 		//	mb세션 id로 at세션 담기
 		AT_Dto atData = new AT_Dto();
 		atData = at_Dao.getAtData(id);
-
-		
-		/*
-		 * AT_Dto atInfo = new AT_Dto();
-		 * 
-		 * atInfo = at_Dao.getAtInfo(id);
-		 */	
-		
 		
 		mav.addObject("atData", atData);
 		mav.addObject("mpsList", mpsList);
@@ -366,7 +348,6 @@ public class MyPageService {
 	 * 작성일: 2020.02.13
 	 -----------------------------------------------------------------------------------------*/
 	public ModelAndView getMyPageGoProd(int po_pd_code) {
-		
 		mav = cmServ.getprodDetail(po_pd_code);
 		
 		return mav;
@@ -380,7 +361,7 @@ public class MyPageService {
 	public ModelAndView actMyPageOrderCancle(int po_num) {
 		mpDao.actMyPageOrderCancle(po_num);
 		mav = getmyPage();
-
+		mav.addObject("orderCancleMsg","주문취소 되었습니다");
 		return mav;
 	}
 	
@@ -413,7 +394,7 @@ public class MyPageService {
 		
 		mpDao.actMyPageDelSubs(mpSubDto);
 		mav = getmyPage();
-		
+		mav.addObject("subCancleMsg","구독취소 되었습니다");
 		return mav;
 	}
 	
@@ -461,5 +442,17 @@ public class MyPageService {
 		at_Dao.deleteATUserATData(cm_id);	// 공방 테이블에서 삭제
 		at_Dao.deleteAGRequest(cm_id);		// 공방신청 테이블에서 삭제
 	}
+
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 관리자에게 메세지 보내기
+	 * 작성자: JSH
+	 * 작성일: 2020.02.20
+	 -----------------------------------------------------------------------------------------*/
+	public ModelAndView SendAdminMessageFromMP(MG_Dto mgDto) {
+		log.warn("관리자에게 문의하기 시작 서비스");
+		mpDao.sendAdminMessageFromMP(mgDto);
+		
+		return mav;
+	}
 	
-}
+}//MyPageService Class end

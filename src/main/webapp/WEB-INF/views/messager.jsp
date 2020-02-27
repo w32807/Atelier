@@ -201,12 +201,8 @@
 	<script src="resources/AT_front/js/main.js"></script>
 
 	<script src="text/javascript">
-		
-	$("#submit").click(function(){
-		
-		
+		$("#submit").click(function(){
 	})
-		
 	</script>
 
 </body>

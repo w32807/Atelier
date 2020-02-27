@@ -65,20 +65,8 @@
 <meta name="description"
    content="This is an example dashboard created using build-in elements and components.">
 <meta name="msapplication-tap-highlight" content="no">
-<!--
-    =========================================================
-    * ArchitectUI HTML Theme Dashboard - v1.0.0
-    =========================================================
-    * Product Page: https://dashboardpack.com
-    * Copyright 2019 DashboardPack (https://dashboardpack.com)
-    * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
-    =========================================================
-    * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-    -->
-
 
 <!-- <link rel="shortcut icon" href="./resources/ADATList/img/favicon.png"> -->
-
 
 <!-- Bootstrap CSS -->
 <link href="./resources/ADATList/css/bootstrap.min.css" rel="stylesheet">
@@ -194,28 +182,6 @@
                      </section>
                   </div>
                </div>
-
-
-               
-
-
-				<!-- 공방 신청서 리스트 페이징 처리 추가 필요
-               <div class="row">
-                  <div class="container">
-                     <ul class="pagination" style="padding-left: 35%;">
-
-                        <li class="disabled"><a href="#">«</a></li>
-                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">»</a></li>
-
-                     </ul>
-                  </div>
-               </div>
-                -->
             </div>
          </div>
       </div>
@@ -247,7 +213,4 @@
    </script>
 
 </body>
-
-
-
 </html>

@@ -71,6 +71,7 @@ public class AD_Service {
 	@Setter(onMethod_ = @Autowired)
 	MG_Dao mDao;
 	
+	
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 공지사항 전체 출력
 	  * 작성자: KYH
@@ -92,6 +93,7 @@ public class AD_Service {
 		session.setAttribute("pageNum", num);
 		
 		mav.setViewName("ADNoticeList");
+		
 		return mav;
 	}
 	
@@ -120,9 +122,6 @@ public class AD_Service {
 	public ModelAndView getADNoticeDetail(Integer nt_num) {
 		mav = new ModelAndView();
 		
-		//ntdto = aDao.getADNoticeDetail(ntdto.getNt_num());
-		ntDao.viewCountUpdate(nt_num);
-		
 		CO_NoticeDto ntdto = ntDao.getADNoticeDetail(nt_num);
 		
 		mav.addObject("ntdto", ntdto);
@@ -137,23 +136,17 @@ public class AD_Service {
 	  * 작성일 : 2019.02.04
 	  -----------------------------------------------------------------------------------*/
 	public Map<String, List<CO_NoticeDto>> ADNoticeInsert(CO_NoticeDto ntdto, Integer pageNum, Integer maxNum) {
-		log.warn("서비스ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ");
 		Map<String, List<CO_NoticeDto>> ntMap = null;
 		
 		try {
-			//로그인하면 아래 주석 해제 후 실행
-			//CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
-			//ntdto.setNt_id(cmDto.getCm_id());
 			
 			//임시 아이디로 문자열 지정
 			ntdto.setNt_id("admin");
 			ntDao.ADNoticeInsert(ntdto);
-			log.warn("서비스입력ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ");
 			maxNum = ntDao.getADNoticeCount();
 			Map<String, Integer> pageInt = new HashMap<String, Integer>();
 			pageInt.put("pageNum", pageNum);
 			pageInt.put("maxNum", maxNum);
-			log.warn("서비스입력ㅇㄴㅁㅁㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴㄴ");
 			List<CO_NoticeDto> ntlist = ntDao.getADNoticeList(pageInt);
 			ntMap = new HashMap<String, List<CO_NoticeDto>>();
 			ntMap.put("ntlist", ntlist);
@@ -162,6 +155,7 @@ public class AD_Service {
 			e.printStackTrace();
 			ntMap = null;
 		}
+		
 		return ntMap;
 	}
 	
@@ -176,7 +170,6 @@ public class AD_Service {
 		if(ntDao.ADNoticeUpdate(ntdto)) {
 			view = "redirect:ADNoticeList";
 		}
-		
 		return view;
 	}
 	
@@ -188,13 +181,10 @@ public class AD_Service {
 	public ModelAndView ADNoticeDelete(CO_NoticeDto ntdto, String[] checkedBoxArr, RedirectAttributes rttr) {
 		Integer maxNum = null;
 		Integer pageNum = null;
-		//String nt_num = String.valueOf(ntdto.getNt_num());
-		//int[] a = (int[])checkedBoxArr;
 		for(String nt_num : checkedBoxArr) {
 			ntDao.ADNoticeDelete(nt_num);
 		}
 		
-		//mav = getADNoticeList(pageNum, maxNum);
 		mav = new ModelAndView();
 		mav.setViewName("redirect:ADNoticeList");
 		rttr.addFlashAttribute("check", "공지사항 삭제 완료!");
@@ -243,16 +233,13 @@ public class AD_Service {
 		String PagingHtml = paging.makeHtmlPaging();
 		
 		return PagingHtml;
-		
 	}
-	
 	   
  	 /* ---------------------------------------------------------------------------------
  	  * 기능: FAQ입력 및 출력(ajax)
  	  * 작성자: JWJ
  	  * 작성일 : 2019.02.02
  	  -----------------------------------------------------------------------------------*/
- 	
 	public Map<String, List<FT_FAQDto>> FAQInsert(FT_FAQDto faq,Integer pageNum,Integer maxNum) {
 		Map<String, List<FT_FAQDto>> faqmap = null;
 		
@@ -270,12 +257,8 @@ public class AD_Service {
 			Timestamp convertedDate = new Timestamp(parsedate.getTime()); 
 			faqList.get(1).setFt_regdate(convertedDate);
 			
-			
 			faqmap = new HashMap<String, List<FT_FAQDto>>();
 			faqmap.put("faqList", faqList);
-			
-			
-			
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -309,8 +292,6 @@ public class AD_Service {
 			view = "redirect:ADFAQ";
 			rttr.addFlashAttribute("check", "수정 성공");
 		}
-		
-		
 		return view;
 	}
 
@@ -341,7 +322,6 @@ public class AD_Service {
 	public ModelAndView MaterialInsert(AD_MaterialDto material, RedirectAttributes rttr) {
 		mav = new ModelAndView();
 		String view = null;
-		
 		log.warn("원자재 등록 서비스 시작");
 
 		try {
@@ -353,6 +333,7 @@ public class AD_Service {
 				rttr.addFlashAttribute("check", "fail");
 			}
 		mav.setViewName(view);
+		
 		return mav;
 	}
 	
@@ -411,6 +392,7 @@ public class AD_Service {
 		
 		mav.addObject("AGList", AGList);
 		mav.setViewName("ADATMemberUp");
+		
 		return mav;
 	}
 
@@ -434,8 +416,6 @@ public class AD_Service {
 		}
 		System.out.println("fuck");
 		mav = getApplicant();
-		
-		//getApplicant();
 		
 		return mav;
 	}
@@ -469,8 +449,6 @@ public class AD_Service {
 		
 		// AT 테이블에 데이터 삽입
 		at_dto.setAt_id(ag_Member.getAg_id());
-		//at_dto.setAt_logo();
-		//at_dto.setAt_seq();
 		at_dto.setAt_name(ag_Member.getAg_at_name());
 		at_dto.setAt_phone(ag_Member.getAg_phone());
 		at_dto.setAt_addr(cm_Member.getCm_addr());
@@ -481,8 +459,6 @@ public class AD_Service {
 		at_dto.setAt_logo("default.png");
 		atDao.insertATData(at_dto);
 		DeleteATMember(id);
-
-		//return "ADATMemberUp";
 	}
 	
 	/* ---------------------------------------------------------------------------------
@@ -491,9 +467,7 @@ public class AD_Service {
 	  * 작성일 : 2019.02.07
 	  -----------------------------------------------------------------------------------*/
 	public void DeleteATMember(String id) {
-		//CM_Dto cmMem = cmDao.getMemberInfo(id);
 		atDao.deleteAGRequest(id);
-		//return "ADATMemberUp";
 	}
 	
 	/* ---------------------------------------------------------------------------------
@@ -531,6 +505,7 @@ public class AD_Service {
 				rttr.addFlashAttribute("check", "fail");
 			}
 		mav.setViewName(view);
+		
 		return mav;
 	}
 	
@@ -541,9 +516,7 @@ public class AD_Service {
 	  -----------------------------------------------------------------------------------*/
 	public ModelAndView MaterialDel(Integer RM_NUM) {
 		mav = new ModelAndView();
-		
 		log.warn("원자재 삭제 서비스 시작");
-
 		aDao.delADMaterial(RM_NUM);
 		mav.setViewName("redirect:ADCompany");
 
@@ -557,17 +530,14 @@ public class AD_Service {
 		  -----------------------------------------------------------------------------------*/
 	public ModelAndView goADMessage(String mg_receiver) {
 		mav = new ModelAndView();
-
 		String view = null;
 
 		List<MG_Dto> bList = aDao.getADMessageList(mg_receiver);
 		mav.addObject("bList", bList);
-
 		mav.setViewName("ADMessage");
 		
 		return mav;
 	}
-	
 
 	/* ---------------------------------------------------------------------------------
 	 * 기능: 메세지 상세보기 출력
@@ -577,21 +547,15 @@ public class AD_Service {
 		public ModelAndView ADMessagecon(Integer mg_num) {
 		
 		mav = new ModelAndView();
-
 		String view = null;
 		
 		try {
 			MG_Dto mgDto = aDao.getADMessageContents(mg_num);
 			mav.addObject("mgDto", mgDto);
-			
 			mDao.ChangeCheck(mgDto.getMg_num());
-			
 			mav.setViewName("ADMessageContents");
-			
 		}catch(Exception e) {
-			
 			e.printStackTrace();
-			
 		}
 		
 		return mav;
@@ -605,25 +569,16 @@ public class AD_Service {
 		public ModelAndView MessageSendBtn(MG_Dto mDto) {
 		 
 		  mav = new ModelAndView();
-			 
 		  String view = null;
-				  
 		  String mg_receiver = mDto.getMg_sender();
-		  
 		  log.warn(mDto.getMg_receiver()+","+mDto.getMg_sender());
 		  
 		  try {
-			  
 			  aDao.ADSendMessage(mDto);
 			  view =  "forward:ADMessage";
-			  
-			  
 		  }catch(Exception e) {
-			  
 			  e.printStackTrace();
-		  
 		  }
-		  
 		  
 		  mav.setViewName(view);
 		  
@@ -637,16 +592,12 @@ public class AD_Service {
 	-----------------------------------------------------------------------------------*/
 	@Transactional
 	public ModelAndView delMessage(String[] check, RedirectAttributes rttr) {
-		
 		mav = new ModelAndView();
 		
 		for(String hs : check) {
 			aDao.delMessage(hs);
-			
 		}
 		rttr.addFlashAttribute("check","삭제 완료!");
-		
-		
 		mav.setViewName("redirect:ADMessage");
 		
 		return mav;
@@ -658,31 +609,20 @@ public class AD_Service {
 	 * 작성자: KBH
 	 * 작성일 : 2020.02.12 / 수정(KBH) 2020.02.13
 	  -----------------------------------------------------------------------------------*/
-	public ModelAndView getADProdList(Integer pageNum, Integer maxNum) {
+	public ModelAndView getADProdList() {
 		mav = new ModelAndView();
-
-		int num = (pageNum == null) ? 1 : pageNum;
-		maxNum = aDao.getADProdListCount();
-		Map<String, Integer> pageInt = new HashMap<String, Integer>();
-		pageInt.put("pageNum", num);
-		pageInt.put("maxNum", maxNum);
-		List<PD_productDto> pd = aDao.getADProdList(pageInt);
-
+		List<PD_productDto> pd = aDao.getADProdList();
 		mav.addObject("pd", pd);
-		mav.addObject("paging", getADProdPaging(num));
-		session.setAttribute("pageNum", num);
-
 		mav.setViewName("ADProdManage");
+		
 		return mav;
 	}
 	
-	/*
-	 * -----------------------------------------------------------------------------
+	/*-----------------------------------------------------------------------------
 	 *  	기능: 상품삭제 Paging 처리 
 	 *  	작성자: KBH 
 	 *  	작성일 : 2020.02.12
 	 * ----------------------------------------------------------------------------- */
-	
 	private Object getADProdPaging(int num) {
 		// 전체 글 개수 구하기(from DB)
 		int maxNum = pdDao.getATProdListCount();
@@ -701,22 +641,17 @@ public class AD_Service {
 	 * 작성일: 2020.02.12 / 수정(KBH) 2020.02.13
 	 -----------------------------------------------------------------------------------------*/
 	public ModelAndView productDelete(String[] check, RedirectAttributes rttr) {
-		log.warn("st");
-		
 		mav = new ModelAndView();
-		
 		
 		try {
 			for(int i=0; i<check.length; i++ ) {
 				aDao.productDelete(check[i]);
 			mav.setViewName("redirect:ADProdManage");	
 			}
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 			log.warn("error");
 		}
-	
 		
 		return mav;
 	}
@@ -727,14 +662,9 @@ public class AD_Service {
 	 * 작성일: 2020.02.13
 		 -----------------------------------------------------------------------------------------*/
 	public ModelAndView productUpdate1(Integer pd_code) {
-		log.warn("st");
-		
 		mav = new ModelAndView();
-		
 		PD_productDto pdDto = aDao.ProductUpdate1(pd_code);
-		
 		mav.addObject("pd",pdDto);
-		
 		mav.setViewName("ADProdDetail");
 		
 		return mav;
@@ -746,18 +676,13 @@ public class AD_Service {
 	 * 작성일: 2020.02.13
 		 -----------------------------------------------------------------------------------------*/
 	public ModelAndView productUpdate2(PD_productDto pdDto) {
-		log.warn("stst");
-		
 		mav = new ModelAndView();
-		
 		try {
 			aDao.ProductUpdate2(pdDto);
 				mav.setViewName("redirect:ADProdManage");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		
 		return mav;
 	}
@@ -784,7 +709,6 @@ public class AD_Service {
 	-----------------------------------------------------------------------------------*/
 	public ModelAndView ADATListStateProc(String id, String state, RedirectAttributes rttr, String check) {
 		String view = null;
-		
 		AT_Dto at_dto = new AT_Dto();
 
 		if(state.equals("active")) {
@@ -793,16 +717,11 @@ public class AD_Service {
 			
 			atDao.updateATState(at_dto);
 			if(check.equals("true")) {
-				//view = "ADATList";
-				//mav.setViewName(view);
 				mav = ADATListProc();
 			}
 			else {
 				String SearchName = (String)session.getAttribute("search");
-				//System.out.println(SearchName);
-				//view = "redirect:ADATListSearch?searchName="+SearchName;
 				mav = ADATListSearchProc(SearchName);
-				//System.out.println(view);
 			}
 			
 			rttr.addFlashAttribute("check","해당 공방이 활성화 되었습니다.");
@@ -814,24 +733,14 @@ public class AD_Service {
 			atDao.updateATState(at_dto);
 			
 			if(check.equals("true")) {
-				//view = "ADATList";
-				//mav.setViewName(view);
 				mav = ADATListProc();
 			}
 			else {
-				//view = "redirect:ADATListSearch";
 				String SearchName = (String)session.getAttribute("search");
-				//System.out.println(SearchName);
 				mav = ADATListSearchProc(SearchName);
-				//view = "redirect:ADATListSearch?searchName"+SearchName;
-				//System.out.println(view);
 			}
-			
-			//view = "redirect:ADATList";
 			rttr.addFlashAttribute("check","해당 공방이 비활성화 되었습니다.");
 		}
-		
-		//mav.setViewName(view);
 		
 		return mav;
 	}
@@ -848,7 +757,6 @@ public class AD_Service {
 		List<AT_Dto>at_list = atDao.getATListSearch(at_dto);
 		mav.addObject("at_list", at_list);
 		mav.setViewName("ADATListSearch"); 
-		//rttr.addFlashAttribute("check","이용해주셔서 ㄳㅇ. ㅃㅇ!");
 		
 		return mav;
 	}
@@ -859,37 +767,27 @@ public class AD_Service {
 	 * 작성일: 2020.02.13
  	-----------------------------------------------------------------------------------------*/
 		public ModelAndView SearchProc(String search) {
-
 		mav = new ModelAndView();
-		
 		List<PD_productDto> pd = aDao.SearchProc(search);
 		
 		mav.addObject("pd",pd);
-		
 		mav.setViewName("ADProdManage");
-		
 		
 		return mav;
 	}
 	
 	public ModelAndView AdminMessage(MG_Dto mgDto) {
-		
 		mav = new ModelAndView();
-		
 		String view = null;
-		
 		try {
-		
 			aDao.setADMessage();
-			
 		}catch(Exception e) {
 			
 		}
 		
 		return mav;
 	}
-
-}
+}//AD_Service Class end
 
 
 

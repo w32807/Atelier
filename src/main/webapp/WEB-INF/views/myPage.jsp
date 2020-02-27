@@ -83,27 +83,33 @@
                 <jsp:include page="myPageLBar.jsp" flush="false"/>
                 
                 <div class="col-lg-9 order-1 order-lg-2">
-                    <div class="row">
+                    <div class="row" style="margin-left: 50px;">
                             <div class="myPage_main">
                             <!-- 
                             	마이페이지 메인
                              -->
-							<div class="myInfo_upper">
+							<div>
 								<h4>My Informations</h4>
-								<ul>
-									<li style="background-color: lightcoral">배송중인 상품 <a
-										href="myOrder?po_cm_id=${mb.cm_id}">${sendingProd}</a>개
+								<ul style="margin-left: 50px;">
+									<li style="font-weight: bold; float: left; display: inline-block; margin-right: 100px;">
+										<img src="./resources/main/img/mypage-1.png" alt="delivery" width="120px">
+										<p style="font-size: 18px; font-weight: bolder; margin-left: -10px;">배송중인 상품&nbsp;
+										<a href="myOrder?po_cm_id=${mb.cm_id}">${sendingProd}</a></p>
 									</li>
-									<li style="background-color: powderblue">구독 중인 공방 <a
-										href="mySubscript?sc_cm_id=${mb.cm_id}">${subscribedNum}</a>개
+									<li style="font-weight: bold; float: left; display: inline-block; margin-right: 100px;">
+										<img src="./resources/main/img/mypage-2.png" alt="subscribe" width="120px">
+										<p style="font-size: 18px; font-weight: bolder; margin-left: -10px;">구독 중인 공방&nbsp;
+										<a href="mySubscript?sc_cm_id=${mb.cm_id}">${subscribedNum}</a></p>
 									</li>
-									<li style="background-color: palegreen">읽지 않은 쪽지 <a
-										href="messager?mg_receiver=${mb.cm_id}">${uncheckedMessageNum}</a>개
+									<li style="font-weight: bold; float: left; display: inline-block; margin-right: 100px;">
+										<img src="./resources/main/img/mypage-3.png" alt="message" width="120px">
+										<p style="font-size: 18px; font-weight: bolder; margin-left: -10px;">읽지 않은 쪽지&nbsp;
+										<a href="messager?mg_receiver=${mb.cm_id}">${uncheckedMessageNum}</a></p>
 									</li>
 								</ul>
 							</div>
 
-							<div class="myInfo_middle">
+							<div class="myInfo_middle" style="padding-top: 50px;">
 								<h4>주문 / 배송 중인 상품</h4>
 								<div class="row">
 									<div class="col-lg-12">
@@ -113,19 +119,19 @@
 											<table class="table table-striped table-advance table-hover">
 												<tbody>
 													<tr>
-														<th><i class="icon_profile"></i> 제품명</th>
-														<th><i class="icon_calendar"></i> 구매한 날짜</th>
-														<th><i class="icon_pin_alt"></i> 배송상태</th>
-														<th><i class="icon_mail_alt"></i> 판매자에게 문의</th>
-														<th><i class="icon_cogs"></i> 제품 바로가기</th>
-														<th><i class="icon_cogs"></i> 주문 취소</th>
+														<th style="padding: 10px 40px;"><i class="icon_profile"></i> 제품명</th>
+														<th style="padding: 10px 30px;"><i class="icon_calendar"></i> 구매한 날짜</th>
+														<th style="padding: 10px 45px;"><i class="icon_pin_alt"></i> 배송상태</th>
+														<th style="padding: 10px 25px;"><i class="icon_mail_alt"></i> 판매자에게 문의</th>
+														<th style="padding: 10px 25px;"><i class="icon_cogs"></i> 제품 바로가기</th>
+														<th style="padding: 10px 25px;"><i class="icon_cogs"></i> 주문 취소</th>
 													</tr>
 													<!-- 주문/배송중인 상품 -->
 													<c:forEach var="poList" items="${poList}">
 														<tr>
-															<td>${poList.po_pd_name}</td>
-															<td>${poList.po_date_simple}</td>
-															<td>${poList.po_state}</td>
+															<td style="text-align: center;">${poList.po_pd_name}</td>
+															<td style="text-align: center;">${poList.po_date_simple}</td>
+															<td style="text-align: center;">${poList.po_state}</td>
 															<td style="text-align: center;">
 																<div class="btn-group">
 																	<a class="btn btn-primary"
@@ -144,8 +150,9 @@
 															<td style="text-align: center;">
 																<div class="btn-group">
 																	<a class="btn btn-danger"
-																		href="myPageOrderCancle?po_num=${poList.po_num}"><i
-																		class="icon_close_alt2"></i></a>
+																		href="myPageOrderCancle?po_num=${poList.po_num}"
+																		onclick="return confirm('정말 주문취소 하시겠습니까?');">
+																		<i class="icon_close_alt2"></i></a>
 																</div>
 															</td>
 														</tr>
@@ -157,7 +164,7 @@
 								</div>
 							</div>
 							<div>
-								<div class="col-lg-12">
+								<div class="col-lg-12" style="padding-top: 50px;">
 									<section class="panel">
 										<header class="panel-heading">
 											<h4>구독 정보</h4>
@@ -184,8 +191,9 @@
 																class="icon_house_alt"></span> 바로가기</a></td>
 														<td><a class="btn btn-danger btn-sm"
 															href="myPageDelSubs?sc_at_id=${mpsList.sc_at_id}"
-															title="Bootstrap 3 themes generator"><span
-																class="icon_target"></span> 구독 해제</a></td>
+															title="Bootstrap 3 themes generator"
+															onclick="return confirm('정말 구독취소 하시겠습니까?');">
+															<span class="icon_target" ></span> 구독 해제</a></td>
 													</tr>
 												</c:forEach>
 											</tbody>
@@ -247,7 +255,21 @@
     	}
     	
     }
+    
+    $(document).ready(function() {
+    	var chgMessage = "${orderCancleMsg}";
+    	if(chgMessage!=""){
+    		alert(chgMessage);
+    	}
+    })
+    
+    $(document).ready(function() {
+    	var chgMessage = "${subCancleMsg}";
+    	if(chgMessage!=""){
+    		alert(chgMessage);
+    	}
+    })
+    
     </script>
 </body>
-
 </html>

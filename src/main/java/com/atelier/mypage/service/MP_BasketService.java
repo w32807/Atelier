@@ -26,9 +26,7 @@ public class MP_BasketService {
 	@Setter(onMethod_=@Autowired)
 	BT_Dao btDao;
 	
-	
 	public ModelAndView getBasketList(String bt_cm_id) {
-		log.warn("aa");
 		mav = new ModelAndView();
 		
 		List<PO_Dto> bList = btDao.getBasketList(bt_cm_id);
@@ -39,17 +37,13 @@ public class MP_BasketService {
 
 	//장바구니 담기하고 팝업띄우기
 	public ModelAndView goBasket(BT_Dto btDto) {
-		
 		mav = new ModelAndView();
 		String view = null;
-		
 		try {
 			btDao.goBasket(btDto);
-			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 		mav.setViewName(view);
 		
 		return mav;
@@ -70,10 +64,6 @@ public class MP_BasketService {
 		if(a){
 			mav = getBasketList(bt_cm_id);
 		}
-		
 		return mav;
 	}
-
-	
-	
-}//class end
+}//MP_BasketService Class end

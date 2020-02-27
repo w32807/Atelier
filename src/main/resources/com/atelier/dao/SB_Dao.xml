@@ -20,4 +20,5 @@
 	<select id="compareSub" parameterType="com.atelier.dto.SB_Dto" resultType="Integer">
 		SELECT COUNT (*) FROM SC WHERE SC_CM_ID = #{sc_cm_id} AND SC_AT_ID = #{sc_at_id}
 	</select>
+	
 </mapper>

@@ -97,24 +97,11 @@
                         <div class="col-lg-4">
                             <div class="cart-buttons">
                                 <a href="prodList_All" class="primary-btn continue-shop">쇼핑 계속하기</a>
-                                <!--  장바구니 업데이트 -->
-                                <!--  <a href="#" class="primary-btn up-cart">Update cart</a>-->
                             </div>
-                            <!--  할인쿠폰 -->
-                            <!--  <div class="discount-coupon">
-                                <h6>Discount Codes</h6>
-                                <form action="#" class="coupon-form">
-                                    <input type="text" placeholder="Enter your codes">
-                                    <button type="submit" class="site-btn coupon-btn">Apply</button>
-                                </form>
-                            </div>
-                            -->
                         </div>
                         <div class="col-lg-4 offset-lg-4">
                             <div class="proceed-checkout">
                                 <ul>
-                                <!-- 서브토탈 -->
-                                    <!--  <li class="subtotal">Subtotal <span>$240.00</span></li>-->
                                     <li class="cart-total">총 가격 <span id="orderTotalPrice"></span></li>
                                 </ul>
                                 <a id="order" class="proceed-btn">구매하기</a>
@@ -286,7 +273,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	    	   $('.ADhideandshow').show();
 	       }
 	});
-		
 		
 		function deleteBasket(bt_num){
 			$("#deleteInput").val(bt_num);

@@ -35,7 +35,9 @@
 
 							<div class="d-block text-center card-footer"
 								style="margin-left: -33px; width: 750px;">
-								<button class="btn-wide btn btn-info" id="saveBtn">Save</button>
+								<button class="btn-wide btn btn-info" id="saveBtn" style="display: none;">Save</button>
+								<button class="btn-wide btn btn-info" id="closeBtn" onclick="window.close();"
+									style="background-color: #d92550; border: #d92550;">Close</button>
 								<button class="btn-wide btn btn-warning" id="modifyBtn">수정</button>
 							</div>
 						</div>
@@ -51,6 +53,8 @@
 	$("#modifyBtn").click(function() {
 		$("#nt_title").removeAttr('readonly');	//선택한 요소의 특정 속성 제거
 		$("#nt_contents").removeAttr('readonly');	//선택한 요소의 특정 속성 제거
+		$("#saveBtn").show();
+		$("#closeBtn").hide();
 	})
 	
 	$("#saveBtn").click(function() {

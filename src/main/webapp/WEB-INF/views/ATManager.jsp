@@ -55,10 +55,6 @@
     
 	<!-- Modernizr JS -->
 	<script src="resources/AT_front/js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
 
 	</head>
 	<body>
@@ -201,14 +197,5 @@
 	<script src="resources/AT_front/js/main.js"></script>
 
 	</body>
-	<script type="text/javascript">
-	 $( document ).ready(function() {
-		 var responseMessage = "${message}";
-	        if(responseMessage != ""){
-	            alert(responseMessage)
-	        }
-		});
-
-	</script>
 </html>
 

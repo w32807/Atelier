@@ -203,12 +203,12 @@
 														<td style="text-align: center;"><a
 															class="btn btn-danger"
 															href="ADATListStateProc?id=${at_list.at_id}&state=inactive&check=true"><i
-																class="icon_close_alt2"></i></a></td>
+																class="icon_close_alt2" onclick="ATclose()"></i></a></td>
 
 														<td style="text-align: center;"><a
 															class="btn btn-success"
 															href="ADATListStateProc?id=${at_list.at_id}&state=active&check=true"><i
-																class="icon_check_alt2"></i></a></td>
+																class="icon_check_alt2" onclick="ATcheck()"></i></a></td>
 													</div>
 												</tr>
 											</c:forEach>
@@ -217,27 +217,6 @@
 								</section>
 							</div>
 						</div>
-
-
-
-
-						<!-- 공방리스트 페이징 처리 추가 필요
-               <div class="row" style="margin-top: 0%;">
-                  <div class="container">
-                     <ul class="pagination" style="padding-left: 35%;">
-
-                        <li class="disabled"><a href="#">«</a></li>
-                        <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
-                        <li><a href="#">»</a></li>
-
-                     </ul>
-                  </div>
-               </div>
-                -->
 					</div>
 				</div>
 			</div>
@@ -268,18 +247,18 @@
    </script>
 </body>
 <script type="text/javascript">
-window.onload = function(){
-/* ---------------------------------------------------------------------------------------
- * 기능: 공방 상태 변경 시 출력되는 alert 메시지 출력
- * 작성자: JSG
- * 작성일: 2020.02.013
- -----------------------------------------------------------------------------------------*/
-var chk = "${check}";
-if(chk != ""){
-	alert(chk);
-	location.reload(true);//화면을 다시 한번 불러오면서 check를 리셋함 
-}
-}
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 공방 상태 변경 시 출력되는 alert 메시지 출력
+	 * 작성자: JSG
+	 * 작성일: 2020.02.013
+	 -----------------------------------------------------------------------------------------*/
+	   function ATclose(){
+	    alert("해당 공방이 [정지]되었습니다.");
+	 }
+	 
+	   function ATcheck(){
+	       alert("해당 공방이 [활성]되었습니다.");
+	    }
 </script>
 
 

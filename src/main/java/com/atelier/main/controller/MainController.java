@@ -47,18 +47,15 @@ public class MainController {
 	CM_Service mServ;
 	private static final Logger logger = LoggerFactory.getLogger(MainController.class);
 
-	/**
-	 * Simply selects the home view to render by returning its name.
-	 */
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 공방 메인에 오늘의 추천공방 띄우기
+	 * 작성자: JSG
+	 * 작성일: 2020.02.14
+	 -----------------------------------------------------------------------------------------*/
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public ModelAndView home(Locale locale, Model model) {
 		log.info("1번");
-		
-		/* ---------------------------------------------------------------------------------------
-		 * 기능: 공방 메인에 오늘의 추천공방 띄우기
-		 * 작성자: JSG
-		 * 작성일: 2020.02.14
-		 -----------------------------------------------------------------------------------------*/
+	
 		mav = new ModelAndView();
 		mav = mServ.getTodayAT();
 
@@ -72,6 +69,7 @@ public class MainController {
 	 -----------------------------------------------------------------------------------------*/
 	@GetMapping("login")
 	public String login() {
+		
 		return "login";
 	}
 
@@ -83,6 +81,7 @@ public class MainController {
 	@PostMapping("loginProc")
 	public ModelAndView login(CM_Dto cmDto, RedirectAttributes rttr) {
 		mav = mServ.loginProc(cmDto, rttr);
+		
 		return mav;
 	}
 
@@ -116,6 +115,7 @@ public class MainController {
 	public ModelAndView memberInsert(CM_Dto member, RedirectAttributes rttr) {
 		mav = mServ.memberInsert(member, rttr);
 		log.warn("memberInsert()");
+		
 		return mav;
 	}
 
@@ -128,6 +128,7 @@ public class MainController {
 	@ResponseBody
 	public int idCheck(@RequestParam("CM_ID") String CM_ID) {
 		log.warn(CM_ID);
+		
 		return mServ.userIdCheck(CM_ID);
 	}
 	/* ---------------------------------------------------------------------------------------
@@ -141,11 +142,9 @@ public class MainController {
 
 		 String insertChk = mServ.insertbasket(bt_count,bt_pd_code);
 		 String jsonInsert = "{\"result\":\"" + insertChk + "\"}";
+		 
 		 return jsonInsert;
 	  }
-	 
-	//HOME
-	//Shop Home
 
 	 @GetMapping("main")
 		public ModelAndView main() {
@@ -154,6 +153,7 @@ public class MainController {
 			log.warn("메인으로 가는 컨트롤러");
 			return mav;
 		}
+	 
 	 /* ---------------------------------------------------------------------------------------
 		 * 기능: 상품 목록 전체 보기
 		 * 작성자: JWJ
@@ -179,46 +179,6 @@ public class MainController {
 		
 		return mav;
 	}
-
-	/*
-	 * //가방보기
-	 * 
-	 * @RequestMapping(value = "prodList_Bag", method = RequestMethod.GET) public
-	 * String prodList_Bag(Locale locale, Model model) {
-	 * 
-	 * return "prodList_Bag"; } //신발보기
-	 * 
-	 * @RequestMapping(value = "prodList_shoes", method = RequestMethod.GET) public
-	 * String product_shoes(Locale locale, Model model) {
-	 * 
-	 * return "prodList_shoes"; } //지갑보기
-	 * 
-	 * @RequestMapping(value = "prodList_Wallet", method = RequestMethod.GET) public
-	 * String product_Wallet(Locale locale, Model model) {
-	 * 
-	 * return "prodList_Wallet"; } //벨트보기
-	 * 
-	 * @RequestMapping(value = "prodList_Belt", method = RequestMethod.GET) public
-	 * String product_Belt(Locale locale, Model model) {
-	 * 
-	 * return "prodList_Belt"; } //장갑보기
-	 * 
-	 * @RequestMapping(value = "prodList_Gloves", method = RequestMethod.GET) public
-	 * String product_Gloves(Locale locale, Model model) {
-	 * 
-	 * return "prodList_Gloves"; } //가구보기
-	 * 
-	 * @RequestMapping(value = "prodList_House", method = RequestMethod.GET) public
-	 * String product_House(Locale locale, Model model) {
-	 * 
-	 * return "prodList_House"; } //기타보기
-	 * 
-	 * @RequestMapping(value = "prodList_Etc", method = RequestMethod.GET) public
-	 * String product_Etc(Locale locale, Model model) {
-	 * 
-	 * return "prodList_Etc"; }
-	 */
-	
 	
 	/* ---------------------------------------------------------------------------------------
 	 * 기능: 상품 상세정보 보기 / 상품 리뷰 리스트 출력
@@ -229,6 +189,7 @@ public class MainController {
 	@GetMapping("prodDetail")
 	public ModelAndView getprodDetail(int pd_code) {
 		mav = mServ.getprodDetail(pd_code);
+		
 		return mav;
 	}
 	
@@ -240,7 +201,6 @@ public class MainController {
 	@GetMapping(value = "prodReview", produces="application/json; charset=utf-8")
 	@ResponseBody
 	public Map<String, List<PR_Dto>> prodReviewWrite(PR_Dto prDto) {
-	
 		Map<String, List<PR_Dto>> prMap = mServ.prodReviewWrite(prDto);
 		
 		return prMap;
@@ -262,11 +222,13 @@ public class MainController {
 	//비밀번호변경
 	@GetMapping("myChangePwd")
 	public String myChangePwd() {
+		
 		return "myChangePwd";
 	}
 	//내정보수정
 	@GetMapping("myInfoUpdate")
 	public String myInfoUpdate() {
+		
 		return "myInfoUpdate";
 	}
 	
@@ -283,17 +245,6 @@ public class MainController {
 		return view;
 	}
 
-	/*
-	 * //마이페이지의 주문내역에서 취소신청을 눌렀을 때.
-	 * 
-	 * @GetMapping("orderCancle") public String orderCancle() { return "myOrder"; }
-	 */
-//	//구독 리스트 출력
-//	@RequestMapping(value = "mySubscript", method = RequestMethod.GET)
-//	public String mySubscript(Locale locale, Model model) {
-//
-//		return "mySubscript";
-//	}
 	//	관리자에게 문의하기
 	@GetMapping("myAdminRQ")
 	public String myAdminRQ() {
@@ -334,7 +285,7 @@ public class MainController {
 		 model.addAttribute("exception",e);
 		 return "error/error500";
 	 }
-}
+}//MainController Class end
 
 
 

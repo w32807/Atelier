@@ -42,7 +42,6 @@
 						</div>
 					</div>
 
-
 <!-- Link to open the modal -->
 
 </body>

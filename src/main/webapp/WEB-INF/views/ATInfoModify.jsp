@@ -55,10 +55,6 @@
     
 	<!-- Modernizr JS -->
 	<script src="resources/AT_front/js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
 	<style type="text/css">
 		table, td {
 			padding: 5px 4px;
@@ -113,12 +109,12 @@
 					</div>
 					<div class="row">
 						<div class="col-md-7" style="margin: 0 350px;">
-							<div class="row">
+							<div class="row" style="width: 1100px;">
 								<form name="modifyFrm" action="ATUpdateAtelier" method="post" onsubmit="return modifyChk()" enctype="multipart/form-data">
-								<table class="col-md-10 col-md-offset-1 col-md-pull-1 animate-box" data-animate-effect="fadeInLeft" style="margin-bottom: 30px;">
-										<tr style="font-size: 15px;">
-											<td style="font-weight: bold;">카테고리</td>
-			                                <td><label for="AT_CATE1 "><b>카테고리1 *&nbsp&nbsp&nbsp</b></label>
+								<table class="col-md-10 col-md-offset-1 col-md-pull-1 animate-box" data-animate-effect="fadeInLeft" style="margin-bottom: 30px; margin-left: -40px;">
+										<tr style="font-size: 16px;">
+											<td style="font-size: 16px; font-weight: bold; width: 120px;">카테고리</td>
+			                                <td><label for="AT_CATE1 " style="margin-bottom: 10px;"><b>카테고리1 *&nbsp&nbsp&nbsp</b></label>
                                 <select id="AT_CATE1 " name="at_cate1">
                                 	<option value="없음">없음</option>
                                 	<option value="의류">의류</option>
@@ -131,7 +127,7 @@
                                 	<option value="기타 악세서리">기타 악세서리</option>
                                 </select>
                            
-                                <label for="AT_CATE2 "><b>&nbsp&nbsp&nbsp카테고리2 *&nbsp&nbsp&nbsp</b></label>
+                                <label for="AT_CATE2 " style="margin-bottom: 10px;"><b>&nbsp&nbsp&nbsp카테고리2 *&nbsp&nbsp&nbsp</b></label>
                                 <select id="AT_CATE2 " name="at_cate2">
                                 	<option value="없음">없음</option>
                                 	<option value="의류">의류</option>
@@ -144,7 +140,7 @@
                                 	<option value="기타 악세서리">기타 악세서리</option>
                                 </select>
                            
-                                <label for="AT_CATE3 "><b>&nbsp&nbsp&nbsp카테고리3 *&nbsp&nbsp&nbsp</b></label>
+                                <label for="AT_CATE3 " style="margin-bottom: 10px;"><b>&nbsp&nbsp&nbsp카테고리3 *&nbsp&nbsp&nbsp</b></label>
                                 <select id="AT_CATE3 " name="at_cate3">
                                 	<option value="없음">없음</option>
                                 	<option value="의류">의류</option>
@@ -158,59 +154,54 @@
                                 </select>
                            </td>
 										</tr>
-										<tr style="font-size: 15px;">
-										 	<td  style="font-weight: bold;">공방 이름</td>
+										<tr style="font-size: 16px;">
+										 	<td style="font-size: 16px; font-weight: bold; width: 120px;">공방 이름</td>
 											<td>
-												<input type="text" class="input_text form-control" name="at_name" value=${at.at_name}>
+												<input type="text" class="input_text form-control" name="at_name" value=${at.at_name}
+													style="width: 230px; height: 30px; font-size: 15px; margin-bottom: 10px;">
 											</td>
 										</tr>
-										<!--
-										<tr style="font-size: 15px;">	 
-										 	<td style="font-weight: bold;">공방 소개글</td>
+										<tr style="font-size: 16px;">
+										 	<td style="font-size: 16px; font-weight: bold; width: 120px;">공방 사이트</td>
 											<td>
-												<textarea class="input_text form-control " cols="30" rows="7" name="">메인 페이지 공방 소개글 출력</textarea>
+												<input type="text" class="input_text form-control" name="at_snsaddr" value=${at.at_snsaddr}
+													style="width: 480px; height: 30px; font-size: 15px; margin-bottom: 10px;">
 											</td>
 										</tr>
-										 -->
-										<tr style="font-size: 15px;">
-										 	<td style="font-weight: bold;">공방 사이트</td>
-											<td><input type="text" class="input_text form-control" name="at_snsaddr" value=${at.at_snsaddr}></td>
-										</tr>
-										<tr style="font-size: 15px;">
-										 	<td style="font-weight: bold;">공방 로고</td>
+										<tr style="font-size: 16px;">
+										 	<td style="font-size: 16px; font-weight: bold; width: 120px;">공방 로고</td>
 											<td class="logo " >
-											<!-- 
-												<div class="img_wrap" style="margin: auto;">
-													<img src="resources/main/img/blog/a.png" style ="border:3px solid darkgrey; max-width: 100%; border-radius:20% ;" id="img" />
-													<input type="file" id= "input_img" name="input_img" onchange="fileChk(this)" />
-													<input type="hidden" id="filecheck" value="0" name="fileCheck">
-												</div>
-											 -->
 											 
-											 <label for="CM_ID"><p><b>프로필 사진</b></p></label>
+											 <label for="CM_ID"></label>
 												<div class="img_wrap" style="margin: auto;">
-													<img src="resources/main/img/blog/a.png" style ="border:3px solid darkgrey; width: 300px; border-radius:20% ; "id="img"/ >
+													<img src="resources/main/img/blog/a.png" style ="width: 300px; border: none;" id="img"/ >
 												</div>
 											</div>
 											<hr>
 											<div>
-												<input type="file" id= "input_img" name=input_img onchange="fileChk(this)" />
+												<input type="file" id= "input_img" name=input_img onchange="fileChk(this)" style="margin-bottom: 10px;"/>
 												<input type="hidden" 	id="filecheck" value="0" name="fileCheck">
 											</div>
 											</td>
 										</tr>
-										<tr style="font-size: 15px;">
-										 	<td style="font-weight: bold;">공방 주소</td>
-											<td><input type="text" class="input_text form-control" name = "at_addr" value=${at.at_addr}></td>
+										<tr style="font-size: 16px;">
+										 	<td style="font-size: 16px; font-weight: bold; width: 120px;">공방 주소</td>
+											<td>
+												<input type="text" class="input_text form-control" name = "at_addr" value=${at.at_addr}
+													style="width: 230px; height: 30px; font-size: 15px; margin-bottom: 10px;">
+											</td>
 										</tr>
-										<tr style="font-size: 15px;">
-										 	<td style="font-weight: bold;">공방 연락처</td>
-											<td><input type="text" class="input_text form-control" name = "at_phone" value=${at.at_phone}></td>
+										<tr style="font-size: 16px;">
+										 	<td style="font-size: 16px; font-weight: bold; width: 120px;">공방 연락처</td>
+											<td>
+												<input type="text" class="input_text form-control" name = "at_phone" value=${at.at_phone}
+													style="width: 230px; height: 30px; font-size: 15px; margin-bottom: 10px;">
+											</td>
 										</tr>						
 									</table>
 									<input type="submit" class="btn info_btn btn-send-message" value="submit"
-											onsubmit="modifyChk();" style="margin-bottom: 100px;">
-									<a href="ATDetail?at_num=${at.at_seq}" class="btn info_btn btn-send-message" style="margin-left: 10px; margin-bottom: 100px;">CANCLE</a>
+											onsubmit="modifyChk();" style="width: 100px; border: none; font-size: 16px; color: white; background-color: #A09182;">
+									<a href="ATDetail?at_num=${at.at_seq}" class="btn info_btn btn-send-message" style="width: 100px; margin-left: 0px; order: none; font-size: 16px; color: white; background-color: #A09182;">CANCLE</a>
 								</form>
 							</div>
 						</div>
@@ -274,7 +265,6 @@
 			return true;
 		}
 		
-		
 	</script>
 	 <script type="text/javascript">
     /* ---------------------------------------------------------------------------------------
@@ -282,33 +272,33 @@
 	 * 작성자: JSH
 	 * 작성일: 2020.02.05
 	 -----------------------------------------------------------------------------------------*/
-	 
-   var sel_file;
-   
-   $(document).ready(function(){
-      $("#input_img").on("change", handleImgFileSelect);
-   });
-   
-   function handleImgFileSelect(e) {
-      var files = e.target.files;
-      var filesArr = Array.prototype.slice.call(files);
-      
-      filesArr.forEach(function(f) {
-         if(!f.type.match("image.*")) {
-            alert("확장자는 이미지 확장자만 가능합니다.");
-            return;
-         }
-         
-         sel_file = f;
-         
-         var reader = new FileReader();
-         reader.onload = function(e) {
-            $("#img").attr("src",e.target.result);
-            
-         }
-         reader.readAsDataURL(f);
-      });
-   }
+		 
+	   var sel_file;
+	   
+	   $(document).ready(function(){
+	      $("#input_img").on("change", handleImgFileSelect);
+	   });
+	   
+	   function handleImgFileSelect(e) {
+	      var files = e.target.files;
+	      var filesArr = Array.prototype.slice.call(files);
+	      
+	      filesArr.forEach(function(f) {
+	         if(!f.type.match("image.*")) {
+	            alert("확장자는 이미지 확장자만 가능합니다.");
+	            return;
+	         }
+	         
+	         sel_file = f;
+	         
+	         var reader = new FileReader();
+	         reader.onload = function(e) {
+	            $("#img").attr("src",e.target.result);
+	            
+	         }
+	         reader.readAsDataURL(f);
+	      });
+	   }
    
 </script>
 

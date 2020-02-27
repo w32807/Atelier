@@ -100,20 +100,11 @@
 							<li><span>제 품 코 드</span> : ${pd.pd_code}</li>
 
 						</ul>
-						<!--      <div class="pd-share">
-                                    <div class="p-code">제품코드 : 00012</div>
-                                    <div class="pd-social">
-                                        <a href="https://www.facebook.com/"><i class="ti-facebook"></i></a>
-                                        <a href="https://twitter.com/"><i class="ti-twitter-alt"></i></a>
-                                        <a href="https://www.instagram.com/"><i class="ti-linkedin"></i></a>
-                                    </div>
-                                </div> -->
 					</div>
 				</div>
 		</div>
 	</div>
 		<!--  탭시작 -->
-		
 		<div class="product-tab">
 			<div class="tab-item">
 				<ul class="nav" role="tablist">
@@ -124,7 +115,6 @@
 				</ul>
 			</div>
 			<!-- 탭시작 -->
-			
 			
 			<div class="tab-item-content">
 				<div class="tab-content">

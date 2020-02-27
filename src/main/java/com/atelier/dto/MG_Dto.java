@@ -15,4 +15,5 @@ public class MG_Dto {
 	private String mg_check; // 읽음여부 t/f
 	private String mg_contents; //쪽지내용
 	private Timestamp mg_date; // 받은 시간
+	
 }

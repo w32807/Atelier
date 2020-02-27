@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.atelier.dao.CM_Dao">
-<!--  -->
-	<insert id="memberInsert" parameterType="com.atelier.dto.CM_Dto">
-		INSERT INTO COMMON_MEMBER
-		VALUES (#{cm_id},#{cm_pwd},#{cm_name},#{cm_nick},#{cm_phone},#{cm_addr},DEFAULT,'일반회원',DEFAULT)
-	</insert>
+
+   <insert id="memberInsert" parameterType="com.atelier.dto.CM_Dto">
+      INSERT INTO COMMON_MEMBER
+      VALUES (#{cm_id},#{cm_pwd},#{cm_name},#{cm_nick},#{cm_phone},#{cm_addr},DEFAULT,'일반회원',#{cm_pfphoto})
+   </insert>
 	
 	<select id="getSecurityPwd" parameterType="String" resultType="String">
 		SELECT cm_pwd FROM COMMON_MEMBER WHERE cm_id=#{id}
@@ -14,11 +14,7 @@
 	<select id="getMemberInfo" parameterType="String" resultType="com.atelier.dto.CM_Dto">
 		SELECT * FROM COMMON_MEMBER WHERE cm_id=#{id}
 	</select>
-	<!-- 
-	<select id="getMemberInfo2" parameterType="String" resultType="com.atelier.dto.CM_Dto">
-		SELECT * FROM COMMON_MEMBER WHERE cm_id=#{id}
-	</select>
-	 -->
+
 	<update id="memberUpdate" parameterType="com.atelier.dto.CM_Dto">
 		UPDATE COMMON_MEMBER 
 		SET CM_NAME=#{cm_name},CM_NICK=#{cm_nick},CM_PHONE=#{cm_phone},CM_ADDR=#{cm_addr},CM_ADDR2=#{cm_addr2} 
@@ -59,6 +55,37 @@
 		SELECT * FROM PD WHERE PD_REGIST='T' AND PD_CATE = #{pd_cate}
 	</select>
 	
+	<select id="getprodDetail" resultType="com.atelier.dto.PD_productDto">
+		SELECT * FROM PD WHERE PD_CODE = #{pd_code}
 	
+	</select>
 	
+	<select id="getAt_num" parameterType="String" resultType="Integer">
+		SELECT AT_SEQ FROM AT WHERE AT_NAME = #{pd_at_name}	
+	</select>
+  
+  	<insert id="insertbasket" parameterType="com.atelier.dto.BT_Dto">
+  		INSERT INTO BT VALUES(BT_NUM_SEQ.NEXTVAL,#{bt_cm_id},#{bt_at_name},#{bt_price},#{bt_count},#{bt_pd_code})
+  	</insert>
+  	
+  	<select id="getPd_code" parameterType="Integer" resultType="Integer">
+  		SELECT BT_PD_CODE FROM BT WHERE BT_NUM = #{getorderVtNum}
+  	</select>
+  	
+  	<insert id="orderInsert" parameterType="com.atelier.vo.PO_Vo">
+  		INSERT INTO PO
+  		VALUES (PO_NUM_SEQ.NEXTVAL, #{po_cm_id}, #{po_pd_code},	DEFAULT, #{po_count}, 
+  		#{po_price},SYSDATE,#{po_addr},#{po_at_id},#{po_at_name})
+  	</insert>
+  	
+  	<update id="userStateChange" parameterType="com.atelier.dto.CM_Dto">
+		UPDATE CM 
+		SET CM_STATE=#{cm_state}
+		WHERE CM_ID=#{cm_id}
+	</update>
+  	
+  	<select id="getAt" parameterType="String" resultType="com.atelier.dto.AT_Dto">
+		SELECT * FROM AT WHERE AT_ID = #{at_id}
+	</select>   	
+  	
 </mapper>

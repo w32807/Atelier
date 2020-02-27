@@ -105,7 +105,9 @@ public class CO_Service {
 	public ModelAndView getNoticeContents(Integer Noticenum) {
 		// TODO Auto-generated method stub
 		mav = new ModelAndView();
+		coDao.noticeCountUpdate(Noticenum);
 		CO_NoticeDto noticeContents = coDao.getNoticeContents(Noticenum);
+		
 		mav.addObject("noticeContents", noticeContents);
 		mav.setViewName("CONoticeContents");
 		return mav;

@@ -31,9 +31,6 @@ import com.atelier.dto.PD_productDto;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
-/**
- * Handles requests for the application home page.
- */
 @Slf4j
 @Controller
 public class AD_controller {
@@ -64,9 +61,8 @@ public class AD_controller {
 		return mav;
 	}
 
-	
-		/* ---------------------------------------------------------------------------------
-	  * 기능: 공지사항 상세내용 보기 및 조회수 증가
+	/* ---------------------------------------------------------------------------------
+	  * 기능: 공지사항 상세내용 보기
 	  * 작성자: KYH
 	  * 작성일 : 2019.02.04
 	  -----------------------------------------------------------------------------------*/
@@ -104,6 +100,7 @@ public class AD_controller {
 		 log.warn("공지사항 삭제 컨트롤러");
 		 String[] checkedBoxArr = request.getParameterValues("NoticeChk");
 		 mav = aServ.ADNoticeDelete(ntdto, checkedBoxArr, rttr);
+		 
 		 return mav;
 	 }
 	 
@@ -115,8 +112,10 @@ public class AD_controller {
 	@GetMapping("ADFAQ")
 	public ModelAndView goADFAQ(Integer pageNum , Integer maxNum) {
 		mav = aServ.getFAQList(pageNum,maxNum);
+		
 		return mav;
 	}
+	
 	 /* ---------------------------------------------------------------------------------
 	  * 기능: FAQ 상세보기
 	  * 작성자: JWJ
@@ -125,8 +124,10 @@ public class AD_controller {
 	@GetMapping("ADFAQContents")
 	public ModelAndView goADFAQContents(FT_FAQDto faq) {
 		mav = aServ.getFAQDetail(faq);
+		
 		return mav;
 	}
+	
 	 /* ---------------------------------------------------------------------------------
 	  * 기능: FAQ 수정
 	  * 작성자: JWJ
@@ -139,6 +140,7 @@ public class AD_controller {
 		
 		return view;
 	}
+	
 	 /* ---------------------------------------------------------------------------------
 	  * 기능: FAQ 삭제
 	  * 작성자: JWJ
@@ -160,6 +162,7 @@ public class AD_controller {
 	@GetMapping("ADATMemberUp")
 	public ModelAndView goADATMemberUp() {
 		mav = aServ.getApplicant();
+		
 		return mav;
 	}
 	
@@ -170,7 +173,6 @@ public class AD_controller {
 	  -----------------------------------------------------------------------------------*/
 	@GetMapping("ATMemberUpCheck")
 	public ModelAndView ATMemberUpCheck(String check, String id) {
-
 		mav = aServ.ATMemberCheckProc(check, id);
 		
 		return mav;
@@ -184,6 +186,7 @@ public class AD_controller {
 	@GetMapping("ADATList")
 	public ModelAndView goADATList() {
 		mav = aServ.ADATListProc();
+		
 		return mav;
 	}
 	
@@ -194,8 +197,8 @@ public class AD_controller {
 	  -----------------------------------------------------------------------------------*/
 	@GetMapping("ADATListStateProc")
 	public ModelAndView ADATListStateProc(String id, String state, RedirectAttributes rttr, String check) {
-		//String[] chkedBoxArr = request.getParameterValues("at_listchk");
 		mav = aServ.ADATListStateProc(id, state, rttr, check);
+		
 		return mav;
 	}
 	
@@ -207,21 +210,14 @@ public class AD_controller {
 	@GetMapping("ADATListSearch")
 	public ModelAndView ADATListSearchProc(String searchName) {
 		mav = aServ.ADATListSearchProc(searchName);
+		
 		return mav;
 	}
 	
-	/*
-	 * @GetMapping("ADProdManage") public String goADProdManage() { return
-	 * "ADProdManage"; }
-	 */
-	
-	/*
-	 * @GetMapping("ADMessageContents") public String goADMessageContents() { return
-	 * "ADMessageContents"; }
-	 */
 	
 	@GetMapping("ADCompanyInsert")
 	public String goADCompanyInsert() {
+		
 		return "ADCompanyInsert";
 	}
 	
@@ -233,6 +229,7 @@ public class AD_controller {
 	@PostMapping("MaterialInsert")
 	public ModelAndView MaterialInsert(AD_MaterialDto material, RedirectAttributes rttr) {
 		mav = aServ.MaterialInsert(material, rttr);
+		
 		return mav;
 	}
 	
@@ -245,22 +242,9 @@ public class AD_controller {
 	public ModelAndView ADCompany(Integer adcPageNum,Integer maxNum) {
 		log.warn("원자재 리스트 출력 컨트롤러 시작");
 		mav = aServ.getADCompanyList(adcPageNum,maxNum);
+		
 		return mav;
 	}
-	
-	
-	/* ---------------------------------------------------------------------------------
-	  * 기능: 메세지 리스트 출력
-	  * 작성자: KBH
-	  * 작성일 : 2010.02.10
-	  -----------------------------------------------------------------------------------*/
-	/*@GetMapping("ADMessage")
-		public ModelAndView goADMessage(String mg_receiver) {
-			
-			mav = aServ.goADMessage(mg_receiver);
-			
-			return mav;
-		}*/
 	
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 원자재 수정 / 기존 데이터 입력
@@ -312,17 +296,12 @@ public class AD_controller {
 
 	@GetMapping("ADMessage")
 	public ModelAndView goADMessage() {
-
 		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
-
 		String mg_receiver = cmDto.getCm_id();
-
 		mav = aServ.goADMessage(mg_receiver);
 
 		return mav;
 	}
-
-
 
 	/* ---------------------------------------------------------------------------------
 	 * 기능: 메세지 상세보기 출력
@@ -337,10 +316,6 @@ public class AD_controller {
 		return mav;
 	}
 
-
-
-
-
 	/* ---------------------------------------------------------------------------------
 	 * 기능: 메세지 상세보기에서 답장 
 	 * 작성자: KBH
@@ -348,12 +323,10 @@ public class AD_controller {
 	-----------------------------------------------------------------------------------*/
 	@GetMapping("ADmessageSendBtn")
 	public ModelAndView ADmessageSendBtn(MG_Dto mDto) {
-
 		mav = aServ.MessageSendBtn(mDto);
 
 		return mav;
 	}
-
 
 	/* ---------------------------------------------------------------------------------
 	 * 기능: 메세지 삭제
@@ -362,9 +335,7 @@ public class AD_controller {
 	-----------------------------------------------------------------------------------*/
 	@GetMapping("delMessage")
 	public ModelAndView delMessage(HttpServletRequest hs, RedirectAttributes rttr) {
-
 		String[] check = hs.getParameterValues("prod");
-
 		mav = aServ.delMessage(check,rttr);
 
 		return mav;
@@ -376,9 +347,9 @@ public class AD_controller {
 	 * 작성일 : 2020.02.12 / 수정(KBH) 2020.02.13
 	  -----------------------------------------------------------------------------------*/
 	@GetMapping("ADProdManage")
-	public ModelAndView getATProdList(Integer pageNum, Integer maxNum) {
+	public ModelAndView getATProdList() {
 		log.warn("제작한 상품 리스트 전체 출력 컨트롤러");
-		mav = aServ.getADProdList(pageNum, maxNum);
+		mav = aServ.getADProdList();
 
 		return mav;
 	}
@@ -390,14 +361,9 @@ public class AD_controller {
 	 -----------------------------------------------------------------------------------------*/
 	@GetMapping("productDelete")
 	public ModelAndView ProdManager(HttpServletRequest hs, RedirectAttributes rttr) {
-
-
-
 		String[] check = hs.getParameterValues("prod");
 		log.warn(check[0]);
-
 		mav = aServ.productDelete(check,rttr);
-
 
 		return mav;
 	}
@@ -409,9 +375,7 @@ public class AD_controller {
 		 -----------------------------------------------------------------------------------------*/
 	@GetMapping("ADProdDetail")
 	public ModelAndView ADupdateManager1(Integer pd_code) {
-
 		mav = aServ.productUpdate1(pd_code);
-
 
 		return mav;
 	}
@@ -426,7 +390,6 @@ public class AD_controller {
 		log.warn("fdsa");
 		mav = aServ.productUpdate2(pdDto);
 
-
 		return mav;
 	}
 	
@@ -437,7 +400,6 @@ public class AD_controller {
  	-----------------------------------------------------------------------------------------*/
 	@GetMapping("searchProduct")
 	public ModelAndView SearchProc(String search) {
-		
 		mav = aServ.SearchProc(search);
 		
 		return mav;
@@ -450,12 +412,11 @@ public class AD_controller {
 		 -----------------------------------------------------------------------------------------*/
 	@PostMapping("AdminMessage")
 	public ModelAndView AdminMessage(MG_Dto mgDto) {
-		
 		mav = aServ.AdminMessage(mgDto);
 		
 		return mav;
 	}
-}
+}//AD_controller Class end
 
 
 

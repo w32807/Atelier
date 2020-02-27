@@ -16,25 +16,16 @@
 <meta name="description"
     content="Accordions represent collapsable component with extended functionality.">
 <meta name="msapplication-tap-highlight" content="no">
-<!--
-    =========================================================
-    * ArchitectUI HTML Theme Dashboard - v1.0.0
-    =========================================================
-    * Product Page: https://dashboardpack.com
-    * Copyright 2019 DashboardPack (https://dashboardpack.com)
-    * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
-    =========================================================
-    * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-    -->
 <link href="./resources/ADATList/css/main.css" rel="stylesheet">
+
 <script type="text/javascript">
-window.onload = function() {
-    var chk = "${check}";
-    if(chk != ""){
-        alert(chk);
-        location.reload(true); 
-    }
-}
+	window.onload = function() {
+	    var chk = "${check}";
+	    if(chk != ""){
+	        alert(chk);
+	        location.reload(true); 
+	    }
+	}
 </script>
 </head>
 <body>
@@ -45,43 +36,15 @@ window.onload = function() {
 
                 <!--로고 이름바꾸기. -->
                 <div class="header__pane ml-auto">
-                    <!--  <div>
-                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
-                           <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span> 
-                        </button>
-                    </div> -->
                 </div>
             </div>
             <div class="app-header__mobile-menu">
-                <!--  <div>
-                    <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
-                        <span class="hamburger-box">
-                            <span class="hamburger-inner"></span>
-                        </span>
-                    </button>
-                </div> -->
             </div>
             <div class="app-header__menu">
-                <!--  <span>
-                    <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
-                        <span class="btn-icon-wrapper">
-                            <i class="fa fa-ellipsis-v fa-w-6"></i>
-                        </span>
-                    </button>
-                </span> -->
             </div>
             <div class="app-header__content">
                 <div class="app-header-left">
                     <div class="search-wrapper">
-                        <!-- <div class="input-holder">
-                            <input type="text" class="search-input"
-                                placeholder="Type to search">
-                            <button class="search-icon">
-                                <span></span>
-                            </button>
-                        </div> -->
                         <button class="close"></button>
                     </div>
 
@@ -101,12 +64,14 @@ window.onload = function() {
                     <div class="row">
                         <div class="col-md-12">
                             <div class="main-card mb-3 card">
-                                <div class="card-header" style="display: block; padding: 15px 153px 15px 59px;">
-                                
-                                        FAQ
-                                            <span><button id="delBtn" class=" btn-icon btn-icon-only btn btn-outline-danger" style="float: right;">
-                                            삭제
-                                            </button></span>
+                                <div class="card-header">
+                                	FAQ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <span>
+										<button class="btn-icon btn-icon-only btn btn-outline-danger"
+											id="delBtn" style="margin-left: 1400px; font-weight: bolder;">
+											삭제
+										</button>
+									</span>
                                 </div>
                                 <div class="table-responsive">
                                     <table
@@ -174,7 +139,7 @@ window.onload = function() {
                     </div>
 
                     <div class="container">
-                        <div>
+                        <div style="min-height: 430px;">
                             <br style="clear: both">
                             <form name="FAQFrm" id="FAQFrm">
                                 <div class="form-group col-md-12 " style="margin-left: -50px;" id="inputFrm">
@@ -184,7 +149,7 @@ window.onload = function() {
                                     </div>
                                     <br>
                                     <textarea class="form-control input-sm " type="textarea" name="ft_contents" value=""
-                                        id="message" placeholder="내용을 입력하세요" maxlength="140" rows="7"
+                                        id="message" placeholder="내용을 입력하세요" maxlength="500" rows="7"
                                         style="width: 1180px;"></textarea>
                                 </div>
                             </form>
@@ -204,7 +169,7 @@ window.onload = function() {
 <script type="text/javascript" src="./resources/assets/scripts/main.js"></script>
 <script src="./resources/main/js/jquery-3.3.1.min.js" /></script>
 
-<script src="resources/js/jquery.serializeObject.js"></script>
+<script src="./resources/js/jquery.serializeObject.js"></script>
 <script type="text/javascript">
       $(function() { //전체선택 체크박스 클릭 
          $("#allCheck").click(function() { //만약 전체 선택 체크박스가 체크된상태일경우 
@@ -251,16 +216,13 @@ window.onload = function() {
                                         +'</div></td>'
                                     +'<td class="text-center">'+ dfaqList[i].ft_id +'</td>'
                                     +'<td class="text-center">'+ dfaqList[i].ft_regdate +'</td>'
-                                    +'<td class="text-center"><a href="ADNoticeContentsft_num='+dfaqList[i].ft_num+'"'
-                                        +'onclick='+"window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=no');return false;"+'>'
+                                    +'<td class="text-center"><a href="ADFAQContents?ft_num='+dfaqList[i].ft_num+'"'
+                                        +'onclick='+'"window.open(this.href, '+"'_blank', "+"'width=800px,height=600px,toolbars=no,scrollbars=no')"+';return false;"'+'>'
                                             +'<button type="button" id="PopoverCustomT-1"'
                                                 +'class="btn btn-primary btn-sm">Details</button>'
                                     +'</a></td>'
                                 +'</tr>'
                  } 
-                    
-                
-                  
                   inputFrm = '<div class="col-sm-10" style="padding: 0;">'
                                 +'<input type="text" class="form-control" placeholder="제목" name="ft_title"  style="padding-right: 100px; width: 1180px;">'
                             +'</div>'
@@ -271,6 +233,7 @@ window.onload = function() {
                   
                     $('#inputFrm').html(inputFrm);
                     $('#tbody').html(faqList);
+                    console.log(faqList);
             },
             error: function(error) {
                 alert("FAQ 입력 실패");

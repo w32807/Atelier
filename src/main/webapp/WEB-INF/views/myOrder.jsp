@@ -85,6 +85,7 @@
 						<form id="seletor">
 							<select id="selectBox" 
 							style="margin-left: 900px; border-radius: 10px; width: 100px; height: 35px;  padding-left: 8px; font-size: 14px; border: 1px solid #A09182; color: white; background-color: #A09182;">
+								<option value="">선택</option>
 								<option value="before">배송전</option>
 								<option value="being">배송중</option>
 								<option value="after">배송 완료</option>
@@ -186,22 +187,6 @@
 		}
 	});
 	
-/* 	$("#selectBox").change(function() {//얘는 ajax로 처리하는게 속 편할 듯.
-		var value = $(this).val();
-		if (value == "배송전") {
-			$("#cancleBtn").show();
-			//배송전을 클릭하면 배송전 목록만 불러옴
-		} else if(value == "배송중"){
-			$("#cancleBtn").hide();
-			//배송중을 클릭하면 배송중 목록만 불러옴
-		} else if(value == "배송완료"){
-			$("#cancleBtn").hide();
-			//배송 완료를 선택하면 배송 완료 목록만 불러옴
-			}
-		
-	});  */
-	
-	
 	$("#seletor").change(function() {
 		
 		var select = $("#seletor").serializeObject();
@@ -211,74 +196,43 @@
 		console.log(select);
 		
 			$.ajax({
-				url:"orderAjax",
-				type:"post",
-				data:select,
-				dataType:"json",
-				success: function(data){
-					console.log(data);
-					var poList = "";
-					var dlist = data.poList;
-					
-					for(var i=0; i<dlist.length; i++){
+					url:"orderAjax",
+					type:"post",
+					data:select,
+					dataType:"json",
+					success: function(data){
+						console.log(data);
+						var poList = "";
+						var dlist = data.poList;
 						
-						poList +=				
-						 '<br>'+
-						 '<div class="'+ dlist[i].po_state + '"style="margin-left: 80px;">'+
-						 '<img src="'+'./resources/main/img/products/'+dlist[i].pi_oriname+'"'+ 'style="width:330px;">'+
-						 '<div class="colorlib-text" style="position: absolute; display: inline-block; padding: 50px 0 0 80px; font-size: 18px; font-weight: 400;">'+
-						 '<div style="display: inline-block; line-height: 35px;">'+
-						 '<input type="hidden" value="'+dlist[i].po_num+'">'+
-						 '<input type="checkbox" name="prod"' + 'value='+'"'+dlist[i].po_num+'">'+
-						 '<h3 style="display: inline-block; font-size: 25px; letter-spacing: 1px; margin-bottom: 35px;"><b>상품명</b></h3>'+
-						 '<br>'+
-						 '<b style="margin-right: 40px;">배송상태</b><span>'+dlist[i].po_state+'</span><br>'+
-						 '<b style="margin-right: 40px;">가격</b><span>'+dlist[i].po_price+'&#8361;</span><br>'+
-						 '<b style="margin-right: 40px;">수량</b><span>'+dlist[i].po_count+'</span><br>'+
-						 '<b style="margin-right: 40px;">배송지</b><span>'+dlist[i].po_addr+'</span><br>'+
-						 '<br>'+
-						 '</div>'+
-						 '</div>'+
-						 '</div>'
-					}
-					$('#orderAjax').html(poList);
+						for(var i=0; i<dlist.length; i++){
+							
+							poList +=				
+							 '<br>'+
+							 '<div class="'+ dlist[i].po_state + '"style="margin-left: 80px;">'+
+							 '<img src="'+'./resources/main/img/products/'+dlist[i].pi_oriname+'"'+ 'style="width:330px;">'+
+							 '<div class="colorlib-text" style="position: absolute; display: inline-block; padding: 50px 0 0 80px; font-size: 18px; font-weight: 400;">'+
+							 '<div style="display: inline-block; line-height: 35px;">'+
+							 '<input type="hidden" value="'+dlist[i].po_num+'">'+
+							 '<input type="checkbox" name="prod"' + 'value='+'"'+dlist[i].po_num+'">'+
+							 '<h3 style="display: inline-block; font-size: 25px; letter-spacing: 1px; margin-bottom: 35px;"><b>상품명</b></h3>'+
+							 '<br>'+
+							 '<b style="margin-right: 40px;">배송상태</b><span>'+dlist[i].po_state+'</span><br>'+
+							 '<b style="margin-right: 40px;">가격</b><span>'+dlist[i].po_price+'&#8361;</span><br>'+
+							 '<b style="margin-right: 40px;">수량</b><span>'+dlist[i].po_count+'</span><br>'+
+							 '<b style="margin-right: 40px;">배송지</b><span>'+dlist[i].po_addr+'</span><br>'+
+							 '<br>'+
+							 '</div>'+
+							 '</div>'+
+							 '</div>'
+						}
+						$('#orderAjax').html(poList);
+					},
+					error: function(error){
+						alert("hhhhhh");
 				},
-				error: function(error){
-					alert("hhhhhh");
-			},
-			
 			});
-		
 	});
-		
 	</script>
-	
-
-	
 </body>
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

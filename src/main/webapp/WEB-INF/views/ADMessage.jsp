@@ -65,17 +65,6 @@
 <meta name="description"
    content="This is an example dashboard created using build-in elements and components.">
 <meta name="msapplication-tap-highlight" content="no">
-<!--
-    =========================================================
-    * ArchitectUI HTML Theme Dashboard - v1.0.0
-    =========================================================
-    * Product Page: https://dashboardpack.com
-    * Copyright 2019 DashboardPack (https://dashboardpack.com)
-    * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
-    =========================================================
-    * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-    -->
-
 
 <!-- <link rel="shortcut icon" href="./resources/ADATList/img/favicon.png"> -->
 
@@ -146,7 +135,7 @@
                   <div class="col-md-10">
                      <section class="panel">
                         <header class="panel-heading no-border">
-                           <b>공방회원 승인 / 거부 </b>
+                           <b>메세지 답변 </b>
                         </header>
                         <!-- ----- -->
                         <div style="text-align: right; margin: 2.5% 0px;">
@@ -173,10 +162,10 @@
                     	<input type="hidden" name="mg_sender" value="${mb.cm_id}">
                     	<input type="hidden" name="mg_receiver" value="${m.mg_sender}">
                               <c:if test="${m.mg_check eq 'F'}">
-                              <tr style="background-color:red;">
+                              <tr style="background-color:lightgray;">
                               </c:if>
                               <c:if test="${m.mg_check eq 'T'}">
-                              <tr style="background-color:blue;">
+                              <tr style="background-color:white;">
                               </c:if>
                                  <th><input type="checkbox" name="prod" value="${m.mg_num}"></th>
                                  <td>${m.mg_sender}</td>
@@ -195,29 +184,6 @@
                   </div>
                </div>
                
-          <!--      <div class="row" style="float: right">
-                  <div>
-                     <section class="panel" style="text-aligh: right;">
-
-                        <div>
-                           <table class="table table-striped table-advance table-hover">
-                              <tbody>
-                                 <tr>
-                                    <th><i class="icon_mail_alt"></i> 모두 삭제</th>
-                           <div class="btn-group">
-                                       <td style="text-align: center;"><a
-                                          class="btn btn-danger" href="#"><i
-                                             class="icon_check_alt2"></i></a></td>
-                                    </div>
-                                 </tr>
-                               
-                              </tbody>
-                           </table>
-                        </div>
-                     </section>
-                  </div>
-               </div> -->
-
                <div class="row">
                   <div class="container">
                      <ul class="pagination" style="padding-left: 35%;">

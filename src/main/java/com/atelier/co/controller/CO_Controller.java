@@ -25,34 +25,30 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 public class CO_Controller {
 
+	ModelAndView mav;
+	
 	@Setter(onMethod_ = @Autowired)
 	private HttpSession session;
 
 	@Setter(onMethod_ = @Autowired)
 	CO_Service mServ;
 	
-	ModelAndView mav;//service에서 넘어오는 ModelandView를 받기 위한 변수
-	
 	/* ---------------------------------------------------------------------------------------
 	 * 기능: 고객센터의 공지사항, FAQ리스트 처리
 	 * 작성자: JSG, KYH
 	 * 작성일: 2020.02.05
 	 -----------------------------------------------------------------------------------------*/
-
 	@GetMapping(value = "CONotice", produces="application/json; charset=utf-8")
 	@ResponseBody
 	public ModelAndView noticeList(Integer noticePageNum, Integer FAQPageNum) {
-		//log.info("boardList()");
-		log.warn("고객센터ㅏ-----------------------------------------------");
-		
 		mav = mServ.getNoticeList(noticePageNum, FAQPageNum);
 		
 		return mav;
 	}
 	
 	/* ---------------------------------------------------------------------------------------
-	 * 기능: 고객센터 공지사항 상세정보 처리
-	 * 작성자: JSG
+	 * 기능: 고객센터 공지사항 상세정보 처리 / 조회수 증가
+	 * 작성자: JSG / KYH
 	 * 작성일: 2020.02.05
 	 -----------------------------------------------------------------------------------------*/
 	@GetMapping("CONoticeContents")//get방식으로 전송되는 method. 
@@ -74,6 +70,7 @@ public class CO_Controller {
 
 		return mav;
 	}
+	
 	/* ---------------------------------------------------------------------------------------
 	 * 기능: 메세지 문의
 	 * 작성자: KBH
@@ -81,11 +78,10 @@ public class CO_Controller {
 	 -----------------------------------------------------------------------------------------*/
 	@PostMapping("ADsendMessage")
 	public ModelAndView ADsendMessage(MG_Dto mgDto){
-		
 		mav = mServ.ADSendMessage(mgDto);
 		
 		return mav;
 	}
 	
 	
-}//class end
+}//CO_Controller class end

@@ -29,25 +29,16 @@ public class MP_OrderService {
 	PO_Dao poDao;
 
 	
-	/* 기능: 주문내역 조회메소드 <수정필요>*/
+	/* 기능: 주문내역 조회메소드 */
 	public ModelAndView getMyOrder(String po_cm_id) {
-		
 		mav = new ModelAndView();
-		
-		
 		List<PO_Dto> poList = poDao.getMyOrder(po_cm_id);
-		
-		log.warn("aa");
-		
+
 		mav.addObject("poList" , poList);	
-		
-		
-		
 		mav.setViewName("myOrder");
 		
 		return mav;
 	}
-
 	
 	/* ---------------------------------------------------------------------------------------
 	 * 기능: 주문내역 조회메소드 / 페이징 메소드
@@ -74,9 +65,7 @@ public class MP_OrderService {
 		
 		try {
 			List<PO_Dto> poList = poDao.getOrderList(poDto);
-			
 			poMap = new HashMap<String, List<PO_Dto>>();
-			
 			poMap.put("poList", poList);
 			
 		}catch(Exception e) {
@@ -87,69 +76,23 @@ public class MP_OrderService {
 		return poMap;
 	}
 
-
-	
-
 	 /* ---------------------------------------------------------------------------------------
-		 * 기능: 주문내역 취소 메소드 <수정필요>
+		 * 기능: 주문내역 취소 메소드 
 		 * 작성자: KBH
 		 * 작성일: 2020.02.07
 		 -----------------------------------------------------------------------------------------*/
 		public ModelAndView orderCancle(String[] prod) {
-			log.warn("st");
-			
 			mav = new ModelAndView();
-			
 			
 			try {
 				for(int i=0; i<prod.length; i++ ) {
 					poDao.orderCancle(prod[i]);
 				}
-				
 				mav.setViewName("myOrder");
 			}catch(Exception e) {
 				e.printStackTrace();
 				log.warn("error");
 			}
-		
-			
 			return mav;
 		}
-	
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}//MP_OrderService Class end

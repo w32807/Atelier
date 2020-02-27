@@ -54,10 +54,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/style.css" type="text/css">
 	<!-- Modernizr JS -->
 	<script src="resources/AT_front/js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-		<script src="js/respond.min.js"></script>
-		<![endif]-->
 	<script type="text/javascript">
 		window.onload = function() {//이 페이지가 실행 되면, 모든 체크박스의 체크를 해제.(뒤로가기 버튼으로 이 페이지에 접근 시 체크박스 해제를 위함)
 			$("input:checkbox[name=prod]").each(function() {
@@ -282,8 +278,6 @@
 		});
 			
 	</script>
-
-
 </body>
 </html>
 

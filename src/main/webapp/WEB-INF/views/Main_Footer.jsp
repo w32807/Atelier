@@ -52,8 +52,7 @@
                         <ul>
                         	<li><a href="CONotice">고객 센터</a></li>
                             <li><a href="CONotice">약관</a></li>
-                            <li><a href="CONotice">개인 정보 처리 방침</a></li>
-                            <li><a href="CONotice">QNA</a></li>
+                            <li><a href="CONotice">FAQ</a></li>
                             <li><a href="CONotice">Contact US</a></li>
                         </ul>
                     </div>
@@ -112,10 +111,8 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 
 <script type="text/javascript">
 
-	/*
-		ATRegist가 준비가 되면 함수 실행 후 페이지 출력
-
-	*/
+	/*	ATRegist가 준비가 되면 함수 실행 후 페이지 출력*/
+	
 	$(document).ready(function (){
 		$('.ADhideandshow').hide();
 		 var ad_state = '${mb.cm_state}';
@@ -124,9 +121,6 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 	    	   $('.ADhideandshow').show();
 	       }
 	});
-		
-		
-	
 
 </script>
 

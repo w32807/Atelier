@@ -96,9 +96,5 @@
     <script src="<c:url value="/resources/main/js/jquery.slicknav.js"/>"></script>
     <script src="<c:url value="/resources/main/js/owl.carousel.min.js"/>"></script>
     <script src="<c:url value="/resources/main/js/main.js"/>"></script>
-	
-	
-
-	
     </body>
 </html>

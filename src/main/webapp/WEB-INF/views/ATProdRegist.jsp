@@ -52,12 +52,6 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/main/css/style.css" type="text/css">
 	
-	<!-- Modernizr JS -->
-	<!-- <script src="resources/AT_front/js/modernizr-2.6.2.min.js"></script> -->
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-		<script src="js/respond.min.js"></script>
-	<![endif]-->
 	<!-- CkEditor -->
 	<script type="text/javascript" src="resources/AT_front/ckeditor/ckeditor.js"></script>
 	
@@ -109,13 +103,13 @@
                                         <td><input type="text" name="pd_at_name" class="content" title="제품명" value='${myAt.at_name}' readonly="readonly"></td>
                                     </tr>
 									<tr>
-										<td class="title"><b>수 &nbsp;&nbsp;량</b></td>
+										<td class="title"><b>수&nbsp;&nbsp;량</b></td>
 										<td><input name="pd_numofstock" class="content"
 												type="number" min="0"
-												style="border: none; width: 70px;" placeholder="수량 "title="수량" value='${modifyProdDto.pd_numofstock}'></td>
+												style="border: none; width: 70px;" placeholder="수 량 "title="수량" value='${modifyProdDto.pd_numofstock}'></td>
 									</tr>
 									<tr>
-										<td class="title"><b>단 가</b></td>
+										<td class="title"><b>단&nbsp;&nbsp;가</b></td>
 										<td><input type="number" class="content" name="pd_price"  min="0"
                                                 style="border: none; width: 70px;" placeholder="단 가"title="단가" value='${modifyProdDto.pd_price}'></td>
 									</tr>
@@ -125,12 +119,12 @@
 										    
 									</tr>
 									<tr>
-										<td class="title"><b>색 상</b></td>
+										<td class="title"><b>색&nbsp;&nbsp;상</b></td>
 										<td><input type="text" class="content" name="pd_option" placeholder="색 상"title="색상" value='${modifyProdDto.pd_option}'></td>
 									</tr>
 									
 									<tr>
-										<td class="title"><b>타겟</b></td>
+										<td class="title"><b>타&nbsp;&nbsp;겟</b></td>
 										<td>
 										<select id="sex_select" class="content" name="pd_sex" placeholder="타겟" title="타겟" >
 													<option >남성용</option>
@@ -280,8 +274,6 @@
 	              reader.readAsDataURL(input.files[0]);
 	            }
 	        };
-		
-	        
 			      
 	        $(document).ready(function() { 
 		    	 var chk = "${check}";
@@ -318,16 +310,11 @@
 			    	//$('#preview').attr('background-image','url(resources/prodImg/${oriName})');
 			    	$("#preview").css({"background-image":"url(resources/main/img/products/${oriName})"}); 
 			    }
-			    
-			    
 		        CKEDITOR.instances.p_content.setData('${modifyProdDto.pd_detail}');
 		    }); 
 	    
 	     
 	</script>
-	
-		
-	
 	</body>
 </html>
 

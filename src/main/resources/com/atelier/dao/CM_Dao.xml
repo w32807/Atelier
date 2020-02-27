@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.atelier.dao.CM_Dao">
-<!--  -->
-	<insert id="memberInsert" parameterType="com.atelier.dto.CM_Dto">
-		INSERT INTO COMMON_MEMBER
-		VALUES (#{cm_id},#{cm_pwd},#{cm_name},#{cm_nick},#{cm_phone},#{cm_addr},DEFAULT,'일반회원',DEFAULT)
-	</insert>
+
+   <insert id="memberInsert" parameterType="com.atelier.dto.CM_Dto">
+      INSERT INTO COMMON_MEMBER
+      VALUES (#{cm_id},#{cm_pwd},#{cm_name},#{cm_nick},#{cm_phone},#{cm_addr},DEFAULT,'일반회원',#{cm_pfphoto})
+   </insert>
 	
 	<select id="getSecurityPwd" parameterType="String" resultType="String">
 		SELECT cm_pwd FROM COMMON_MEMBER WHERE cm_id=#{id}
@@ -14,11 +14,7 @@
 	<select id="getMemberInfo" parameterType="String" resultType="com.atelier.dto.CM_Dto">
 		SELECT * FROM COMMON_MEMBER WHERE cm_id=#{id}
 	</select>
-	<!-- 
-	<select id="getMemberInfo2" parameterType="String" resultType="com.atelier.dto.CM_Dto">
-		SELECT * FROM COMMON_MEMBER WHERE cm_id=#{id}
-	</select>
-	 -->
+
 	<update id="memberUpdate" parameterType="com.atelier.dto.CM_Dto">
 		UPDATE COMMON_MEMBER 
 		SET CM_NAME=#{cm_name},CM_NICK=#{cm_nick},CM_PHONE=#{cm_phone},CM_ADDR=#{cm_addr},CM_ADDR2=#{cm_addr2} 
@@ -91,6 +87,5 @@
   	<select id="getAt" parameterType="String" resultType="com.atelier.dto.AT_Dto">
 		SELECT * FROM AT WHERE AT_ID = #{at_id}
 	</select>   	
-   	
   	
 </mapper>

@@ -65,21 +65,6 @@
 <meta name="description"
 	content="This is an example dashboard created using build-in elements and components.">
 <meta name="msapplication-tap-highlight" content="no">
-<!--
-    =========================================================
-    * ArchitectUI HTML Theme Dashboard - v1.0.0
-    =========================================================
-    * Product Page: https://dashboardpack.com
-    * Copyright 2019 DashboardPack (https://dashboardpack.com)
-    * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
-    =========================================================
-    * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-    -->
-
-
-<!-- <link rel="shortcut icon" href="./resources/ADATList/img/favicon.png"> -->
-
-
 
 <!-- Bootstrap CSS -->
 <link href="./resources/ADATList/css/bootstrap.min.css" rel="stylesheet">
@@ -212,24 +197,7 @@
 
 
 								</div>
-								<!-- 
-								<div style="text-align: right; margin-top: 1.5%">
-									<i class="icon_mail_alt"></i> 모두 활동
-									<div class="btn-group" style="margin-left: 0.5%;">
-										<td style="text-align: center;"><a
-											class="btn btn-success" href="#" style="margin-right: 20px"><i
-												class="icon_check_alt2"></i></a>
-									</div>
-
-									<i class="icon_mail_alt"></i> 모두 정지
-									<div class="btn-group" style="margin-left: 0.5%;">
-										<td style="text-align: center;"><a class="btn btn-danger"
-											href="#" style="margin-right: 20px"><i
-												class="icon_close_alt2"></i></a>
-									</div>
-								</div>
-								 -->
-
+							
 								<table class="table table-striped table-advance table-hover">
 									<tbody>
 										<tr>
@@ -262,12 +230,12 @@
 													<td style="text-align: center;"><a
 														class="btn btn-danger"
 														href="ADATListStateProc?id=${at_list.at_id}&state=inactive&check=false"><i
-															class="icon_close_alt2"></i></a></td>
+															class="icon_close_alt2" onclick="ATclose()"></i></a></td>
 
 													<td style="text-align: center;"><a
 														class="btn btn-success"
 														href="ADATListStateProc?id=${at_list.at_id}&state=active&check=false"><i
-															class="icon_check_alt2"></i></a></td>
+															class="icon_check_alt2" onclick="ATcheck()"></i></a></td>
 												</div>
 											</tr>
 										</c:forEach>
@@ -276,23 +244,6 @@
 							</section>
 						</div>
 					</div>
-					<!-- 
-					<div class="row" style="margin-top: 0%;">
-						<div class="container">
-							<ul class="pagination" style="padding-left: 35%;">
-
-								<li class="disabled"><a href="#">«</a></li>
-								<li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-								<li><a href="#">2</a></li>
-								<li><a href="#">3</a></li>
-								<li><a href="#">4</a></li>
-								<li><a href="#">5</a></li>
-								<li><a href="#">»</a></li>
-
-							</ul>
-						</div>
-					</div>
-					 -->
 				</div>
 			</div>
 		</div>
@@ -323,20 +274,19 @@
    </script>
 
 </body>
-
-<script type="text/javascript">
-window.onload = function(){
-/* ---------------------------------------------------------------------------------------
- * 기능: 로그인 여부에 따른 메세지 출력 (로그인 성공, 실패)
- * 작성자: JSG
- * 작성일: 2020.02.013
- -----------------------------------------------------------------------------------------*/
-var chk = "${check}";
-if(chk != ""){
-	alert(chk);
-	location.reload(true);//화면을 다시 한번 불러오면서 check를 리셋함 
-}
-}
-</script>
+	<script type="text/javascript">
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 공방 상태 변경 시 출력되는 alert 메시지 출력
+	 * 작성자: JSG
+	 * 작성일: 2020.02.013
+	 -----------------------------------------------------------------------------------------*/
+	   function ATclose(){
+	    alert("해당 공방이 [정지]되었습니다.");
+	 }
+	 
+	   function ATcheck(){
+	       alert("해당 공방이 [활성]되었습니다.");
+	    }
+	</script>
 
 </html>

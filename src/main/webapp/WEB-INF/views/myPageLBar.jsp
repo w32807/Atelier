@@ -10,22 +10,6 @@
 		<div class="blog-sidebar">
 			<div class="profile_form"
 				style="border: 2px solid #00000033; text-align: center; border-radius: 30px;">
-				<!-- 
-							<img class="profile_img"
-								src="./resources/main/img/blog/profile_sample.jpg"
-								style="padding: 30px 0px;">
-							 -->
-				<!-- spring taglib
-							 <img class="profile_img"
-								src="<spring:url value = '/profile/tester@gmail'/>"
-								style="padding: 30px 0px;">
-								 -->
-				<!-- 
-								 <a><img class="profile_img" src="/profileIMG?name=${mb.cm_pfphoto}" style="padding: 30px 0px;"></a>
-								  -->
-				<!-- 
-								  <img class="profile_img" src="resources\upload\profile\"a style="padding: 30px 0px;">
-								   -->
 				<img class="profile_img" id="profile_img"
 					src="./resources/main/img/blog/penguin.jpg"
 					style="padding: 30px 0px;">

@@ -122,7 +122,7 @@
 									<div class="desc">
 										<h3><a href="/ATProductDetail">${pd.pd_name}</a></h3>
 										<p>${pd.pd_price}<br>${pd.pd_sex}</p>
-										<a href="/ATProductDetail?pd_code=${pd.pi_pd_code}" class="lead">Read More <i class="icon-arrow-right3"></i></a>
+										<a href="/prodDetail?pd_code=${pd.pi_pd_code}" class="lead">Read More <i class="icon-arrow-right3"></i></a>
 									</div>
 								</div>
 							</div>

@@ -168,11 +168,11 @@ table, tr, td {
 					</form>
 					<table>
 						<tr style="background-color: #A09182;">
-							<th style="width: 550px; text-align: left; padding-left: 15px; color: white;">Content</th>
-							<th style="width: 200px; text-align: center; color: white;">Date</th>
-							<th style="width: 150px; text-align: center; color: white;">Writer</th>
+							<th style="width: 520px; height: 40px; text-align: left; padding-left: 15px; color: white; font-size: 16px;">Content</th>
+							<th style="width: 200px; height: 40px; text-align: center; color: white; font-size: 16px;">Date</th>
+							<th style="width: 150px; height: 40px; text-align: center; color: white; font-size: 16px;">Writer</th>
 							<c:if test="${mb.cm_id eq r.sm_receiver}">
-							<th style="width: 80px; text-align: center; padding-right: 15px; color: white;">Delete</th>
+							<th style="width: 80px; height: 40px; text-align: center; padding-right: 15px; color: white; font-size: 16px;">Delete</th>
 							</c:if>
 							
 						</tr>
@@ -191,7 +191,7 @@ table, tr, td {
 								<td style="width: 150px;">${r.sm_sender}</td>
 								<c:if test="${mb.cm_id eq r.sm_receiver}">
 								<td style="padding-right: 15px; width: 80px;">	
-									<a href=deleteMessage?sm_num=${r.sm_num}><button type="button" id="btnDelete"
+									<a href="deleteMessage?sm_num=${r.sm_num}" onclick="confirmDelete(${r.sm_num})"><button type="button" id="btnDelete"
 										style="border: 0; background-color: white;">
 										삭제
 									</button></a>
@@ -254,6 +254,19 @@ table, tr, td {
             var dlist = data.rList;
             
             for(var i=0; i<dlist.length; i++){
+            	var sessionId = "${mb.cm_id}";
+            	var receiverId = dlist[i].sm_receiver;
+            	var delBtn = '';
+            	if(sessionId === receiverId){
+            		delBtn = '<td style="padding-right: 15px; width: 80px;">'+
+                    '<a href="deleteMessage?sm_num='+dlist[i].sm_num+'" onclick="confirmDelete('+dlist[i].sm_num+')">'+
+                    '<button type="button" id="btnDelete" style="border: 0; background-color: white;">'+
+                    '삭제'+
+                    '</button>'+
+                    '</a>'+
+                    '</td>'
+            	}
+            	
                rlist +=
             '<form id="deleteMessage'+dlist[i].sm_num+'">'
             +        
@@ -270,13 +283,7 @@ table, tr, td {
             '<td style="width: 150px;">'+
             dlist[i].sm_sender+
             '</td>'+
-            '<td style="padding-right: 15px; width: 80px;">'+
-            '<a href=deleteMessage?sm_num=${r.sm_num}>'+
-            '<button type="button" id="btnDelete" style="border: 0; background-color: white;">'+
-            '삭제'+
-            '</a>'+
-            '</button>'+
-            '</td>'+
+            	delBtn +
             '</tr>'+
             '</form>'
             }
@@ -288,10 +295,10 @@ table, tr, td {
          }
       });
    });
-    
 
-      function confirmDelete(bnum) {
+   function confirmDelete(bum) {
             theForm=document.delBoard;
+            var delFrm = document.getElementById("deleteMessage"+bum)
             //document.객체의 이름으로 저장 하나의 태그를 변수로 저장
             var chk = confirm("정말 삭제하시겠습니까?");
             if (chk) {

@@ -159,41 +159,21 @@
  * 작성인 : KJH
  * 작성날짜 : 2020.02.04     최종수정일 :2020.02.18
  ----------------------------------------------------------------------------------*/
-// checkvalue 기능
 function checkvalue() {
 
-// a 텍스트 필드와 b 텍스트 필드 중 둘다 값이 있을 때
-if(myChangePwd.pwd2.value && myChangePwd.pwd3.value) {
-
-  // 두 필드의 값이 서로 다를 때
-  if(myChangePwd.pwd2.value!=myChangePwd.pwd3.value){
-
-   // status 필드에 일치하지 않는다는 문장 출력
-   myChangePwd.status.value = "[ 일치하지 않습니다 ]";
-
-   // 그에 맞게 길이 수정
-   myChangePwd.status.style.width = 120;
-
-  // 두 필드의 값이 동일 할 때
-  } else {
-
-   // status 필드에 일치한다는 문장 출력
-   myChangePwd.status.value = "[ 일치합니다 ]";
-
-   // 역시 그에 맞게 길이 수정
-   myChangePwd.status.style.width = 83;
-  }
-
-// a 텍스트 필드와 b 텍스트 필드 두중하나라도 값이 없을 때
-} else {
-
-  // 아무것도 입력이 안 되어 있으므로 비밀번호를 입력해 달라는 메세지를 status 필드에 출력 함
-  myChangePwd.status.value = "비밀번호를 입력해 주세요";
-
-  // 그에 맞게 길이 수정
-  myChangePwd.status.style.width = 160;
-}
-
+	if(myChangePwd.pwd2.value && myChangePwd.pwd3.value) {
+		  if(myChangePwd.pwd2.value!=myChangePwd.pwd3.value){
+		   myChangePwd.status.value = "[ 일치하지 않습니다 ]";
+		   myChangePwd.status.style.width = 120;
+		  } else {
+		   myChangePwd.status.value = "[ 일치합니다 ]";
+		   myChangePwd.status.style.width = 83;
+		  }
+		
+	} else {
+	  myChangePwd.status.value = "비밀번호를 입력해 주세요";
+	  myChangePwd.status.style.width = 160;
+	}
 }
 
 </script>
@@ -225,9 +205,14 @@ if(myChangePwd.pwd2.value && myChangePwd.pwd3.value) {
     	if(mid1 != ''){
     		$('.showandhide').hide();
     	}
-    	
-    	
     }
+    
+    $(document).ready(function() {
+    	var chgMessage = "${chgMessage}";
+    	if(chgMessage!=""){
+    		alert(chgMessage);
+    	}
+    })
     </script>
 </body>
 

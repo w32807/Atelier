@@ -77,15 +77,6 @@ nav>div a.nav-item.nav-link, nav>div a.nav-item.nav-link.active {
 	border-radius: 0;
 }
 
-/* nav>div a.nav-item.nav-link.active:after {
-	content: "";
-	position: relative;
-	bottom: -60px;
-	left: -10%;
-	border: 15px solid transparent;
-	border-top-color: #e74c3c;
-} */
-
 .tab-content {
 	background: #fdfdfd;
 	line-height: 25px;
@@ -115,7 +106,7 @@ nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
 
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12 ">
+			<div class="col-md-12 " style="margin-bottom: 100px;">
 				<nav>
 					<div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
 						<a class="nav-item nav-link active" id="nav-home-tab"
@@ -175,7 +166,7 @@ nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
 											<td class="text-center">${bnotice.nt_count}</td>
 											<td class="text-center">
 												<a href="CONoticeContents?Noticenum=${bnotice.nt_num}"
-													onclick="window.open(this.href, '_blank', 'width=800px,height=600px,toolbars=no,scrollbars=yes');return false;">
+													onclick="window.open(this.href, '_blank', 'width=700px,height=600px,toolbars=no,scrollbars=yes');return false;">
 													<button type="button" id="PopoverCustomT-1"
 														class="btn btn-primary btn-sm"
 														style="background-color:#e74c3c; border-color:#e74c3c;">
@@ -187,7 +178,7 @@ nav>div a.nav-item.nav-link:hover, nav>div a.nav-item.nav-link:focus {
 									</c:forEach>								
 								</tbody>
 							</table>
-							<p style="text-align:center">${paging}</p>
+							<p style="text-align:center; margin-top: 30px;">${paging}</p>
 						</div>
 					</div>
 
@@ -338,7 +329,7 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 														</c:forEach>								
 													</tbody>
 												</table>
-												<p style="text-align:center">${FAQpaging}</p>
+												<p style="text-align:center; margin-top: 30px;">${FAQpaging}</p>
 											</div>	
 										</div>
 									</div>
@@ -387,11 +378,6 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 
 							}
 						</script>
-						<!--Load the API from the specified URL
-						    * The async attribute allows the browser to render the page while the API loads
-						    * The key parameter will contain your own API key (which is not needed for this tutorial)
-						    * The callback parameter executes the initMap() function
-						    -->
 						<script async defer
 							src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAc_ZbCtkK4m_JITKv4tiuyM3XcKcgiAYo&callback=initMap">
 						</script>
@@ -402,7 +388,7 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 						<section class="contact-section spad">
 							<div class="container">
 								<div class="row">
-									<div class="col-lg-5">
+									<div class="col-lg-5" style="margin-left: 100px;">
 										<div class="contact-title">
 											<h4>Contacts Us</h4>
 											<p>Atelier로의 연락은 아래로 부탁드립니다!</p>
@@ -437,15 +423,15 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 											</div>
 										</div>
 									</div>
-									<div class="col-lg-6 offset-lg-1">
+									<div class="col-lg-4 offset-lg-1" style="margin-left: 80px;">
 										<div class="contact-form">
 											<div class="leave-comment">
-												<h4>Sign In</h4>
+												<h4>Sign Up</h4>
 												<p>Atelier의 회원이 되어 즐거운 쇼핑을 즐겨 보세요!</p>
 												<form action="#" class="comment-form">
 													<div class="row">
 														<div class="col-lg-6">														
-															<button type="button" class="site-btn" onclick="location.href='memJoinFrm'">Sign In</button>
+															<button type="button" class="site-btn" onclick="location.href='memJoinFrm'">Sign Up</button>
 														</div>
 													</div>
 														<br>
@@ -478,15 +464,6 @@ Google에 문의하는 방법을 보려면 문의 페이지를 참조하시기 �
 										
 											<fieldset>
 
-												<!-- Name input-->
-											<!-- 	<div class="form-group">
-													<label class="col-md-6 control-label" for="name">Name</label>
-													<div class="col-md-6">
-														<input id="name" name="name" type="text"
-															placeholder="Your name" class="form-control">
-													</div>
-												</div>
- -->
 												<!-- Message body -->
 										<form class="form-horizontal" action="ADsendMessage" method="post" name="sendingForm">
 												<div class="form-group">

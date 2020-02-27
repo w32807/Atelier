@@ -114,65 +114,63 @@
 	<!-- 상단바 Include -->
 	<jsp:include page="Main_Upper.jsp" flush="false"/>
 
-    <!-- 좌측바 Include -->
-	<div id="colorlib-page">
-		<jsp:include page="AT_LBar.jsp" flush="false"/>
+   <!-- 좌측바 Include -->
+   <div id="colorlib-page">
+      <jsp:include page="AT_LBar.jsp" flush="false"/>
 
-		<div id="colorlib-main">
-			<div class="colorlib-about">
-				<div class="container-fluid" style="height: auto; min-height: 800px;">
-					<div class="row">
-						<div class="col-md-6 col-md-offset-3 col-md-pull-3">
-							<h2 class="colorlib-heading animate-box" data-animate-effect="fadeInLeft"
-								style="margin-left: 100px; font-weight: bolder; font-size: 23px; letter-spacing: 0.5px;">공지사항<hr></h2>
-						</div>
-					</div>
-					<div class="support-notice">
-						공지사항 게시판입니다. 공지사항을 제대로 읽지 않아 발생되는 모든 문제에 대해서는 책임지지 않습니다. 꼭 숙지 부탁드립니다.
-					</div>
-					<!-- 메세지 전송 -->
-					<table>
-						<tr style="background-color: #A09182;">
-							<th style="width: 60px; text-align: center; color: white;">No</th>
-							<th style="width: 550px; text-align: center; padding-left: 15px; color: white;">Title</th>
-							
-							<th style="width: 130px; text-align: center; color: white;">Writer</th>
-							<th style="width: 120px; text-align: center; padding-right: 15px; color: white;">View</th>
-						</tr>
-					</table>
-			
-					<div style="height:250px; overflow:auto; ">
-						<table>
-						<c:forEach var="nitem" items ="${ntList}">
-								<tr style="background-color: white; border-bottom: 2px solid #A09182; height:40px;">
-									<td style="width: 60px; text-align: center;">
-										${nitem.at_nt_num}
-									</td>
-									<td style="width: 550px; text-align: center; padding-left: 15px;">
-										<a href="ATNoticeDetail?at_nt_num=${nitem.at_nt_num}" style="color: #353535;">${nitem.at_nt_title}</a>
-									</td>
-									
-									<td style="width: 100px;">
-										${nitem.at_nt_id}
-									</td>
-									<td style="width: 140px;">
-										${nitem.at_nt_count}
-									</td>
-								</tr>
-								</c:forEach>
-						</table>
-					</div>
-						<div>
-						</div>
-						<hr>
-					<center>
-					<button class="NTConfig" onclick="location.href='./ATNoticeWrite'">글쓰기</button>
-					</center>
-				</div>
-			</div>
-		</div>
-	</div>
-	
+      <div id="colorlib-main">
+         <div class="colorlib-about">
+            <div class="container-fluid" style="height: auto; min-height: 800px;">
+               <div class="row">
+                  <div class="col-md-6 col-md-offset-3 col-md-pull-3">
+                     <h2 class="colorlib-heading animate-box" data-animate-effect="fadeInLeft"
+                        style="margin-left: 100px; font-weight: bolder; font-size: 23px; letter-spacing: 0.5px;">공지사항<hr></h2>
+                  </div>
+               </div>
+               <div class="support-notice">
+                  공지사항 게시판입니다. 공지사항을 제대로 읽지 않아 발생되는 모든 문제에 대해서는 책임지지 않습니다. 꼭 숙지 부탁드립니다.
+               </div>
+               <!-- 메세지 전송 -->
+               <table>
+                  <tr style="background-color: #A09182;">
+                     <th style="width: 60px; text-align: center; color: white;">No</th>
+                     <th style="width: 550px; text-align: center; padding-left: 15px; color: white;">Title</th>
+                     
+                     <th style="width: 130px; text-align: center; color: white;">Writer</th>
+                     <th style="width: 120px; text-align: center; padding-right: 15px; color: white;">View</th>
+                  </tr>
+               </table>
+         
+               <div style="height:250px; overflow:auto; ">
+                  <table>
+                  <c:forEach var="nitem" items ="${ntList}">
+                        <tr style="background-color: white; border-bottom: 2px solid #A09182; height:40px;">
+                           <td style="width: 60px; text-align: center;">
+                              ${nitem.at_nt_num}
+                           </td>
+                           <td style="width: 550px; text-align: center; padding-left: 15px;">
+                              <a href="ATNoticeDetail?at_nt_num=${nitem.at_nt_num}" style="color: #353535;">${nitem.at_nt_title}</a>
+                           </td>
+                           
+                           <td style="width: 100px;">
+                              ${nitem.at_nt_id}
+                           </td>
+                           <td style="width: 140px;">
+                              ${nitem.at_nt_count}
+                           </td>
+                        </tr>
+                        </c:forEach>
+
+                  </table>
+                  <button class="NTConfig" onclick="location.href='./ATNoticeWrite'" style="font-size:15px; float: right; margin-right: 300px; margin-top: 10px;">글쓰기</button>
+               </div>
+                  <div>
+                  </div>
+                  <hr>
+            </div>
+         </div>
+      </div>
+   </div>
 	<!----------------------------------------------------------여기서부터 하단바입니다.-------------------------------------------------------------------------->
 	<!-- 하단바 Include -->
 	<jsp:include page="Main_Footer.jsp" flush="false"/>

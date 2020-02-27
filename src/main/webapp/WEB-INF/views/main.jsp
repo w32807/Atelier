@@ -33,35 +33,25 @@
     <!-- Hero Section Begin -->
     <section class="hero-section">
         <div class="hero-items owl-carousel">
-            <div class="single-hero-items set-bg" data-setbg="./resources/main/img/hero-1.jpg">
+            <div class="single-hero-items set-bg" data-setbg="./resources/main/img/hero-1.png">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>Bag,kids</span>
-                            <h1>Black friday</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore</p>
-                            <a href="#" class="primary-btn">Shop Now</a>
+                            <h1 style="margin-bottom: 30px;">Atelier</h1>
+                            <p style="color: white;">아틀리에<br>품질 좋은 가죽 제품을 저렴한 가격에 만나 보실 수 있습니다</p>
+                            <!-- <a href="#" class="primary-btn">Shop Now</a> -->
                         </div>
-                    </div>
-                    <div class="off-card">
-                        <h2>Sale <span>50%</span></h2>
                     </div>
                 </div>
             </div>
-            <div class="single-hero-items set-bg" data-setbg="./resources/main/img/hero-2.jpg">
+            <div class="single-hero-items set-bg" data-setbg="./resources/main/img/hero-2.png">
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-5">
-                            <span>Bag,kids</span>
-                            <h1>Black friday</h1>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                incididunt ut labore et dolore</p>
-                            <a href="#" class="primary-btn">Shop Now</a>
+                            <h1 style="margin-bottom: 30px;">Atelier</h1>
+                            <p style="color: white;">아틀리에<br>품질 좋은 가죽 제품을 저렴한 가격에 만나 보실 수 있습니다</p>
+                            <!-- <a href="#" class="primary-btn">Shop Now</a> -->
                         </div>
-                    </div>
-                    <div class="off-card">
-                        <h2>Sale <span>50%</span></h2>
                     </div>
                 </div>
             </div>
@@ -75,25 +65,25 @@
             <div class="row">
                 <div class="col-lg-4">
                     <div class="single-banner" >
-                        <img src="./resources/main/img/banner-1.jpg">
+                        <img src="./resources/main/img/banner-1.png">
                         <div id="first_bgi" class="inner-text">
-                            <h4>남성용</h4>
+                            <h4 style="background: none; margin-top: -25px; font-size: 30px; letter-spacing: 1px; color: #fff;">WALLET</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="single-banner">
-                        <img  src="./resources/main/img/banner-2.jpg">
+                        <img  src="./resources/main/img/banner-2.png">
                         <div id="second_bgi" class="inner-text">
-                            <h4>여성용</h4>
+                            <h4 style="background: none; margin-top: -25px; font-size: 30px; letter-spacing: 1px; color: #fff;">BELT</h4>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="single-banner">
-                        <img src="./resources/main/img/banner-3.jpg">
+                        <img src="./resources/main/img/banner-3.png">
                         <div id="third_bgi" class="inner-text">
-                            <h4>남녀 공용</h4>
+                            <h4 style="background: none; margin-top: -25px; font-size: 30px; letter-spacing: 1px; color: #fff;">BAG</h4>
                         </div>
                     </div>
                 </div>
@@ -108,8 +98,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-3">
-                    <div id="large_banner" class="product-large set-bg" data-setbg="./resources/main/img/products/women-large.jpg" onclick="location.href='prodList_All'">
-                    	<h3>Atelier</h3>
+                    <div id="large_banner" class="product-large set-bg" data-setbg="./resources/main/img/product-img.png" onclick="location.href='prodList_All'">
+                    	<h3 style="color: white; margin-top: -60px; margin-bottom: 30px;">Atelier</h3>
                         <h2>Products</h2>
                         <a href="#">Discover More</a>
                     </div>
@@ -200,123 +190,6 @@
     </section>
     -->
 
-    <!-- Man Banner Section Begin -->
-    <!-- 
-    <section class="man-banner spad">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-8">
-                    <div class="filter-control">
-                        <ul>
-                            <li class="active">Clothings</li>
-                            <li>HandBag</li>
-                            <li>Shoes</li>
-                            <li>Accessories</li>
-                        </ul>
-                    </div>
-                    <div class="product-slider owl-carousel">
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="./resources/img/products/man-1.jpg" alt="">
-                                <div class="sale">Sale</div>
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Coat</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $14.00
-                                    <span>$35.00</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="./resources/img/products/man-2.jpg" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Shoes</div>
-                                <a href="#">
-                                    <h5>Guangzhou sweater</h5>
-                                </a>
-                                <div class="product-price">
-                                    $13.00
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="./resources/img/products/man-3.jpg" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Pure Pineapple</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
-                                </div>
-                            </div>
-                        </div>
-                        <div class="product-item">
-                            <div class="pi-pic">
-                                <img src="./resources/img/products/man-4.jpg" alt="">
-                                <div class="icon">
-                                    <i class="icon_heart_alt"></i>
-                                </div>
-                                <ul>
-                                    <li class="w-icon active"><a href="#"><i class="icon_bag_alt"></i></a></li>
-                                    <li class="quick-view"><a href="#">+ Quick View</a></li>
-                                    <li class="w-icon"><a href="#"><i class="fa fa-random"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="pi-text">
-                                <div class="catagory-name">Towel</div>
-                                <a href="#">
-                                    <h5>Converse Shoes</h5>
-                                </a>
-                                <div class="product-price">
-                                    $34.00
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 offset-lg-1">
-                    <div class="product-large set-bg m-large" data-setbg="./resources/img/products/man-large.jpg">
-                        <h2>Men’s</h2>
-                        <a href="#">Discover More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    -->
     <!-- Man Banner Section End -->
 
     <!-- Latest Blog Section Begin -->
@@ -467,9 +340,14 @@
 	          alert("이미 신청을 하였습니다.");
 	          document.location.href = "main";
 	       }
-    	
-    	
     }
+    
+	    $(document).ready(function() {
+	    	var chgMessage = "${chgMessage}";
+	    	if(chgMessage!=""){
+	    		alert(chgMessage);
+	    	}
+	    });
     </script>
  
 </html>

@@ -31,4 +31,6 @@ public interface MP_Dao {
 
 	void actMyPageDelSubs(MP_SubscribeDto mpSubDto);
 
+	void sendAdminMessageFromMP(MG_Dto mgDto);
+
 }

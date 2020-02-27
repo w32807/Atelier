@@ -11,4 +11,5 @@ public interface PR_Dao {
 	public void prodReviewWrite(PR_Dto prDto);
 
 	public boolean prodReviewDelete(Map<String, Object> dataMap);
+	
 }

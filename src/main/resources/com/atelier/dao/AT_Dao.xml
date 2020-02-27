@@ -39,23 +39,19 @@
     	UPDATE PD SET PD_REGIST = 'T' WHERE PD_CODE = #{pd_code}
     </update>
     
-   <insert id="replyInsert" parameterType="com.atelier.dto.SM_Dto" useGeneratedKeys="true" 
+   	<insert id="replyInsert" parameterType="com.atelier.dto.SM_Dto" useGeneratedKeys="true" 
       keyProperty="sm_num"> 
          <selectKey keyProperty="sm_num" resultType="int" order="BEFORE">
          SELECT SM_NUM_SEQ.NEXTVAL FROM DUAL
          </selectKey>         
          INSERT INTO SUPPORT_MG 
          VALUES(${sm_num}, #{sm_contents},DEFAULT, #{sm_sender},#{sm_receiver})
-   </insert>
+   	</insert>
    
-   <select id="getReplyList1" parameterType="String" resultType="com.atelier.dto.SM_Dto">
-      SELECT * FROM SUPPORT_MG WHERE SM_RECEIVER = #{sm_receiver} ORDER BY SM_NUM DESC
-   </select>   
-<!--       
-   <select id="getReplyList2" parameterType="com.atelier.dto.SM_Dto" resultType="com.atelier.dto.SM_Dto">
-      SELECT * FROM SUPPORT_MG ORDER BY SM_NUM DESC
-   </select>   
-     -->
+    <select id="getReplyList1" parameterType="String" resultType="com.atelier.dto.SM_Dto">
+    	  SELECT * FROM SUPPORT_MG WHERE SM_RECEIVER = #{sm_receiver} ORDER BY SM_NUM DESC
+    </select>   
+
      <delete id="deleteImg" parameterType="Integer">
    	  DELETE FROM PI WHERE PI_PD_CODE = #{currentPd_code}
    </delete>
@@ -117,13 +113,11 @@
    	</select>
    	
    	<select id="getATList" resultType="com.atelier.dto.AT_Dto">
-	   SELECT *
-	   FROM AT
+	   SELECT * FROM AT
 	</select>
 	
 	<select id="getATDetailData" resultType="com.atelier.dto.AT_Dto">
-	   SELECT *
-	   FROM AT
+	   SELECT * FROM AT
 	   WHERE AT_SEQ = #{at_seq}
 	</select>
 	
@@ -144,14 +138,12 @@
 	</delete>
 	
 	 <update id="updateATState" parameterType="com.atelier.dto.AT_Dto">
-		UPDATE AT SET
-		AT_STATE = #{at_state}
+		UPDATE AT SET AT_STATE = #{at_state}
 		WHERE AT_ID = #{at_id}
 	</update>
    
    	<select id="getATListSearch" resultType="com.atelier.dto.AT_Dto">
-	   SELECT *
-	   FROM AT
+	   SELECT * FROM AT
 	   WHERE AT_NAME LIKE '%${at_name}%'
 	</select>
 	
@@ -210,11 +202,6 @@
 	<select id="getAtData" parameterType="String" resultType="com.atelier.dto.AT_Dto">
 		SELECT * FROM ATELIER WHERE AT_ID=#{id}
 	</select>
-	
-	<!-- <select id="getAtInfo" parameterType="String" resultType="com.atelier.dto.">
-	
-	</select>
-	 -->
 	 
 	 <select id="getctList" resultType="com.atelier.dto.CT_Dto">
 	 	SELECT * FROM CT
@@ -223,4 +210,5 @@
 	  <select id="getRmList" resultType="com.atelier.dto.RM_Dto">
 	 	SELECT * FROM RM
 	 </select>
+	 
 </mapper>

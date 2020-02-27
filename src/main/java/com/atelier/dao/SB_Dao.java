@@ -14,4 +14,5 @@ public interface SB_Dao {
 	public void deleteATUserSCData(String cm_id);
 
 	public Integer compareSub(SB_Dto sbDto);
+	
 }

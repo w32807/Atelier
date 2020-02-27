@@ -80,27 +80,12 @@
 			<form id="orderInsert" action="orderInsert" class="checkout-form" method="post">
 				<div class="row">
 					<div class="col-lg-6">
-						<!-- 로그인 화면으로 가기 -->
-					<!-- 	<div class="checkout-content">
-							<a href="login" class="content-btn">로그인 화면으로 가기</a>
-						</div> -->
-						<!--  로그인 화면으로 가기 끝 -->
 						<hr>
 						<h4>결제하기</h4>
 						<hr>
 						<h4>주문자 정보</h4>
 						<!-- row 시작 -->
 						<div class="row">
-							<!--  첫이름 마지막 이름 
-                            <div class="col-lg-6">
-                                <label for="fir">First Name<span>*</span></label>
-                                <input type="text" id="fir">
-                            </div>
-                            <div class="col-lg-6">
-                                <label for="last">Last Name<span>*</span></label>
-                                <input type="text" id="last">
-                            </div>
-                            -->
 							<div class="col-lg-12">
 								<label for="zip"></label>주문자 성명 <input  type="text" id="senderName" required value="${cmDto.cm_name}" readonly="readonly">
 							</div>
@@ -279,13 +264,11 @@
 	<script
 		src="${pageContext.request.contextPath}/resources/main/js/main.js"></script>
 	<script>
-function btn(){
-    alert('주문이 완료되었습니다!');
-}
-
+		function btn(){
+		    alert('주문이 완료되었습니다!');
+		}
     
 		$("#receiver").change(function() {
-
 			var receiverName = $("#senderName").val();
 			var receiverPhone = $("#senderPhone").val();
 			if ($("#receiver").is(":checked")) {
@@ -300,7 +283,6 @@ function btn(){
 		});
 
 		$("#orderInsertBtn").click(function() {
-
 			if (confirm("결제를 진행하시겠습니까?")) {
 				$("#orderInsert").submit();
 			}

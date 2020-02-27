@@ -35,8 +35,6 @@ public class MP_BascketController {
 	@Setter(onMethod_ = @Autowired)
 	HttpSession session;
 
-
-
 	//장바구니 출력
 	@GetMapping("basket")
 	public ModelAndView getBasketList() {
@@ -59,7 +57,6 @@ public class MP_BascketController {
 
 		return mav;
 	}
-
 	
 	/* ---------------------------------------------------------------------------------
 	 * 기능: 장바구니에서 내역 삭제
@@ -75,4 +72,4 @@ public class MP_BascketController {
 		
 		return mav;
 	}
-}
+}//MP_BascketController Class end

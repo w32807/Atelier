@@ -76,10 +76,6 @@
 
 <!-- Modernizr JS -->
 <script src="resources/AT_front/js/modernizr-2.6.2.min.js"></script>
-<!-- FOR IE9 below -->
-<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
 </head>
 <body>
 	<aside id="colorlib-aside" role="complementary"

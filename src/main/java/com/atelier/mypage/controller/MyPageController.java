@@ -162,6 +162,19 @@ public class MyPageController {
 	@PostMapping("DropoutProc")
 	public ModelAndView DropoutProc(CM_Dto cm_dto, RedirectAttributes rttr) {
 		mav = mpServ.myDropoutProc(cm_dto, rttr);
+		
 		return mav;
 	}
-}
+	
+	/* ---------------------------------------------------------------------------------------
+	 * 기능: 관리자에게 메세지 보내기
+	 * 작성자: JSH
+	 * 작성일: 2020.02.20
+	 -----------------------------------------------------------------------------------------*/
+	@PostMapping("AdminMessageFromMP")
+	public ModelAndView AdminMessageFromMP(MG_Dto mgDto) {
+		mav = mpServ.SendAdminMessageFromMP(mgDto);
+		
+		return mav;
+	}
+}//MyPageController Class end

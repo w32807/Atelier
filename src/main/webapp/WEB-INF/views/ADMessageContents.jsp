@@ -59,8 +59,5 @@
 		<!-- Link to open the modal -->
 </body>
 <script type="text/javascript" src="resources/assets/scripts/main.js"></script>
-<script type="text/javascript">
-
-</script>
 
 </html>

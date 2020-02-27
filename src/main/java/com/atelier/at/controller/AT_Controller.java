@@ -79,6 +79,7 @@ public class AT_Controller {
 	@GetMapping("ATDetail")
 	public ModelAndView goATDetail(int at_num) {
 		mav = mServ.getATDetail(at_num);
+		
 		return mav;
 	}
 	
@@ -97,9 +98,9 @@ public class AT_Controller {
 			}
 		}
 		mav = mServ.printATList(checkedBoxArr);
+		
 		return mav;
 	}
-
 	
 	@GetMapping("ATInfoModify")//공방 수정으로 이동하는 메소드
 	public String goATInfoModify() {
@@ -113,15 +114,11 @@ public class AT_Controller {
 	  -----------------------------------------------------------------------------------*/
 	@PostMapping("ATUpdateAtelier")
 	public ModelAndView ATUpdateAtelierData(MultipartHttpServletRequest multi, RedirectAttributes rttr) {
-		
 		mav = atServ.updateATData(multi,rttr);
 		
 		return mav;
 	}
 	
-	//--------------------------------------------------------------------------------------------
-	// 책임자 : 장원준
-	//--------------------------------------------------------------------------------------------
 	/* ---------------------------------------------------------------------------------
 	  * 기능: 제작한 상품 리스트 전체 출력
 	  * 작성자: KYH
@@ -129,7 +126,6 @@ public class AT_Controller {
 	  -----------------------------------------------------------------------------------*/
 	@GetMapping("ATProdManage")
 	public ModelAndView getATProdList(Integer pageNum, Integer maxNum) {
-		//log.warn("제작한 상품 리스트 전체 출력 컨트롤러");
 		mav = atServ.getATProdList(pageNum, maxNum);
 		
 		return mav;
@@ -142,7 +138,6 @@ public class AT_Controller {
 	  -----------------------------------------------------------------------------------*/
 	@PostMapping("ATProdRegistTrueList")
 	public ModelAndView getATProdRegistTrueList(Integer pageNum, Integer maxNum) {
-		//log.warn("판매 등록한 상품 리스트 출력 컨트롤러");
 		mav = atServ.getATProdRegistTrueList(pageNum, maxNum);
 		
 		return mav;
@@ -155,9 +150,7 @@ public class AT_Controller {
 	  -----------------------------------------------------------------------------------*/
 	@PostMapping("prodRegistCancle")
 	public ModelAndView prodRegistCancleProc(PD_productDto pdDto, HttpServletRequest request, RedirectAttributes rttr) {
-		//log.warn("판매 등록해제 컨트롤러");
 		String[] checkedBoxArr = request.getParameterValues("prodChk");
-		
 		mav = atServ.prodRegistCancleProc(pdDto, checkedBoxArr, rttr);
 		
 		return mav;
@@ -188,12 +181,6 @@ public class AT_Controller {
 		return view;
 	}
 	
-	
-	/*
-	 * @GetMapping("ATProdRegist")//제품 목록 관리에서(ATProdManage)에서 제품 메뉴 제작 페이지로 넘어가는
-	 * 메소드 public String prodMake() { return "ATProdRegist"; }
-	 */
-	
 	 /* ---------------------------------------------------------------------------------
 	  * 기능: 제품 관리의 상품 등록하기
 	  * 작성자: JWJ
@@ -214,9 +201,10 @@ public class AT_Controller {
 	@PostMapping("prodRegist")
 	public ModelAndView prodSellRegist(HttpServletRequest request, RedirectAttributes rttr) {
 		
-		String[] chkedBoxArr = request.getParameterValues("prodChk");//체크박스의 값들이 넘어옴(상품의 상품코드를 가져옴)
+		String[] chkedBoxArr = request.getParameterValues("prodChk");
 		mav = atServ.changeProdRegist(chkedBoxArr,rttr);
-		return mav;//상품의 판매등록을 하고 난 뒤 다시 제품관리 페이지로 넘어감
+		
+		return mav;
 	}
 	
 	 /* ---------------------------------------------------------------------------------
@@ -256,13 +244,8 @@ public class AT_Controller {
 		
 		return view;
 	}
-//	@GetMapping("prodDetail")//제품 목록 관리에서 1개의 상품 상세보기를 위한 메소드
-//	public String goprodDetail(HttpServletRequest request) {
-//		String pd_code = request.getParameter("PD_CODE");//form태그로 넘어온 상품 코드의 정보.
-//		//제품관리 페이지에서 하나의 상품의 상세보기를 선택하면, 상품 세부정보 페이지로 이동
-//		return "prodDetail";
-//	}
-	 /* ---------------------------------------------------------------------------------
+
+	/* ---------------------------------------------------------------------------------
 	  * 기능: 주문 상태 조회 페이지로 이동
 	  * 작성자: JWJ
 	  * 작성일 : 2019.02.07
@@ -287,11 +270,6 @@ public class AT_Controller {
 		return view;
 	}
 	
-//	@GetMapping("ATMessageWrite")
-//	public String ATMessageWrite() {
-//		return "ATMessageWrite";
-//	}
-	
 	@GetMapping("ATMessageRQ")
 	public String ATMessageRQ() {
 		return "ATMessageRQ";
@@ -302,7 +280,6 @@ public class AT_Controller {
 	 * 책임자 : 김병현, 김종현
 	 * 작성일 : 2020.02.06		최종수정일 : 2020.02.06
 	 ------------------------------------------------------------------- */
-
 	@GetMapping("ATSupportMg")//응원의 메세지로 이동하는 메소드 public String goATSupportMg() {
 	   public ModelAndView getSupportMg() {
 		   
@@ -318,10 +295,6 @@ public class AT_Controller {
 	
 	   //응원의 한마디 ajax
 		@PostMapping(value = "/supportMGInsert", produces = "application/json; charset=utf-8")
-		//	//text/html은 텍스트이고 html이다.
-		//	//시스템에서 만든 것이고 json이다 라는 뜻.
-		//	//dispather를 안 거치고 바로 html로 보냄
-		//	//model을 써야만 디스패처서블릿을 간다.
 		@ResponseBody
 		public Map<String, List<SM_Dto>> supportMGInsert(SM_Dto reply){
 		Map<String, List<SM_Dto>> rmap = mServ.replyInsert(reply);
@@ -346,70 +319,66 @@ public class AT_Controller {
 			return mav;
 		}
 		
-		
 		/*-------------------------------------------------------------------
-		 * 기   능 : 공지사항 리스트 출력
-		 * 작업자 : KJH
-		 * 작성일 : 2020.02.11		최종수정일 : 2020.02.11
-		-------------------------------------------------------------------*/
-		@GetMapping("ATNotice")
-		public ModelAndView ATNoticeList(Integer pageNum) {
-			log.info("ATNoticeList()");
-			
-			AT_Dto atDto = (AT_Dto) session.getAttribute("at");
-			
-			String at_nt_id = atDto.getAt_id();
-					
-			mav = atServ.getATNoticeList(at_nt_id);
+	       * 기   능 : 공지사항 리스트 출력
+	       * 작업자 : KJH
+	       * 작성일 : 2020.02.11      최종수정일 : 2020.02.11
+	      -------------------------------------------------------------------*/
+	      @GetMapping("ATNotice")
+	      public ModelAndView ATNoticeList(Integer pageNum) {
+	         log.info("ATNoticeList()");
+	         AT_Dto atDto = (AT_Dto) session.getAttribute("at");
+	         String at_nt_id = atDto.getAt_id();
+	         mav = atServ.getATNoticeList(at_nt_id);
 
-			return mav;
-		}
-		/*-------------------------------------------------------------------
-		 * 기   능 : 공지사항 내용 출력
-		 * 작업자 : KJH
-		 * 작성일 : 2020.02.11		최종수정일 : 2020.02.11
-		-------------------------------------------------------------------*/
-		@GetMapping("ATNoticeDetail")
-		public ModelAndView getNoticeContents(Integer at_nt_num) {//form에서 넘겨주는 name과 controller의 매개변수 명과 같아야 한다.
-			log.info("getNoticeContents - at_nt_num = " + at_nt_num);
-			mav = atServ.getNoticeContents(at_nt_num);
-			
-			return mav;
-		}
-		
-		
-		/*-------------------------------------------------------------------
-		 * 기   능 : 공지사항 작성
-		 * 작업자 : KJH
-		 * 작성일 : 2020.02.11		최종수정일 : 2020.02.11
-		-------------------------------------------------------------------*/
-		
-		//글 쓰기 관련 작업 2가지.
-		//1. 리스트 화면에서 글쓰기 화면으로 전환하기
-		//DB안가고 화면전환만 하는 방법
+	         return mav;
+	      }
+	      /*-------------------------------------------------------------------
+	       * 기   능 : 공지사항 내용 출력
+	       * 작업자 : KJH
+	       * 작성일 : 2020.02.11      최종수정일 : 2020.02.11
+	      -------------------------------------------------------------------*/
+	      @GetMapping("ATNoticeDetail")
+	      public ModelAndView getNoticeContents(Integer at_nt_num) {
+	         log.info("getNoticeContents - at_nt_num = " + at_nt_num);
+	         mav = atServ.getNoticeContents(at_nt_num);
+	         
+	         return mav;
+	      }
+	      
+	      
+	      /*-------------------------------------------------------------------
+	       * 기   능 : 공지사항 작성
+	       * 작업자 : KJH
+	       * 작성일 : 2020.02.11      최종수정일 : 2020.02.11
+	      -------------------------------------------------------------------*/
+	      //글 쓰기 관련 작업 2가지.
+	      //1. 리스트 화면에서 글쓰기 화면으로 전환하기
+	      //DB안가고 화면전환만 하는 방법
 
-		//공지사항 작성폼으로 이동
-		@GetMapping("ATNoticeWrite")
-		public String ATNoticeWrite() {
-			return "ATNoticeWrite";
-		}
+	      //공지사항 작성폼으로 이동
+	      @GetMapping("ATNoticeWrite")
+	      public String ATNoticeWrite() {
+	    	  
+	         return "ATNoticeWrite";
+	      }
 
-		//2. 글쓰기 화면에서 들어 온 데이터를 처리
-		//공지사항 작성
-		@PostMapping("noticeWrite")
-		public ModelAndView noticeWrite(AT_NT_Dto ntDto,RedirectAttributes rttr) {
-			log.warn("notice");
-			mav = atServ.noticeWrite(ntDto,rttr);
-			return mav;
-		}
-		
-		@GetMapping("delNotice")//글 삭제를 위한 controller 메소드
-		public String delNotice (@RequestParam("at_nt_num")int at_nt_num, RedirectAttributes rttr) {
-			String view = atServ.delNotice(at_nt_num,rttr);
-			return view;
-		}
-		
-
+	      //2. 글쓰기 화면에서 들어 온 데이터를 처리
+	      //공지사항 작성
+	      @PostMapping("noticeWrite")
+	      public ModelAndView noticeWrite(AT_NT_Dto ntDto,RedirectAttributes rttr) {
+	         log.warn("notice");
+	         mav = atServ.noticeWrite(ntDto,rttr);
+	         
+	         return mav;
+	      }
+	      
+	      @GetMapping("delNotice")//글 삭제를 위한 controller 메소드
+	      public String delNotice (@RequestParam("at_nt_num")int at_nt_num, RedirectAttributes rttr) {
+	         String view = atServ.delNotice(at_nt_num,rttr);
+	         
+	         return view;
+	      }
 		
 		/*-------------------------------------------------------------------
 		 * 기능 : 발주 리스트 조회 컨트롤러 / 발주 조회 리스트 삭제 컨트롤러
@@ -421,6 +390,7 @@ public class AT_Controller {
 			log.warn("발주 리스트 조회 컨트롤러 시작");
 			
 			mav = mServ.getATOrderSearchList(request, rttr);
+			
 			return mav;
 		}
 		
@@ -432,7 +402,6 @@ public class AT_Controller {
 		@GetMapping("ATManager")
 		public ModelAndView ATManagerList() {
 			log.warn("공방 관리 홈 리스트 출력 컨트롤러 시작");
-			
 			mav = mServ.getATManagerList();
 			
 			return mav;
@@ -445,7 +414,6 @@ public class AT_Controller {
 		 ------------------------------------------------------------------- */
 		@GetMapping("prodSearch")
 		public ModelAndView prodSearch(String keyword) {
-
 			mav = atServ.prodSearch(keyword);
 
 			return mav;
@@ -459,7 +427,6 @@ public class AT_Controller {
 		 ------------------------------------------------------------------- */
 		@PostMapping("registSelect")
 		public ModelAndView getregistSelProd(String registSelect) {
-			
 			mav = atServ.getregistSelProd(registSelect);
 			
 			return mav;
@@ -472,11 +439,8 @@ public class AT_Controller {
 		 ------------------------------------------------------------------- */
 		@GetMapping("ATMessageWrite")
 		public ModelAndView ATMessage() {
-			
 			AT_Dto atDto = (AT_Dto)session.getAttribute("at");
-			
 			String receiver = atDto.getAt_id();
-			
 			mav = atServ.getATMessage(receiver);
 			
 			return mav;
@@ -489,15 +453,10 @@ public class AT_Controller {
 		 ------------------------------------------------------------------- */
 		@GetMapping("messageFrm")
 		public ModelAndView messageFrm(MG_Dto mgDto, RedirectAttributes rttr) {
-			
 			CM_Dto cmDto = (CM_Dto)session.getAttribute("mb");
-			
 			String sender = cmDto.getCm_id();
-			
 			mgDto.setMg_sender(sender);
-			
 			mav = atServ.setMessage(mgDto,rttr);
-			
 			
 			return mav;
 		}
@@ -509,7 +468,6 @@ public class AT_Controller {
 		 ------------------------------------------------------------------- */
 		@GetMapping("ATMessageRQSend")
 		public ModelAndView ATMessageRQSend(MG_Dto mgDto) {
-
 			mav = atServ.setATMessageRQSend(mgDto);
 			
 			return mav;
@@ -523,6 +481,20 @@ public class AT_Controller {
 		@GetMapping("ATProdRegist")//제품 목록 관리에서(ATProdManage)에서 제품 메뉴 제작 페이지로 넘어가는 메소드
 		public ModelAndView prodMake() {
 			mav = atServ.prodMake();
-		return mav;
+			
+			return mav;
 		}
-}
+		
+		/*-------------------------------------------------------------------
+		 * 기능 : 공방 홈에서 판매물품 보기
+		 * 작성자: JWJ
+		 * 작성일 : 2020.02.20
+		 ------------------------------------------------------------------- */
+		@GetMapping("ATProduct")
+		public ModelAndView ATProduct(String at_id) {
+			mav = atServ.getATProdList(at_id);
+			
+			return mav;
+		}
+		
+}//AT_Controller Class end

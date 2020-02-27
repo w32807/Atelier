@@ -33,17 +33,13 @@ public class MP_MessageController {
 	 -----------------------------------------------------------------------------------------*/
 	@GetMapping("messager")
 	public ModelAndView Messager() {
-		
 		CM_Dto cmDto = (CM_Dto) session.getAttribute("mb");
-		
 		String mg_receiver = cmDto.getCm_id();
-		
 		mav = mServ.Messager(mg_receiver);
 		
 		return mav;
 		
 	}
-	
 	
 	/* ---------------------------------------------------------------------------------------
 	 * 기능: 쪽지 답장기능 메소드
@@ -52,41 +48,16 @@ public class MP_MessageController {
 	 -----------------------------------------------------------------------------------------*/
 	@GetMapping("myMessageWrite")
 	public ModelAndView myMessageWrite(Integer mg_num) {
-		log.warn("와옹아ㅏ앙");
 		mav = mServ.myMessageWrite(mg_num);
 		
 		return mav;
-		
 	}
-	
-	
-	
 	
 	// 메세지 보내기 버튼 
 	@GetMapping("messageSendBtn")
 	public ModelAndView MessageSendBtn(MG_Dto mDto) {
-		
-		
 		mav = mServ.MessageSendBtn(mDto);
-		
 		
 		return mav;
 	}
-	
-	/*
-	 * @PostMapping(value = "messageSendBtn", produces =
-	 * "application/json; charset=utf-8")
-	 * 
-	 * @ResponseBody public Map<String , List<PO_Dto>> MessageSendBtn(MG_Dto mDto){
-	 * log.warn("aa"); Map <String , List<PO_Dto>> poMap = mServ.getOrder(mDto);
-	 * 
-	 * 
-	 * return poMap;
-	 * 
-	 * }
-	 */
-
-	
-	
-	
-}
+}//MP_MessageController Class end

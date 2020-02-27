@@ -88,7 +88,7 @@
 										        </a>
 										    </h4>
 										</div>
-										<form id="messageFrm" action="AdminMessage" method="post">
+										<form id="messageFrm" action="AdminMessageFromMP" method="post">
 											<textarea id="messageContents" rows="10" cols="45" name="mg_contents"
 													style="margin-top: 5px; font-size: 15px; resize: none; width: 375px;" placeholder="여기에 내용을 작성 해주세요." ></textarea>
 											<input type="hidden" name="mg_receiver" value="admin@gmail.com">
@@ -152,10 +152,10 @@
 						console.log(content);
 					} else {
 						$("#messageFrm").submit();
+						alert("관리자에게 문의 메세지 전송 완료.")
+						window.close();
 					}
-								
 				});
-						
 						
 	</script>
 </body>

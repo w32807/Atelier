@@ -15,16 +15,6 @@
 <meta name="description"
 	content="This is an example dashboard created using build-in elements and components.">
 <meta name="msapplication-tap-highlight" content="no">
-<!--
-    =========================================================
-    * ArchitectUI HTML Theme Dashboard - v1.0.0
-    =========================================================
-    * Product Page: https://dashboardpack.com
-    * Copyright 2019 DashboardPack (https://dashboardpack.com)
-    * Licensed under MIT (https://github.com/DashboardPack/architectui-html-theme-free/blob/master/LICENSE)
-    =========================================================
-    * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-    -->
 <link href="./resources/ADATList/css/main.css" rel="stylesheet">
 
 
@@ -34,45 +24,13 @@
 		class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
 		<div class="app-header header-shadow">
 			<div class="app-header__logo">
-				<!--로고 이름바꾸기. -->
-				<!-- <div class="header__pane ml-auto">
-                    <div>
-                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
-                           <span class="hamburger-box">
-                                <span class="hamburger-inner"></span>
-                            </span> 
-                        </button>
-                    </div>
-                </div> -->
 			</div>
 			<div class="app-header__mobile-menu">
-				<!--  <div>
-                    <button type="button" class="hamburger hamburger--elastic mobile-toggle-nav">
-                        <span class="hamburger-box">
-                            <span class="hamburger-inner"></span>
-                        </span>
-                    </button>
-                </div> -->
 			</div>
 			<div class="app-header__menu">
-				<!--  <span>
-                    <button type="button" class="btn-icon btn-icon-only btn btn-primary btn-sm mobile-toggle-header-nav">
-                        <span class="btn-icon-wrapper">
-                            <i class="fa fa-ellipsis-v fa-w-6"></i>
-                        </span>
-                    </button>
-                </span> -->
 			</div>
 			<div class="app-header__content">
 				<div class="app-header-left">
-					<!--  <div class="search-wrapper">
-                        <div class="input-holder">
-                            <input type="text" class="search-input" placeholder="Type to search">
-                            <button class="search-icon"><span></span></button>
-                        </div>
-                        <button class="close"></button>
-                    </div>
-                    -->
 				</div>
 
 			</div>
@@ -93,7 +51,7 @@
 									공지사항
 									<span>
 										<button class="btn-icon btn-icon-only btn btn-outline-danger"
-											id="deleteBtn" style="margin-left: 1400px;">
+											id="deleteBtn" style="margin-left: 1400px; font-weight: bolder;">
 											삭제
 										</button>
 									</span>
@@ -161,11 +119,6 @@
 							<form id="ADNoticeFrm" name="ADNoticeFrm">
 								<div class="form-group col-md-12 " style="margin-left: -50px;" id="inputFrm">
 									<div class="col-sm-10" style="padding: 0;">
-										<!-- <div>
-											<input type="hidden" value="조회수EL">
-											<input type="hidden" value="날짜EL">
-											<input type="hidden" value="${mb.cm_id}">
-										</div> -->
 										
 										<input type="text" class="form-control" placeholder="제목"
 											id="nt_title" name="nt_title"
@@ -173,7 +126,7 @@
 									</div>
 									<br>
 									<textarea class="form-control input-sm " placeholder="내용을 입력하세요"
-										id="nt_contents" name="nt_contents" maxlength="140" rows="7"
+										id="nt_contents" name="nt_contents" maxlength="500" rows="7"
 										style="width: 1180px;"></textarea>
 								</div>
 								<div class="d-block text-center card-footer" style="margin-left: -33px; width: 1180px;">
@@ -290,48 +243,7 @@
 			alert("삭제할 목록을 선택 해 주세요.");
 		}
 	})
-	
-	//조회수 증가 Ajax
-	function noticeViewUpdateAjax() {
-		var noticeListFrm = $("#ntTable").serializeObject();
-		console.log(noticeListFrm);
-		
-		$.ajax({
-			url: "ADNoticeContents",
-			type: "get",
-			data: noticeListFrm,
-			dataType: "json",
-			success: function(data) {
-				console.log(data.ntlist);
-				var ntlist = '';
-				for(var i = 0; i < data.ntlist.length; i++) {
-					ntlist += '<tr>' + '<td class="text-center text-muted">'
-					+ '<input type="checkbox">' + '</td>'
-					+ '<td class="text-center">' + data.ntlist[i].nt_num + '</td>'
-					+ '<td>'+'<div class="widget-content p-0" style="text-align: center;">'
-					+ '<div class="widget-content-left flex2">'
-					+ '<div class="widget-heading">' + data.ntlist[i].nt_title + '</div>'
-					+ '</div>'+'</div>'+'</td>'	
-					+ '<td class="text-center">' + data.ntlist[i].nt_id + '</td>'	
-					+ '<td class="text-center">' + data.ntlist[i].nt_count + '</td>'	
-					+ '<td class="text-center">'
-					+ '<a href="ADNoticeContents" onclick="window.open(this.href, "_blank", "width=800px,height=600px,toolbars=no,scrollbars=yes");return false;">'
-					+ '<button type="button" id="PopoverCustomT-1" class="btn btn-primary btn-sm" onclick="noticeViewUpdateAjax();">Details</button>'
-					+ '</a>'
-					+ '</td>'
-					+ '</tr>'
-				}
-				$('#ntTable').html(ntlist);
-				//location.reload();
-			},
-			error: function(error) {
-				alert("로드 실패");
-			}
-		});
-		//location.reload();
-	}
-	
-	
+
 	</script>
 
 </html>

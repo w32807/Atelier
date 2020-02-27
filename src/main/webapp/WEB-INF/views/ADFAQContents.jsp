@@ -58,8 +58,6 @@
         
     });
     
-    
-    
     $("#saveBtn").click(function() {
         var title = $("#title").val();  
         var contents = $("#contents").val();    
@@ -69,13 +67,7 @@
             $("#FAQupdateFrm").submit();
             window.opener.location.reload();
             window.close();
-            
-                
-                
         }
-        
-        
-    
     });                 
                         
 </script>

@@ -96,38 +96,6 @@
 					   		</div>
 				   		</div>
 				   	</li>
-				 <!--   	<li style="background-image: url(resources/AT_front/images/img_bg_2.jpg);">
-				   		<div class="overlay"></div>
-				   		<div class="container-fluid">
-				   			<div class="row">
-					   			<div class="col-md-8 col-md-offset-2 col-md-pull-2 slider-text">
-					   				<div class="slider-text-inner">
-					   					<div class="desc" style="background: none; top: 200px;">
-						   					<h1 style="font-size: 18px; font-weight: 600;">공방의 소개글이 들어갑니다.</h1>
-						   					<h2><a href="https://colorlib.com/" target="_blank" style="font-size: 18px; font-weight: 600; color: #A09182; border-bottom: 1px solid #A09182;">공방 사이트 주소</a></h2>
-											<p><a class="btn btn-primary btn-learn" style="font-weight: 600;">구독 & 좋아요</a></p>
-										</div>
-					   				</div>
-					   			</div>
-					   		</div>
-				   		</div>
-				   	</li> -->
-				<!--    	<li style="background-image: url(resources/AT_front/images/img_bg_3.jpg);">
-				   		<div class="overlay"></div>
-				   		<div class="container-fluid">
-				   			<div class="row">
-					   			<div class="col-md-8 col-md-offset-2 col-md-pull-2 slider-text">
-					   				<div class="slider-text-inner">
-					   					<div class="desc" style="background: none; top: 200px;">
-						   					<h1 style="font-size: 18px; font-weight: 600;">공방의 소개글이 들어갑니다.</h1>
-						   					<h2><a href="https://colorlib.com/" target="_blank" style="font-size: 18px; font-weight: 600; color: #A09182; border-bottom: 1px solid #A09182;">공방 사이트 주소</a></h2>
-											<p><a class="btn btn-primary btn-learn" style="font-weight: 600;">구독 & 좋아요</a></p>
-										</div>
-					   				</div>
-					   			</div>
-					   		</div>
-				   		</div>
-				   	</li> -->
 				  	</ul>
 			  	</div>
 			</aside>
@@ -201,25 +169,37 @@
 	
 <script type="text/javascript">
 
-	$("#subBtn").click(function(){
-		if(confirm("구독 하시겠습니까?")){
-			var subFrm = $("#subFrm").serializeObject();
-			$.ajax({
-				url: "SubFromProd",
-				type: "get",
-				data: subFrm,
-				dataType: "json",
-				success: function(data) {
-					console.log("ajax 실행 결과 : " + data.subMassage);
-					alert(data.subMassage);
-					$("subBtn").html("&nbsp;&nbsp;&nbsp;구독 취소&nbsp;&nbsp;&nbsp");
-				},
-				error: function(error) {
-					alert("로그인을 먼저 해 주세요.");
-				}
-			})
-		}
-	})
+		$("#subBtn").click(function(){
+			if(confirm("구독 하시겠습니까?")){
+				var subFrm = $("#subFrm").serializeObject();
+				$.ajax({
+					url: "SubFromProd",
+					type: "get",
+					data: subFrm,
+					dataType: "json",
+					success: function(data) {
+						console.log("ajax 실행 결과 : " + data.subMessage);
+						alert(data.subMassage);
+						$("subBtn").html("&nbsp;&nbsp;&nbsp;구독 취소&nbsp;&nbsp;&nbsp");
+					},
+					error: function(error) {
+						alert("로그인을 먼저 해 주세요.");
+					}
+				})
+			}
+		})
+
+		/* ---------------------------------------------------------------------------------------
+		 * 기   능: 공방 회원 비활성 시, 판매물품 접근 제어
+		 * 작성일: 2020.02.20
+		 * 작성자: JWJ 
+		 -----------------------------------------------------------------------------------------*/
+		 $( document ).ready(function() {
+			 var responseMessage = "${message}";
+		        if(responseMessage != ""){
+		            alert(responseMessage)
+	        }
+		});
 
 </script>
 </html>

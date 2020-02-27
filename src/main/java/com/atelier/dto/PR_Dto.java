@@ -8,15 +8,6 @@ import lombok.Data;
 
 @Data
 public class PR_Dto {
-	/*
-	PR_NUM NUMBER(10) PRIMARY KEY,                  -- 댓글번호
-	PR_PD_CODE NUMBER(20),                          -- 상품코드
-	PR_CM_ID NVARCHAR2(50),                         -- 작성자ID
-	PR_CM_NICK NVARCHAR2(50),                       -- 작성자닉네임
-	PR_STAR NUMBER(10,0),                           -- 별점
-	PR_CONTENTS NVARCHAR2(200),                     -- 댓글 내용
-	PR_DATE DATE DEFAULT(SYSDATE)                   -- 화면에 표시 될 작성시간
-	*/
 	
 	private int pr_num;
 	private int pr_pd_code;

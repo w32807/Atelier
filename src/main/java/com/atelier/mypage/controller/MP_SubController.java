@@ -35,7 +35,6 @@ public class MP_SubController {
 		mav = sbServ.getSubscription(sbDto);
 		
 		return mav;
-		
 	}
 	
 	/* ---------------------------------------------------------------------------------------
@@ -61,14 +60,12 @@ public class MP_SubController {
 	public Map<String, String> SubFromProd(SB_Dto sbDto) {
 		log.warn("구독 컨트롤러!!!");
 		Map<String, String> SubFromProdMap = new HashMap<String, String>();
-		String subMassage = sbServ.SubFromProd(sbDto);
-		SubFromProdMap.put("subMassage", subMassage);
+		String subMessage = sbServ.SubFromProd(sbDto);
+		SubFromProdMap.put("subMessage", subMessage);
 		
 		return SubFromProdMap;
 	}
-	
-	
-}
+}//MP_SubController Class end
 
 
 
